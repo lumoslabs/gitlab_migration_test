@@ -46,7 +46,7 @@ tunnels:
 ```
 
 ```
-ngrok start --all
+ngrok start lumos-google-assistant
 ```
 
 - Put the ngrok https public url in *.env.local* as a *PUBLIC_URL*
