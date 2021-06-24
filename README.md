@@ -1,34 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Lumos Google Assistant App
 
-## Getting Started
+## Development
 
-First, run the development server:
+### Getting started
+
+#### Choose node version
 
 ```bash
-npm run dev
-# or
+nvm use
+```
+
+#### Install dependencies
+
+```bash
+yarn install
+```
+
+#### Update configuration file
+
+All enviroment variables should be stored in *.env.example*, just copy paste it to *.env.local* file
+
+```bash
+cp  .env.example .env.local
+```
+
+#### Start
+
+```bash
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:7300](http://localhost:7300) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Testing on simulator
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+You should use ngrok for test local version on [simulator](https://console.actions.google.com/u/3/project/lumos-nest-prod/simulator) and set public url to *.env.local* as a *PUBLIC_URL*
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Folder structure
 
-## Learn More
+* Frontend routes - */src/pages*
+* React components - */src/components* can be imported by alias @components/*
+* UI components - */src/components/ui* can be imported by alias @components/ui/*
+* Backend routes - */src/pages/api/*
+* Backend modules - */src/api/*
 
-To learn more about Next.js, take a look at the following resources:
+[aliases](https://nextjs.org/docs/advanced-features/module-path-aliases) 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Linting
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+yarn lint
+```
 
-## Deploy on Vercel
+### Testing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+TODO
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+ 
