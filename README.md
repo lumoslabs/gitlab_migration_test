@@ -4,10 +4,10 @@
 
 ### Getting started
 
-#### Choose node version
+#### Choose node version from .nvmrc
 
 ```bash
-nvm use
+nvm use v14.17.0
 ```
 
 #### Install dependencies
@@ -34,7 +34,25 @@ Open [http://localhost:7300](http://localhost:7300) with your browser to see the
 
 ### Testing on simulator
 
-You should use ngrok for test local version on [simulator](https://console.actions.google.com/u/3/project/lumos-nest-prod/simulator) and set public url to *.env.local* as a *PUBLIC_URL*
+Set up NGROK: https://dashboard.ngrok.com/get-started/setup
+open `~/.ngrok2/ngrok.yml` and add:
+
+```
+authtoken: <your auth token>
+tunnels:
+  lumos-google-assistant:
+    proto: http
+    addr: 7300
+```
+
+```
+ngrok start --all
+```
+
+- Put the ngrok https public url in *.env.local* as a *PUBLIC_URL*
+- Go to Settings in https://console.actions.google.com/project/lumos-nest-prod/simulator and put this URL in the Test URL field:
+ https://{yourngrokdomain}.ngrok.io/google/fulfillment
+
 
 ### Folder structure
 
