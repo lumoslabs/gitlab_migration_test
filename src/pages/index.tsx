@@ -1,5 +1,6 @@
 import { css, StyleSheet } from 'aphrodite/no-important';
-import { commonNestStylesWithProps } from '@styles/commonNestStyles';
+import { commonNestStylesWithProps } from '../styles/commonNestStyles';
+import dynamic from 'next/dynamic'
 
 const styles = StyleSheet.create({
   app: {
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
 });
 
 
-export default function Index(): JSX.Element {
+export function Index(): JSX.Element {
   return (
     <main>
       {/* clientHeight should be window.usableClientHeight, how do we make that work?  */}
@@ -59,3 +60,8 @@ export default function Index(): JSX.Element {
     </main>
   )
 }
+
+
+export default dynamic(() => Promise.resolve(Index), {
+  ssr: false
+})
