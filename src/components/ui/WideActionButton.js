@@ -8,11 +8,11 @@ const WideActionButton = (props) => {
   const extendStyles = props.extendStyles || []
 
   return (
-    <div className={ css(commonStyles.flexJustifyCenter) }>
+    <div className={css(commonStyles.flexJustifyCenter)}>
       <RoundedButton
-        styles = { [commonStyles.action, styles.wideAction, ...extendStyles] }
-        value = { props.buttonText }
-        onClick = {e => {
+        styles={[commonStyles.action, styles.wideAction, ...extendStyles]}
+        value={props.buttonText}
+        onClick={e => {
           analyticsTrack('button_click', {
             id: props.id,
             current_page: props.currentPage,
@@ -21,7 +21,7 @@ const WideActionButton = (props) => {
           props.onClick(e);
           e.preventDefault();
         }}
-        disabled = { props.disabled }
+        disabled={props.disabled}
       />
     </div>
   );
