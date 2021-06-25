@@ -1,5 +1,3 @@
-import Link from 'next/link'
-import Button from '@components/ui/Button'
 import { css, StyleSheet } from 'aphrodite/no-important';
 import { commonNestStylesWithProps } from '../styles/commonNestStyles';
 

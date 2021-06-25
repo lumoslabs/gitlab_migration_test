@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { RoundedButton } from './buttons/';
 import { css, StyleSheet } from 'aphrodite/no-important';

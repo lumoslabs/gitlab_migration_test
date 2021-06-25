@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { css } from 'aphrodite';
 import { Link } from 'react-router-dom';

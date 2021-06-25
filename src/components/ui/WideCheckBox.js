@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 import { analyticsTrack } from '../segment/analytics';
