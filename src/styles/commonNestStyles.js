@@ -1,4 +1,3 @@
-
 import { StyleSheet } from 'aphrodite';
 
 const commonNestStyles = StyleSheet.create({
