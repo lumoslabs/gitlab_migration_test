@@ -1,7 +1,7 @@
-import Script from 'next/script'
+// import Script from 'next/script'
 
-function Rollbar() {
+// function Rollbar() {
 
-}
+// }
 
-export default Rollbar
+// export default Rollbar
