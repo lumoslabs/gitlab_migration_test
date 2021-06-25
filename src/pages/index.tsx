@@ -1,5 +1,5 @@
 import { css, StyleSheet } from 'aphrodite/no-important';
-import { commonNestStylesWithProps } from '../styles/commonNestStyles';
+import { commonNestStylesWithProps } from '@styles/commonNestStyles';
 
 const styles = StyleSheet.create({
   app: {
@@ -49,7 +49,7 @@ export default function Index(): JSX.Element {
   return (
     <main>
       {/* clientHeight should be window.usableClientHeight, how do we make that work?  */}
-      <div className={css([styles.app, commonNestStylesWithProps({clientHeight: '100%'}).fullHeight])}>
+      <div className={css([styles.app, commonNestStylesWithProps({ clientHeight: '100%' }).fullHeight])}>
         <div className={css(styles.mainContent)}>
           <img className={css([styles.iconImage])}
             src='assets/lumosity_white_logo_with_r.svg'
