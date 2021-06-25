@@ -20,6 +20,12 @@ function NestHandler(): JSX.Element {
     window.interactiveCanvas.ready(callbacks)
   }
 
+  window.onload = () => {
+    window.usableClientHeight = window.innerHeight; // document.body.clientHeight;
+    window.usableClientWidth = window.innerWidth; //document.body.clientWidth;
+    window.interactiveCanvas.ready(callbacks);
+  };
+
   /* eslint-enable */
 
   return <>
