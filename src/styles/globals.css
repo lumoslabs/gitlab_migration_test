@@ -1,11 +1,118 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@font-face {
+  font-family: 'MuseoSans100';
+  font-style: normal;
+  font-weight: 100;
+  src:
+    local('Museo Sans 100'),
+    local('Museo-Sans-100'),
+    url(/fonts/museosans/MuseoSans_100.otf) format('opentype');
 }
 
-* {
-  box-sizing: border-box;
+@font-face {
+  font-family: 'MuseoSans100Italic';
+  font-style: italic;
+  font-weight: 100;
+  src:
+    local('Museo Sans 100 Italic'),
+    local('Museo-Sans-100-Italic'),
+    url(/fonts/museosans/MuseoSans_100_Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'MuseoSans300';
+  font-style: normal;
+  font-weight: 300;
+  src:
+    local('Museo Sans 300'),
+    local('Museo-Sans-300'),
+    url(/fonts/museosans/MuseoSans_300.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'MuseoSans300Italic';
+  font-style: italic;
+  font-weight: 300;
+  src:
+    local('Museo Sans 300 Italic'),
+    local('Museo-Sans-300-Italic'),
+    url(/fonts/museosans/MuseoSans_300_Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'MuseoSans500';
+  font-style: normal;
+  font-weight: 500;
+  src:
+    local('MuseoSans 500'),
+    local('Museo-Sans-500'),
+    url(/fonts/museosans/MuseoSans_500.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'MuseoSans500Italic';
+  font-style: italic;
+  font-weight: 500;
+  src:
+    local('Museo Sans 500 Italic'),
+    local('Museo-Sans-500-Italic'),
+    url(/fonts/museosans/MuseoSans_500_Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'MuseoSans700';
+  font-style: normal;
+  font-weight: 700;
+  src:
+    local('Museo Sans 700'),
+    local('Museo-Sans-700'),
+    url(/fonts/museosans/MuseoSans_700.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'MuseoSans700Italic';
+  font-style: italic;
+  font-weight: 700;
+  src:
+    local('Museo Sans 700 Italic'),
+    local('Museo-Sans-700-Italic'),
+    url(/fonts/museosans/MuseoSans_700_Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'MuseoSans900';
+  font-style: normal;
+  font-weight: 900;
+  src:
+    local('Museo Sans 900'),
+    local('Museo-Sans-900'),
+    url(/fonts/museosans/MuseoSans_900.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'MuseoSans900Italic';
+  font-style: italic;
+  font-weight: 900;
+  src:
+    local('Museo Sans 900 Italic'),
+    local('Museo-Sans-900-Italic'),
+    url(/fonts/museosans/MuseoSans_900_Italic.otf) format('opentype');
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  margin: 0;
+  font-family: "MuseoSans100", "MuseoSans300", "MuseoSans500", "MuseoSans700", "MuseoSans900";
+  overflow-y: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
