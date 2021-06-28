@@ -1,5 +1,6 @@
 import getConfig from 'next/config'
 import { NextPageContext } from 'next'
+import Rollbar from '@components/Rollbar'
 
 interface IError {
   statusCode: number
@@ -19,7 +20,6 @@ Error.getInitialProps = ({ req, res, err }: NextPageContext): IError => {
   const { publicRuntimeConfig } = getConfig()
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404
   if (!process.browser) {
-    const Rollbar = require('rollbar')
     const rollbar = new Rollbar({
       environment: publicRuntimeConfig.rollbar.enviroment,
       accessToken: publicRuntimeConfig.rollbar.serverToken
