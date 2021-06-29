@@ -9,10 +9,10 @@ import trophyImg from 'public/assets/trophy.svg';
 import trophyBannerImg from 'public/assets/trophy_banner.svg';
 
 // just mocking topScoreData
-const topScoreData = {
-  score: 1000,
-  updated_at: '2021-07-01'
-};
+// const topScoreData = {
+//   score: 1000,
+//   updated_at: '2021-07-01'
+// };
 
 export interface ITopScoreData {
   score: number;
