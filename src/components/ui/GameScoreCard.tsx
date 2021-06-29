@@ -1,24 +1,50 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import { FormattedMessage } from 'react-intl';
 import {  Container, Row } from 'react-bootstrap';
 import { css, StyleSheet } from 'aphrodite/no-important';
-import commonStyles from '../styles/commonStyles';
-import WideActionButton from 'react-shared/src/components/WideActionButton';
-import LoadingComponent from 'react-shared/src/components/LoadingComponent';
-import checkIcon from 'react-shared/src/assets/check_mark_done.png';
-import trophyImg from 'react-shared/src/assets/trophy.svg';
-import trophyBannerImg from 'react-shared/src/assets/trophy_banner.svg';
+import commonStyles from '../../styles/commonStyles';
+import WideActionButton from './WideActionButton';
+import LoadingComponent from './LoadingComponent';
+import trophyImg from 'public/assets/trophy.svg';
+import trophyBannerImg from 'public/assets/trophy_banner.svg';
 
-const GameScoreCard = (props) => {
+// just mocking topScoreData
+const topScoreData = {
+  score: 1000,
+  updated_at: '2021-07-01'
+};
+
+export interface ITopScoreData {
+  score: number;
+  updated_at: string;
+}
+
+export interface IGameScoreCardProps {
+  title: string;
+  description: string;
+  gameIcon?: string;
+  showTrainingIcon: boolean;
+  showTrophy: boolean;
+  trainingIcon?: string;
+  currentScore: number;
+  scoresData: ITopScoreData;
+  topScoresLoading: boolean;
+  topScoreTodaysScoreIndex: number;
+  topScoresData: ITopScoreData;
+  actionButtonText: string;
+  actionButtonClicked: boolean;
+  currentPage: string;
+}
+
+const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
   return (
-    <div className={css([commonStyles.flexColumnAlignCenter, commonStyles.fullWidth, styles.cardDiv])}>
+    <div className={css([commonStyles.flexColumnAlignCenter, commonStyles.fullWidth])}>
       <Card className={css([commonStyles.flexColumnAlignCenter, styles.card])}>
         <Card.Body className={ css([styles.cardBody])}>
           <div className={css([commonStyles.flexRowAllCenter, styles.titleDiv])}>
             <div className={css([commonStyles.flexRowAllCenter, styles.mainTitleDiv])}>
               <img
-                src={props.gameIcon || checkIcon}
+                src={props.gameIcon || 'assets/check_mark_done.png'}
                 className={css(styles.gameIconImage)}
                 alt='Game Icon'
               />
@@ -50,15 +76,16 @@ const GameScoreCard = (props) => {
                     return (
                       <div key = {'div_'+i} className={css(styles.currentStatDiv)}>
                         <p className={css(styles.scoreText)}>
-                          <FormattedMessage
+                          {/* I don't think we need this intl component, not sure how to put it into a plain form...
+                            <FormattedMessage
                             id={'scoreText_'+i}
-                            defaultMessage={ scoreData.scoreText }
+                            defaultMessage={scoreData.scoreText}
                             values={{
                               ...scoreData.values,
                               left: chunks => <span className={css(styles.scoreLeftAlign)}>{chunks}</span>,
                               right: chunks => <span className={css(styles.scoreRightAlign)}>{chunks}</span>
                             }}
-                          />
+                          /> */}
                         </p>
                       </div>
                     );
@@ -74,8 +101,8 @@ const GameScoreCard = (props) => {
                 {props.topScoresLoading &&
                   <LoadingComponent
                     title="Loading Top Scores"
-                    titleDivHeight={50}
-                    loadingDivHeight={100}
+                    titleDivHeight='50'
+                    loadingDivHeight='100'
                   />
                 }
                 {!props.topScoresLoading && props.topScoresData && props.topScoresData.map((topScoreData, i) => {
@@ -93,7 +120,7 @@ const GameScoreCard = (props) => {
                           className={css(styles.trophyBannerImage)}
                         />
                       }
-                      <p key={'col_index'} className={css([styles.topScoreBold, styles.topScoreNum])}>
+                      <p key={'col_index'} className={css(styles.topScoreBold)}>
                         { i+1 }
                       </p>
                       <p key={'col_score'} className={css([styles.topScoreBold, styles.topScoreValue])}>
@@ -113,9 +140,9 @@ const GameScoreCard = (props) => {
       </Card>
       <div className={css([commonStyles.flexColumnAllCenter, styles.actiondiv])}>
         <WideActionButton
-          extendStyles={[styles.nextButton]}
+          extendStyles={styles.nextButton}
           buttonText={props.actionButtonText}
-          onClick={ props.actionButtonClicked}
+          onClick={props.actionButtonClicked}
           id='game_next'
           currentPage={props.currentPage}
         />
