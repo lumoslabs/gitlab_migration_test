@@ -1,18 +1,12 @@
 import React from 'react';
-import Lottie from 'lottie-react';
 import { css, StyleSheet } from 'aphrodite';
-import lumositySpinner from 'public/assets/loader_spin_black.json';
 import { base } from '../../styles/colors';
 import commonStyles from '../../styles/commonStyles';
 
-const styles = (titleDivHeight, loadingDivHeight) => StyleSheet.create({
+const baseStyles = StyleSheet.create({
   loadingAnimdiv: {
     display: 'flex',
     flexDirection: 'column'
-  },
-
-  titleDiv: {
-    height: titleDivHeight
   },
   loadingTitle: {
     color: base.lumosBlack,
@@ -20,7 +14,12 @@ const styles = (titleDivHeight, loadingDivHeight) => StyleSheet.create({
     fontSize: '1.95vw',
     fontWeight: 500
   },
+});
 
+const customStyles = (titleDivHeight, loadingDivHeight) => StyleSheet.create({
+  titleDiv: {
+    height: titleDivHeight
+  },
   loadingdiv: {
     height: loadingDivHeight
   },
@@ -33,19 +32,19 @@ export interface ILoadingComponent {
 }
 
 const LoadingComponent = ({ title, titleDivHeight = '20vh', loadingDivHeight  = '40vh' }: ILoadingComponent): JSX.Element => {
+  const customizedStyles = customStyles(titleDivHeight, loadingDivHeight);
+
   return (
-    <div className={css([commonStyles.flexColumnAllCenter, styles.loadingAnimdiv])}>
-      {title &&
-        <div className={css([commonStyles.flexColumnAllCenter, styles({titleDivHeight}).titleDiv])}
-        >
-          <p className={css(styles.loadingTitle)}>
+    <div className={css([commonStyles.flexColumnAllCenter, baseStyles.loadingAnimdiv])}>
+      {title && (
+        <div className={css([commonStyles.flexColumnAllCenter, customizedStyles.titleDiv])}>
+          <p className={css(baseStyles.loadingTitle)}>
             {title}
           </p>
         </div>
-      }
-      <div className={css([commonStyles.flexColumnAllCenter, styles({loadingDivHeight}).loadingdiv]) }
-      >
-        <Lottie animationData={lumositySpinner} />
+      )}
+      <div className={css([commonStyles.flexColumnAllCenter, customizedStyles.loadingdiv])}>
+        <div className="loader" />
       </div>
     </div>
   );
