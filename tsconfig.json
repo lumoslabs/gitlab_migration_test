@@ -25,6 +25,9 @@
       "@styles/*": [
         "src/styles/*"
       ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
       "@backend/*": [
         "src/backend/*"
       ]

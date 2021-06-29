@@ -49,8 +49,7 @@ const styles = StyleSheet.create({
 export function Index(): JSX.Element {
   return (
     <main>
-      {/* clientHeight should be window.usableClientHeight, how do we make that work?  */}
-      <div className={css([styles.app, commonNestStylesWithProps({ clientHeight: '100%' }).fullHeight])}>
+      <div className={css([styles.app, commonNestStylesWithProps({ clientHeight: window.usableClientHeight }).fullHeight])}>
         <div className={css(styles.mainContent)}>
           <img className={css([styles.iconImage])}
             src='assets/lumosity_white_logo_with_r.svg'
