@@ -1,3 +1,8 @@
+// @ts-check
+
+/**
+ * @type {import('next/dist/next-server/server/config').NextConfig}
+ **/
 module.exports = () => {
   return {
     serverRuntimeConfig: {
@@ -5,7 +10,12 @@ module.exports = () => {
       google: {
         client_id: process.env.GOOGLE_CLIENT_ID
       },
-      public_url: process.env.PUBLIC_URL
+      public_url: process.env.PUBLIC_URL,
+      dynamodb: {
+        region: 'us-east-1',
+        endpoint: 'http://localhost:8002',
+        prefix: 'dev_',
+      }
     },
     publicRuntimeConfig: {
       // Will be available on both server and client
