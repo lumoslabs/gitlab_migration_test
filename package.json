@@ -9,7 +9,8 @@
     "check-types": "tsc --pretty --noEmit",
     "lint": "next lint --fix",
     "prepare": "husky install",
-    "test": "jest"
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "dependencies": {
     "@assistant/conversation": "^3.8.0",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
+    "@shelf/jest-dynamodb": "^1.8.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@types/jest": "^26.0.23",

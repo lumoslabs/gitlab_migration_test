@@ -12,9 +12,13 @@ module.exports = () => {
       },
       public_url: process.env.PUBLIC_URL,
       dynamodb: {
+        prefix: 'dev_',
         region: 'us-east-1',
         endpoint: 'http://localhost:8002',
-        prefix: 'dev_',
+        sslEnabled: true,
+      },
+      misc: {
+        config_catalog_id: 1
       }
     },
     publicRuntimeConfig: {

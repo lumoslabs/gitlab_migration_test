@@ -1,6 +1,14 @@
 import { DocumentClient, getTableName } from '@backend/libs/db'
 import { Table, Entity } from 'dynamodb-toolbox'
 
+export enum ConfigTypes {
+  CATALOG = 'catalog',
+  GAME = 'game',
+  ONBOARDING = 'onboarding',
+  TRAINING = 'training',
+}
+
+
 export interface Config {
   name: string;
   created_at: string;
