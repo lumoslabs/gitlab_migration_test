@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import {  Container, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import { css, StyleSheet } from 'aphrodite/no-important';
 import commonStyles from '../../styles/commonStyles';
 import WideActionButton from './WideActionButton';
