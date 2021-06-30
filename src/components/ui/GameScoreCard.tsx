@@ -31,7 +31,6 @@ export interface IGameScoreCardProps {
   currentPage: string;
 }
 
-
 const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
   return (
     <div className={css([commonStyles.flexColumnAlignCenter, commonStyles.fullWidth])}>

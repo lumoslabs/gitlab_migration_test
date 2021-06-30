@@ -1,5 +1,4 @@
 import { css, StyleSheet } from 'aphrodite/no-important';
-import { commonNestStylesWithProps } from '../styles/commonNestStyles';
 import dynamic from 'next/dynamic'
 
 const styles = StyleSheet.create({
@@ -45,13 +44,13 @@ const styles = StyleSheet.create({
   },
 });
 
-
 export function Index(): JSX.Element {
   return (
     <main>
-      <div className={css([styles.app, commonNestStylesWithProps({ clientHeight: window.usableClientHeight }).fullHeight])}>
+      <div className={css(styles.app)}>
         <div className={css(styles.mainContent)}>
-          <img className={css([styles.iconImage])}
+          <img
+            className={css(styles.iconImage)}
             src='assets/lumosity_white_logo_with_r.svg'
           />
         </div>
@@ -59,7 +58,6 @@ export function Index(): JSX.Element {
     </main>
   )
 }
-
 
 export default dynamic(() => Promise.resolve(Index), {
   ssr: false

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'aphrodite';
-import { base, gray } from './colors';
+import { base } from './colors';
 
 const commonStyles = StyleSheet.create({
   simpleFlex: {
@@ -114,7 +114,7 @@ const commonStyles = StyleSheet.create({
       outline: 'none'
     },
     ':hover': {
-      backgroundColor: gray.grayLighter,
+      backgroundColor: base.grayLighter,
       color: base.lumosBlack,
     },
     ':active': {

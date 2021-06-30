@@ -1,6 +1,5 @@
 import Script from 'next/script'
 import getConfig from 'next/config'
-import { commonNestStylesWithProps } from '../../styles/commonNestStyles';
 import { css, StyleSheet } from 'aphrodite/no-important';
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic'
@@ -48,6 +47,12 @@ const styles = StyleSheet.create({
   },
 });
 
+const heightFromClient = (clientHeight) => StyleSheet.create({
+  fullHeight: {
+    height: `${clientHeight}px`,
+  },
+});
+
 function Layout({ children }: { children: React.ReactNode }): JSX.Element {
   const { publicRuntimeConfig } = getConfig()
 
@@ -71,10 +76,12 @@ function Layout({ children }: { children: React.ReactNode }): JSX.Element {
     setClient([window.clientHeight])
   }, [])
 
-  return <>
+  const stylesWithHeight = heightFromClient(clientHeight);
+
+return <>
     <main>
       <Script src={publicRuntimeConfig.interactiveCanvasLibUrl} onLoad={onLoad} />
-      <div className={css([styles.app, commonNestStylesWithProps({ clientHeight: clientHeight }).fullHeight])}>
+      <div className={css([styles.app, stylesWithHeight.fullHeight])}>
         {children}
       </div>
     </main>
