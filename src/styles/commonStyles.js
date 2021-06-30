@@ -1,4 +1,3 @@
-
 import { StyleSheet } from 'aphrodite';
 import { base, gray } from './colors';
 

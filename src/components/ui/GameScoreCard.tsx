@@ -7,12 +7,7 @@ import WideActionButton from './WideActionButton';
 import LoadingComponent from './LoadingComponent';
 import trophyImg from 'public/assets/trophy.svg';
 import trophyBannerImg from 'public/assets/trophy_banner.svg';
-
-// just mocking topScoreData
-// const topScoreData = {
-//   score: 1000,
-//   updated_at: '2021-07-01'
-// };
+import checkIcon from 'public/assets/check_mark_done.png';
 
 export interface ITopScoreData {
   score: number;
@@ -27,14 +22,15 @@ export interface IGameScoreCardProps {
   showTrophy: boolean;
   trainingIcon?: string;
   currentScore: number;
-  scoresData: ITopScoreData;
+  scoresData: ITopScoreData[];
   topScoresLoading: boolean;
   topScoreTodaysScoreIndex: number;
-  topScoresData: ITopScoreData;
+  topScoresData: ITopScoreData[];
   actionButtonText: string;
   actionButtonClicked: boolean;
   currentPage: string;
 }
+
 
 const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
   return (
@@ -44,7 +40,7 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
           <div className={css([commonStyles.flexRowAllCenter, styles.titleDiv])}>
             <div className={css([commonStyles.flexRowAllCenter, styles.mainTitleDiv])}>
               <img
-                src={props.gameIcon || 'assets/check_mark_done.png'}
+                src={props.gameIcon || checkIcon}
                 className={css(styles.gameIconImage)}
                 alt='Game Icon'
               />
