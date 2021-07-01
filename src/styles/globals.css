@@ -180,3 +180,16 @@ code {
     transform: rotate(360deg);
   }
 }
+
+.progress {
+  width: '50vw';
+  height: '4vh';
+  border-radius: '2vh';
+}
+
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+  display: 'flex';
+  flex-wrap: 'inherit';
+}
