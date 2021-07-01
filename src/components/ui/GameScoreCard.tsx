@@ -2,12 +2,12 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import { Container, Row } from 'react-bootstrap';
 import { css, StyleSheet } from 'aphrodite/no-important';
-import commonStyles from '../../styles/commonStyles';
-import WideActionButton from './WideActionButton';
-import LoadingComponent from './LoadingComponent';
-import trophyImg from 'public/assets/trophy.svg';
-import trophyBannerImg from 'public/assets/trophy_banner.svg';
-import checkIcon from 'public/assets/check_mark_done.png';
+import commonStyles from '@styles/commonStyles';
+import WideActionButton from '@components/ui/WideActionButton';
+import LoadingComponent from '@components/ui/LoadingComponent';
+import trophyImg from '@assets/trophy.svg';
+import trophyBannerImg from '@assets/trophy_banner.svg';
+import checkIcon from '@assets/check_mark_done.png';
 
 export interface ITopScoreData {
   score: number;

@@ -1,7 +1,7 @@
 import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { css, StyleSheet } from 'aphrodite/no-important';
-import commonStyles from '../../styles/commonStyles';
+import commonStyles from '@styles/commonStyles';
 
 export interface IGameProgressBarProps {
   name: string;
