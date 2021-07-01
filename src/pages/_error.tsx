@@ -1,6 +1,6 @@
 import getConfig from 'next/config'
 import { NextPageContext } from 'next'
-import Rollbar from '@components/Rollbar'
+import Rollbar from 'Rollbar'
 
 interface IError {
   statusCode: number
