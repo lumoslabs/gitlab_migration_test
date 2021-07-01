@@ -1,17 +1,17 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
-import { RoundedButton } from './buttons';
+import Button from '@components/ui/Button';
+
 import commonStyles from '../../styles/commonStyles';
 // TODO:
 // import { analyticsTrack } from '../segment/analytics';
 
 export interface IWideActionButtonProps {
-  extendStyles: string;
+  extendStyles: any;
   buttonText: string;
   onClick?(e: React.MouseEvent<any>): any;
   id: string;
   currentPage: string;
-  disabled: boolean;
 }
 
 const WideActionButton = (props: IWideActionButtonProps): JSX.Element => {
@@ -19,9 +19,9 @@ const WideActionButton = (props: IWideActionButtonProps): JSX.Element => {
 
   return (
     <div className={css(commonStyles.flexJustifyCenter)}>
-      <RoundedButton
-        styles={[commonStyles.action, styles.wideAction, extendStyles]}
-        value={props.buttonText}
+      <Button
+        buttonStyles={[styles.wideAction, extendStyles]}
+        text={props.buttonText}
         onClick={e => {
           // TODO:
           // analyticsTrack('button_click', {
@@ -32,7 +32,6 @@ const WideActionButton = (props: IWideActionButtonProps): JSX.Element => {
           props.onClick(e);
           e.preventDefault();
         }}
-        disabled={props.disabled}
       />
     </div>
   );
