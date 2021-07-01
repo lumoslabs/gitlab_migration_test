@@ -1,0 +1,22 @@
+.progress-bar {
+  display: flex;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: rgb(250, 163, 58);
+  transition: width .6s ease;
+}
+
+.progress {
+  width: '50vw';
+  height: '4vh';
+  border-radius: '2vh';
+}
+
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+  display: 'flex';
+  flex-wrap: 'inherit';
+}

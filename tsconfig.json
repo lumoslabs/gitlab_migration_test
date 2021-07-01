@@ -24,6 +24,12 @@
       ],
       "@styles/*": [
         "src/styles/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@assets/*": [
+        "public/assets/*"
       ]
     }
   },
