@@ -7,7 +7,6 @@ import WideActionButton from '@components/ui/WideActionButton';
 import LoadingComponent from '@components/ui/LoadingComponent';
 import trophyImg from '@assets/trophy.svg';
 import trophyBannerImg from '@assets/trophy_banner.svg';
-import checkIcon from '@assets/check_mark_done.png';
 
 export interface ITopScoreData {
   score: number;
@@ -29,6 +28,8 @@ export interface IGameScoreCardProps {
   actionButtonText: string;
   actionButtonClicked: boolean;
   currentPage: string;
+  statLabel: string;
+  stat: number;
 }
 
 const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
@@ -39,7 +40,7 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
           <div className={css([commonStyles.flexRowAllCenter, styles.titleDiv])}>
             <div className={css([commonStyles.flexRowAllCenter, styles.mainTitleDiv])}>
               <img
-                src={props.gameIcon || checkIcon}
+                src={props.gameIcon || '/assets/check_mark_done.png'}
                 className={css(styles.gameIconImage)}
                 alt='Game Icon'
               />
@@ -66,26 +67,12 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
                 {props.currentScore}
               </p>
               <div className={css([commonStyles.flexColumnAlignCenter, styles.scoreValuediv])}>
-                {
-                  props.scoresData.map((scoreData, i) => {
-                    return (
-                      <div key = {'div_'+i} className={css(styles.currentStatDiv)}>
-                        <p className={css(styles.scoreText)}>
-                          {/* I don't think we need this intl component, not sure how to put it into a plain form...
-                            <FormattedMessage
-                            id={'scoreText_'+i}
-                            defaultMessage={scoreData.scoreText}
-                            values={{
-                              ...scoreData.values,
-                              left: chunks => <span className={css(styles.scoreLeftAlign)}>{chunks}</span>,
-                              right: chunks => <span className={css(styles.scoreRightAlign)}>{chunks}</span>
-                            }}
-                          /> */}
-                        </p>
-                      </div>
-                    );
-                  })
-                }
+                <div  className={css(styles.currentStatDiv)}>
+                  <p className={css(styles.scoreText)}>
+                    <span className={css(styles.scoreLeftAlign)}>{props.statLabel}</span>
+                    <span className={css(styles.scoreRightAlign)}>{props.stat}</span>
+                  </p>
+                </div>
               </div>
             </div>
             <div className={css([commonStyles.flexColumnAllCenter, styles.topScoreDiv])}>
