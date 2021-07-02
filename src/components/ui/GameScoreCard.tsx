@@ -1,10 +1,10 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-import { Container, Row, Col } from 'react-bootstrap';
-import { css, StyleSheet } from 'aphrodite/no-important';
-import commonStyles from '@styles/commonStyles';
-import WideActionButton from '@components/ui/WideActionButton';
-import base from '@styles/colors/base';
+import React from 'react'
+import Card from 'react-bootstrap/Card'
+import { Container, Row, Col } from 'react-bootstrap'
+import { css, StyleSheet } from 'aphrodite/no-important'
+import commonStyles from '@styles/commonStyles'
+import WideActionButton from '@components/ui/WideActionButton'
+import base from '@styles/colors/base'
 
 const { black, gray7, lumosOrange } = base;
 
@@ -33,6 +33,9 @@ export interface IGameScoreCardProps {
 }
 
 const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
+  const dayjs = require('dayjs')
+  const formattedDate = (date: string) => dayjs(date).format('MMM DD, YYYY')
+
   return (
     <div className={css([commonStyles.flexColumnAlignCenter, commonStyles.fullWidth])}>
       <Card className={css([commonStyles.flexColumnAlignCenter, styles.card])}>
@@ -113,10 +116,9 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
                               {topScoreData.score}
                             </p>
                           </Col>
-                          <Col className={css(styles.alignRight)}>
+                          <Col xs={7} className={css(styles.alignRight)}>
                             <p key={'col_date'} className={css(styles.topScoreDate)}>
-                              {/* Will add DayJS to format date*/}
-                              {topScoreData.updated_at}
+                              {formattedDate(topScoreData.updated_at)}
                             </p>
                           </Col>
                         </Row>
@@ -312,7 +314,7 @@ const styles = StyleSheet.create({
   },
 
   alignRight: {
-    textAlign: 'right',
+    textAlign: 'right'
   },
 
   topScoreBold: {
