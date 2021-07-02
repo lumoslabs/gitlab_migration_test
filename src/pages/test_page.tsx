@@ -1,4 +1,4 @@
-// import LoadingComponent from '@components/ui/LoadingComponent';
+import LoadingComponent from '@components/ui/LoadingComponent';
 // import GameProgressBar from '@components/ui/GameProgressBar';
 import GameScoreCard from '@components/ui/GameScoreCard';
 import { StyleSheet } from 'aphrodite';
@@ -10,8 +10,10 @@ const styles = StyleSheet.create({
     fontStyle: 'italic'
   }
 });
+
 export default function Test(): JSX.Element {
   const handleClick = () => { window.location.href = 'https://lumos-assistant.ngrok.io' };
+
   return (
     <main>
       {/* <GameProgressBar name='Train of Thought' progressLevel={50} /> */}
@@ -23,13 +25,13 @@ export default function Test(): JSX.Element {
         showTrainingIcon={true}
         showTrophy={true}
         trainingIcon='assets/training_1by3.svg'
-        currentScore={1000}
-        scoresData={[]}
+        currentScore={100000}
+        scoresData={[{"updated_at":"2021-07-02T20:15:27Z","score":6}]}
         topScoresLoading={false}
-        topScoreTodaysScoreIndex={1}
-        topScoresData={[]}
+        topScoreTodaysScoreIndex={0}
+        topScoresData={[{"updated_at":"07/02/2020","score":600000}, {"updated_at":"07/01/2020","score":55000}, {"updated_at":"07/01/2020","score":5000}, {"updated_at":"07/01/2020","score":4000}, {"updated_at":"07/01/2020","score":3000}]}
         actionButtonText='Next Game'
-        actionButtonClicked={false}
+        actionButtonHandler={handleClick}
         currentPage={window.location.href}
         stat={10}
         statLabel='Cards'
