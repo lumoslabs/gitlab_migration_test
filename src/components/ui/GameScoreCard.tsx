@@ -21,8 +21,6 @@ export interface IGameScoreCardProps {
   showTrophy: boolean;
   trainingIcon?: string;
   currentScore: number;
-  scoresData: ITopScoreData[];
-  topScoresLoading: boolean;
   topScoreTodaysScoreIndex: number;
   topScoresData: ITopScoreData[];
   actionButtonText: string;
@@ -85,7 +83,7 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
               </div>
             </div>
             <div className={css([commonStyles.flexColumnAllCenter, styles.topScoreDiv])}>
-              {!props.topScoresLoading && props.topScoresData && (
+              {props.topScoresData && (
                 <>
                   <p className={css(styles.topScoresTitle)}>
                     {'Top Scores'}

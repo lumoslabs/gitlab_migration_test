@@ -26,8 +26,6 @@ export default function Test(): JSX.Element {
         showTrophy={true}
         trainingIcon='assets/training_1by3.svg'
         currentScore={100000}
-        scoresData={[{"updated_at":"2021-07-02T20:15:27Z","score":6}]}
-        topScoresLoading={false}
         topScoreTodaysScoreIndex={0}
         topScoresData={[{"updated_at":"05/02/2020","score":600000}, {"updated_at":"2021-07-02T20:15:27Z","score":55000}, {"updated_at":"07/01/2020","score":5000}, {"updated_at":"07/01/2020","score":4000}, {"updated_at":"07/01/2020","score":3000}]}
         actionButtonText='Next Game'
