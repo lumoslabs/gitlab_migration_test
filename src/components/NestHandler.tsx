@@ -2,12 +2,15 @@ import Script from 'next/script'
 import getConfig from 'next/config'
 
 import { TtsMarkName, actions, getTts, getIsStarted } from '@store/slices/appSlice'
-import { asSharedAction } from '@store/slices/appSharedActions'
+import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions'
 
 import { useAppSelector, useAppDispatch } from '@store/hooks'
 
+import { useRouter } from 'next/router'
+
 function NestHandler(): JSX.Element {
   const { publicRuntimeConfig } = getConfig()
+  const router = useRouter()
 
   //debug bar for state manage schema
   const tts = useAppSelector(getTts)
@@ -18,9 +21,12 @@ function NestHandler(): JSX.Element {
     const callbacks = {
       onUpdate(data: unknown[]) {
         data.forEach((row) => {
-          const sharedAction = asSharedAction(row)
-          if (sharedAction) {
-            dispatch(actions[sharedAction.command]())
+          const action = asSharedAction(row)
+          if (action && actions[action.command]) {
+            dispatch(actions[action.command]())
+          }
+          if (action.command == appSharedActions.GO_TO) {
+            router.push(action.payload)
           }
         })
       },
