@@ -24,7 +24,6 @@ const ReloginComponent = (props: IReloginComponentProps): JSX.Element => {
       </div>
       <div className={css(commonStyles.flexJustifyCenter)}>
         <RoundedButton
-          styles={[commonStyles.cta, commonStyles.action]}
           value='Log In'
           onClick={e => {
             // TODO

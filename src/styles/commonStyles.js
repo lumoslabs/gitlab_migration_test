@@ -94,33 +94,6 @@ const commonStyles = StyleSheet.create({
     border: '1px solid',
     width: '100%'
   },
-  widerCtasdiv: {
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  ctasdiv: {
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  cta: {
-    fontFamily: 'MuseoSans500',
-    fontSize: 12,
-    fontWeight: 700
-  },
-  action: {
-    color: base.lumosWhite,
-    backgroundColor: base.lumosOrange,
-    ':focus': {
-      outline: 'none'
-    },
-    ':hover': {
-      backgroundColor: base.grayLighter,
-      color: base.lumosBlack,
-    },
-    ':active': {
-      backgroundColor: '#d5d5d5'
-    }
-  },
   card: {
     cursor: 'pointer',
     borderRadius: '20px',

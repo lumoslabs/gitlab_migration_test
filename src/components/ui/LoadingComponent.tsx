@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
-import base from '../../styles/colors/base';
-import commonStyles from '../../styles/commonStyles';
+import base from '@styles/colors/base';
+import commonStyles from '@styles/commonStyles';
 
 const baseStyles = StyleSheet.create({
   loadingAnimdiv: {

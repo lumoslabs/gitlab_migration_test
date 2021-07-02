@@ -19,9 +19,11 @@ export const turquoise = '#CBE6EA';
 export const whiteAt98 = 'rgba(256, 256, 256, 0.98)';
 export const blackAt62 = 'rgba(0, 0, 0, 0.62)';
 export const blackAt89 = 'rgba(0, 0, 0, 0.89)';
+export const darkOrange = '#C94727';
 
 const base = {
   black: black,
+  darkOrange: darkOrange,
   green: green,
   grayDarker: grayDarker,
   tealDark: tealDark,
