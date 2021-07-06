@@ -48,12 +48,11 @@ const styles = StyleSheet.create({
     border: 'none',
     boxShadow: `0px 0.125vmin 0.125vmin 0px rgba(0, 0, 0, 0.11),
       0px 0.25vmin 0.5vmin 0px rgba(0, 0, 0, 0.13),
-      0px 0.25vmin 0.75vmin 0px rgba(0, 0, 0, 0.1)`,
+      0px 0.25vmin 0.75vmin 0px rgba(0, 0, 0, 0.1)`
   },
 
   section: {
-    marginTop: '17vmin',
-    marginLeft: '8.25vmin',
+    marginTop: '17vmin'
   },
 
   cardTitle: {
