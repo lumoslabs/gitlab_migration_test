@@ -1,25 +1,6 @@
 import { css, StyleSheet } from 'aphrodite/no-important';
 import dynamic from 'next/dynamic'
 
-export function Index(): JSX.Element {
-  return (
-    <main>
-      <div className={css(styles.app)}>
-        <div className={css(styles.mainContent)}>
-          <img
-            className={css(styles.iconImage)}
-            src='assets/lumosity_white_logo_with_r.svg'
-          />
-        </div>
-      </div>
-    </main>
-  )
-}
-
-export default dynamic(() => Promise.resolve(Index), {
-  ssr: false
-})
-
 const styles = StyleSheet.create({
   app: {
     width: '100%',
@@ -62,3 +43,22 @@ const styles = StyleSheet.create({
     width: '31.25vw'
   },
 });
+
+export function Index(): JSX.Element {
+  return (
+    <main>
+      <div className={css(styles.app)}>
+        <div className={css(styles.mainContent)}>
+          <img
+            className={css(styles.iconImage)}
+            src='assets/lumosity_white_logo_with_r.svg'
+          />
+        </div>
+      </div>
+    </main>
+  )
+}
+
+export default dynamic(() => Promise.resolve(Index), {
+  ssr: false
+})
