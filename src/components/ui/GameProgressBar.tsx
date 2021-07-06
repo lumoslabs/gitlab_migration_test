@@ -5,7 +5,6 @@ import commonStyles from '@styles/commonStyles';
 import base from '@styles/colors/base';
 
 export interface IGameProgressBarProps {
-  name: string;
   progressLevel: number;
 }
 
@@ -14,7 +13,7 @@ const GameProgressBar = (props: IGameProgressBarProps): JSX.Element => {
     <div className={css([commonStyles.flexColumnAllCenter, commonStyles.flexJustifyCenter, styles.progressBarDiv])}>
       <ProgressBar variant='lumos' className={css(styles.progressOverride)} animated={false} now={props.progressLevel} />
       <p className={css(styles.loadingText)}>
-        Loading {props.name}
+        Loading
       </p>
     </div>
   );

@@ -10,7 +10,6 @@ const GameContainer = (): JSX.Element => {
 
   // TODO: get these variables from gameRun
   const showProgress = true;
-  const gameName = 'Train of Thought';
   const progressLevel = 50;
 
   return (
@@ -24,10 +23,7 @@ const GameContainer = (): JSX.Element => {
           </canvas>
           {
             showProgress &&
-            <GameProgressBar
-              name={gameName}
-              progressLevel={progressLevel}
-            />
+            <GameProgressBar progressLevel={progressLevel} />
           }
           {/* TODO: Hookup game */}
           {/* <Script attributes={{ id:'gameScript', ref:'gameScript'}} url={gameUrl} /> */}
