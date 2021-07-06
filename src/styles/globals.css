@@ -181,15 +181,12 @@ code {
   }
 }
 
-.progress {
-  width: '50vw';
-  height: '4vh';
-  border-radius: '2vh';
-}
-
-.row {
-  margin-right: 0px;
-  margin-left: 0px;
-  display: 'flex';
-  flex-wrap: 'inherit';
+.bg-lumos {
+  background-color: #FCB913 !important;
+  display: flex !important;
+  overflow: hidden !important;
+  color: #fff !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  transition: width .6s ease !important;
 }

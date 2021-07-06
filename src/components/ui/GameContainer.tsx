@@ -8,14 +8,15 @@ import GameProgressBar from '@components/ui/GameProgressBar';
 
 const GameContainer = (): JSX.Element => {
 
+  // TODO: get these variables from gameRun
   const showProgress = true;
   const gameName = 'Train of Thought';
   const progressLevel = 50;
 
   return (
-    <div id="gamediv" className={css([commonStyles.fullWidth, commonStyles.flexColumnAllCenter])}>
-      <Card id="gameCard" className={css([commonStyles.flexColumnAllCenter, styles.gameFrame])}>
-        <Card.Body id="gameCardBody" className={css(commonStyles.flexJustifyCenter)}>
+    <div className={css([commonStyles.fullWidth, commonStyles.flexColumnAllCenter])}>
+      <Card className={css([commonStyles.flexColumnAllCenter, styles.gameFrame])}>
+        <Card.Body className={css(commonStyles.flexJustifyCenter)}>
           <canvas
             id="gameCanvas"
             className={css(commonStyles.flexColumnAllCenter)}
@@ -28,10 +29,11 @@ const GameContainer = (): JSX.Element => {
               progressLevel={progressLevel}
             />
           }
+          {/* TODO: Hookup game */}
           {/* <Script attributes={{ id:'gameScript', ref:'gameScript'}} url={gameUrl} /> */}
         </Card.Body>
       </Card>
-      {/* {
+      {/* { TODO: Set up skip game
         config.development && isTester(userStoreState) &&
         <div className={css([commonStyles.flexRowAllCenter, styles.skipTextdiv])}>
           <Link to=''
