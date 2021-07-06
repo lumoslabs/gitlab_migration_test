@@ -5,6 +5,7 @@ import GameScoreCard from '@components/ui/GameScoreCard';
 import { StyleSheet } from 'aphrodite';
 import Button from '@components/ui/Button';
 import WideActionButton from '@components/ui/WideActionButton';
+import WorkoutCard from '@components/ui/WorkoutCard';
 
 const styles = StyleSheet.create({
   nextButton: {
@@ -17,6 +18,7 @@ export default function Test(): JSX.Element {
 
   return (
     <main>
+      <WorkoutCard clickHandler={handleClick}  />
       <UserBar clickHandler={handleClick} />
       {/* <GameContainer /> */}
       {/* <LoadingComponent title=''/> */}
