@@ -2,10 +2,12 @@ import LoadingComponent from '@components/ui/LoadingComponent';
 import UserBar from '@components/ui/UserBar';
 import GameContainer from '@components/ui/GameContainer';
 import GameScoreCard from '@components/ui/GameScoreCard';
-import { StyleSheet } from 'aphrodite';
+import GameCard from '@components/ui/GameCard';
+import { css, StyleSheet } from 'aphrodite';
 import Button from '@components/ui/Button';
 import WideActionButton from '@components/ui/WideActionButton';
 import WorkoutCard from '@components/ui/WorkoutCard';
+import commonStyles from '@styles/commonStyles';
 
 const styles = StyleSheet.create({
   nextButton: {
@@ -18,8 +20,13 @@ export default function Test(): JSX.Element {
 
   return (
     <main>
-      <WorkoutCard clickHandler={handleClick}  />
-      <UserBar clickHandler={handleClick} />
+      {/* <WorkoutCard clickHandler={handleClick}  /> */}
+      <GameCard
+        clickHandler={handleClick}
+        brainArea='ATTENTION'
+        bannerUrl='https://assets-staging.nest.lumosity.com/frontend_assets/banner/color_match_header.png'
+        title='Train of Thought'
+        />
       {/* <GameContainer /> */}
       {/* <LoadingComponent title=''/> */}
       {/* <GameScoreCard
@@ -46,6 +53,7 @@ export default function Test(): JSX.Element {
         id='test'
         currentPage={window.location.href}
         /> */}
+      <UserBar clickHandler={handleClick} />
     </main>
   )
 }
