@@ -1,7 +1,13 @@
 import UserModel, { User } from '@backend/models/user'
 import getConfig from 'next/config'
+import jwt from 'jsonwebtoken'
 
 const { serverRuntimeConfig } = getConfig()
+
+
+export interface TokenPayload {
+  id: string
+}
 
 export default class AuthService {
 
@@ -12,12 +18,33 @@ export default class AuthService {
     return row.Item as User
   }
 
-  async tokenToUser(id: string) {
-    return await this.getUser(id)
+  parseToken(token: string): Promise<TokenPayload> {
+    return new Promise((resolve, reject) => {
+      jwt.verify(token, serverRuntimeConfig.jwt.secret, function (err, decoded) {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(decoded)
+        }
+      })
+    })
   }
 
-  async userIdToToken(user: User): Promise<string> {
-    return user.id
+  generateToken(user: User): Promise<string> {
+    const payload: TokenPayload = {
+      id: user.id
+    }
+    return new Promise((resolve, reject) => {
+      jwt.sign(payload, serverRuntimeConfig.jwt.secret, {
+        expiresIn: serverRuntimeConfig.jwt.expiresIn
+      }, (err, token) => {
+        if (err)
+          reject(err)
+        else
+          resolve(token)
+      })
+    });
   }
 }
+
 
