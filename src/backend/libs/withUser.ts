@@ -9,7 +9,7 @@ export default function withUser<T>(handler: (req: NextApiRequest, res: NextApiR
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const authService = new AuthService()
     const token = req.headers?.authorization?.replace('Bearer ', '');
-    (req as NextApiRequestWithUser).user = await authService.parseToken(token)
+    (req as NextApiRequestWithUser).user = token ? await authService.parseToken(token) : null
     return handler(req, res)
   };
 };
