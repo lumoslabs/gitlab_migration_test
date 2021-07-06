@@ -17,7 +17,7 @@ export default function Test(): JSX.Element {
 
   return (
     <main>
-      <UserBar accountClickHandler={handleClick} />
+      <UserBar clickHandler={handleClick} />
       {/* <GameContainer /> */}
       {/* <LoadingComponent title=''/> */}
       {/* <GameScoreCard
