@@ -1,4 +1,5 @@
 import LoadingComponent from '@components/ui/LoadingComponent';
+import UserBar from '@components/ui/UserBar';
 import GameContainer from '@components/ui/GameContainer';
 import GameScoreCard from '@components/ui/GameScoreCard';
 import { StyleSheet } from 'aphrodite';
@@ -16,7 +17,8 @@ export default function Test(): JSX.Element {
 
   return (
     <main>
-      <GameContainer />
+      <UserBar accountClickHandler={handleClick} />
+      {/* <GameContainer /> */}
       {/* <LoadingComponent title=''/> */}
       {/* <GameScoreCard
         title='Color Match'
