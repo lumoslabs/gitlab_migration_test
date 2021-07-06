@@ -1,5 +1,3 @@
-import Script from 'next/script'
-import getConfig from 'next/config'
 import { commonNestStylesWithProps } from '../../styles/commonNestStyles';
 import { css, StyleSheet } from 'aphrodite/no-important';
 import React from 'react';
@@ -49,27 +47,11 @@ const styles = StyleSheet.create({
 });
 
 function Layout({ children }: { children: React.ReactNode }): JSX.Element {
-  const { publicRuntimeConfig } = getConfig()
-
-  const onLoad = () => {
-    const callbacks = {
-      onUpdate(data: any[]) {
-        console.log('onUpdate', data)
-      },
-      onTtsMark(markName: string) {
-        console.log('onTtsMark', markName)
-      },
-
-    };
-
-    window.interactiveCanvas.ready(callbacks)
-  }
 
   const usableClientHeight = window.innerHeight; // document.body.clientHeight;
 
   return <>
     <main>
-      <Script src={publicRuntimeConfig.interactiveCanvasLibUrl} onLoad={onLoad} />
       <div className={css([styles.app, commonNestStylesWithProps({ clientHeight: usableClientHeight }).fullHeight])}>
         {children}
       </div>

@@ -30,6 +30,9 @@
       ],
       "@backend/*": [
         "src/backend/*"
+      ],
+      "@store/*": [
+        "src/store/*"
       ]
     }
   },
