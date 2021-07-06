@@ -9,13 +9,17 @@ export interface IUserBarProps {
 const UserBar = (props: IUserBarProps): JSX.Element => {
   return (
     <div className={css([commonStyles.flexRow, styles.footer])}>
-      <div className={css([commonStyles.flexRow, styles.clickable])} onClick={props.clickHandler}>
+      <div className={css([commonStyles.flexRow, styles.clickable])}
+        onClick={props.clickHandler}
+      >
         <img
           src={props.profilePicUrl || '/assets/guest_avatar.svg'}
           className={css(styles.avatarImg)}
           alt='Avatar'
         />
-        <p className={css(styles.nameText)}>{props.name || 'Guest' }</p>
+        <p className={css(styles.nameText)}>
+          {props.name || 'Guest' }
+        </p>
       </div>
     </div>
   );
