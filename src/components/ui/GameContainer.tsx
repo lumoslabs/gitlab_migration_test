@@ -6,7 +6,6 @@ import commonStyles from '@styles/commonStyles';
 import { css, StyleSheet } from 'aphrodite/no-important';
 import GameProgressBar from '@components/ui/GameProgressBar';
 
-
 const GameContainer = (): JSX.Element => {
 
   const showProgress = true;
