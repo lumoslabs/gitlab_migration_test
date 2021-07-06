@@ -1,5 +1,7 @@
 import { css, StyleSheet } from 'aphrodite/no-important';
 import commonStyles from '@styles/commonStyles';
+import { base } from '@styles/colors';
+
 export interface IUserBarProps {
   clickHandler(e: React.MouseEvent<any>): any;
   profilePicUrl?: string;
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
 
   nameText: {
     fontSize: '3vmin',
-    color: '#000000',
+    color: base.lumosBlack,
     fontWeight: 500,
     fontFamily: 'MuseoSans500',
     margin: 0,
