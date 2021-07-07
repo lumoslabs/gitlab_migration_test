@@ -13,8 +13,7 @@ import commonStyles from '@styles/commonStyles';
 const styles = StyleSheet.create({
   topSpace: {
     height: '100%',
-    overflowY: 'hidden',
-    marginTop: '17vmin'
+    marginTop: '17vmin',
   }
 });
 
@@ -22,7 +21,7 @@ export default function Test(): JSX.Element {
   const handleClick = () => { window.location.href = 'https://lumos-assistant.ngrok.io' };
 
   return (
-    <div className={css([commonStyles.flexRowJustifyCenter, commonStyles.fullWidth, styles.topSpace])}>
+    <div className={css(commonStyles.flexRowJustifyCenter, commonStyles.fullWidth, styles.topSpace)}>
       <div className={css(commonStyles.flexAlignCenter)}>
         <WorkoutCard clickHandler={handleClick} />
         <GameSection />

@@ -10,6 +10,7 @@ exports[`Index page matches snapshot 1`] = `
         class="mainContent_lvw97s"
       >
         <img
+          alt="Lumosity logo"
           class="iconImage_l2q5ji"
           src="assets/lumosity_white_logo_with_r.svg"
         />

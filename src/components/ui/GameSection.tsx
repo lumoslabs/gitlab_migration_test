@@ -4,35 +4,17 @@ import {  Container } from 'react-bootstrap'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import commonStyles from '@styles/commonStyles'
 
-const styles = StyleSheet.create({
-  gamesDiv: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    marginTop: '10px'
-  },
-
-  title: {
-    width: '100%',
-    margin: 0,
-  },
-
-  gridCol: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: '0 0 auto'
-  },
-});
-
-export interface IGameCardsProps {
-  i: number;
-  title: string;
-  brainArea: string;
-  bannerUrl: string;
-  gameUrl: string;
-}
-
 const GameSection = (): JSX.Element => {
+
+  // TODO: Get this from database?
   const allGames = [
+    {
+      name: 'train-of-thought-nest',
+      title: 'Train of Thought',
+      brainArea: 'ATTENTION',
+      bannerUrl: 'https://assets.nest.lumosity.com/frontend_assets/banner/train_of_thought_header.png',
+      gameUrl: 'https://assets.nest.lumosity.com/game-assets/TrainOfThought_CC/nest_lowres/43a41021888c93d6b1fe1401ca0459f4655f2df3/289057183/release/'
+    },
     {
       name: 'color-match-nest',
       title: 'Color Match',
@@ -55,13 +37,6 @@ const GameSection = (): JSX.Element => {
       gameUrl: 'https://assets.nest.lumosity.com/game-assets/Raindrops_CC/nest_lowres/3bea7a3244b88385fa8aef44f9484770f1a6d924/289602258/release/'
     },
     {
-      name: 'train-of-thought-nest',
-      title: 'Train of Thought',
-      brainArea: 'ATTENTION',
-      bannerUrl: 'https://assets.nest.lumosity.com/frontend_assets/banner/train_of_thought_header.png',
-      gameUrl: 'https://assets.nest.lumosity.com/game-assets/TrainOfThought_CC/nest_lowres/43a41021888c93d6b1fe1401ca0459f4655f2df3/289057183/release/'
-    },
-    {
       name: 'word-snatchers-nest',
       title: 'Word Snatchers',
       brainArea: 'LANGUAGE',
@@ -72,6 +47,8 @@ const GameSection = (): JSX.Element => {
 
   const gameCards = allGames.map((props): JSX.Element => {
     const { title, brainArea, bannerUrl, gameUrl } = props
+
+    // TODO: make this launch game
     const handleClick = () => { window.location.href = gameUrl }
 
     return (
@@ -85,7 +62,7 @@ const GameSection = (): JSX.Element => {
     );
   });
 
-  const gameCardColumns = [];
+  const gameCardColumns = []
   for (let col = 0, i=0; col < ((gameCards.length / 2)); col++) {
     gameCardColumns.push(
       <div className={css([commonStyles.flexRowAllCenter, styles.gridCol])}
@@ -99,10 +76,23 @@ const GameSection = (): JSX.Element => {
   }
 
   return (
-    <Container className={css([commonStyles.flexRowAllCenter, styles.gamesDiv]) }>
+    <Container className={css([commonStyles.flexRowAllCenter, styles.gamesDiv])}>
       {gameCardColumns}
     </Container>
   );
 }
+
+const styles = StyleSheet.create({
+  gamesDiv: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    marginTop: '10px'
+  },
+  gridCol: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: '0 0 auto'
+  }
+})
 
 export default GameSection;

@@ -13,7 +13,6 @@ export interface IWorkoutCardProps {
 }
 
 const WorkoutCard = (props: IWorkoutCardProps): JSX.Element => {
-
   return (
     <div className={css([commonStyles.flexColumnAllCenter, styles.section])}>
       <Card className={css([commonStyles.flexColumnAllCenter, styles.card])}
@@ -21,7 +20,8 @@ const WorkoutCard = (props: IWorkoutCardProps): JSX.Element => {
       >
         <Card.Body className={css([commonStyles.flexColumnAllCenter, styles.cardBody])}>
           <Card.Img className={css(styles.cardImg)}
-            src={props.workoutImage || '/assets/workout_icon.svg'}>
+            src={props.workoutImage || '/assets/workout_icon.svg'}
+            alt='Workout Icon'>
           </Card.Img>
           <Card.Title className={css(styles.cardTitle)}>
             {'Daily Workout'}
@@ -52,15 +52,11 @@ const styles = StyleSheet.create({
   },
 
   section: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    marginRight: '20px',
-    marginLeft: '20px'
+    marginRight: '2vmin'
   },
 
   cardTitle: {
-    fontSize: '4.5vmin',
+    fontSize: '32px',
     fontFamily: 'MuseoSans700',
     fontWeight: 700,
     lineHeight: '4.5vmin'
@@ -80,7 +76,7 @@ const styles = StyleSheet.create({
   },
 
   cardBody: {
-    width: '50vmin',
+    width: '30vmax',
     height: '60vmin',
     justifyContent: 'space-evenly'
   },

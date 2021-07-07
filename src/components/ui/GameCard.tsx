@@ -4,8 +4,6 @@ import { css, StyleSheet } from 'aphrodite/no-important'
 import commonStyles from '@styles/commonStyles'
 import { base } from '@styles/colors'
 
-const { black } = base
-
 export interface IGameCardProps {
   clickHandler(e: React.MouseEvent<any>): any;
   brainArea: string;
@@ -22,6 +20,7 @@ const GameCard = (props: IGameCardProps): JSX.Element => {
         <Card.Img className={css(styles.cardImg)}
           variant="top"
           src={props.bannerUrl}
+          alt='Game icon'
         />
         <Card.Body className={css([commonStyles.flexColumn, styles.cardBody])}>
           <p className={css([commonStyles.pageTitle, styles.subTitle])}>
@@ -52,13 +51,13 @@ const styles = StyleSheet.create({
       0px 2px 6px 0px rgba(0, 0, 0, 0.1)`,
     overflow: 'hidden',
     marginBottom: '2vmin',
-    marginRight: '2vmin'
+    marginRight: '1.75vmin'
   },
 
   title: {
-    fontSize: '3.625vmin',
+    fontSize: '3.5vmin',
     fontWeight: 700,
-    color: black,
+    color: base.black,
     fontFamily: 'MuseoSans700',
     lineHeight: '4.25vmin'
   },
@@ -74,16 +73,16 @@ const styles = StyleSheet.create({
   },
 
   cardImg: {
-    width: '34.5vmin',
+    width: '19.7vmax',
     height: '14.5vmin',
     objectFit: 'cover'
   },
 
   cardBody: {
-    width: '34.5vmin',
+    width: '19.7vmax',
     height: '14.5vmin',
     justifyContent: 'flex-start',
-    padding: '2.5vmin'
+    padding: '2vmin'
   },
 });
 
