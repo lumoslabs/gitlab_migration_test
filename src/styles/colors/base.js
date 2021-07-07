@@ -11,6 +11,7 @@ export const lumosTeal = '#4DBCB6';
 export const lumosKale = '#5ABE82';
 export const lumosPistachio = '#B0CA5F';
 export const gray7 = '#666';
+export const gray8 = '#4D4D4D';
 export const green = '#A7C81F'; // from lux 1
 export const tealDark = '#077380'; // from lux 1
 export const black = '#000';
@@ -26,6 +27,7 @@ const base = {
   black: black,
   darkOrange: darkOrange,
   gray7: gray7,
+  gray8: gray8,
   green: green,
   grayDarker: grayDarker,
   tealDark: tealDark,
