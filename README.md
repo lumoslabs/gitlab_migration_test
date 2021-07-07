@@ -59,6 +59,9 @@ ngrok start lumos-google-assistant
 * Frontend routes - */src/pages*
 * React components - */src/components* can be imported by alias @components/*
 * UI components - */src/components/ui* can be imported by alias @components/ui/*
+* Styles - */src/styles/* can be imported by alias @styles/*
+* Assets - */public/assets/* can be imported by alias @assets/*
+* Add more shortcuts in tsconfig.json paths
 * Backend routes - */src/pages/api/*
 * Backend modules - */src/api/*
 
