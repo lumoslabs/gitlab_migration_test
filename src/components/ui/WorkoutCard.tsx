@@ -13,6 +13,7 @@ export interface IWorkoutCardProps {
 }
 
 const WorkoutCard = (props: IWorkoutCardProps): JSX.Element => {
+
   return (
     <div className={css([commonStyles.flexColumnAllCenter, styles.section])}>
       <Card className={css([commonStyles.flexColumnAllCenter, styles.card])}
