@@ -1,6 +1,7 @@
 import UserModel, { User } from '@backend/models/user'
 import getConfig from 'next/config'
 import jwt from 'jsonwebtoken'
+import { v4 as uuidv4 } from 'uuid';
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -16,6 +17,21 @@ export default class AuthService {
     if (!row?.Item)
       return null
     return row.Item as User
+  }
+
+  async createNewUser() {
+    /*
+        const user : User = {
+          id: uuidv4(),
+          profile: {};
+          state: any;
+          email: string;
+          last_login_at: string;
+          updated_at?: string;
+          created_at?: string;
+        
+        }
+    */
   }
 
   parseToken(token: string): Promise<TokenPayload> {

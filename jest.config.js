@@ -2,9 +2,10 @@ const { pathsToModuleNameMapper } = require('ts-jest/utils')
 const { compilerOptions } = require('./tsconfig')
 
 module.exports = {
-  setupFilesAfterEnv: ['<rootDir>/src/jest.setup.ts'],
+  setupFiles: ['<rootDir>/src/jest.setupBeforeEnv.js'],
+  setupFilesAfterEnv: ['<rootDir>/src/jest.setupAfterEnv.js'],
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
+  testMatch: ["**/src/test/**/*.[jt]s?(x)"],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
   testEnvironment: 'jsdom',
-  preset: "@shelf/jest-dynamodb",
 };

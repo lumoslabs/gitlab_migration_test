@@ -5,6 +5,8 @@ import * as AphroditeNoImportant from 'aphrodite/no-important';
 Aphrodite.StyleSheetTestUtils.suppressStyleInjection();
 AphroditeNoImportant.StyleSheetTestUtils.suppressStyleInjection();
 
+jest.setTimeout(100000)
+
 jest.mock('next/config', () => () => ({
   serverRuntimeConfig: {
     google: {
@@ -12,10 +14,10 @@ jest.mock('next/config', () => () => ({
     },
     public_url: 'http://nest.dev',
     dynamodb: {
-      prefix: 'dev_',
-      endpoint: 'localhost:8005',
+      prefix: 'test_',
+      endpoint: process.env.MOCK_DYNAMODB_ENDPOINT,
       sslEnabled: false,
-      region: 'local-env',
+      region: 'local',
     }
   },
   publicRuntimeConfig: {

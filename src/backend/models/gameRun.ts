@@ -9,6 +9,16 @@ export enum GameRunState {
   ENDED = 'ENDED'
 }
 
+export enum GameEvents {
+  START = 'game:start',
+  LOADED = 'game:loadComplete',
+  COMPLETED = 'game:complete'
+}
+
+export interface GameEventData {
+  score?: number,
+}
+
 export interface GameRun {
   id: string;
   game_state: GameRunState;

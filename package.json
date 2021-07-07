@@ -28,12 +28,12 @@
     "react-dom": "17.0.2",
     "react-redux": "^7.2.4",
     "rollbar": "^2.23.0",
+    "setimmediate": "^1.0.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
-    "@shelf/jest-dynamodb": "^1.8.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@types/jest": "^26.0.23",
@@ -52,6 +52,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^6.0.0",
     "jest": "^27.0.5",
+    "jest-dynalite": "^3.3.1",
     "jest-watch-typeahead": "^0.6.4",
     "prettier": "^2.3.1",
     "react-test-renderer": "^17.0.2",

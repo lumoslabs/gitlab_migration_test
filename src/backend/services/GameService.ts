@@ -1,6 +1,5 @@
-import GameRunModel, { GameRun, GameRunState } from '@backend/models/gameRun'
+import GameRunModel, { GameEventData, GameEvents, GameRun, GameRunState } from '@backend/models/gameRun'
 import { v4 as uuidv4 } from 'uuid';
-import { getCurrentUTCString } from '@backend/libs/dayjs'
 
 export default class GameService {
 
@@ -14,6 +13,28 @@ export default class GameService {
       score: 0,
     }
     await GameRunModel.put(game)
+    return id
+  }
+
+  async updateGame(id: string, eventName: GameEvents, eventData?: GameEventData) {
+    if (eventName === GameEvents.LOADED) {
+      await GameRunModel.update({
+        id: id,
+        game_state: GameRunState.LOADED,
+      })
+    } else if (eventName === GameEvents.START) {
+      await GameRunModel.update({
+        id: id,
+        game_state: GameRunState.STARTED,
+      })
+    } else if (eventName === GameEvents.COMPLETED) {
+      await GameRunModel.update({
+        id: id,
+        game_state: GameRunState.ENDED,
+        score: eventData?.score ?? 0,
+        run_data: eventData
+      })
+    }
     return id
   }
 
