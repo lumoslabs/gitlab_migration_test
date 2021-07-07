@@ -52,7 +52,11 @@ const styles = StyleSheet.create({
   },
 
   section: {
-    marginTop: '17vmin'
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginRight: '20px',
+    marginLeft: '20px'
   },
 
   cardTitle: {
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
   },
 
   cardBody: {
-    width: '60vmin',
+    width: '50vmin',
     height: '60vmin',
     justifyContent: 'space-evenly'
   },

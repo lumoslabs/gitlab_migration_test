@@ -1,17 +1,10 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
-import { css, StyleSheet } from 'aphrodite/no-important';
-import commonStyles from '@styles/commonStyles';
-import { base } from '@styles/colors';
+import React from 'react'
+import { Card } from 'react-bootstrap'
+import { css, StyleSheet } from 'aphrodite/no-important'
+import commonStyles from '@styles/commonStyles'
+import { base } from '@styles/colors'
 
-const { lumosOrange } = base
-
-const brainAreaColorsMap = {
-  ATTENTION: lumosOrange,
-  FLEXIBILITY: 'rgb(249, 136, 22)',
-  MATH: 'rgb(154, 75, 138)',
-  LANGUAGE: 'rgb(14, 145, 161)',
-};
+const { black } = base
 
 export interface IGameCardProps {
   clickHandler(e: React.MouseEvent<any>): any;
@@ -21,8 +14,6 @@ export interface IGameCardProps {
 }
 
 const GameCard = (props: IGameCardProps): JSX.Element => {
-  const brainAreaColor = brainAreaColorsMap[props.brainArea];
-
   return (
     <div className={css([commonStyles.flexRowAllCenter, styles.gridCol])}>
       <Card className={css([commonStyles.flexColumnAllCenter, styles.card])}
@@ -33,7 +24,7 @@ const GameCard = (props: IGameCardProps): JSX.Element => {
           src={props.bannerUrl}
         />
         <Card.Body className={css([commonStyles.flexColumn, styles.cardBody])}>
-          <p className={css([commonStyles.pageTitle, subTitleStyle({color: brainAreaColor}).subTitle])}>
+          <p className={css([commonStyles.pageTitle, styles.subTitle])}>
             {props.brainArea}
           </p>
           <Card.Title className={css(styles.title)}>
@@ -44,18 +35,6 @@ const GameCard = (props: IGameCardProps): JSX.Element => {
     </div>
   );
 }
-
-const subTitleStyle = (props) => StyleSheet.create({
-  subTitle: {
-    fontSize: '2.125vmin',
-    fontWeight: 700,
-    color: props.color,
-    letterSpacing: '0.1vmin',
-    lineHeight: '2.75vmin',
-    fontFamily: 'MuseoSans700',
-    marginBottom: '0.5vmin'
-  },
-});
 
 const styles = StyleSheet.create({
   gridCol: {
@@ -79,9 +58,19 @@ const styles = StyleSheet.create({
   title: {
     fontSize: '3.625vmin',
     fontWeight: 700,
-    color: '#000000',
+    color: black,
     fontFamily: 'MuseoSans700',
     lineHeight: '4.25vmin'
+  },
+
+  subTitle: {
+    fontSize: '2.125vmin',
+    fontWeight: 700,
+    color: '#717171',
+    letterSpacing: '0.1vmin',
+    lineHeight: '2.75vmin',
+    fontFamily: 'MuseoSans700',
+    marginBottom: '0.5vmin'
   },
 
   cardImg: {
