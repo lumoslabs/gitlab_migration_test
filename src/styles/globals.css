@@ -180,3 +180,13 @@ code {
     transform: rotate(360deg);
   }
 }
+
+.bg-lumos {
+  background-color: #FCB913 !important;
+  display: flex !important;
+  overflow: hidden !important;
+  color: #fff !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  transition: width .6s ease !important;
+}

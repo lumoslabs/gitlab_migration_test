@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: '100%',
     height: '100vh',
-    minHeight: '84vh',
+    minHeight: '100vh',
     margin: '0',
     padding: '0',
     display: 'flex',
