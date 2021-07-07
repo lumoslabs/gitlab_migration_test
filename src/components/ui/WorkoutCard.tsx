@@ -21,7 +21,8 @@ const WorkoutCard = (props: IWorkoutCardProps): JSX.Element => {
         <Card.Body className={css([commonStyles.flexColumnAllCenter, styles.cardBody])}>
           <Card.Img className={css(styles.cardImg)}
             src={props.workoutImage || '/assets/workout_icon.svg'}
-            alt='Workout Icon'>
+            alt='Workout Icon'
+          >
           </Card.Img>
           <Card.Title className={css(styles.cardTitle)}>
             {'Daily Workout'}
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   },
 
   cardTitle: {
-    fontSize: '32px',
+    fontSize: '32x',
     fontFamily: 'MuseoSans700',
     fontWeight: 700,
     lineHeight: '4.5vmin'
