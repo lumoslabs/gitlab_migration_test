@@ -1,6 +1,5 @@
-
 import { StyleSheet } from 'aphrodite';
-import { base, gray } from './colors';
+import { base } from './colors';
 
 const commonStyles = StyleSheet.create({
   simpleFlex: {
@@ -94,33 +93,6 @@ const commonStyles = StyleSheet.create({
   horizontalRule: {
     border: '1px solid',
     width: '100%'
-  },
-  widerCtasdiv: {
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  ctasdiv: {
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  cta: {
-    fontFamily: 'MuseoSans500',
-    fontSize: 12,
-    fontWeight: 700
-  },
-  action: {
-    color: base.lumosWhite,
-    backgroundColor: base.lumosOrange,
-    ':focus': {
-      outline: 'none'
-    },
-    ':hover': {
-      backgroundColor: gray.grayLighter,
-      color: base.lumosBlack,
-    },
-    ':active': {
-      backgroundColor: '#d5d5d5'
-    }
   },
   card: {
     cursor: 'pointer',
