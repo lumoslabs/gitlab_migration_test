@@ -12,22 +12,24 @@ export interface IGameCardProps {
 }
 
 const GameCard = (props: IGameCardProps): JSX.Element => {
+  const { clickHandler, bannerUrl, brainArea, title } = props
+
   return (
     <div className={css([commonStyles.flexRowAllCenter, styles.gridCol])}>
       <Card className={css([commonStyles.flexColumnAllCenter, styles.card])}
-        onClick={props.clickHandler}
+        onClick={clickHandler}
       >
         <Card.Img className={css(styles.cardImg)}
           variant="top"
-          src={props.bannerUrl}
+          src={bannerUrl}
           alt='Game icon'
         />
         <Card.Body className={css([commonStyles.flexColumn, styles.cardBody])}>
           <p className={css([commonStyles.pageTitle, styles.subTitle])}>
-            {props.brainArea}
+            {brainArea}
           </p>
           <Card.Title className={css(styles.title)}>
-            {props.title}
+            {title}
           </Card.Title>
         </Card.Body>
       </Card>
