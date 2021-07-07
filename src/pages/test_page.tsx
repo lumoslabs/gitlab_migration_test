@@ -1,5 +1,6 @@
 import LoadingComponent from '@components/ui/LoadingComponent';
 // import GameProgressBar from '@components/ui/GameProgressBar';
+import UserInfo from '@components/ui/UserInfo';
 import GameScoreCard from '@components/ui/GameScoreCard';
 import { StyleSheet } from 'aphrodite';
 import Button from '@components/ui/Button';
@@ -16,6 +17,11 @@ export default function Test(): JSX.Element {
 
   return (
     <main>
+      <UserInfo
+        show={true}
+        handleClose={handleClick}
+        logoutCallback={handleClick}
+      />
       {/* <GameProgressBar name='Train of Thought' progressLevel={50} /> */}
       {/* <LoadingComponent title=''/> */}
       <GameScoreCard
