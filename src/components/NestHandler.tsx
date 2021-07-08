@@ -33,7 +33,7 @@ function NestHandler(): JSX.Element {
       onTtsMark(tts: TtsMarkName) {
         dispatch(actions.setTts({ tts }))
       },
-    };
+    }
     window.interactiveCanvas.ready(callbacks)
   }
 

@@ -1,8 +1,8 @@
-import React from 'react';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import { css, StyleSheet } from 'aphrodite/no-important';
-import commonStyles from '@styles/commonStyles';
-import base from '@styles/colors/base';
+import React from 'react'
+import ProgressBar from 'react-bootstrap/ProgressBar'
+import { css, StyleSheet } from 'aphrodite/no-important'
+import commonStyles from '@styles/commonStyles'
+import base from '@styles/colors/base'
 
 export interface IGameProgressBarProps {
   progressLevel: number;
@@ -16,7 +16,7 @@ const GameProgressBar = (props: IGameProgressBarProps): JSX.Element => {
         Loading
       </p>
     </div>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
     fontFamily: 'MuseoSans500',
     marginTop: '2.5vmin'
   }
-});
+})
 
-export default GameProgressBar;
+export default GameProgressBar

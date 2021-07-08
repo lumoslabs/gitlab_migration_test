@@ -1,5 +1,5 @@
-import { css, StyleSheet } from 'aphrodite/no-important';
-import React, { useEffect, useState } from 'react';
+import { css, StyleSheet } from 'aphrodite/no-important'
+import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 
 const styles = StyleSheet.create({
@@ -43,23 +43,23 @@ const styles = StyleSheet.create({
     height: '13.66vh',
     width: '31.25vw'
   },
-});
+})
 
 const heightFromClient = (clientHeight) => StyleSheet.create({
   fullHeight: {
     height: `${clientHeight}px`,
   },
-});
+})
 
 function Layout({ children }: { children: React.ReactNode }): JSX.Element {
 
-  const [clientHeight, setClient] = useState(0);
+  const [clientHeight, setClient] = useState(0)
 
   useEffect(() => {
     setClient(window.clientHeight)
   }, [])
 
-  const stylesWithHeight = heightFromClient(clientHeight);
+  const stylesWithHeight = heightFromClient(clientHeight)
 
   return <>
     <main>

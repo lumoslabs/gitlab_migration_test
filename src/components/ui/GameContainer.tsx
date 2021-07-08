@@ -1,16 +1,16 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-// import Script from 'react-load-script';
-// import { Link } from 'react-router-dom';
-import commonStyles from '@styles/commonStyles';
-import { css, StyleSheet } from 'aphrodite/no-important';
-import GameProgressBar from '@components/ui/GameProgressBar';
+import React from 'react'
+import Card from 'react-bootstrap/Card'
+// import Script from 'react-load-script'
+// import { Link } from 'react-router-dom'
+import commonStyles from '@styles/commonStyles'
+import { css, StyleSheet } from 'aphrodite/no-important'
+import GameProgressBar from '@components/ui/GameProgressBar'
 
 const GameContainer = (): JSX.Element => {
 
   // TODO: get these variables from gameRun
-  const showProgress = true;
-  const progressLevel = 50;
+  const showProgress = true
+  const progressLevel = 50
 
   return (
     <div className={css([commonStyles.fullWidth, commonStyles.flexColumnAllCenter])}>
@@ -44,7 +44,7 @@ const GameContainer = (): JSX.Element => {
         </div>
       } */}
     </div>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0
   }
-});
+})
 
 
-export default GameContainer;
+export default GameContainer

@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     height: '13.66vh',
     width: '31.25vw'
   },
-});
+})
 
 export function Index(): JSX.Element {
   return (

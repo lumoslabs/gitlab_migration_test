@@ -1,6 +1,6 @@
-import React from 'react';
-import { css } from 'aphrodite';
-import commonStyles from '@styles/commonStyles';
+import React from 'react'
+import { css } from 'aphrodite'
+import commonStyles from '@styles/commonStyles'
 
 export interface ISkipComponent {
   message?: string;
@@ -14,7 +14,7 @@ const SkipComponent = ({ message = 'Skip', onClick = () => void (0) }: ISkipComp
         {message}
       </a>
     </div>
-  );
-};
+  )
+}
 
-export default SkipComponent;
+export default SkipComponent

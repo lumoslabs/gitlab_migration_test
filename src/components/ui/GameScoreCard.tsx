@@ -6,7 +6,7 @@ import commonStyles from '@styles/commonStyles'
 import WideActionButton from '@components/ui/WideActionButton'
 import base from '@styles/colors/base'
 
-const { black, gray7, lumosOrange } = base;
+const { black, gray7, lumosOrange } = base
 
 export interface ITopScoreData {
   score: number;
@@ -122,7 +122,7 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
                             </p>
                           </Col>
                         </Row>
-                      );
+                      )
                     })}
                   </Container>
                 </>
@@ -141,8 +141,8 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   card: {
@@ -347,6 +347,6 @@ const styles = StyleSheet.create({
     margin: '3.33vh',
     padding: 0
   }
-});
+})
 
-export default GameScoreCard;
+export default GameScoreCard

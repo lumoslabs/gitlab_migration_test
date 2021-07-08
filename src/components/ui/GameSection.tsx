@@ -51,8 +51,8 @@ const GameSection = (): JSX.Element => {
         bannerUrl={bannerUrl}
         slug={slug}
       />
-    );
-  });
+    )
+  })
 
   const gameCardColumns = []
   for (let col = 0, i=0; col < ((gameCards.length / 2)); col++) {
@@ -63,15 +63,15 @@ const GameSection = (): JSX.Element => {
         {gameCards[i]}
         {gameCards[i+1]}
       </div>
-    );
-    i += 2;
+    )
+    i += 2
   }
 
   return (
     <Container className={css([commonStyles.flexRowAllCenter, styles.gamesDiv])}>
       {gameCardColumns}
     </Container>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default GameSection;
+export default GameSection
