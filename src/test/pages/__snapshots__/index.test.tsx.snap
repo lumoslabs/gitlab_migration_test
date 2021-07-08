@@ -4,12 +4,13 @@ exports[`Index page matches snapshot 1`] = `
 <DocumentFragment>
   <main>
     <div
-      class="app_1mrdeqi-o_O-fullHeight_1lwrul0"
+      class="app_1mrdeqi"
     >
       <div
         class="mainContent_lvw97s"
       >
         <img
+          alt="Lumosity logo"
           class="iconImage_l2q5ji"
           src="assets/lumosity_white_logo_with_r.svg"
         />

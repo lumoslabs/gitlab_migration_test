@@ -1,6 +1,5 @@
-import { commonNestStylesWithProps } from '../../styles/commonNestStyles';
 import { css, StyleSheet } from 'aphrodite/no-important';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic'
 
 const styles = StyleSheet.create({
@@ -8,7 +7,7 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: '100%',
     height: '100vh',
-    minHeight: '84vh',
+    minHeight: '100vh',
     margin: '0',
     padding: '0',
     display: 'flex',
@@ -46,13 +45,25 @@ const styles = StyleSheet.create({
   },
 });
 
+const heightFromClient = (clientHeight) => StyleSheet.create({
+  fullHeight: {
+    height: `${clientHeight}px`,
+  },
+});
+
 function Layout({ children }: { children: React.ReactNode }): JSX.Element {
 
-  const usableClientHeight = window.innerHeight; // document.body.clientHeight;
+  const [clientHeight, setClient] = useState(0);
+
+  useEffect(() => {
+    setClient(window.clientHeight)
+  }, [])
+
+  const stylesWithHeight = heightFromClient(clientHeight);
 
   return <>
     <main>
-      <div className={css([styles.app, commonNestStylesWithProps({ clientHeight: usableClientHeight }).fullHeight])}>
+      <div className={css([styles.app, stylesWithHeight.fullHeight])}>
         {children}
       </div>
     </main>

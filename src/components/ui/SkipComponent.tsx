@@ -2,7 +2,6 @@ import React from 'react';
 import { css } from 'aphrodite';
 import commonStyles from '@styles/commonStyles';
 
-
 export interface ISkipComponent {
   message?: string;
   onClick?(e: React.MouseEvent<any>): any;
