@@ -27,5 +27,15 @@ export default class CatalogService {
     const game: GameConfig | null = await this.getRow(slug, 'game')
     return game
   }
+
+  async getVoiceGameMap() {
+    return {
+      'color match': 'color-match-nest',
+      'ebb and flow': 'ebb-and-flow-nest',
+      'raindrops': 'raindrops-nest',
+      'train of thought': 'train-of-thought-nest',
+      'word snatchers': 'word-snatchers-nest'
+    }
+  }
 }
 
