@@ -11,7 +11,7 @@ describe('GameService', () => {
       game_slug: 'test-game',
       user_id: 'user_id'
     }
-    const id = await (new GameService()).createGame(game)
+    const id = await (new GameService()).createGameRun(game)
 
     const saved = await GameRunModel.get({ id })
     const { created_at, updated_at, ...result } = saved.Item
@@ -30,8 +30,8 @@ describe('GameService', () => {
       game_slug: 'test-game',
       user_id: 'user_id'
     }
-    const id = await (new GameService()).createGame(game)
-    await (new GameService()).updateGame(id, GameEvents.LOADED)
+    const id = await (new GameService()).createGameRun(game)
+    await (new GameService()).updateGameRun(id, GameEvents.LOADED)
 
     const saved = await GameRunModel.get({ id })
     const { created_at, updated_at, ...result } = saved.Item
@@ -50,9 +50,9 @@ describe('GameService', () => {
       game_slug: 'test-game',
       user_id: 'user_id'
     }
-    const id = await (new GameService()).createGame(game)
+    const id = await (new GameService()).createGameRun(game)
     const score = 100
-    await (new GameService()).updateGame(id, GameEvents.COMPLETED, { score })
+    await (new GameService()).updateGameRun(id, GameEvents.COMPLETED, { score })
 
     const saved = await GameRunModel.get({ id })
     const { created_at, updated_at, ...result } = saved.Item
@@ -73,7 +73,7 @@ describe('GameService', () => {
       game_slug: 'test-game',
       user_id: 'user_id'
     }
-    const id = await (new GameService()).createGame(game)
+    const id = await (new GameService()).createGameRun(game)
 
 
     const saved = await (new GameService()).getGameRun(id)

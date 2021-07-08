@@ -9,7 +9,7 @@ export default class GameService {
     return row?.Item ? row.Item as GameRun : null
   }
 
-  async createGame(omitGame: Omit<GameRun, "id" | "game_state" | "score" | "run_data" | "updated_at" | "created_at">): Promise<string> {
+  async createGameRun(omitGame: Omit<GameRun, "id" | "game_state" | "score" | "run_data" | "updated_at" | "created_at">): Promise<string> {
     const id = uuidv4()
     const game: GameRun = {
       ...omitGame,
@@ -22,7 +22,7 @@ export default class GameService {
     return id
   }
 
-  async updateGame(id: string, eventName: GameEvents, eventData?: GameEventData) {
+  async updateGameRun(id: string, eventName: GameEvents, eventData?: GameEventData) {
     if (eventName === GameEvents.LOADED) {
       await GameRunModel.update({
         id: id,

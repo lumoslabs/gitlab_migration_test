@@ -52,7 +52,7 @@ const handler = (async (req: NextApiRequestWithUser, res: NextApiResponse): Prom
   if (!game) {
     throw new ValidationError('slug', ValidationRules.INCORRECT)
   }
-  const id = await gameService.createGame({
+  const id = await gameService.createGameRun({
     game_version: game.values?.last_version?.id,
     game_slug: game.id,
     user_id: req.user?.id

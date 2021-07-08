@@ -12,13 +12,13 @@ const wrapperStyle = {
   height: '100%',
   background: 'white'
 }
-const ApiDoc = ({ spec }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const ApiDoc = ({ spec }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element => {
   return <div style={wrapperStyle}>
     <SwaggerUI spec={spec} />
   </div>
 };
 
-export const getStaticProps: GetStaticProps = async ctx => {
+export const getStaticProps: GetStaticProps = async () => {
 
   if (!serverRuntimeConfig.apidoc) {
     return {

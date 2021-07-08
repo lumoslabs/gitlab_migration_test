@@ -68,7 +68,7 @@ const handler = async (req: NextApiRequestWithUser, res: NextApiResponse): Promi
     throw new ValidationError('eventName', ValidationRules.INCORRECT)
   }
 
-  await gameService.updateGame(
+  await gameService.updateGameRun(
     id,
     eventName,
     req.body?.eventData
