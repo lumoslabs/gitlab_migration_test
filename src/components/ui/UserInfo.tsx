@@ -1,8 +1,8 @@
 import React from 'react'
-import { Modal, Row} from 'react-bootstrap'
-import { css, StyleSheet} from 'aphrodite/no-important'
+import { Modal, Row } from 'react-bootstrap'
+import { css, StyleSheet } from 'aphrodite/no-important'
 import commonStyles from '@styles/commonStyles'
-import { base} from '@styles/colors'
+import { base } from '@styles/colors'
 import WideActionButton from '@components/ui/WideActionButton'
 
 export interface IUserInfoProps {
@@ -84,10 +84,10 @@ const styles = StyleSheet.create({
   modal: {
     background: base.lumosWhite,
     borderRadius: '4.66vh',
-    height: '78vh',
-    width: '57.81vw',
-    top: '18vh',
-    left: '21.1vw',
+    height: '96vh',
+    width: '70vw',
+    top: '2vh',
+    left: '15vw',
     boxShadow: `0px 1px 1px 0px rgba(0, 0, 0, 0.11),
       0px 2px 4px 0px rgba(0, 0, 0, 0.13),
       0px 2px 6px 0px rgba(0, 0, 0, 0.1)`
@@ -125,7 +125,6 @@ const styles = StyleSheet.create({
 
   detailsDiv: {
     marginTop: '3vh',
-    width: '100%',
     height: 'fit-content'
 },
 
@@ -137,10 +136,7 @@ const styles = StyleSheet.create({
     color: base.lumosBlack,
     fontFamily: 'MuseoSans700',
     fontSize: '3.33vh',
-    fontWeight: 700,
-    textAlign: 'right',
-    flex: 1,
-    marginLeft: '8.75vw'
+    fontWeight: 700
 },
 
   valueText: {
@@ -154,7 +150,7 @@ const styles = StyleSheet.create({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    marginRight: '8.75vw'
+    marginRight: '2.34vw'
 },
 
   cta: {

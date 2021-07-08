@@ -21,6 +21,8 @@ export default function Test(): JSX.Element {
         show={true}
         handleClose={handleClick}
         logoutCallback={handleClick}
+        email='liina@lumoslabs.com'
+        name='Liina Laufer'
       />
       {/* <GameProgressBar name='Train of Thought' progressLevel={50} /> */}
       {/* <LoadingComponent title=''/> */}
