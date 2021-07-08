@@ -23,7 +23,10 @@ module.exports = () => {
       },
       misc: {
         config_catalog_id: 1
-      }
+      },
+      // Should be disabled for production
+      guest_user: true,
+      apidoc: true
     },
     publicRuntimeConfig: {
       // Will be available on both server and client

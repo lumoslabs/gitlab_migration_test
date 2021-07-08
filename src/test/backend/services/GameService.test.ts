@@ -4,6 +4,7 @@ import GameService from '@backend/services/GameService'
 import GameRunModel, { GameEvents, GameRunState, table } from '@backend/models/gameRun'
 
 describe('GameService', () => {
+
   it('createGame creates new row', async () => {
     const game = {
       game_version: 'nest-1',
@@ -13,7 +14,7 @@ describe('GameService', () => {
     const id = await (new GameService()).createGame(game)
 
     const saved = await GameRunModel.get({ id })
-    const { created, modified, ...result } = saved.Item
+    const { created_at, updated_at, ...result } = saved.Item
     expect(result).toEqual({
       id,
       game_state: GameRunState.CREATED,
@@ -33,7 +34,7 @@ describe('GameService', () => {
     await (new GameService()).updateGame(id, GameEvents.LOADED)
 
     const saved = await GameRunModel.get({ id })
-    const { created, modified, ...result } = saved.Item
+    const { created_at, updated_at, ...result } = saved.Item
     expect(result).toEqual({
       id,
       game_state: GameRunState.LOADED,
@@ -54,7 +55,7 @@ describe('GameService', () => {
     await (new GameService()).updateGame(id, GameEvents.COMPLETED, { score })
 
     const saved = await GameRunModel.get({ id })
-    const { created, modified, ...result } = saved.Item
+    const { created_at, updated_at, ...result } = saved.Item
     expect(result).toEqual({
       id,
       game_state: GameRunState.ENDED,
@@ -62,6 +63,27 @@ describe('GameService', () => {
       run_data: {
         score
       },
+      ...game
+    })
+  })
+
+  it('getRow returns existing row', async () => {
+    const game = {
+      game_version: 'nest-1',
+      game_slug: 'test-game',
+      user_id: 'user_id'
+    }
+    const id = await (new GameService()).createGame(game)
+
+
+    const saved = await (new GameService()).getGameRun(id)
+    const { created_at, updated_at, ...result } = saved
+
+    expect(result).toEqual({
+      id,
+      game_state: GameRunState.CREATED,
+      score: 0,
+      run_data: {},
       ...game
     })
   })

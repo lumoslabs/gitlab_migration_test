@@ -45,16 +45,14 @@ export const table = new Table({
 
 const GameRunModel = new Entity<GameRun>({
   name: 'GameRun',
-  modified: 'updated_at',
-  created: 'created_at',
+  modifiedAlias: 'updated_at',
+  createdAlias: 'created_at',
   attributes: {
     id: { partitionKey: true },
     user_id: { type: 'string' },
     game_state: { type: 'string' },
     game_slug: { type: 'string' },
     game_version: { type: 'string' },
-    created_at: { type: 'string' },
-    updated_at: { type: 'string' },
     score: { type: 'number' },
     run_data: { type: 'map' }
   },

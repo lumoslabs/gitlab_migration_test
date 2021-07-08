@@ -3,6 +3,12 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default class GameService {
 
+  //TODO: wrap it with cache decorator
+  async getGameRun(id: string): Promise<GameRun | null> {
+    const row = await GameRunModel.get({ id })
+    return row?.Item ? row.Item as GameRun : null
+  }
+
   async createGame(omitGame: Omit<GameRun, "id" | "game_state" | "score" | "run_data" | "updated_at" | "created_at">): Promise<string> {
     const id = uuidv4()
     const game: GameRun = {
