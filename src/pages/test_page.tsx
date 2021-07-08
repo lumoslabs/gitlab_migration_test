@@ -2,14 +2,18 @@ import LoadingComponent from '@components/ui/LoadingComponent';
 import UserBar from '@components/ui/UserBar';
 import GameContainer from '@components/ui/GameContainer';
 import GameScoreCard from '@components/ui/GameScoreCard';
-import { StyleSheet } from 'aphrodite';
+import GameSection from '@components/ui/GameSection';
+import GameCard from '@components/ui/GameCard';
+import { css, StyleSheet } from 'aphrodite';
 import Button from '@components/ui/Button';
 import WideActionButton from '@components/ui/WideActionButton';
 import WorkoutCard from '@components/ui/WorkoutCard';
+import commonStyles from '@styles/commonStyles';
 
 const styles = StyleSheet.create({
-  nextButton: {
-    fontStyle: 'italic'
+  topSpace: {
+    height: '100%',
+    marginTop: '17vmin',
   }
 });
 
@@ -17,9 +21,17 @@ export default function Test(): JSX.Element {
   const handleClick = () => { window.location.href = 'https://lumos-assistant.ngrok.io' };
 
   return (
-    <main>
-      <WorkoutCard clickHandler={handleClick}  />
-      <UserBar clickHandler={handleClick} />
+    <div className={css(commonStyles.flexRowJustifyCenter, commonStyles.fullWidth, styles.topSpace)}>
+      <div className={css(commonStyles.flexAlignCenter)}>
+        <WorkoutCard clickHandler={handleClick} />
+        <GameSection />
+      </div>
+      {/* <GameCard
+        clickHandler={handleClick}
+        brainArea='ATTENTION'
+        bannerUrl='https://assets-staging.nest.lumosity.com/frontend_assets/banner/color_match_header.png'
+        title='Train of Thought'
+        /> */}
       {/* <GameContainer /> */}
       {/* <LoadingComponent title=''/> */}
       {/* <GameScoreCard
@@ -46,6 +58,7 @@ export default function Test(): JSX.Element {
         id='test'
         currentPage={window.location.href}
         /> */}
-    </main>
+      <UserBar clickHandler={handleClick} />
+    </div>
   )
 }

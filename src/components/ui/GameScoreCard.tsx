@@ -97,10 +97,12 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
                               <img
                                 src='/assets/trophy.svg'
                                 className={css(styles.trophyImage)}
+                                alt='trophy'
                               />
                               <img
                                 src='/assets/trophy_banner.svg'
                                 className={css(styles.trophyBannerImage)}
+                                alt='trophy banner'
                               />
                             </>
                           )}
