@@ -3,37 +3,41 @@ import { Card } from 'react-bootstrap'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import commonStyles from '@styles/commonStyles'
 import { base } from '@styles/colors'
+import Link from 'next/link'
 
 export interface IGameCardProps {
-  clickHandler(e: React.MouseEvent<any>): any;
   brainArea: string;
   bannerUrl: string;
   title: string;
+  slug: string;
 }
 
 const GameCard = (props: IGameCardProps): JSX.Element => {
-  const { clickHandler, bannerUrl, brainArea, title } = props
+  const { bannerUrl, brainArea, title, slug } = props
 
   return (
-    <div className={css([commonStyles.flexRowAllCenter, styles.gridCol])}>
-      <Card className={css([commonStyles.flexColumnAllCenter, styles.card])}
-        onClick={clickHandler}
-      >
-        <Card.Img className={css(styles.cardImg)}
-          variant="top"
-          src={bannerUrl}
-          alt='Game icon'
-        />
-        <Card.Body className={css([commonStyles.flexColumn, styles.cardBody])}>
-          <p className={css([commonStyles.pageTitle, styles.subTitle])}>
-            {brainArea}
-          </p>
-          <Card.Title className={css(styles.title)}>
-            {title}
-          </Card.Title>
-        </Card.Body>
-      </Card>
-    </div>
+    <Link href={`/game/${slug}`}>
+      <a>
+        <div className={css([commonStyles.flexRowAllCenter, styles.gridCol])}>
+          <Card className={css([commonStyles.flexColumnAllCenter, styles.card])}
+          >
+            <Card.Img className={css(styles.cardImg)}
+              variant="top"
+              src={bannerUrl}
+              alt='Game icon'
+            />
+            <Card.Body className={css([commonStyles.flexColumn, styles.cardBody])}>
+              <p className={css([commonStyles.pageTitle, styles.subTitle])}>
+                {brainArea}
+              </p>
+              <Card.Title className={css(styles.title)}>
+                {title}
+              </Card.Title>
+            </Card.Body>
+          </Card>
+        </div>
+      </a>
+    </Link>
   );
 }
 

@@ -9,47 +9,39 @@ const GameSection = (): JSX.Element => {
   // TODO: Get this from database?
   const allGames = [
     {
-      name: 'train-of-thought-nest',
+      slug: 'train-of-thought-nest',
       title: 'Train of Thought',
       brainArea: 'ATTENTION',
-      bannerUrl: 'https://assets.nest.lumosity.com/frontend_assets/banner/train_of_thought_header.png',
-      gameUrl: 'https://assets.nest.lumosity.com/game-assets/TrainOfThought_CC/nest_lowres/43a41021888c93d6b1fe1401ca0459f4655f2df3/289057183/release/'
+      bannerUrl: 'https://assets.nest.lumosity.com/frontend_assets/banner/train_of_thought_header.png'
     },
     {
-      name: 'color-match-nest',
+      slug: 'color-match-nest',
       title: 'Color Match',
       brainArea: 'FLEXIBILITY',
-      bannerUrl: 'https://assets.nest.lumosity.com/frontend_assets/banner/color_match_header.png',
-      gameUrl: 'https://assets.nest.lumosity.com/game-assets/ColorMatch_CC/nest_lowres/a213a4c63155fa5fde7fbe266d42654a33b71a56/289067450/release/'
+      bannerUrl: 'https://assets.nest.lumosity.com/frontend_assets/banner/color_match_header.png'
     },
     {
-      name: 'ebb-and-flow-nest',
+      slug: 'ebb-and-flow-nest',
       title: 'Ebb and Flow',
       brainArea: 'FLEXIBILITY',
-      bannerUrl: 'https://assets.nest.lumosity.com/frontend_assets/banner/ebb_and_flow_header.png',
-      gameUrl: 'https://assets.nest.lumosity.com/game-assets/EbbAndFlow_CC/nest_lowres/cd95f718b77a7320a74542238f9bf8895faac790/289522478/release/'
+      bannerUrl: 'https://assets.nest.lumosity.com/frontend_assets/banner/ebb_and_flow_header.png'
     },
     {
-      name: 'raindrops-nest',
+      slug: 'raindrops-nest',
       title: 'Raindrops',
       brainArea: 'MATH',
-      bannerUrl: 'https://assets.nest.lumosity.com/frontend_assets/banner/raindrops_header.png',
-      gameUrl: 'https://assets.nest.lumosity.com/game-assets/Raindrops_CC/nest_lowres/3bea7a3244b88385fa8aef44f9484770f1a6d924/289602258/release/'
+      bannerUrl: 'https://assets.nest.lumosity.com/frontend_assets/banner/raindrops_header.png'
     },
     {
-      name: 'word-snatchers-nest',
+      slug: 'word-snatchers-nest',
       title: 'Word Snatchers',
       brainArea: 'LANGUAGE',
-      bannerUrl: 'https://assets.nest.lumosity.com/frontend_assets/banner/word_snatchers_header.png',
-      gameUrl: 'https://assets.nest.lumosity.com/game-assets/WordSnatchers_CC/nest_lowres/65db28a8e7fa8b8bf3ea2a2a6c67ac6533956258/289509235/release/'
+      bannerUrl: 'https://assets.nest.lumosity.com/frontend_assets/banner/word_snatchers_header.png'
     }
   ]
 
   const gameCards = allGames.map((props): JSX.Element => {
-    const { title, brainArea, bannerUrl, gameUrl } = props
-
-    // TODO: make this launch game
-    const handleClick = () => { window.location.href = gameUrl }
+    const { title, brainArea, bannerUrl, slug } = props
 
     return (
       <GameCard
@@ -57,7 +49,7 @@ const GameSection = (): JSX.Element => {
         title={title}
         brainArea={brainArea}
         bannerUrl={bannerUrl}
-        clickHandler={handleClick}
+        slug={slug}
       />
     );
   });
