@@ -9,6 +9,7 @@ export interface IUserBarProps {
 }
 
 const UserBar = (props: IUserBarProps): JSX.Element => {
+
   return (
     <div className={css([commonStyles.flexRow, styles.footer])}>
       <div className={css([commonStyles.flexRow, styles.clickable])}
