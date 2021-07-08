@@ -1,16 +1,22 @@
-import LoadingComponent from '@components/ui/LoadingComponent';
-// import GameProgressBar from '@components/ui/GameProgressBar';
-import UserInfo from '@components/ui/UserInfo';
-import GameScoreCard from '@components/ui/GameScoreCard';
-import { StyleSheet } from 'aphrodite';
-import Button from '@components/ui/Button';
-import WideActionButton from '@components/ui/WideActionButton';
+import LoadingComponent from '@components/ui/LoadingComponent'
+// import GameProgressBar from '@components/ui/GameProgressBar'
+import UserBar from '@components/ui/UserBar'
+import UserInfo from '@components/ui/UserInfo'
+import GameScoreCard from '@components/ui/GameScoreCard'
+import GameSection from '@components/ui/GameSection'
+import GameCard from '@components/ui/GameCard'
+import { css, StyleSheet } from 'aphrodite'
+import Button from '@components/ui/Button'
+import WideActionButton from '@components/ui/WideActionButton'
+import WorkoutCard from '@components/ui/WorkoutCard'
+import commonStyles from '@styles/commonStyles'
 
 const styles = StyleSheet.create({
-  nextButton: {
-    fontStyle: 'italic'
+  topSpace: {
+    height: '100%',
+    marginTop: '17vmin',
   }
-});
+})
 
 export default function Test(): JSX.Element {
   const handleClick = () => { window.location.href = 'https://lumos-assistant.ngrok.io' };
@@ -21,12 +27,13 @@ export default function Test(): JSX.Element {
         show={true}
         handleClose={handleClick}
         logoutCallback={handleClick}
-        email='liina@lumoslabs.com'
+        email='liina.laufer@australianemailswithreallylongdomains.com'
         name='Liina Laufer'
+        timezone='Australian Central Western Standard Time'
       />
       {/* <GameProgressBar name='Train of Thought' progressLevel={50} /> */}
       {/* <LoadingComponent title=''/> */}
-      <GameScoreCard
+      {/* <GameScoreCard
         title='Color Match'
         description='description'
         gameIcon='https://assets-staging.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_color_match.png'
@@ -41,7 +48,7 @@ export default function Test(): JSX.Element {
         currentPage={window.location.href}
         stat={10}
         statLabel='Cards'
-      />
+      /> */}
       {/* <Button onClick={handleClick} text='Button' />
       <WideActionButton
         onClick={handleClick}
@@ -50,6 +57,7 @@ export default function Test(): JSX.Element {
         id='test'
         currentPage={window.location.href}
         /> */}
+      <UserBar clickHandler={handleClick} />
     </main>
   )
 }

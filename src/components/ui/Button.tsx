@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, css } from 'aphrodite';
-import base from '@styles/colors/base';
+import React from 'react'
+import { StyleSheet, css } from 'aphrodite'
+import base from '@styles/colors/base'
 
-const { lumosWhite, lumosOrange, darkOrange } = base;
+const { lumosWhite, lumosOrange, darkOrange } = base
 
 const styles = StyleSheet.create({
   button: {
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
       backgroundColor: darkOrange
     }
   }
-});
+})
 
 export interface IButtonProps {
   text: string;
@@ -47,7 +47,7 @@ const Button = React.forwardRef(({ onClick = () => void (0), text, buttonStyles 
     <button className={`btn btn-block ${css(styles.button, buttonStyles)}`} onClick={onClick} >
       {text}
     </button>
-  );
-});
+  )
+})
 
-export default Button;
+export default Button

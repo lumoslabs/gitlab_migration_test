@@ -5,6 +5,7 @@ export declare global {
         onUpdate: (data: any[]) => any,
         onTtsMark: (markName: string) => any
       }) => any
-    }
+    },
+    clientHeight: number;
   }
 }

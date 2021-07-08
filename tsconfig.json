@@ -28,6 +28,12 @@
       "@pages/*": [
         "src/pages/*"
       ],
+      "@backend/*": [
+        "src/backend/*"
+      ],
+      "@store/*": [
+        "src/store/*"
+      ],
       "@assets/*": [
         "public/assets/*"
       ]

@@ -1,4 +1,4 @@
-import { css, StyleSheet } from 'aphrodite/no-important';
+import { css, StyleSheet } from 'aphrodite/no-important'
 import dynamic from 'next/dynamic'
 
 const styles = StyleSheet.create({
@@ -52,6 +52,7 @@ export function Index(): JSX.Element {
           <img
             className={css(styles.iconImage)}
             src='assets/lumosity_white_logo_with_r.svg'
+            alt='Lumosity logo'
           />
         </div>
       </div>

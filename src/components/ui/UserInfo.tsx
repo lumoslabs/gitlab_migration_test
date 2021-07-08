@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Row } from 'react-bootstrap'
+import { Modal, Container, Row, Col } from 'react-bootstrap'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import commonStyles from '@styles/commonStyles'
 import { base } from '@styles/colors'
@@ -23,10 +23,12 @@ const UserInfo = (props: IUserInfoProps): JSX.Element => {
       show={show}
       onHide={handleClose}
     >
-      <Modal.Body>
+      <Modal.Title>
         <p className={css(styles.title)}>
           {'Your Profile'}
         </p>
+      </Modal.Title>
+      <Modal.Body>
         <div className={css([commonStyles.flexColumnAlignCenter, styles.avatarDiv])}>
           <img
             src={profilePicUrl || '/assets/guest_avatar.svg'}
@@ -34,40 +36,56 @@ const UserInfo = (props: IUserInfoProps): JSX.Element => {
             alt='Avatar'
           />
         </div>
-        <div className={css([commonStyles.flexColumnAlignCenter, styles.detailsDiv])}>
-          <Row className={css(styles.rowDiv)}>
-            <p className={css(styles.labelsText)}>
-              {'Email'}
-            </p>
-            <p className={css(styles.valueText)}>
-              {email || ''}
-            </p>
+        <Container>
+          <Row>
+            <Col xs={4}>
+              <p className={css(styles.labelsText)}>
+                {'Email'}
+              </p>
+            </Col>
+            <Col xs={8}>
+              <p className={css(styles.valueText, styles.email)}>
+                {email || ''}
+              </p>
+            </Col>
           </Row>
-          <Row className={css(styles.rowDiv)}>
-            <p className={css(styles.labelsText)}>
-              {'Name'}
-            </p>
-            <p className={css(styles.valueText)}>
-              {name}
-            </p>
+          <Row>
+            <Col xs={4}>
+              <p className={css(styles.labelsText)}>
+                {'Name'}
+              </p>
+            </Col>
+            <Col xs={8}>
+              <p className={css(styles.valueText)}>
+                {name}
+              </p>
+            </Col>
           </Row>
-          <Row className={css(styles.rowDiv)}>
-            <p className={css(styles.labelsText)}>
-              {'Time Zone'}
-            </p>
-            <p className={css(styles.valueText)}>
-              {timezone || 'Pacific Time USA & Canada'}
-            </p>
+          <Row>
+            <Col xs={4}>
+              <p className={css(styles.labelsText)}>
+                {'Time Zone'}
+              </p>
+            </Col>
+            <Col xs={8}>
+              <p className={css(styles.valueText)}>
+                {timezone || 'Pacific Time USA & Canada'}
+              </p>
+            </Col>
           </Row>
-          <Row className={css(styles.rowDiv)}>
-            <p className={css(styles.labelsText)}>
-              {'Language'}
-            </p>
-            <p className={css(styles.valueText)}>
-              {'English'}
-            </p>
+          <Row>
+            <Col xs={4}>
+              <p className={css(styles.labelsText)}>
+                {'Language'}
+              </p>
+            </Col>
+            <Col xs={8}>
+              <p className={css(styles.valueText)}>
+                {'English'}
+              </p>
+            </Col>
           </Row>
-        </div>
+        </Container>
         <WideActionButton
           extendStyles={styles.cta}
           buttonText='Logout'
@@ -77,7 +95,7 @@ const UserInfo = (props: IUserInfoProps): JSX.Element => {
         />
       </Modal.Body>
     </Modal>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -93,11 +111,6 @@ const styles = StyleSheet.create({
       0px 2px 6px 0px rgba(0, 0, 0, 0.1)`
 },
 
-  contentDiv: {
-    width: '100%',
-    height: '100%'
-},
-
   title: {
     color: base.lumosBlack,
     fontFamily: 'MuseoSans700',
@@ -111,25 +124,13 @@ const styles = StyleSheet.create({
 },
 
   avatarDiv: {
-    marginTop: '3vh',
-    marginBottom: '3vh',
-    width: '100%',
-    height: '15vh'
+    marginBottom: '3vh'
 },
 
   avatarImg: {
     width: '15vh',
     height: '15vh',
     borderRadius: '50%'
-},
-
-  detailsDiv: {
-    marginTop: '3vh',
-    height: 'fit-content'
-},
-
-  rowDiv: {
-    width: '100%'
 },
 
   labelsText: {
@@ -145,19 +146,21 @@ const styles = StyleSheet.create({
     fontSize: '3.33vh',
     fontWeight: 500,
     textAlign: 'left',
-    marginLeft: '2.34vw',
     flex: 1,
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
     marginRight: '2.34vw'
 },
 
+  email: {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
+  },
+
   cta: {
-    height: '9vh',
+    height: '10vh',
     width: '15vw',
     borderRadius: '36px'
 }
-});
+})
 
-export default UserInfo;
+export default UserInfo
