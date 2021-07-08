@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: '100%',
     height: '100vh',
-    minHeight: '84vh',
+    minHeight: '100vh',
     margin: '0',
     padding: '0',
     display: 'flex',
@@ -53,15 +53,15 @@ const heightFromClient = (clientHeight) => StyleSheet.create({
 
 function Layout({ children }: { children: React.ReactNode }): JSX.Element {
 
-  const [[clientHeight], setClient] = useState([0,0]);
+  const [clientHeight, setClient] = useState(0);
 
   useEffect(() => {
-    setClient([window.clientHeight, 0])
+    setClient(window.clientHeight)
   }, [])
 
   const stylesWithHeight = heightFromClient(clientHeight);
 
-return <>
+  return <>
     <main>
       <div className={css([styles.app, stylesWithHeight.fullHeight])}>
         {children}

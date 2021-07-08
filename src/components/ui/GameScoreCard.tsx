@@ -91,22 +91,24 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
                   <Container className={css([commonStyles.flexColumnAlignCenter, styles.topScoreValueDiv])}>
                     {props.topScoresData.map((topScoreData, i) => {
                       return (
-                        <Row key={'row'+i} className={css(styles.topScoreRow)}>
+                        <Row key={'row' + i} className={css(styles.topScoreRow)}>
                           {props.showTrophy && props.topScoreTodaysScoreIndex == i && (
                             <>
                               <img
                                 src='/assets/trophy.svg'
                                 className={css(styles.trophyImage)}
+                                alt='trophy'
                               />
                               <img
                                 src='/assets/trophy_banner.svg'
                                 className={css(styles.trophyBannerImage)}
+                                alt='trophy banner'
                               />
                             </>
                           )}
                           <Col xs={2} className={css(styles.alignLeft)}>
                             <p key={'col_index'} className={css(styles.topScoreBold)}>
-                              {i+1}
+                              {i + 1}
                             </p>
                           </Col>
                           <Col className={css(styles.alignLeft)}>

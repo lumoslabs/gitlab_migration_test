@@ -19,9 +19,6 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@assets/*": [
-        "public/assets/*"
-      ],
       "@components/*": [
         "src/components/*"
       ],
@@ -36,6 +33,9 @@
       ],
       "@store/*": [
         "src/store/*"
+      ],
+      "@assets/*": [
+        "public/assets/*"
       ]
     }
   },
