@@ -1,5 +1,3 @@
-import Script from 'next/script'
-import getConfig from 'next/config'
 import { css, StyleSheet } from 'aphrodite/no-important';
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic'
@@ -54,33 +52,17 @@ const heightFromClient = (clientHeight) => StyleSheet.create({
 });
 
 function Layout({ children }: { children: React.ReactNode }): JSX.Element {
-  const { publicRuntimeConfig } = getConfig()
 
-  const onLoad = () => {
-    const callbacks = {
-      onUpdate(data: any[]) {
-        console.log('onUpdate', data)
-      },
-      onTtsMark(markName: string) {
-        console.log('onTtsMark', markName)
-      },
-
-    };
-
-    window.interactiveCanvas.ready(callbacks)
-  }
-
-  const [[clientHeight], setClient] = useState([0,0]);
+  const [clientHeight, setClient] = useState(0);
 
   useEffect(() => {
-    setClient([window.clientHeight])
+    setClient(window.clientHeight)
   }, [])
 
   const stylesWithHeight = heightFromClient(clientHeight);
 
-return <>
+  return <>
     <main>
-      <Script src={publicRuntimeConfig.interactiveCanvasLibUrl} onLoad={onLoad} />
       <div className={css([styles.app, stylesWithHeight.fullHeight])}>
         {children}
       </div>
