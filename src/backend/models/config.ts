@@ -27,8 +27,20 @@ export interface CatalogConfig extends Config {
   }
 }
 
+export interface GameConfigVersion {
+  id: string;
+  overrides: {
+    extras: Record<string, string>,
+    game_url: string
+  }
+}
+
+
+//two primary keys? lets use slug as primary key
 export interface GameConfig extends Config {
   values: {
+    id: number;
+    slug: string;
     brain_area: string;
     continuous_match_configs: string[];
     created_at: string;
@@ -38,10 +50,9 @@ export interface GameConfig extends Config {
     score_thumbnail_url: string;
     path: string;
     updated_at: string;
-    versions: unknown;
+    versions: GameConfigVersion[];
     banner_url: string;
-    id: number;
-    slug: string;
+    last_version: GameConfigVersion;
   }
 }
 
@@ -49,6 +60,7 @@ export const table = new Table({
   name: getTableName('nest_configs'),
   partitionKey: 'id',
   sortKey: 'type',
+  entityField: false,
   DocumentClient
 })
 

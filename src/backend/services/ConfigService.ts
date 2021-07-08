@@ -8,9 +8,7 @@ export default class CatalogService {
   //TODO: wrap it with cache decorator
   async getRow(id: string, type: string): Promise<Config | null> {
     const row = await ConfigModel.get({ id, type })
-    if (!row?.Item)
-      return null
-    return row.Item as Config
+    return row?.Item ? row.Item as Config : null
   }
 
   async getCatalogGames() {
@@ -24,8 +22,11 @@ export default class CatalogService {
   }
 
   async getCatalogGameBySlug(slug: string) {
-    const game: GameConfig | null = await this.getRow(slug, 'game')
-    return game
+    const game: Omit<GameConfig, "last_version"> | null = await this.getRow(slug, 'game')
+    return game ? {
+      ...game,
+      last_version: game?.values?.versions?.pop()
+    } as GameConfig : null
   }
 
   async getVoiceGameMap() {

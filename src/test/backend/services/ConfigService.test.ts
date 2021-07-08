@@ -1,3 +1,5 @@
+import 'setimmediate';
+import "jest-dynalite/withDb";
 import ConfigService from '@backend/services/ConfigService'
 import { table, ConfigTypes } from '@backend/models/config'
 import { DocumentClient } from '@backend/libs/db'
