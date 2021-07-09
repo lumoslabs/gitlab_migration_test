@@ -32,3 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+#dynalite data
+/dynalite_db

@@ -10,7 +10,9 @@
     "lint": "next lint --fix",
     "prepare": "husky install",
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test-watch": "jest --watch",
+    "dynalite": "ts-node ./tools/dynalite.mjs",
+    "migrate": "yarn run ts-node tools/migration.mjs"
   },
   "dependencies": {
     "@assistant/conversation": "^3.8.0",
@@ -33,6 +35,7 @@
     "rollbar": "^2.23.0",
     "setimmediate": "^1.0.5",
     "swagger-ui-react": "^3.51.1",
+    "ts-node": "^10.0.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -46,6 +49,8 @@
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "babel-jest": "^27.0.5",
+    "dotenv": "^10.0.0",
+    "dynamodb-admin": "^4.0.1",
     "eslint": "^7.29.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-next": "^11.0.1",
