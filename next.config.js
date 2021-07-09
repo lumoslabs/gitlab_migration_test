@@ -12,10 +12,10 @@ module.exports = () => {
       },
       public_url: process.env.PUBLIC_URL,
       dynamodb: {
-        prefix: 'dev_',
-        region: 'us-east-1',
-        endpoint: 'http://localhost:8002',
-        sslEnabled: true,
+        prefix: process.env.DYNAMODB_PREFIX,
+        region: process.env.DYNAMODB_REGION,
+        endpoint: process.env.DYNAMODB_LOCAL ? 'http://localhost:' + process.env.DYNAMODB_PORT : undefined,
+        sslEnabled: process.env.DYNAMODB_SSL ? true : false,
       },
       jwt: {
         secret: 'devjwtsecret' || process.env.JWT_SECRET,
