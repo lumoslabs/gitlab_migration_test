@@ -26,7 +26,7 @@ cp  .env.example .env.local
 
 #### Setup Dynamodb (only for development)
 
-You can setup local dynamodb instanse with dynalite or 
+You can either setup a local dynamodb instance with dynalite:
 
 ##### Dynalite
 
@@ -36,9 +36,9 @@ Just a local implementation of Amazon's DynamoDB built on LevelDB
 yarn run dynalite
 ```
 
-OR
+_OR_
 
-##### Docker 
+##### Docker
 
 Official version of local dynamodb
 
