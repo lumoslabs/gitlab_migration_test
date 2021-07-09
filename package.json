@@ -31,6 +31,7 @@
     "react": "17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "17.0.2",
+    "react-load-script": "^0.0.6",
     "react-redux": "^7.2.4",
     "rollbar": "^2.23.0",
     "setimmediate": "^1.0.5",

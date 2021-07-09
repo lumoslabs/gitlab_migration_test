@@ -7,5 +7,6 @@ export declare global {
       }) => any
     },
     clientHeight: number;
+    Lumos: any;
   }
 }

@@ -32,6 +32,11 @@ You can either setup a local dynamodb instance with dynalite:
 
 Just a local implementation of Amazon's DynamoDB built on LevelDB
 
+Authenticate with AWS:
+```
+eval $(aws-okta -d -t 10h env prod-g-analysts)`
+```
+
 ```bash
 yarn run dynalite
 ```
