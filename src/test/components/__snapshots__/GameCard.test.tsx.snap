@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="/game/color-match-nest"
+  >
+    <div
+      class="flexRowAllCenter_1cn94ih-o_O-gridCol_1f8v8h4"
+    >
+      <div
+        class="flexColumnAllCenter_1vexgx1-o_O-card_2cv6tx card"
+      >
+        <img
+          alt="Game icon"
+          class="card-img-top cardImg_1inpevm"
+          src="https://assets-staging.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_color_match.png"
+        />
+        <div
+          class="flexColumn_n8t8ll-o_O-cardBody_ly1891 card-body"
+        >
+          <p
+            class="pageTitle_1a3u8g5-o_O-subTitle_rlrlr4"
+          >
+            Attention
+          </p>
+          <div
+            class="title_1wry8v1 card-title h5"
+          >
+            Color Match
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</DocumentFragment>
+`;
