@@ -1,9 +1,9 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import getConfig from 'next/config'
 
-import { createSwaggerSpec } from 'next-swagger-doc';
-import SwaggerUI from 'swagger-ui-react';
-import 'swagger-ui-react/swagger-ui.css';
+import { createSwaggerSpec } from 'next-swagger-doc'
+import SwaggerUI from 'swagger-ui-react'
+import 'swagger-ui-react/swagger-ui.css'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -16,7 +16,7 @@ const ApiDoc = ({ spec }: InferGetStaticPropsType<typeof getStaticProps>): JSX.E
   return <div style={wrapperStyle}>
     <SwaggerUI spec={spec} />
   </div>
-};
+}
 
 export const getStaticProps: GetStaticProps = async () => {
 
@@ -31,12 +31,12 @@ export const getStaticProps: GetStaticProps = async () => {
     version: '0.0.1',
     openApiVersion: '3.0.0',
     apiFolder: './src/pages/api',
-  });
+  })
   return {
     props: {
       spec,
     },
-  };
-};
+  }
+}
 
-export default ApiDoc;
+export default ApiDoc

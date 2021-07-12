@@ -1,0 +1,295 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserBar displays the correct info 1`] = `
+<DocumentFragment>
+  <div
+    class="fade modal-backdrop show"
+  />
+  <div
+    aria-modal="true"
+    class="fade modal_d8krus modal show"
+    role="dialog"
+    style="display: block;"
+    tabindex="-1"
+  >
+    <div
+      class="modal-dialog"
+    >
+      <div
+        class="modal-content"
+      >
+        <div
+          class="modal-title h4"
+        >
+          <p
+            class="title_1809nyj"
+          >
+            Your Profile
+          </p>
+        </div>
+        <div
+          class="modal-body"
+        >
+          <div
+            class="flexColumnAlignCenter_1ndpwxc-o_O-avatarDiv_1f3o2jp"
+          >
+            <img
+              alt="Avatar"
+              class="avatarImg_106i4z8"
+              src="/assets/guest_avatar.svg"
+            />
+          </div>
+          <div
+            class="container"
+          >
+            <div
+              class="row"
+            >
+              <div
+                class="col-4"
+              >
+                <p
+                  class="labelsText_1hh284c"
+                >
+                  Email
+                </p>
+              </div>
+              <div
+                class="col-8"
+              >
+                <p
+                  class="valueText_91azc3-o_O-email_1iurgbx"
+                >
+                  email@example.com
+                </p>
+              </div>
+            </div>
+            <div
+              class="row"
+            >
+              <div
+                class="col-4"
+              >
+                <p
+                  class="labelsText_1hh284c"
+                >
+                  Name
+                </p>
+              </div>
+              <div
+                class="col-8"
+              >
+                <p
+                  class="valueText_91azc3"
+                >
+                  Lumosity User
+                </p>
+              </div>
+            </div>
+            <div
+              class="row"
+            >
+              <div
+                class="col-4"
+              >
+                <p
+                  class="labelsText_1hh284c"
+                >
+                  Time Zone
+                </p>
+              </div>
+              <div
+                class="col-8"
+              >
+                <p
+                  class="valueText_91azc3"
+                >
+                  Pacific Time
+                </p>
+              </div>
+            </div>
+            <div
+              class="row"
+            >
+              <div
+                class="col-4"
+              >
+                <p
+                  class="labelsText_1hh284c"
+                >
+                  Language
+                </p>
+              </div>
+              <div
+                class="col-8"
+              >
+                <p
+                  class="valueText_91azc3"
+                >
+                  English
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flexJustifyCenter_jfsfb5"
+          >
+            <button
+              class="btn btn-block button_1xm70sk-o_O-wideAction_4zoj1f-o_O-cta_2yfb43"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="fade modal-backdrop show"
+  />
+  <div
+    aria-modal="true"
+    class="fade modal_d8krus modal show"
+    role="dialog"
+    style="display: block;"
+    tabindex="-1"
+  >
+    <div
+      class="modal-dialog"
+    >
+      <div
+        class="modal-content"
+      >
+        <div
+          class="modal-title h4"
+        >
+          <p
+            class="title_1809nyj"
+          >
+            Your Profile
+          </p>
+        </div>
+        <div
+          class="modal-body"
+        >
+          <div
+            class="flexColumnAlignCenter_1ndpwxc-o_O-avatarDiv_1f3o2jp"
+          >
+            <img
+              alt="Avatar"
+              class="avatarImg_106i4z8"
+              src="/assets/guest_avatar.svg"
+            />
+          </div>
+          <div
+            class="container"
+          >
+            <div
+              class="row"
+            >
+              <div
+                class="col-4"
+              >
+                <p
+                  class="labelsText_1hh284c"
+                >
+                  Email
+                </p>
+              </div>
+              <div
+                class="col-8"
+              >
+                <p
+                  class="valueText_91azc3-o_O-email_1iurgbx"
+                >
+                  email@example.com
+                </p>
+              </div>
+            </div>
+            <div
+              class="row"
+            >
+              <div
+                class="col-4"
+              >
+                <p
+                  class="labelsText_1hh284c"
+                >
+                  Name
+                </p>
+              </div>
+              <div
+                class="col-8"
+              >
+                <p
+                  class="valueText_91azc3"
+                >
+                  Lumosity User
+                </p>
+              </div>
+            </div>
+            <div
+              class="row"
+            >
+              <div
+                class="col-4"
+              >
+                <p
+                  class="labelsText_1hh284c"
+                >
+                  Time Zone
+                </p>
+              </div>
+              <div
+                class="col-8"
+              >
+                <p
+                  class="valueText_91azc3"
+                >
+                  Pacific Time
+                </p>
+              </div>
+            </div>
+            <div
+              class="row"
+            >
+              <div
+                class="col-4"
+              >
+                <p
+                  class="labelsText_1hh284c"
+                >
+                  Language
+                </p>
+              </div>
+              <div
+                class="col-8"
+              >
+                <p
+                  class="valueText_91azc3"
+                >
+                  English
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flexJustifyCenter_jfsfb5"
+          >
+            <button
+              class="btn btn-block button_1xm70sk-o_O-wideAction_4zoj1f-o_O-cta_2yfb43"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

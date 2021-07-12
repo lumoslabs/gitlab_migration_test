@@ -1,8 +1,8 @@
-import React from 'react';
-import { css, StyleSheet } from 'aphrodite';
-import Button from '@components/ui/Button';
+import React from 'react'
+import { css, StyleSheet } from 'aphrodite'
+import Button from '@components/ui/Button'
 
-import commonStyles from '../../styles/commonStyles';
+import commonStyles from '../../styles/commonStyles'
 // TODO:
 // import { analyticsTrack } from '../segment/analytics';
 
@@ -29,19 +29,19 @@ const WideActionButton = (props: IWideActionButtonProps): JSX.Element => {
           //   current_page: props.currentPage,
           //   message: props.buttonText,
           // });
-          props.onClick(e);
-          e.preventDefault();
+          props.onClick(e)
+          e.preventDefault()
         }}
       />
     </div>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   wideAction: {
     width: 327,
     height: 56
   },
-});
+})
 
-export default WideActionButton;
+export default WideActionButton

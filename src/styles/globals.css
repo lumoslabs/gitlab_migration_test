@@ -181,6 +181,10 @@ code {
   }
 }
 
+.modal-content {
+  border: 0 !important;
+}
+
 .bg-lumos {
   background-color: #FCB913 !important;
   display: flex !important;

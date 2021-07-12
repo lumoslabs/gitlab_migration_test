@@ -1,9 +1,9 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
-import { css, StyleSheet } from 'aphrodite/no-important';
-import commonStyles from '@styles/commonStyles';
-import { base } from '@styles/colors';
-import WideActionButton from '@components/ui/WideActionButton';
+import React from 'react'
+import { Card } from 'react-bootstrap'
+import { css, StyleSheet } from 'aphrodite/no-important'
+import commonStyles from '@styles/commonStyles'
+import { base } from '@styles/colors'
+import WideActionButton from '@components/ui/WideActionButton'
 
 export interface IWorkoutCardProps {
   clickHandler(e: React.MouseEvent<any>): any;
@@ -41,7 +41,7 @@ const WorkoutCard = (props: IWorkoutCardProps): JSX.Element => {
         </Card.Body>
       </Card>
     </div>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -91,6 +91,6 @@ const styles = StyleSheet.create({
     fontSize: '3.625vmin',
     fontWeight: 700
   }
-});
+})
 
-export default WorkoutCard;
+export default WorkoutCard

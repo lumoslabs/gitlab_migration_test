@@ -1,6 +1,6 @@
-import { css, StyleSheet } from 'aphrodite/no-important';
-import commonStyles from '@styles/commonStyles';
-import { base } from '@styles/colors';
+import { css, StyleSheet } from 'aphrodite/no-important'
+import commonStyles from '@styles/commonStyles'
+import { base } from '@styles/colors'
 
 export interface IUserBarProps {
   clickHandler(e: React.MouseEvent<any>): any;
@@ -9,6 +9,7 @@ export interface IUserBarProps {
 }
 
 const UserBar = (props: IUserBarProps): JSX.Element => {
+
   return (
     <div className={css([commonStyles.flexRow, styles.footer])}>
       <div className={css([commonStyles.flexRow, styles.clickable])}
@@ -24,8 +25,8 @@ const UserBar = (props: IUserBarProps): JSX.Element => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   footer: {
@@ -58,6 +59,6 @@ const styles = StyleSheet.create({
     margin: 0,
     marginLeft: '1.5825vmin'
   },
-});
+})
 
-export default UserBar;
+export default UserBar

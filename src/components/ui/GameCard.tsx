@@ -38,7 +38,7 @@ const GameCard = (props: IGameCardProps): JSX.Element => {
         </div>
       </a>
     </Link>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     height: '14.5vmin',
     justifyContent: 'flex-start',
     padding: '2vmin'
-  },
-});
+  }
+})
 
-export default GameCard;
+export default GameCard

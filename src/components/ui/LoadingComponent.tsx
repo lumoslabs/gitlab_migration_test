@@ -1,7 +1,7 @@
-import React from 'react';
-import { css, StyleSheet } from 'aphrodite';
-import base from '@styles/colors/base';
-import commonStyles from '@styles/commonStyles';
+import React from 'react'
+import { css, StyleSheet } from 'aphrodite'
+import base from '@styles/colors/base'
+import commonStyles from '@styles/commonStyles'
 
 const baseStyles = StyleSheet.create({
   loadingAnimdiv: {
@@ -14,7 +14,7 @@ const baseStyles = StyleSheet.create({
     fontSize: '1.95vw',
     fontWeight: 500
   },
-});
+})
 
 const customStyles = (titleDivHeight, loadingDivHeight) => StyleSheet.create({
   titleDiv: {
@@ -23,7 +23,7 @@ const customStyles = (titleDivHeight, loadingDivHeight) => StyleSheet.create({
   loadingdiv: {
     height: loadingDivHeight
   },
-});
+})
 
 export interface ILoadingComponent {
   title?: string;
@@ -32,7 +32,7 @@ export interface ILoadingComponent {
 }
 
 const LoadingComponent = ({ title, titleDivHeight = '20vh', loadingDivHeight  = '40vh' }: ILoadingComponent): JSX.Element => {
-  const customizedStyles = customStyles(titleDivHeight, loadingDivHeight);
+  const customizedStyles = customStyles(titleDivHeight, loadingDivHeight)
 
   return (
     <div className={css([commonStyles.flexColumnAllCenter, baseStyles.loadingAnimdiv])}>
@@ -47,7 +47,7 @@ const LoadingComponent = ({ title, titleDivHeight = '20vh', loadingDivHeight  = 
         <div className="loader" />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoadingComponent;
+export default LoadingComponent

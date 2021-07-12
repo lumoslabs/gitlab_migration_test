@@ -13,11 +13,11 @@ import onHome from '@backend/conversation/onHome'
 const { serverRuntimeConfig } = getConfig()
 const conversationApp = conversation({
   clientId: serverRuntimeConfig.google.client_id,
-});
+})
 
 conversationApp.handle('StartApp', onStartApp)
-conversationApp.handle('OpenGame', onOpenGame);
-conversationApp.handle('Home', onHome);
+conversationApp.handle('OpenGame', onOpenGame)
+conversationApp.handle('Home', onHome)
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
