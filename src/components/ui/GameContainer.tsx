@@ -1,15 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import Script from 'react-load-script'
-import { GameConfig } from '@backend/models/config'
-import commonStyles from '@styles/commonStyles'
 import { css, StyleSheet } from 'aphrodite/no-important'
-import GameProgressBar from '@components/ui/GameProgressBar'
-import Button from '@components/ui/Button'
-import { useState } from 'react'
-import { useEffect } from 'react'
 import { Alert } from 'react-bootstrap'
 import getConfig from 'next/config'
+import { GameConfig } from '@backend/models/config'
+import commonStyles from '@styles/commonStyles'
+import GameProgressBar from '@components/ui/GameProgressBar'
+import Button from '@components/ui/Button'
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -86,10 +84,7 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
 
   return (
     <div className={css([commonStyles.fullWidth, commonStyles.flexColumnAllCenter])}>
-      {
-        error &&
-        <Alert variant="danger">Something went wrong</Alert>
-      }
+      {error && <Alert variant="danger">Something went wrong</Alert>}
       <Card className={css([commonStyles.flexColumnAllCenter, styles.gameFrame])}>
         <Card.Body className={css(commonStyles.flexJustifyCenter)}>
           <div className='cocos3' id='game-manager'>
@@ -99,18 +94,19 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
               style={{ visibility: showProgress ? 'hidden' : 'visible' }}
               width={clientWidth}
               height={clientHeight}
-            >
-            </canvas>
+            />
           </div>
-          {
-            showProgress &&
-            <GameProgressBar progressLevel={progressLevel} />
-          }
-          <Script onError={() => { setError(true) }} onLoad={() => { console.log('loaded') }} attributes={{ id: 'gameScript', ref: 'gameScript' }} url={versionedGameUrl} />
+          {showProgress && <GameProgressBar progressLevel={progressLevel} />}
+          <Script
+            onError={() => {setError(true)}}
+            onLoad={() => {console.log('loaded')}}
+            attributes={{id: 'gameScript', ref: 'gameScript'}}
+            url={versionedGameUrl}
+          />
         </Card.Body>
       </Card>
       {publicRuntimeConfig.game_skip && (
-        <div className={css([commonStyles.flexRowAllCenter, styles.skipTextdiv])}>
+        <div className={css([commonStyles.flexRowAllCenter, styles.skipGameDiv])}>
           <Button buttonStyles={styles.skipGameButton}
             onClick={() => {window.sendToJavaScript('game:complete', { score: 0 })}}
             text='Skip Game'
@@ -127,22 +123,16 @@ const styles = StyleSheet.create({
     background: 'transparent',
     border: '0px'
   },
-  gameCanvas: {
-    width: '480px',
-    height: '640px'
+
+  skipGameDiv: {
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    zIndex: 1,
+    margin: 0,
+    padding: 0
   },
 
-  homediv: {
-    paddingBottom: 20,
-  },
-skipTextdiv: {
-  position: 'absolute',
-  left: 0,
-  bottom: 0,
-  zIndex: 1,
-  margin: 0,
-  padding: 0
-},
   skipGameButton: {
     backgroundColor: 'transparent'
   }
