@@ -13,7 +13,10 @@ const { publicRuntimeConfig } = getConfig()
 
 export interface IGameCompletedData {
   //TODO: extend it
-  score: number
+  score: number;
+  session_level: number;
+  user_level: number;
+  game_result_data: unknown;
 }
 
 type IGameEventData = number | IGameCompletedData | null
