@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flexColumnAllCenter_1vexgx1-o_O-section_rgclyh"
+  >
+    <div
+      class="flexColumnAllCenter_1vexgx1-o_O-card_1rrn0ox card"
+    >
+      <div
+        class="flexColumnAllCenter_1vexgx1-o_O-cardBody_1858xbs card-body"
+      >
+        <img
+          alt="Workout Icon"
+          class="card-img cardImg_3mv33q"
+          src="/assets/workout_icon.svg"
+        />
+        <div
+          class="cardTitle_ena3cq card-title h5"
+        >
+          Daily Workout
+        </div>
+        <div
+          class="cardSubtitle_1g4oaq4 card-subtitle h6"
+        >
+          Your daily workout of 3 games.
+        </div>
+        <div
+          class="flexJustifyCenter_jfsfb5"
+        >
+          <button
+            class="button_1xm70sk-o_O-wideAction_4zoj1f-o_O-cta_1jbl92e"
+          >
+            Start My Workout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

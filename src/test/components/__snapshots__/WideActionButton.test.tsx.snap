@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flexJustifyCenter_jfsfb5"
+  >
+    <button
+      class="button_1xm70sk-o_O-wideAction_4zoj1f-o_O-nextButton_14syk2g"
+    >
+      WideActionButton
+    </button>
+  </div>
+</DocumentFragment>
+`;
