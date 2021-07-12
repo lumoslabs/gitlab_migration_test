@@ -42,7 +42,7 @@ export interface IButtonProps {
   buttonStyles?: any;
 }
 
-const Button = React.forwardRef(({ onClick = () => void (0), text, buttonStyles }: IButtonProps) => {
+const Button = (({ onClick = () => void (0), text, buttonStyles }: IButtonProps): JSX.Element => {
   return (
     <button className={`btn btn-block ${css(styles.button, buttonStyles)}`} onClick={onClick} >
       {text}
