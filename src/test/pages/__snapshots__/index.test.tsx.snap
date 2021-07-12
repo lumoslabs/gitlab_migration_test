@@ -37,7 +37,7 @@ exports[`Index page matches snapshot 1`] = `
                 class="flexJustifyCenter_jfsfb5"
               >
                 <button
-                  class="btn btn-block button_1xm70sk-o_O-wideAction_4zoj1f-o_O-cta_1jbl92e"
+                  class="button_1xm70sk-o_O-wideAction_4zoj1f-o_O-cta_1jbl92e"
                 >
                   Start My Workout
                 </button>

@@ -26,6 +26,13 @@ export interface IGameContainerProps {
 }
 
 const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element => {
+  const [clientHeight, setHeight] = useState(0)
+  const [clientWidth, setWidth] = useState(0)
+
+  useEffect(() => {
+    setHeight(window.innerHeight)
+    setWidth(window.innerWidth)
+  }, [])
 
   const [progressLevel, setProgressLevel] = useState(0)
   const [showProgress, setShowProgress] = useState(true)
@@ -88,8 +95,10 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
           <div className='cocos3' id='game-manager'>
             <canvas
               id="gameCanvas"
-              className={css([commonStyles.flexColumnAllCenter, styles.gameCanvas])}
+              className={css(commonStyles.flexColumnAllCenter)}
               style={{ visibility: showProgress ? 'hidden' : 'visible' }}
+              width={clientWidth}
+              height={clientHeight}
             >
             </canvas>
           </div>
@@ -100,16 +109,14 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
           <Script onError={() => { setError(true) }} onLoad={() => { console.log('loaded') }} attributes={{ id: 'gameScript', ref: 'gameScript' }} url={versionedGameUrl} />
         </Card.Body>
       </Card>
-      {publicRuntimeConfig.game_skip &&
+      {publicRuntimeConfig.game_skip && (
         <div className={css([commonStyles.flexRowAllCenter, styles.skipTextdiv])}>
-          <Button
-            onClick={() => {
-              window.sendToJavaScript('game:complete', { score: 0 })
-            }}
-            text="Skip Game"
+          <Button buttonStyles={styles.skipGameButton}
+            onClick={() => {window.sendToJavaScript('game:complete', { score: 0 })}}
+            text='Skip Game'
           />
         </div>
-      }
+      )}
     </div>
   )
 }
@@ -128,13 +135,16 @@ const styles = StyleSheet.create({
   homediv: {
     paddingBottom: 20,
   },
-  skipTextdiv: {
-    position: 'absolute',
-    left: '20px',
-    bottom: '20px',
-    zIndex: 1,
-    margin: 0,
-    padding: 0
+skipTextdiv: {
+  position: 'absolute',
+  left: 0,
+  bottom: 0,
+  zIndex: 1,
+  margin: 0,
+  padding: 0
+},
+  skipGameButton: {
+    backgroundColor: 'transparent'
   }
 })
 
