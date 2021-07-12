@@ -1,19 +1,38 @@
+import { useState } from 'react'
 import { GetServerSideProps } from 'next'
-import { GameConfig } from '@backend/models/config'
+import { css, StyleSheet } from 'aphrodite/no-important'
 import ConfigService from '@backend/services/ConfigService'
-import Link from 'next/link'
+import WorkoutCard from '@components/ui/WorkoutCard'
+import GameSection from '@components/ui/GameSection'
+import UserBar from '@components/ui/UserBar'
+import UserInfo from '@components/ui/UserInfo'
+import commonStyles from '@styles/commonStyles'
 
-export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
+export default function Home(): JSX.Element {
+  const [showAccountModal, setShowAccountModal] = useState(false)
+  const handleAccountModalClose = () => setShowAccountModal(false)
+  const handleAccountModalShow = () => setShowAccountModal(true)
+  const handleLogout = () => {
+    setShowAccountModal(false)
+    // TODO: Handle logout
+  }
+  // TODO launch workout function
+  const handleClick = () => { window.location.href = 'https://lumos-assistant.ngrok.io' }
+
   return (
     <main>
-      <h3>Games</h3>
-      <ul>
-        {
-          games.map((game) =>
-            <li key={game.id}><Link href={`/game/${game.values.slug}`}><a>{game.name}</a></Link></li>
-          )
-        }
-      </ul>
+      <div className={css(commonStyles.flexRowJustifyCenter, commonStyles.fullWidth, styles.topSpace)}>
+        <div className={css(commonStyles.flexAlignCenter)}>
+          <WorkoutCard clickHandler={handleClick} />
+          <GameSection />
+        </div>
+      </div>
+      <UserInfo
+        show={showAccountModal}
+        handleClose={handleAccountModalClose}
+        logoutCallback={handleLogout}
+      />
+      <UserBar clickHandler={handleAccountModalShow}/>
     </main>
   )
 }
@@ -27,3 +46,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
     }
   }
 }
+
+const styles = StyleSheet.create({
+  topSpace: {
+    height: '100%',
+    marginTop: '10vmin',
+  }
+})
