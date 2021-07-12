@@ -40,8 +40,8 @@ export interface FrontEndData {
   scores: {
     score_screen_score_key: string;
   }
-
 }
+
 //two primary keys? lets use slug as primary key
 export interface GameConfig extends Config {
   values: {
