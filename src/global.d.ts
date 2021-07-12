@@ -8,5 +8,7 @@ export declare global {
     },
     clientHeight: number;
     Lumos: any;
+    cc: any;
+    sendToJavaScript: (data: string | [string, any], argData: any | null) => void;
   }
 }

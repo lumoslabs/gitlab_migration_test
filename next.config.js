@@ -26,10 +26,11 @@ module.exports = () => {
       },
       // Should be disabled for production
       guest_user: true,
-      apidoc: true
+      apidoc: true,
     },
     publicRuntimeConfig: {
       // Will be available on both server and client
+      game_skip: true,
       interactiveCanvasLibUrl: 'https://www.gstatic.com/assistant/interactivecanvas/api/interactive_canvas.min.js',
       rollbar: {
         clientToken: 'd858493f24794689b215a6b72b4324eb',
