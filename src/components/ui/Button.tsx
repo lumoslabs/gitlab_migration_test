@@ -42,7 +42,8 @@ export interface IButtonProps {
   buttonStyles?: any;
 }
 
-const Button = React.forwardRef(({ onClick = () => void (0), text, buttonStyles }: IButtonProps) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Button = React.forwardRef(({ onClick = () => void (0), text, buttonStyles }: IButtonProps, ref) => {
   return (
     <button className={`btn btn-block ${css(styles.button, buttonStyles)}`} onClick={onClick} >
       {text}
