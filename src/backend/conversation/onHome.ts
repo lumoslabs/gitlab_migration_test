@@ -1,4 +1,4 @@
-import { ConversationV3 } from "@assistant/conversation";
+import { ConversationV3 } from "actions-on-google";
 import appSharedActions from "@store/slices/appSharedActions";
 import { sendCommand } from "./utils";
 

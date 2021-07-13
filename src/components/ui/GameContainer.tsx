@@ -8,6 +8,8 @@ import { GameConfig } from '@backend/models/config'
 import commonStyles from '@styles/commonStyles'
 import GameProgressBar from '@components/ui/GameProgressBar'
 import Button from '@components/ui/Button'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { getContinuosMatchMode, getLastParsedPhrase, sendTextQuery } from '@store/slices/appSlice'
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -26,38 +28,65 @@ export interface IGameContainerProps {
   onComplete: (data: IGameCompletedData) => void;
 }
 
+
+//TODO: should we split logic to simplest functions?
 const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element => {
   const [clientHeight, setHeight] = useState(0)
   const [clientWidth, setWidth] = useState(0)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     setHeight(window.innerHeight)
     setWidth(window.innerWidth)
   }, [])
 
+  //
   const [progressLevel, setProgressLevel] = useState(0)
   const [showProgress, setShowProgress] = useState(true)
   const [error, setError] = useState(false)
 
+  //selectors for app state
+  const isContinuosMatchMode = useAppSelector(getContinuosMatchMode)
+  const lastParsedPhrase = useAppSelector(getLastParsedPhrase)
+
   const gameUrl = game.values?.last_version?.overrides?.game_url
   const gameFile = game.values?.invoke_file
   const versionedGameUrl = `${gameUrl}${gameFile}?ts=${Date.now()}`
-  const gameVars = game.values?.last_version?.overrides?.extras
 
-  const Lumos = {
+  window.Lumos = {
     gamevars: {
-      ...gameVars,
+      ...game.values?.last_version?.overrides?.extras,
       game_resources_url: gameUrl,
     },
   }
 
+  //Send parsed phrase to cocos
+  useEffect(() => {
+    if (lastParsedPhrase) {
+      window.sendEventToCocos(lastParsedPhrase)
+    }
+  }, [lastParsedPhrase])
+
+  //Send cmm mode to cocos
+  useEffect(() => {
+    if (isContinuosMatchMode) {
+      window.sendEventToCocos({ 'action': 'cmm_start' })
+    } else {
+      //TODO: will we send event to cocos?
+      console.log('stop cmm')
+    }
+  }, [isContinuosMatchMode])
+
+  //Save game run into db and clear window before remove component
   useEffect(() => {
     //todo: create game on backend
     return () => {
+      // Clear cocos3 scope
       window?.cc?.director?.end()
     }
   }, [])
 
+  //handle game events
   window.sendToJavaScript = (data: string | [string, IGameEventData], argData: IGameEventData) => {
     const [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
     let parsedData = eventData
@@ -72,6 +101,9 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
         }
         break
       case 'game:loadComplete':
+        //TODO: fix redux-toolkit thunk types
+        //@ts-ignore
+        dispatch(sendTextQuery({ query: 'Invoke Start Game', state: { 'slug': game.id } }))
         setShowProgress(false)
         break
       case 'game:complete':
@@ -79,11 +111,9 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
         onComplete(eventData as IGameCompletedData)
         break
       default:
+        console.log('unhandled game event', eventName, eventData)
     }
-    //    console.log('sendToJavascript', eventName, eventData)
   }
-
-  window.Lumos = Lumos
 
   return (
     <div className={css([commonStyles.fullWidth, commonStyles.flexColumnAllCenter])}>
@@ -101,9 +131,9 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
           </div>
           {showProgress && <GameProgressBar progressLevel={progressLevel} />}
           <Script
-            onError={() => {setError(true)}}
-            onLoad={() => {console.log('loaded')}}
-            attributes={{id: 'gameScript', ref: 'gameScript'}}
+            onError={() => { setError(true) }}
+            onLoad={() => { console.log('loaded') }}
+            attributes={{ id: 'gameScript', ref: 'gameScript' }}
             url={versionedGameUrl}
           />
         </Card.Body>
@@ -111,7 +141,7 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
       {publicRuntimeConfig.game_skip && (
         <div className={css([commonStyles.flexRowAllCenter, styles.skipGameDiv])}>
           <Button buttonStyles={styles.skipGameButton}
-            onClick={() => {window.sendToJavaScript('game:complete', { score: 0 })}}
+            onClick={() => { window.sendToJavaScript('game:complete', { score: 0 }) }}
             text='Skip Game'
           />
         </div>

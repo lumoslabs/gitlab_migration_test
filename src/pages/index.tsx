@@ -1,8 +1,21 @@
 import dynamic from 'next/dynamic'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import LoadingComponent from '@components/ui/LoadingComponent'
+import { useEffect } from 'react'
+import { useAppSelector } from '@store/hooks'
+import { getIsStarted } from '@store/slices/appSlice'
+import { useRouter } from 'next/router'
 
 export function Index(): JSX.Element {
+  const isStarted = useAppSelector(getIsStarted)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (isStarted) {
+      router.push('/home')
+    }
+  }, [isStarted])
+
   return (
     <main>
       <div className={css(styles.app)}>

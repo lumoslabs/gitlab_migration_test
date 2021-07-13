@@ -3,7 +3,7 @@ import getConfig from 'next/config'
 function Rollbar(): JSX.Element {
   const { publicRuntimeConfig } = getConfig()
   return <>
-    <script dangerouslySetInnerHTML={{
+    {publicRuntimeConfig.rollbar.clientToken && <script dangerouslySetInnerHTML={{
       __html: `
         var _rollbarConfig = {
             accessToken: "${publicRuntimeConfig.rollbar.clientToken}",
@@ -19,6 +19,7 @@ function Rollbar(): JSX.Element {
         `
     }}
     />
+    }
   </>
 }
 

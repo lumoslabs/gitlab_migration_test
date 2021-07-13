@@ -1,5 +1,7 @@
 import ConfigModel, { Config, CatalogConfig, GameConfig, ConfigTypes } from '@backend/models/config'
 import getConfig from 'next/config'
+import axios from 'axios'
+import YAML from 'yaml'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -30,6 +32,22 @@ export default class CatalogService {
         last_version: game?.values?.versions?.pop()
       }
     } as GameConfig : null
+  }
+
+  //TODO: wrap it with cache decorator
+  async getGameContinuousMatchPhrases(slug: string) {
+    const game = await this.getCatalogGameBySlug(slug)
+    if (!game || !game.values?.continuous_match_configs)
+      return null
+    const downloaded = await Promise.all(game.values?.continuous_match_configs.map((url) => {
+      return axios.get(url, { responseType: 'blob' })
+    }))
+    return downloaded.reduce((accumulator, yaml) => {
+      const parsed = YAML.parse(yaml.data)
+      if (parsed?.expected_phrases)
+        return accumulator.concat(parsed?.expected_phrases)
+      return accumulator
+    }, [])
   }
 
   async getVoiceGameMap() {

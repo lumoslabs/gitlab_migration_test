@@ -1,4 +1,5 @@
-import { Canvas, ConversationV3 } from "@assistant/conversation"
+import { Canvas, ConversationV3 } from "actions-on-google"
+import { ExpectedPhrase } from "actions-on-google/dist/service/conversation/api/v3"
 import appSharedActions from "@store/slices/appSharedActions"
 import getConfig from 'next/config'
 
@@ -14,19 +15,26 @@ export function getRandomElement<T>(input: Record<string, T> | T[]): T {
 }
 
 
-export const sendCommand = async ({ conv, command, payload = undefined, suppressMic = false }: {
+export const sendCommand = async ({ conv, command = undefined, payload = undefined, suppressMic = false, continuousMatchPhrases = undefined }: {
   conv: ConversationV3,
-  command: appSharedActions,
+  command?: appSharedActions,
+  continuousMatchPhrases?: ExpectedPhrase[],
   payload?: any,
   suppressMic?: boolean
 }) => {
   conv.add(new Canvas({
-    url: serverRuntimeConfig.public_url || ('https://' + conv.headers?.host?.toString()),
+    //TODO: check this property in actions-on-google lib
+    //@ts-ignore
     enableFullScreen: true,
+    continuousMatchConfig: continuousMatchPhrases ? {
+      expectedPhrases: continuousMatchPhrases,
+      durationSeconds: 180,
+    } : undefined,
+    url: serverRuntimeConfig.public_url || ('https://' + conv.headers?.host?.toString()),
     suppressMic,
-    data: [{
+    data: command ? [{
       command,
       payload
-    }]
+    }] : []
   }))
 }
