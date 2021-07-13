@@ -1,0 +1,280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flexColumnAlignCenter_1ndpwxc-o_O-fullWidth_hvhp2z"
+  >
+    <div
+      class="flexColumnAlignCenter_1ndpwxc-o_O-card_1lsbh1o card"
+    >
+      <div
+        class="cardBody_1if8sak card-body"
+      >
+        <div
+          class="flexRowAllCenter_1cn94ih-o_O-titleDiv_17bwlk4"
+        >
+          <img
+            alt="Game Icon"
+            class="gameIconImage_unt5uf"
+            src="https://assets-staging.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_color_match.png"
+          />
+          <p
+            class="title_j3xsuq"
+          >
+            Color Match
+          </p>
+          <div
+            class="flexRowAllCenter_1cn94ih-o_O-trainingIconTitleDiv_13v901n"
+          >
+            <img
+              alt="Training Icon"
+              class="trainingIconImage_1go5ck6"
+              src="/assets/training_1by3.svg"
+            />
+          </div>
+        </div>
+        <div
+          class="flexRowAllCenter_1cn94ih-o_O-scoresContainer_zynqrq"
+        >
+          <div
+            class="flexColumnAllCenter_1vexgx1"
+          >
+            <p
+              class="subTitle_dtyq41"
+            >
+              Your Score
+            </p>
+            <p
+              class="currentScoreText_1jdtvvp"
+            >
+              100000
+            </p>
+            <div
+              class="flexColumnAlignCenter_1ndpwxc-o_O-currentStatDiv_vsjic1"
+            >
+              <div
+                class="container"
+              >
+                <div
+                  class="row"
+                >
+                  <div
+                    class="alignLeft_7jk7mt col-6"
+                  >
+                    <p
+                      class="statLabel_14i786v"
+                    >
+                      Cards
+                    </p>
+                  </div>
+                  <div
+                    class="col-6"
+                  >
+                    <p
+                      class="statNumber_er4n8x"
+                    >
+                      10
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flexColumnAllCenter_1vexgx1-o_O-topScoreDiv_1153ubg"
+          >
+            <p
+              class="topScoresTitle_9xx3ry"
+            >
+              Top Scores
+            </p>
+            <div
+              class="flexColumnAlignCenter_1ndpwxc-o_O-topScoreValueDiv_1w46k8x container"
+            >
+              <div
+                class="topScoreRow_1e8j58m row"
+              >
+                <img
+                  alt="trophy"
+                  class="trophyImage_1fpqs41"
+                  src="/assets/trophy.svg"
+                />
+                <img
+                  alt="trophy banner"
+                  class="trophyBannerImage_9sbp0a"
+                  src="/assets/trophy_banner.svg"
+                />
+                <div
+                  class="alignLeft_7jk7mt col-2"
+                >
+                  <p
+                    class="topScoreBold_xvihdx"
+                  >
+                    1
+                  </p>
+                </div>
+                <div
+                  class="alignLeft_7jk7mt col"
+                >
+                  <p
+                    class="topScoreBold_xvihdx"
+                  >
+                    600000
+                  </p>
+                </div>
+                <div
+                  class="alignRight_140n9qh col-7"
+                >
+                  <p
+                    class="topScoreDate_1y0m58r"
+                  >
+                    May 02, 2020
+                  </p>
+                </div>
+              </div>
+              <div
+                class="topScoreRow_1e8j58m row"
+              >
+                <div
+                  class="alignLeft_7jk7mt col-2"
+                >
+                  <p
+                    class="topScoreBold_xvihdx"
+                  >
+                    2
+                  </p>
+                </div>
+                <div
+                  class="alignLeft_7jk7mt col"
+                >
+                  <p
+                    class="topScoreBold_xvihdx"
+                  >
+                    55000
+                  </p>
+                </div>
+                <div
+                  class="alignRight_140n9qh col-7"
+                >
+                  <p
+                    class="topScoreDate_1y0m58r"
+                  >
+                    Jul 02, 2021
+                  </p>
+                </div>
+              </div>
+              <div
+                class="topScoreRow_1e8j58m row"
+              >
+                <div
+                  class="alignLeft_7jk7mt col-2"
+                >
+                  <p
+                    class="topScoreBold_xvihdx"
+                  >
+                    3
+                  </p>
+                </div>
+                <div
+                  class="alignLeft_7jk7mt col"
+                >
+                  <p
+                    class="topScoreBold_xvihdx"
+                  >
+                    5000
+                  </p>
+                </div>
+                <div
+                  class="alignRight_140n9qh col-7"
+                >
+                  <p
+                    class="topScoreDate_1y0m58r"
+                  >
+                    Jul 01, 2020
+                  </p>
+                </div>
+              </div>
+              <div
+                class="topScoreRow_1e8j58m row"
+              >
+                <div
+                  class="alignLeft_7jk7mt col-2"
+                >
+                  <p
+                    class="topScoreBold_xvihdx"
+                  >
+                    4
+                  </p>
+                </div>
+                <div
+                  class="alignLeft_7jk7mt col"
+                >
+                  <p
+                    class="topScoreBold_xvihdx"
+                  >
+                    4000
+                  </p>
+                </div>
+                <div
+                  class="alignRight_140n9qh col-7"
+                >
+                  <p
+                    class="topScoreDate_1y0m58r"
+                  >
+                    Jul 01, 2020
+                  </p>
+                </div>
+              </div>
+              <div
+                class="topScoreRow_1e8j58m row"
+              >
+                <div
+                  class="alignLeft_7jk7mt col-2"
+                >
+                  <p
+                    class="topScoreBold_xvihdx"
+                  >
+                    5
+                  </p>
+                </div>
+                <div
+                  class="alignLeft_7jk7mt col"
+                >
+                  <p
+                    class="topScoreBold_xvihdx"
+                  >
+                    3000
+                  </p>
+                </div>
+                <div
+                  class="alignRight_140n9qh col-7"
+                >
+                  <p
+                    class="topScoreDate_1y0m58r"
+                  >
+                    Jul 01, 2020
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flexColumnAllCenter_1vexgx1"
+    >
+      <div
+        class="flexJustifyCenter_jfsfb5"
+      >
+        <button
+          class="button_1xm70sk-o_O-wideAction_4zoj1f-o_O-nextButton_14syk2g"
+        >
+          Next Game
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -37,13 +37,12 @@ function NestHandler(): JSX.Element {
     window.interactiveCanvas.ready(callbacks)
   }
 
-  return <>
-    <p>
-      tts: {tts} -
-      isStarted: {isStarted ? 'true' : 'false'}
-    </p>
-    <Script src={publicRuntimeConfig.interactiveCanvasLibUrl} onLoad={onLoad} />
-  </>
+  return (
+    <>
+      {console.log(`tts: ${tts} - isStarted: ${isStarted ? 'true' : 'false'}`)}
+      <Script src={publicRuntimeConfig.interactiveCanvasLibUrl} onLoad={onLoad} />
+    </>
+  )
 }
 
 export default NestHandler

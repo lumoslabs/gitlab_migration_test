@@ -15,7 +15,6 @@ export interface ITopScoreData {
 
 export interface IGameScoreCardProps {
   title: string;
-  description: string;
   gameIcon?: string;
   showTrainingIcon: boolean;
   showTrophy: boolean;

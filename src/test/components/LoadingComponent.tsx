@@ -1,14 +1,10 @@
 import React from 'react'
-import UserBar from '@components/ui/UserBar'
+import LoadingComponent from '@components/ui/LoadingComponent'
 import { render } from '@testing-library/react'
-
-const handleClick = () => { window.location.href = '/' }
 
 it('matches snapshot', () => {
   const { asFragment } = render(
-    <UserBar
-      clickHandler={handleClick}
-   />, {}
+    <LoadingComponent />, {}
   )
   expect(asFragment()).toMatchSnapshot()
 })

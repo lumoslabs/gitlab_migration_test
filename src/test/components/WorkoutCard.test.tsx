@@ -1,14 +1,12 @@
 import React from 'react'
-import UserBar from '@components/ui/UserBar'
+import WorkoutCard from '@components/ui/WorkoutCard'
 import { render } from '@testing-library/react'
 
 const handleClick = () => { window.location.href = '/' }
 
 it('matches snapshot', () => {
   const { asFragment } = render(
-    <UserBar
-      clickHandler={handleClick}
-   />, {}
+    <WorkoutCard clickHandler={handleClick}/>, {}
   )
   expect(asFragment()).toMatchSnapshot()
 })

@@ -44,7 +44,7 @@ export interface IButtonProps {
 
 const Button = (({ onClick = () => void (0), text, buttonStyles }: IButtonProps): JSX.Element => {
   return (
-    <button className={`btn btn-block ${css(styles.button, buttonStyles)}`} onClick={onClick} >
+    <button className={css([styles.button, buttonStyles])} onClick={onClick} >
       {text}
     </button>
   )

@@ -1,13 +1,11 @@
 import React from 'react'
-import UserBar from '@components/ui/UserBar'
+import GameProgressBar from '@components/ui/GameProgressBar'
 import { render } from '@testing-library/react'
-
-const handleClick = () => { window.location.href = '/' }
 
 it('matches snapshot', () => {
   const { asFragment } = render(
-    <UserBar
-      clickHandler={handleClick}
+    <GameProgressBar
+      progressLevel={50}
    />, {}
   )
   expect(asFragment()).toMatchSnapshot()

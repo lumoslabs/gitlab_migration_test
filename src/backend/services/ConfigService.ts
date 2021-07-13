@@ -25,7 +25,10 @@ export default class CatalogService {
     const game: Omit<GameConfig, "last_version"> | null = await this.getRow(slug, 'game')
     return game ? {
       ...game,
-      last_version: game?.values?.versions?.pop()
+      values: {
+        ...game.values,
+        last_version: game?.values?.versions?.pop()
+      }
     } as GameConfig : null
   }
 

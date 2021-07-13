@@ -35,6 +35,12 @@ export interface GameConfigVersion {
   }
 }
 
+export interface FrontEndData {
+  score_description_key: string;
+  scores: {
+    score_screen_score_key: string;
+  }
+}
 
 //two primary keys? lets use slug as primary key
 export interface GameConfig extends Config {
@@ -44,7 +50,7 @@ export interface GameConfig extends Config {
     brain_area: string;
     continuous_match_configs: string[];
     created_at: string;
-    frontend_data: unknown;
+    frontend_data: FrontEndData;
     invoke_file: string;
     title: string;
     score_thumbnail_url: string;

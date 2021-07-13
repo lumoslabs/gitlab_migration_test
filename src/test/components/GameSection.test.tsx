@@ -1,14 +1,10 @@
 import React from 'react'
-import UserBar from '@components/ui/UserBar'
+import GameSection from '@components/ui/GameSection'
 import { render } from '@testing-library/react'
-
-const handleClick = () => { window.location.href = '/' }
 
 it('matches snapshot', () => {
   const { asFragment } = render(
-    <UserBar
-      clickHandler={handleClick}
-   />, {}
+    <GameSection />, {}
   )
   expect(asFragment()).toMatchSnapshot()
 })

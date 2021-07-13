@@ -135,7 +135,7 @@ exports[`UserBar displays the correct info 1`] = `
             class="flexJustifyCenter_jfsfb5"
           >
             <button
-              class="btn btn-block button_1xm70sk-o_O-wideAction_4zoj1f-o_O-cta_2yfb43"
+              class="button_1xm70sk-o_O-wideAction_4zoj1f-o_O-cta_2yfb43"
             >
               Logout
             </button>
@@ -282,7 +282,7 @@ exports[`matches snapshot 1`] = `
             class="flexJustifyCenter_jfsfb5"
           >
             <button
-              class="btn btn-block button_1xm70sk-o_O-wideAction_4zoj1f-o_O-cta_2yfb43"
+              class="button_1xm70sk-o_O-wideAction_4zoj1f-o_O-cta_2yfb43"
             >
               Logout
             </button>
