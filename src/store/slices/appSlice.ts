@@ -55,7 +55,7 @@ export const appSlice = createSlice({
     ) => {
       state.started = true
     },
-    setContinuosMatchMode: (
+    setContinuousMatchMode: (
       state: Draft<typeof initialState>,
       action: PayloadAction<{ cmm: boolean }>
     ) => {
@@ -84,7 +84,7 @@ export const appSlice = createSlice({
 export const getTts = (state) => state.app.tts
 export const getIsStarted = (state) => state.app.started
 export const getSendTextQueryState = (state) => state.app.lastTextQueryState
-export const getContinuosMatchMode = (state) => state.app.continuosMatchMode
+export const getContinuousMatchMode = (state) => state.app.continuosMatchMode
 export const getLastParsedPhrase = (state) => state.app.lastParsedPhrase
 
 // Reducers and actions

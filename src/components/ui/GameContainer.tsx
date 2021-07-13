@@ -9,7 +9,7 @@ import commonStyles from '@styles/commonStyles'
 import GameProgressBar from '@components/ui/GameProgressBar'
 import Button from '@components/ui/Button'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { getContinuosMatchMode, getLastParsedPhrase, sendTextQuery } from '@store/slices/appSlice'
+import { getContinuousMatchMode, getLastParsedPhrase, sendTextQuery } from '@store/slices/appSlice'
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -46,7 +46,7 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
   const [error, setError] = useState(false)
 
   //selectors for app state
-  const isContinuosMatchMode = useAppSelector(getContinuosMatchMode)
+  const isContinuousMatchMode = useAppSelector(getContinuousMatchMode)
   const lastParsedPhrase = useAppSelector(getLastParsedPhrase)
 
   const gameUrl = game.values?.last_version?.overrides?.game_url
@@ -69,13 +69,13 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
 
   //Send cmm mode to cocos
   useEffect(() => {
-    if (isContinuosMatchMode) {
+    if (isContinuousMatchMode) {
       window.sendEventToCocos({ 'action': 'cmm_start' })
     } else {
       //TODO: will we send event to cocos?
       console.log('stop cmm')
     }
-  }, [isContinuosMatchMode])
+  }, [isContinuousMatchMode])
 
   //Save game run into db and clear window before remove component
   useEffect(() => {
