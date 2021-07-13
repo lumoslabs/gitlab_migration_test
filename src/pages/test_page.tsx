@@ -24,7 +24,7 @@ export default function Test(): JSX.Element {
 
   return (
     <main>
-      <AgeGate showFooter={false} />
+      <AgeGate />
       {/* <UserInfo
         show={true}
         handleClose={handleClick}

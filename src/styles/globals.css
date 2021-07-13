@@ -199,10 +199,8 @@ code {
   /* background: none !important; */
   position: fixed !important;
   top: 25% !important;
-  left: 25% !important;
   bottom: 35% !important;
-  right: 25% !important;
-  width: 50% !important;
+  width: 360px !important;
   font-size: 24px !important;
   text-align: left !important;
   font-family: 'MuseoSans500' !important;
@@ -213,13 +211,6 @@ code {
   border: none !important;
   padding: 30px !important;
   margin-top: 40px !important;
-}
-
-
-.datepicker-viewport {
-  /* height: 120px !important; */
-  /* background-image: linear-gradient(black, white) !important; */
-  /* -webkit-gradient(linear,left top, left bottom,from(rgba(115, 229, 255)),color-stop(52%, rgba(245, 245, 245, 0)),color-stop(48%, rgba(245, 245, 245, 0)),to(rgba(115, 229, 255))) !important; */
 }
 
 .datepicker-col-1 {
