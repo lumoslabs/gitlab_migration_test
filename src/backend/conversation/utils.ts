@@ -1,5 +1,5 @@
 import { Canvas, ConversationV3 } from "actions-on-google"
-import { ExpectedPhrase } from "actions-on-google/dist/service/conversation/api/v3"
+import { ExpectedPhrase } from "actions-on-google/dist/api/schema"
 import appSharedActions from "@store/slices/appSharedActions"
 import getConfig from 'next/config'
 
