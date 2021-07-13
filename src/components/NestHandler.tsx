@@ -1,7 +1,7 @@
 import Script from 'next/script'
 import getConfig from 'next/config'
 
-import { TtsMarkName, actions, getTts, getIsStarted, getContinuosMatchMode } from '@store/slices/appSlice'
+import { TtsMarkName, actions, getTts, getIsStarted, getContinuousMatchMode } from '@store/slices/appSlice'
 import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions'
 
 import { useAppSelector, useAppDispatch } from '@store/hooks'
@@ -15,7 +15,7 @@ function NestHandler(): JSX.Element {
   //debug bar for state manage schema
   const tts = useAppSelector(getTts)
   const isStarted = useAppSelector(getIsStarted)
-  const cmm = useAppSelector(getContinuosMatchMode)
+  const cmm = useAppSelector(getContinuousMatchMode)
 
 
   const dispatch = useAppDispatch()
@@ -41,10 +41,10 @@ function NestHandler(): JSX.Element {
         console.log("Change reason: " + reason)
         // Handle mode values: 'TURN_BASED', 'CONTINUOUS_MATCH'
         if (data === 'CONTINUOUS_MATCH') {
-          dispatch(actions.setContinuosMatchMode({ cmm: true }))
+          dispatch(actions.setContinuousMatchMode({ cmm: true }))
           // Handle the start of Continuous Match mode
         } else if (data === 'TURN_BASED') {
-          dispatch(actions.setContinuosMatchMode({ cmm: false }))
+          dispatch(actions.setContinuousMatchMode({ cmm: false }))
         }
       },
       onPhraseMatched(data) {
