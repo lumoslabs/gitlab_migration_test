@@ -201,16 +201,14 @@ code {
   font-size: 24px !important;
   text-align: left !important;
   font-family: 'MuseoSans500' !important;
-  border-radius: 10px;
-  padding: 0 0 15px;
+  border-radius: 10px !important;
+  padding: 15px !important;
 }
 
 .datepicker-wheel {
   border: none !important;
-  padding: 30px !important;
-  margin-top: 40px !important;
 }
 
 .datepicker-col-1 {
-  margin: 0 !important;
+  margin-left: 25px !important;
 }

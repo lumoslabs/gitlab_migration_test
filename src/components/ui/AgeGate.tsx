@@ -27,15 +27,16 @@ const styles = StyleSheet.create({
 
 
 export interface IAgeGateProps {
-  onSubmit?(isUnderage: boolean): any;
+  onSubmit(isUnderage: boolean): any;
 }
 
 const AgeGate = (({ onSubmit }: IAgeGateProps): JSX.Element => {
-  const [date, setDate] = useState(new Date('December 1, 1985'))
-  let isUnderage = false
+
+  const [date, setDate] = useState(new Date('1985-01-02'))
+  let isUnderage = true
   // Are you under 13?
-  if (new Date(Date.now()).getTime() - new Date(date).getTime() < 409968000) {
-    isUnderage = true
+  if (new Date(Date.now()).getTime() - new Date(date).getTime() > 410310589331) {
+    isUnderage = false
   }
 
   // TODO: handle saving date
