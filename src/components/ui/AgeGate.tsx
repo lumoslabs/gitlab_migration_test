@@ -40,7 +40,7 @@ const AgeGate = (({ onSubmit }: IAgeGateProps): JSX.Element => {
   }
 
   // TODO: handle saving date
-  const handleClick = () => { setDate(new Date(date)), onSubmit(isUnderage), console.log(date) }
+  const handleClick = () => { setDate(new Date(date)), onSubmit(isUnderage) }
 
   const monthMap = {
     '1': 'Jan',
