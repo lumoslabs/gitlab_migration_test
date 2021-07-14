@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   button: {
     borderWidth: '0 0 2px 0',
     cursor: 'pointer',
-    fontSize: '1.15em',
+    fontSize: '24px',
     fontWeight: 500,
     fontFamily: '"Museo Sans", "Lucida Grande", Arial, sans-serif',
     padding: '14px 30px 14px 30px',
