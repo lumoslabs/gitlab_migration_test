@@ -25,27 +25,27 @@ const styles = StyleSheet.create({
   }
 })
 
-// TODO: handle saving date
-const handleClick = () => { window.location.href = 'https://lumos-assistant.ngrok.io' }
 
 export interface IAgeGateProps {
-  text: string;
-  onClick?(e: React.MouseEvent<any>): any;
-  buttonStyles?: any;
+  onSubmit?(isUnderage: boolean): () => any;
 }
 
+const AgeGate = (({ onSubmit }: IAgeGateProps): JSX.Element => {
+  const [date, setDate] = useState(new Date('1985-01-01'))
+  let isUnderage = false
+  // Are you under 13?
+  if (new Date(Date.now()).getTime() - new Date(date).getTime() < 409968000) {
+    isUnderage = true
+  }
 
+  // TODO: handle saving date
+  const handleClick = () => { console.log(date), onSubmit(isUnderage) }
 
-const AgeGate = (({ onClick = () => void (0), text, buttonStyles }: IAgeGateProps): JSX.Element => {
-  const [time, setTime] = useState(new Date())
-  const [isOpen, setIsOpen] = useState(true)
-  console.log(time)
   const monthMap = {
     '1': 'Jan',
     '2': 'Feb',
     '3': 'Mar',
     '4': 'Apr',
-
     '5': 'May',
     '6': 'Jun',
     '7': 'Jul',
@@ -74,7 +74,6 @@ const AgeGate = (({ onClick = () => void (0), text, buttonStyles }: IAgeGateProp
     },
   }
 
-
   return (
     <Container className={css(commonStyles.flexColumnAlignCenter)}>
       <Row className={css(commonStyles.flexRowAllCenter)}>
@@ -85,13 +84,12 @@ const AgeGate = (({ onClick = () => void (0), text, buttonStyles }: IAgeGateProp
       <Row className={css(commonStyles.flexRowAllCenter, styles.datePickerRow)}>
         <DatePicker
           theme='android'
-          showCaption={isOpen}
           dateConfig={dateConfig}
           showHeader={false}
           showFooter={false}
-          onSelect={() => { console.log('select') }}
-          onCancel={() => { console.log('cancel') }}
-          value={time}
+          value={date}
+          onSelect={(date) => { setDate(date) }}
+          onChange={(date) => { setDate(date) }}
           isOpen={true}
           isPopup={false}
           max={new Date(Date.now() - 86400000)}
