@@ -6,26 +6,6 @@ import base from '@styles/colors/base'
 import commonStyles from '@styles/commonStyles'
 import Button from '@components/ui/Button'
 
-const styles = StyleSheet.create({
-  title: {
-    color: base.lumosBlack,
-    fontFamily: 'MuseoSans500',
-    fontSize: '32px',
-    fontWeight: 700,
-    display: 'flex',
-    padding: '0px',
-    marginTop: '10vh',
-    textAlign: 'center'
-  },
-  buttonDiv: {
-    bottom: '12vmin'
-  },
-  datePickerRow: {
-    height: '50vh'
-  }
-})
-
-
 export interface IAgeGateProps {
   onSubmit(isUnderage: boolean): any;
 }
@@ -104,3 +84,22 @@ const AgeGate = (({ onSubmit }: IAgeGateProps): JSX.Element => {
 })
 
 export default AgeGate
+
+const styles = StyleSheet.create({
+  title: {
+    color: base.lumosBlack,
+    fontFamily: 'MuseoSans500',
+    fontSize: '32px',
+    fontWeight: 700,
+    display: 'flex',
+    padding: '0px',
+    marginTop: '10vh',
+    textAlign: 'center'
+  },
+  buttonDiv: {
+    bottom: '12vmin'
+  },
+  datePickerRow: {
+    height: '50vh'
+  }
+})
