@@ -22,9 +22,14 @@ const styles = StyleSheet.create({
 export default function Test(): JSX.Element {
   const handleClick = () => { window.location.href = 'https://lumos-assistant.ngrok.io' }
 
+  const handleAgeGateClick = (isUnderage: boolean) => { 
+    window.location.href = 'https://lumos-assistant.ngrok.io/test_page', 
+    console.log('isUnderage: ' + isUnderage)
+  }
+
   return (
     <main>
-      <AgeGate />
+      <AgeGate onSubmit={handleClick} />
       {/* <UserInfo
         show={true}
         handleClose={handleClick}

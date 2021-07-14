@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
 
 
 export interface IAgeGateProps {
-  onSubmit?(isUnderage: boolean): () => any;
+  onSubmit?(isUnderage: boolean): any;
 }
 
 const AgeGate = (({ onSubmit }: IAgeGateProps): JSX.Element => {
-  const [date, setDate] = useState(new Date('1985-01-01'))
+  const [date, setDate] = useState(new Date('December 1, 1985'))
   let isUnderage = false
   // Are you under 13?
   if (new Date(Date.now()).getTime() - new Date(date).getTime() < 409968000) {
@@ -39,7 +39,7 @@ const AgeGate = (({ onSubmit }: IAgeGateProps): JSX.Element => {
   }
 
   // TODO: handle saving date
-  const handleClick = () => { console.log(date), onSubmit(isUnderage) }
+  const handleClick = () => { setDate(new Date(date)), onSubmit(isUnderage), console.log(date) }
 
   const monthMap = {
     '1': 'Jan',
@@ -88,8 +88,7 @@ const AgeGate = (({ onSubmit }: IAgeGateProps): JSX.Element => {
           showHeader={false}
           showFooter={false}
           value={date}
-          onSelect={(date) => { setDate(date) }}
-          onChange={(date) => { setDate(date) }}
+          onChange={(date) => { setDate(new Date(date)) }}
           isOpen={true}
           isPopup={false}
           max={new Date(Date.now() - 86400000)}
