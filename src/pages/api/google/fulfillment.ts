@@ -10,19 +10,42 @@ import onOpenGame from '@backend/conversation/onOpenGame'
 import logger from '@backend/libs/logger'
 import onHome from '@backend/conversation/onHome'
 import onStartGame from '@backend/conversation/onStartGame'
+import onNoMatch from '@backend/conversation/onNoMatch'
+import onGameWelcomeMessage from '@backend/conversation/onGameWelcomeMessage'
 
 const { serverRuntimeConfig } = getConfig()
-//TODO: ???? what happend with types with this version of actions-on-google
-//@eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
+
 const conversationApp = conversation({
   clientId: serverRuntimeConfig.google.client_id,
 })
 
 conversationApp.handle('StartApp', onStartApp)
-conversationApp.handle('Home', onHome)
+conversationApp.handle('NoMatch', onNoMatch)
+
 conversationApp.handle('OpenGame', onOpenGame)
+conversationApp.handle('GameWelcomeMessage', onGameWelcomeMessage)
+
+//
+conversationApp.handle('Home', onHome)
+conversationApp.handle('Games', onHome)
+
+//
 conversationApp.handle('StartGame', onStartGame)
+conversationApp.handle('RestartCMM', onStartGame)
+conversationApp.handle('ResumeGame', onStartGame)
+
+//GoogleAccountLink
+//GoogleAccountLinkRejected
+//StartAccountLinkingMonologue
+//UserLogout
+//RestartGame
+//Training
+//FEInvokeTTS
+//
+//PlayScore
+//Yes
+//No
+//Help
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {

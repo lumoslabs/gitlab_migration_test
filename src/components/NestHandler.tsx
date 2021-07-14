@@ -1,22 +1,31 @@
 import Script from 'next/script'
 import getConfig from 'next/config'
 
-import { TtsMarkName, actions, getTts, getIsStarted, getContinuousMatchMode } from '@store/slices/appSlice'
+import { TtsMarkName, actions, getAppState } from '@store/slices/appSlice'
 import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions'
 
 import { useAppSelector, useAppDispatch } from '@store/hooks'
 
+import { Property } from 'csstype'
+
 import { useRouter } from 'next/router'
+
+const debugBarStyle = {
+  "background": "white",
+  "position": 'absolute' as Property.Position,
+  "whiteSpace": "pre-wrap" as Property.WhiteSpace,
+  "overflow": "auto",
+  "border": "1px red solid",
+  "zIndex": "100" as Property.ZIndex,
+  "right": "0px",
+  "bottom": "0px",
+}
 
 function NestHandler(): JSX.Element {
   const { publicRuntimeConfig } = getConfig()
   const router = useRouter()
 
-  //debug bar for state manage schema
-  const tts = useAppSelector(getTts)
-  const isStarted = useAppSelector(getIsStarted)
-  const cmm = useAppSelector(getContinuousMatchMode)
-
+  const debugState = useAppSelector(getAppState)
 
   const dispatch = useAppDispatch()
 
@@ -39,16 +48,16 @@ function NestHandler(): JSX.Element {
       onListeningModeChanged(data, reason) {
         console.log("onListeningModeChanged: " + data)
         console.log("Change reason: " + reason)
-        // Handle mode values: 'TURN_BASED', 'CONTINUOUS_MATCH'
         if (data === 'CONTINUOUS_MATCH') {
           dispatch(actions.setContinuousMatchMode({ cmm: true }))
-          // Handle the start of Continuous Match mode
+          dispatch(actions.setGameCommand({ action: 'cmm_start' }))
         } else if (data === 'TURN_BASED') {
           dispatch(actions.setContinuousMatchMode({ cmm: false }))
+          dispatch(actions.setGameCommand({ action: 'cmm_stop' }))
         }
       },
       onPhraseMatched(data) {
-        dispatch(actions.setParsedPhrase({ phrase: data }))
+        dispatch(actions.setGameCommand(data))
       },
 
     }
@@ -57,7 +66,9 @@ function NestHandler(): JSX.Element {
 
   return (
     <>
-      {(`tts: ${tts} - isStarted: ${isStarted ? 'true' : 'false'} cmm - ${cmm ? 'true' : 'false'}`)}
+      <div style={debugBarStyle}>
+        {(`${JSON.stringify(debugState, null, 4)}`)}
+      </div>
       <Script src={publicRuntimeConfig.interactiveCanvasLibUrl} onLoad={onLoad} />
     </>
   )
