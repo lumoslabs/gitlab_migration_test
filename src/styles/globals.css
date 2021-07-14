@@ -203,6 +203,7 @@ code {
   font-family: 'MuseoSans500' !important;
   border-radius: 10px !important;
   padding: 15px !important;
+  margin-bottom: 20px;
 }
 
 .datepicker-wheel {
