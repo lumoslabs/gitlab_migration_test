@@ -21,7 +21,21 @@ export const sendTextQuery = createAsyncThunk(
       window.interactiveCanvas?.setCanvasState(state)
     }
     const result = await window.interactiveCanvas?.sendTextQuery(query)
+    if (result !== 'SUCCESS') {
+      console.error('interactiveCanvas - sendTextQuery - incorrect result', { query, state }, result)
+    }
     return result as string
+  }
+)
+
+export const exitContinuousMatchMode = createAsyncThunk(
+  'interactiveCanvas/exitContinuousMatchMode',
+  async () => {
+    try {
+      window.interactiveCanvas?.exitContinuousMatchMode()
+    } catch (e) {
+      console.error('interactiveCanvas - exitContinuousMatchMode - exception', e)
+    }
   }
 )
 
@@ -29,14 +43,14 @@ const initialState: {
   tts: TtsMarkName,
   started: boolean,
   lastTextQueryState: sendTextQueryState,
-  continuosMatchMode: boolean,
-  lastParsedPhrase: Record<string, any> | null
+  continuousMatchMode: boolean,
+  lastGameCommand: Record<string, any> | null
 } = {
   tts: TtsMarkName.START,
   started: false,
   lastTextQueryState: sendTextQueryState.UNKNOWN,
-  continuosMatchMode: false,
-  lastParsedPhrase: null
+  continuousMatchMode: false,
+  lastGameCommand: null
 } as const
 
 
@@ -59,13 +73,13 @@ export const appSlice = createSlice({
       state: Draft<typeof initialState>,
       action: PayloadAction<{ cmm: boolean }>
     ) => {
-      state.continuosMatchMode = Boolean(action?.payload?.cmm)
+      state.continuousMatchMode = Boolean(action?.payload?.cmm)
     },
-    setParsedPhrase: (
+    setGameCommand: (
       state: Draft<typeof initialState>,
-      action: PayloadAction<{ phrase: Record<string, any> }>
+      action: PayloadAction<Record<string, any>>
     ) => {
-      state.lastParsedPhrase = action.payload.phrase
+      state.lastGameCommand = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -81,11 +95,12 @@ export const appSlice = createSlice({
 
 
 // Selectors
+export const getAppState = (state) => state.app
 export const getTts = (state) => state.app.tts
 export const getIsStarted = (state) => state.app.started
 export const getSendTextQueryState = (state) => state.app.lastTextQueryState
-export const getContinuousMatchMode = (state) => state.app.continuosMatchMode
-export const getLastParsedPhrase = (state) => state.app.lastParsedPhrase
+export const getContinuousMatchMode = (state) => state.app.continuousMatchMode
+export const getLastGameCommand = (state) => state.app.lastGameCommand
 
 // Reducers and actions
 export const actions = appSlice.actions

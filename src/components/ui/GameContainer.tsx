@@ -9,7 +9,7 @@ import commonStyles from '@styles/commonStyles'
 import GameProgressBar from '@components/ui/GameProgressBar'
 import Button from '@components/ui/Button'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { getContinuousMatchMode, getLastParsedPhrase, sendTextQuery } from '@store/slices/appSlice'
+import { getLastGameCommand, sendTextQuery, exitContinuousMatchMode } from '@store/slices/appSlice'
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -46,8 +46,7 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
   const [error, setError] = useState(false)
 
   //selectors for app state
-  const isContinuousMatchMode = useAppSelector(getContinuousMatchMode)
-  const lastParsedPhrase = useAppSelector(getLastParsedPhrase)
+  const lastGameCommand = useAppSelector(getLastGameCommand)
 
   const gameUrl = game.values?.last_version?.overrides?.game_url
   const gameFile = game.values?.invoke_file
@@ -62,20 +61,10 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
 
   //Send parsed phrase to cocos
   useEffect(() => {
-    if (lastParsedPhrase) {
-      window.sendEventToCocos(lastParsedPhrase)
+    if (lastGameCommand && window.sendEventToCocos) {
+      window.sendEventToCocos(lastGameCommand)
     }
-  }, [lastParsedPhrase])
-
-  //Send cmm mode to cocos
-  useEffect(() => {
-    if (isContinuousMatchMode) {
-      window.sendEventToCocos({ 'action': 'cmm_start' })
-    } else {
-      //TODO: will we send event to cocos?
-      console.log('stop cmm')
-    }
-  }, [isContinuousMatchMode])
+  }, [lastGameCommand])
 
   //Save game run into db and clear window before remove component
   useEffect(() => {
@@ -93,6 +82,9 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
     switch (eventName) {
       case 'game:loadStart':
         setShowProgress(true)
+        //TODO: fix redux-toolkit thunk types
+        //@ts-ignore
+        dispatch(sendTextQuery({ query: 'Invoke Game Name Welcome Message', state: { 'name': game.values?.title } }))
         break
       case 'game:loadProgress':
         parsedData = Math.floor(Number(eventData) * 100)
@@ -101,20 +93,56 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
         }
         break
       case 'game:loadComplete':
+        break
+      case 'game:start':
+        setShowProgress(false)
+        break
+      case 'game:nest_cmm_start':
         //TODO: fix redux-toolkit thunk types
         //@ts-ignore
         dispatch(sendTextQuery({ query: 'Invoke Start Game', state: { 'slug': game.id } }))
-        setShowProgress(false)
         break
       case 'game:complete':
-        //TODO: save progress
+        //TODO: fix redux-toolkit thunk types
+        //@ts-ignore
+        dispatch(exitContinuousMatchMode())
         onComplete(eventData as IGameCompletedData)
+        break
+      case 'game:nest_cmm_restart':
+        //TODO: fix redux-toolkit thunk types
+        //@ts-ignore
+        dispatch(sendTextQuery({ query: 'Restart Continuous Match Mode', state: { 'slug': game.id } }))
+        break
+      case 'game:speech':
+        console.log('game:speech', eventData)
+
+        //TODO: pass it 
+        break
+      case 'game:pause':
+        break
+      case 'game:nest_cmm_pause':
+        //TODO: fix redux-toolkit thunk types
+        //@ts-ignore
+        dispatch(exitContinuousMatchMode())
         break
       default:
         console.log('unhandled game event', eventName, eventData)
     }
   }
-
+  /*
+    case 'game:nest_cmm_restart':
+      debugger;
+      setRestartContinuousMatch(true);
+      break;
+    case 'game:resume':
+    case 'game:nest_cmm_resume':
+      setResumeContinuousMatch(true);
+      break;
+    case 'game:quit':
+      setEndContinuousMatch(true);
+      props.abortGame();
+      break;
+  */
   return (
     <div className={css([commonStyles.fullWidth, commonStyles.flexColumnAllCenter])}>
       {error && <Alert variant="danger">Something went wrong</Alert>}
