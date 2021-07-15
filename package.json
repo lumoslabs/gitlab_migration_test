@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.0",
+    "actions-on-google": "https://storage.googleapis.com/studio-eap.appspot.com/assistant-conversation-v3.6.0.tgz",
     "aphrodite": "^2.4.0",
     "aws-sdk": "^2.935.0",
     "bootstrap": "4.6.0",
