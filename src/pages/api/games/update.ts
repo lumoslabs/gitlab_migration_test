@@ -4,7 +4,7 @@ import withUser, { NextApiRequestWithUser } from '@backend/libs/withUser'
 import withExceptionHandler from '@backend/libs/withExceptionHandler'
 import { GameEvents } from '@backend/models/gameRun'
 import ValidationError, { ValidationRules } from '@backend/errors/ValidationError'
-import { UnauthorizedError } from '@assistant/conversation/dist/conversation'
+import ForbiddenError from '@backend/errors/ForbiddenError'
 
 /**
  * @curl
@@ -61,7 +61,7 @@ const handler = async (req: NextApiRequestWithUser, res: NextApiResponse): Promi
   const gameRun = await gameService.getGameRun(id)
 
   if (!gameRun || (req.user.id != gameRun.user_id)) {
-    throw new UnauthorizedError()
+    throw new ForbiddenError()
   }
 
   if (!Object.values(GameEvents).includes(eventName)) {

@@ -22,7 +22,7 @@ const GameCard = (props: IGameCardProps): JSX.Element => {
           <Card className={css([commonStyles.flexColumnAllCenter, styles.card])}
           >
             <Card.Img className={css(styles.cardImg)}
-              variant="top"
+              variant='top'
               src={bannerUrl}
               alt='Game icon'
             />

@@ -1,5 +1,5 @@
-import { Canvas, ConversationV3 } from "@assistant/conversation"
-import appSharedActions from "@store/slices/appSharedActions"
+import { Canvas, ConversationV3 } from 'actions-on-google'
+import appSharedActions from '@store/slices/appSharedActions'
 import getConfig from 'next/config'
 
 const { serverRuntimeConfig } = getConfig()

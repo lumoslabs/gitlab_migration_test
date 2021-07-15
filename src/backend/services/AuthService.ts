@@ -1,7 +1,7 @@
 import UserModel, { User } from '@backend/models/user'
 import getConfig from 'next/config'
 import jwt from 'jsonwebtoken'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -59,7 +59,7 @@ export default class AuthService {
         else
           resolve(token)
       })
-    });
+    })
   }
 }
 

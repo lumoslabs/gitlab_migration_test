@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import ValidationError from '@backend/errors/ValidationError';
-import ForbiddenError from '@backend/errors/ForbiddenError';
+import ValidationError from '@backend/errors/ValidationError'
+import ForbiddenError from '@backend/errors/ForbiddenError'
 
 export default function withExceptionHandler<T>(handler: (req: NextApiRequest, res: NextApiResponse) => Promise<T>) {
   return (req, res) => {
@@ -14,6 +14,6 @@ export default function withExceptionHandler<T>(handler: (req: NextApiRequest, r
       } else {
         res.status(500).send("Something went wrong")
       }
-    });
+    })
   }
 }
