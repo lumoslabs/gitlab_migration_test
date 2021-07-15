@@ -44,6 +44,7 @@ function NestHandler(): JSX.Element {
       },
       onTtsMark(tts: TtsMarkName) {
         dispatch(actions.setTts({ tts }))
+        dispatch(actions.setGameCommand({ action: 'tts_' + tts.toLowerCase() }))
       },
       onListeningModeChanged(data, reason) {
         console.log("onListeningModeChanged: " + data)
@@ -52,8 +53,13 @@ function NestHandler(): JSX.Element {
           dispatch(actions.setContinuousMatchMode({ cmm: true }))
           dispatch(actions.setGameCommand({ action: 'cmm_start' }))
         } else if (data === 'TURN_BASED') {
+          //TODO: if-else for reasoning, restart it on timeout?
           dispatch(actions.setContinuousMatchMode({ cmm: false }))
-          dispatch(actions.setGameCommand({ action: 'cmm_stop' }))
+          dispatch(actions.setGameCommand({ action: 'cmm_end' }))
+          //          if (reason === 'CONTINUOUS_MATCH_USER_EXIT') {
+          //          } else {
+          //restart cmm
+          //          }
         }
       },
       onPhraseMatched(data) {

@@ -33,19 +33,18 @@ conversationApp.handle('Games', onHome)
 conversationApp.handle('StartGame', onStartGame)
 conversationApp.handle('RestartCMM', onStartGame)
 conversationApp.handle('ResumeGame', onStartGame)
+conversationApp.handle('RestartGame', onStartGame)
 
 //GoogleAccountLink
 //GoogleAccountLinkRejected
 //StartAccountLinkingMonologue
-//UserLogout
-//RestartGame
 //Training
 //FEInvokeTTS
-//
 //PlayScore
 //Yes
 //No
 //Help
+//UserLogout
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {

@@ -21,6 +21,9 @@ export const sendTextQuery = createAsyncThunk(
       window.interactiveCanvas?.setCanvasState(state)
     }
     const result = await window.interactiveCanvas?.sendTextQuery(query)
+    if (result !== 'SUCCESS') {
+      console.error('interactiveCanvas - sendTextQuery - incorrect result', { query, state }, result)
+    }
     return result as string
   }
 )
@@ -28,7 +31,11 @@ export const sendTextQuery = createAsyncThunk(
 export const exitContinuousMatchMode = createAsyncThunk(
   'interactiveCanvas/exitContinuousMatchMode',
   async () => {
-    window.interactiveCanvas?.exitContinuousMatchMode
+    try {
+      window.interactiveCanvas?.exitContinuousMatchMode()
+    } catch (e) {
+      console.error('interactiveCanvas - exitContinuousMatchMode - exception', e)
+    }
   }
 )
 
