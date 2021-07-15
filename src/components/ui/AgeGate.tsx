@@ -16,12 +16,13 @@ const AgeGate = (({ onSubmit }: IAgeGateProps): JSX.Element => {
 
   // TODO: handle saving date
   const handleClick = () => {
-    let isUnderage = true
     // Are you under 13?
+    let isUnderage = true
     if (new Date(Date.now()).getTime() - new Date(date).getTime() > 410310589331) {
       isUnderage = false
     }
-    onSubmit(isUnderage) }
+    onSubmit(isUnderage)
+  }
 
   const monthMap = {
     '1': 'Jan',
