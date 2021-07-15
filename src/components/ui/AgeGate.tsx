@@ -12,6 +12,7 @@ export interface IAgeGateProps {
 
 const AgeGate = (({ onSubmit }: IAgeGateProps): JSX.Element => {
 
+  // default date
   const [date, setDate] = useState(new Date('1985-01-02'))
 
   // TODO: handle saving date
