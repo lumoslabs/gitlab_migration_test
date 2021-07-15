@@ -1,5 +1,7 @@
 import GameRunModel, { GameEventData, GameEvents, GameRun, GameRunState } from '@backend/models/gameRun'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
+import { ConditionExpression,  AndExpression, equals, greaterThanOrEqualTo } from '@aws/dynamodb-expressions'
+import { QueryOptions } from '@aws/dynamodb-data-mapper'
 
 export default class GameService {
 
@@ -42,6 +44,55 @@ export default class GameService {
       })
     }
     return id
+  }
+
+  async getUserHighScoresForGameSlug(
+    gameSlug: string,
+    userId: string,
+    limit: number = 5
+  ) {
+
+    const createConditionExpression = (conditionFunction, column: string, value) : ConditionExpression => {
+      return {
+        ...conditionFunction(value),
+        subject: column,
+      }
+    }
+
+    const createAndExpression = (conditions) : AndExpression => {
+      return {
+        type: 'And',
+        conditions,
+      }
+    }
+
+    const createGreaterThanOrEqualToConditionExpression = (column: string, value) : ConditionExpression => {
+      return createConditionExpression(greaterThanOrEqualTo, column, value)
+    }
+
+    const createEqualsConditionExpression = (column: string, value) : ConditionExpression => {
+      return createConditionExpression(equals, column, value)
+    }
+    const equalsUserIdCondition: ConditionExpression = createEqualsConditionExpression('user_id', userId)
+    const equalsGameSlugCondition: ConditionExpression = createEqualsConditionExpression('game_url_slug', gameSlug)
+    // const equalsGameStateCondition: ConditionExpression = createEqualsConditionExpression('game_state', GameState.ENDED_GAME)
+    const scoreCondition = createGreaterThanOrEqualToConditionExpression('score', 0)
+
+    const queryAndCondition: AndExpression = createAndExpression([
+      equalsUserIdCondition,
+      scoreCondition,
+    ])
+    const filterAndCondition: AndExpression = createAndExpression([equalsGameSlugCondition])
+
+    const queryOptions: QueryOptions = {
+      limit,
+      indexName: 'GameRunUserScoreIndex',
+      scanIndexForward: false,
+      filter: filterAndCondition,
+      projection: ['score', 'game_url_slug', 'game_version', 'created_at', 'updated_at', 'user_id']
+    }
+
+    return query(GameRunModel, queryAndCondition, queryOptions)
   }
 
 }
