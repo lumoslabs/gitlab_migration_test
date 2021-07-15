@@ -13,14 +13,15 @@ export interface IAgeGateProps {
 const AgeGate = (({ onSubmit }: IAgeGateProps): JSX.Element => {
 
   const [date, setDate] = useState(new Date('1985-01-02'))
-  let isUnderage = true
-  // Are you under 13?
-  if (new Date(Date.now()).getTime() - new Date(date).getTime() > 410310589331) {
-    isUnderage = false
-  }
 
   // TODO: handle saving date
-  const handleClick = () => { setDate(new Date(date)), onSubmit(isUnderage) }
+  const handleClick = () => {
+    let isUnderage = true
+    // Are you under 13?
+    if (new Date(Date.now()).getTime() - new Date(date).getTime() > 410310589331) {
+      isUnderage = false
+    }
+    onSubmit(isUnderage) }
 
   const monthMap = {
     '1': 'Jan',
