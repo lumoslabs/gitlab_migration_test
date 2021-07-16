@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic"
+import dynamic from 'next/dynamic'
 import { GetServerSideProps } from 'next'
 import { GameConfig } from '@backend/models/config'
 
@@ -6,14 +6,14 @@ import {
   MemoryRouter as Router,
   Switch,
   Route,
-} from "react-router-dom"
+} from 'react-router-dom'
 
-import IndexPage from "@routes/index"
-import HomePage from "@routes/home"
-import GamePage from "@routes/game"
+import IndexPage from '@routes/index'
+import HomePage from '@routes/home'
+import GamePage from '@routes/game'
 import NestHandler from '@components/NestHandler'
 
-import ConfigService from "@backend/services/ConfigService"
+import ConfigService from '@backend/services/ConfigService'
 
 export function Index({ games }: { games: GameConfig[] }): JSX.Element {
   console.log('games', games)
@@ -27,10 +27,10 @@ export function Index({ games }: { games: GameConfig[] }): JSX.Element {
     <Router>
       <NestHandler />
       <Switch>
-        <Route exact path="/">
+        <Route exact path='/'>
           <IndexPage />
         </Route>
-        <Route exact path="/home">
+        <Route exact path='/home'>
           <HomePage games={games} />
         </Route>
         {gameRoutes}

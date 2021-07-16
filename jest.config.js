@@ -8,4 +8,4 @@ module.exports = {
   testMatch: ["**/src/test/**/*test*.[jt]s?(x)"],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
   testEnvironment: 'jsdom',
-};
+}

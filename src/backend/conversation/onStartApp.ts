@@ -1,9 +1,9 @@
-import { ConversationV3 } from "actions-on-google";
+import { ConversationV3 } from 'actions-on-google'
 import { sendCommand } from '@backend/conversation/utils'
 import appSharedActions from '@store/slices/appSharedActions'
 
 export default async (conv: ConversationV3) => {
-  conv.add('Welcome to Next js app');
+  conv.add('Welcome to Lumosity. You can say play a game or do a workout. What would you like to do today?')
 
   //  conv.user.params = conv.request.user
   /*
@@ -12,7 +12,7 @@ export default async (conv: ConversationV3) => {
   console.log('conv.session.params', conv.session.params)
 
   conv.session.params.i = (conv?.session?.params?.i || 0) + 1
-  conv.user.params.i = (conv?.user?.params?.i || 0) + 1;
+  conv.user.params.i = (conv?.user?.params?.i || 0) + 1
 
   sendCommand({
     conv,

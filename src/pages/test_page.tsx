@@ -1,5 +1,6 @@
+import AgeGate from '@components/ui/AgeGate'
 import LoadingComponent from '@components/ui/LoadingComponent'
-// import GameProgressBar from '@components/ui/GameProgressBar'
+import GameProgressBar from '@components/ui/GameProgressBar'
 import UserBar from '@components/ui/UserBar'
 import UserInfo from '@components/ui/UserInfo'
 import GameScoreCard from '@components/ui/GameScoreCard'
@@ -20,17 +21,22 @@ const styles = StyleSheet.create({
 
 export default function Test(): JSX.Element {
   const handleClick = () => { window.location.href = 'https://lumos-assistant.ngrok.io' }
+  const handleAgeGateClick = (isUnderage: boolean) => { 
+    window.location.href = 'https://lumos-assistant.ngrok.io/test_page', 
+    console.log('isUnderage: ' + isUnderage)
+  }
 
   return (
     <main>
-      <UserInfo
+      <AgeGate onSubmit={handleAgeGateClick} />
+      {/* <UserInfo
         show={true}
         handleClose={handleClick}
         logoutCallback={handleClick}
         email='liina.laufer@australianemailswithreallylongdomains.com'
         name='Liina Laufer'
         timezone='Australian Central Western Standard Time'
-      />
+      /> */}
       {/* <GameProgressBar name='Train of Thought' progressLevel={50} /> */}
       {/* <LoadingComponent title=''/> */}
       {/* <GameScoreCard

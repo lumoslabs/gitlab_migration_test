@@ -151,12 +151,12 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
   */
   return (
     <div className={css([commonStyles.fullWidth, commonStyles.flexColumnAllCenter])}>
-      {error && <Alert variant="danger">Something went wrong</Alert>}
+      {error && <Alert variant='danger'>Something went wrong</Alert>}
       <Card className={css([commonStyles.flexColumnAllCenter, styles.gameFrame])}>
         <Card.Body className={css(commonStyles.flexJustifyCenter)}>
           <div className='cocos3' id='game-manager'>
             <canvas
-              id="gameCanvas"
+              id='gameCanvas'
               className={css(commonStyles.flexColumnAllCenter)}
               style={{ visibility: showProgress ? 'hidden' : 'visible' }}
               width={clientWidth}

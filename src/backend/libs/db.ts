@@ -1,5 +1,4 @@
-import DynamoDB from 'aws-sdk/clients/dynamodb';
-
+import DynamoDB from 'aws-sdk/clients/dynamodb'
 import getConfig from 'next/config'
 
 const { serverRuntimeConfig } = getConfig()
@@ -8,7 +7,7 @@ const client = new DynamoDB({
   region: serverRuntimeConfig.dynamodb.region,
   endpoint: serverRuntimeConfig.dynamodb.endpoint,
   sslEnabled: serverRuntimeConfig.dynamodb.sslEnabled
-});
+})
 
 export default client
 

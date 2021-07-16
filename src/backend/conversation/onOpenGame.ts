@@ -1,10 +1,10 @@
-import { ConversationV3 } from "actions-on-google";
-import CatalogService from "@backend/services/ConfigService";
-import appSharedActions from "@store/slices/appSharedActions";
-import { getRandomElement, sendCommand } from "./utils";
+import { ConversationV3 } from 'actions-on-google'
+import CatalogService from '@backend/services/ConfigService'
+import appSharedActions from '@store/slices/appSharedActions'
+import { getRandomElement, sendCommand } from './utils'
 
 export default async (conv: ConversationV3) => {
-  conv.add('Open game');
+  // conv.add('Open game')
   console.log('conv.user.params', conv.user.params)
   console.log('conv.session.params', conv.session.params)
   const gameNameResolved = conv?.intent?.params?.game_name?.resolved?.toLowerCase()
