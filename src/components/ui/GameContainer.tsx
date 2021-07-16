@@ -92,7 +92,7 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
         <Card.Body className={css(commonStyles.flexJustifyCenter)}>
           <div className='cocos3' id='game-manager'>
             <canvas
-              id="gameCanvas"
+              id='gameCanvas'
               className={css(commonStyles.flexColumnAllCenter)}
               style={{ visibility: showProgress ? 'hidden' : 'visible' }}
               width={clientWidth}

@@ -23,7 +23,7 @@ export const appSlice = createSlice({
       state: Draft<typeof initialState>,
       action: PayloadAction<{ tts: TtsMarkName }>
     ) => {
-      state.tts = action.payload.tts;
+      state.tts = action.payload.tts
     },
     [appActions.SET_STARTED]: (
       state: Draft<typeof initialState>

@@ -16,7 +16,7 @@ export default class CatalogService {
     //n+1, copy paste from prev version, should be handled by cache decorator
     const games = ((await Promise.all(catalog?.values?.games?.map((game) => {
       return this.getRow(game.slug, ConfigTypes.GAME)
-    }))) as GameConfig[]).sort((a, b) => (a?.values?.title > b?.values?.title) ? 1 : -1);
+    }))) as GameConfig[]).sort((a, b) => (a?.values?.title > b?.values?.title) ? 1 : -1)
 
     return games
   }
