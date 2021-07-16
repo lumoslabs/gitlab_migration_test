@@ -1,4 +1,4 @@
-import { GameConfig } from "@backend/models/config";
+import { GameConfig } from '@backend/models/config'
 
 const games: GameConfig[] = [
   {

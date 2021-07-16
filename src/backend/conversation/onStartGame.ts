@@ -1,7 +1,7 @@
-import { ConversationV3 } from 'actions-on-google';
+import { ConversationV3 } from 'actions-on-google'
 import { sendCommand } from '@backend/conversation/utils'
-import ConfigService from '@backend/services/ConfigService';
-import { ExpectedPhrase } from "actions-on-google/dist/api/schema"
+import ConfigService from '@backend/services/ConfigService'
+import { ExpectedPhrase } from 'actions-on-google/dist/api/schema'
 
 export default async (conv: ConversationV3) => {
   const gameSlug = conv.context?.canvas?.state?.slug
