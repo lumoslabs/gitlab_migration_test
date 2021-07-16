@@ -73,7 +73,8 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
   useEffect(() => {
     console.log('lastGameCommand: ' + JSON.stringify(Object.assign({}, lastGameCommand)))
     if (lastGameCommand && window.sendEventToCocos) {
-      window.sendEventToCocos(Object.assign({}, lastGameCommand))
+      // game needs to be able to modify object
+      window.sendEventToCocos(JSON.parse(JSON.stringify(lastGameCommand)))
     }
   }, [lastGameCommand])
 

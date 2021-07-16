@@ -28,7 +28,7 @@ export interface CatalogConfig extends Config {
 export interface GameConfigVersion {
   id: string;
   overrides: {
-    extras: Record<string, string | Boolean>,
+    extras: Record<string, string | boolean>,
     game_url: string
   }
 }
