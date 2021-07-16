@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import Script from 'react-load-script'
@@ -9,9 +10,14 @@ import commonStyles from '@styles/commonStyles'
 import GameProgressBar from '@components/ui/GameProgressBar'
 import Button from '@components/ui/Button'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { getLastGameCommand, sendTextQuery, exitContinuousMatchMode } from '@store/slices/appSlice'
+import { getLastGameCommand, sendTextQuery, outputTts, exitContinuousMatchMode } from '@store/slices/appSlice'
 
 const { publicRuntimeConfig } = getConfig()
+
+export interface IGameSpeechData {
+  text: string,
+  prompt: boolean
+}
 
 export interface IGameCompletedData {
   //TODO: extend it
@@ -21,7 +27,7 @@ export interface IGameCompletedData {
   game_result_data: unknown;
 }
 
-type IGameEventData = number | IGameCompletedData | null
+type IGameEventData = number | IGameCompletedData | IGameSpeechData | null
 
 export interface IGameContainerProps {
   game: GameConfig;
@@ -62,7 +68,7 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
   //Send parsed phrase to cocos
   useEffect(() => {
     if (lastGameCommand && window.sendEventToCocos) {
-      window.sendEventToCocos(lastGameCommand)
+      window.sendEventToCocos(Object.assign({}, lastGameCommand))
     }
   }, [lastGameCommand])
 
@@ -114,9 +120,9 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
         dispatch(sendTextQuery({ query: 'Restart Continuous Match Mode', state: { 'slug': game.id } }))
         break
       case 'game:speech':
-        console.log('game:speech', eventData)
-
-        //TODO: pass it 
+        parsedData = eventData as IGameSpeechData
+        //@ts-ignore
+        dispatch(outputTts(parsedData))
         break
       case 'game:pause':
         break

@@ -1,30 +1,38 @@
 import { useState } from 'react'
-import { GetServerSideProps } from 'next'
 import { css, StyleSheet } from 'aphrodite/no-important'
-import ConfigService from '@backend/services/ConfigService'
 import WorkoutCard from '@components/ui/WorkoutCard'
 import GameSection from '@components/ui/GameSection'
 import UserBar from '@components/ui/UserBar'
 import UserInfo from '@components/ui/UserInfo'
 import commonStyles from '@styles/commonStyles'
+import { GameConfig } from '@backend/models/config'
+import { useHistory } from "react-router-dom";
 
-export default function Home(): JSX.Element {
+export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
+  const history = useHistory()
+
   const [showAccountModal, setShowAccountModal] = useState(false)
   const handleAccountModalClose = () => setShowAccountModal(false)
   const handleAccountModalShow = () => setShowAccountModal(true)
+
   const handleLogout = () => {
     setShowAccountModal(false)
     // TODO: Handle logout
   }
+
   // TODO launch workout function
   const handleClick = () => { window.location.href = 'https://lumos-assistant.ngrok.io' }
+
+  const onGameClick = (slug: string) => {
+    history.push(`/game/${slug}`)
+  }
 
   return (
     <main>
       <div className={css(commonStyles.flexRowJustifyCenter, commonStyles.fullWidth, styles.topSpace)}>
         <div className={css(commonStyles.flexAlignCenter)}>
           <WorkoutCard clickHandler={handleClick} />
-          <GameSection />
+          <GameSection onClick={onGameClick} games={games} />
         </div>
       </div>
       <UserInfo
@@ -32,19 +40,9 @@ export default function Home(): JSX.Element {
         handleClose={handleAccountModalClose}
         logoutCallback={handleLogout}
       />
-      <UserBar clickHandler={handleAccountModalShow}/>
+      <UserBar clickHandler={handleAccountModalShow} />
     </main>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const service = new ConfigService()
-  const games = await service.getCatalogGames()
-  return {
-    props: {
-      games
-    }
-  }
 }
 
 const styles = StyleSheet.create({

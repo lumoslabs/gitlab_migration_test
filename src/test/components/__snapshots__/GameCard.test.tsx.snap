@@ -2,9 +2,7 @@
 
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
-  <a
-    href="/game/color-match-nest"
-  >
+  <a>
     <div
       class="flexRowAllCenter_1cn94ih-o_O-gridCol_1f8v8h4"
     >

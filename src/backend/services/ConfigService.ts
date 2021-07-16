@@ -17,7 +17,7 @@ export default class CatalogService {
     const catalog: CatalogConfig = await this.getRow(serverRuntimeConfig?.misc?.config_catalog_id || 1, ConfigTypes.CATALOG)
     //n+1, copy paste from prev version, should be handled by cache decorator
     const games = ((await Promise.all(catalog?.values?.games?.map((game) => {
-      return this.getRow(game.slug, ConfigTypes.GAME)
+      return this.getCatalogGameBySlug(game.slug)
     }))) as GameConfig[]).sort((a, b) => (a?.values?.title > b?.values?.title) ? 1 : -1);
 
     return games

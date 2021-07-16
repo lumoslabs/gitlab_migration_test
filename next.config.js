@@ -5,6 +5,18 @@
  **/
 module.exports = () => {
   return {
+    async rewrites() {
+      return [
+        {
+          source: '/home',
+          destination: `/`,
+        },
+        {
+          source: '/game/:game*',
+          destination: `/`,
+        },
+      ]
+    },
     serverRuntimeConfig: {
       // Will only be available on the server side
       google: {

@@ -11,10 +11,8 @@ export enum ConfigTypes {
 
 export interface Config {
   name: string;
-  created_at: string;
   id: string;
   type: string;
-  updated_at: string;
   values: any
 }
 
@@ -30,7 +28,7 @@ export interface CatalogConfig extends Config {
 export interface GameConfigVersion {
   id: string;
   overrides: {
-    extras: Record<string, string>,
+    extras: Record<string, string | Boolean>,
     game_url: string
   }
 }
@@ -39,7 +37,9 @@ export interface FrontEndData {
   score_description_key: string;
   scores: {
     score_screen_score_key: string;
-  }
+    screens: any;
+    run_data_references: any;
+  }[]
 }
 
 //two primary keys? lets use slug as primary key
@@ -49,13 +49,11 @@ export interface GameConfig extends Config {
     slug: string;
     brain_area: string;
     continuous_match_configs: string[];
-    created_at: string;
     frontend_data: FrontEndData;
     invoke_file: string;
     title: string;
     score_thumbnail_url: string;
     path: string;
-    updated_at: string;
     versions: GameConfigVersion[];
     banner_url: string;
     last_version: GameConfigVersion;

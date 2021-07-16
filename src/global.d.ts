@@ -9,7 +9,8 @@ export declare global {
       }) => any,
       sendTextQuery: (text: string) => Promise<"SUCCESS" | "BLOCKED" | "UNKNOWN">,
       setCanvasState: (object: Record<any, any>) => void,
-      exitContinuousMatchMode: () => void
+      exitContinuousMatchMode: () => void,
+      outputTts: (text: string, prompt: boolean) => void
     };
     clientHeight: number;
     Lumos: any;

@@ -9,6 +9,7 @@ export default async (conv: ConversationV3) => {
   conv.add(`Okay. Let's play ${gameName}`)
 
   sendCommand({
+    suppressMic: true,
     conv
   })
 }

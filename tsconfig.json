@@ -28,6 +28,9 @@
       "@pages/*": [
         "src/pages/*"
       ],
+      "@routes/*": [
+        "src/routes/*"
+      ],
       "@backend/*": [
         "src/backend/*"
       ],

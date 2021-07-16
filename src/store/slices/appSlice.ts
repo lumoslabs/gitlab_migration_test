@@ -39,6 +39,21 @@ export const exitContinuousMatchMode = createAsyncThunk(
   }
 )
 
+export const outputTts = createAsyncThunk(
+  'interactiveCanvas/outputTts',
+  async ({ text, prompt }: {
+    text: string,
+    prompt: boolean
+  }) => {
+    try {
+      window.interactiveCanvas?.outputTts(text, prompt)
+    } catch (e) {
+      console.error('interactiveCanvas - outputTts - exception', e)
+    }
+  }
+)
+
+
 const initialState: {
   tts: TtsMarkName,
   started: boolean,

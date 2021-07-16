@@ -9,7 +9,6 @@ export interface IWorkoutCardProps {
   clickHandler(e: React.MouseEvent<any>): any;
   workoutImage?: string;
   buttonText?: string;
-  currentPage?: string;
 }
 
 const WorkoutCard = (props: IWorkoutCardProps): JSX.Element => {
@@ -36,7 +35,6 @@ const WorkoutCard = (props: IWorkoutCardProps): JSX.Element => {
             buttonText={props.buttonText || 'Start My Workout'}
             onClick={props.clickHandler}
             id='start_workout'
-            currentPage={props.currentPage || window.location.href}
           />
         </Card.Body>
       </Card>
