@@ -37,27 +37,31 @@ export interface IGameContainerProps {
 
 //TODO: should we split logic to simplest functions?
 const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element => {
+  const dispatch = useAppDispatch()
+
+  // Set the dimensions of the screen for game layout
   const [clientHeight, setHeight] = useState(0)
   const [clientWidth, setWidth] = useState(0)
-  const dispatch = useAppDispatch()
 
   useEffect(() => {
     setHeight(window.innerHeight)
     setWidth(window.innerWidth)
   }, [])
 
-  //
+  // Game loading progress for loading bar and errors
   const [progressLevel, setProgressLevel] = useState(0)
   const [showProgress, setShowProgress] = useState(true)
   const [error, setError] = useState(false)
 
-  //selectors for app state
+  // Selectors for app state
   const lastGameCommand = useAppSelector(getLastGameCommand)
 
+  // Game info
   const gameUrl = game.values?.last_version?.overrides?.game_url
   const gameFile = game.values?.invoke_file
   const versionedGameUrl = `${gameUrl}${gameFile}?ts=${Date.now()}`
 
+  // window vars for the game
   window.Lumos = {
     gamevars: {
       ...game.values?.last_version?.overrides?.extras,
@@ -73,16 +77,16 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
     }
   }, [lastGameCommand])
 
-  //Save game run into db and clear window before remove component
+  // Save game run into db and clear window before remove component
   useEffect(() => {
-    //todo: create game on backend
+    // TODO: create game on backend
     return () => {
       // Clear cocos3 scope
       window?.cc?.director?.end()
     }
   }, [])
 
-  //handle game events
+  // Handle game events
   window.sendToJavaScript = (data: string | [string, IGameEventData], argData: IGameEventData) => {
     const [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
     let parsedData = eventData
@@ -205,6 +209,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   }
 })
-
 
 export default GameContainer
