@@ -2,6 +2,7 @@ import GameRunModel, { GameEventData, GameEvents, GameRun, GameRunState } from '
 import { v4 as uuidv4 } from 'uuid'
 import { ConditionExpression,  AndExpression, equals, greaterThanOrEqualTo } from '@aws/dynamodb-expressions'
 import { QueryOptions } from '@aws/dynamodb-data-mapper'
+import { User } from '@backend/models/user'
 
 export default class GameService {
 
@@ -24,7 +25,7 @@ export default class GameService {
     return id
   }
 
-  async updateGameRun(id: string, eventName: GameEvents, eventData?: GameEventData) {
+  async updateGameRun(id: string, eventName: GameEvents, eventData?: GameEventData): Promise<string> {
     if (eventName === GameEvents.LOADED) {
       await GameRunModel.update({
         id: id,
@@ -46,11 +47,7 @@ export default class GameService {
     return id
   }
 
-  async getUserHighScoresForGameSlug(
-    gameSlug: string,
-    userId: string,
-    limit: number = 5
-  ) {
+  async getUserTopScoresForGameSlug(gameSlug: string, userId: string, limit = 5): Promise<string> {
 
     const createConditionExpression = (conditionFunction, column: string, value) : ConditionExpression => {
       return {
@@ -92,7 +89,21 @@ export default class GameService {
       projection: ['score', 'game_url_slug', 'game_version', 'created_at', 'updated_at', 'user_id']
     }
 
-    return query(GameRunModel, queryAndCondition, queryOptions)
+    await GameRunModel.get(
+
+    // async function query(tableModel, condition, extras = {}) {
+    //   const foundItems = [];
+    //   // logger.info(`QUERY: ${JSON.stringify(condition)}, ${JSON.stringify(extras)}`);
+    //   for await (const item of getMapper().query(tableModel, condition, extras)) {
+    //     logger.info(`query: ${JSON.stringify(item)}`);
+    //     foundItems.push(item);
+    //   }
+    //   return foundItems;
+    // }
+    
+
+    // return query(GameRunModel, queryAndCondition, queryOptions)
+    return GameRunModel, queryAndCondition, queryOptions
   }
 
 }

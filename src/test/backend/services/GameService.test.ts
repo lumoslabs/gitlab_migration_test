@@ -87,4 +87,19 @@ describe('GameService', () => {
       ...game
     })
   })
+  it ('getUserTopScoresForGameSlug returns top scores for a user', async () => {
+    const game = {
+      game_version: 'nest-1',
+      game_slug: 'test-game',
+      user_id: 'user_id'
+    }
+    const high_scores = await (new GameService()).getUserTopScoresForGameSlug('user_id', 'test-game')
+
+
+    const saved = await (new GameService()).getGameRun(id)
+    const { created_at, updated_at, ...result } = saved
+
+    expect(high_scores).toEqual({})
+  })
+
 })

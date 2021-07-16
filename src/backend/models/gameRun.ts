@@ -1,7 +1,6 @@
 import { DocumentClient, getTableName } from '@backend/libs/db'
 import { Table, Entity } from 'dynamodb-toolbox'
 
-
 export enum GameRunState {
   CREATED = 'CREATED',
   LOADED = 'LOADED',

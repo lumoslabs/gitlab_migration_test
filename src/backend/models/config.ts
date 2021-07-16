@@ -8,7 +8,6 @@ export enum ConfigTypes {
   TRAINING = 'training',
 }
 
-
 export interface Config {
   name: string;
   created_at: string;
