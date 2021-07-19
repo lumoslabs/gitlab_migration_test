@@ -5,12 +5,19 @@ import { useEffect } from 'react'
 import { useAppSelector } from '@store/hooks'
 import { getIsStarted } from '@store/slices/appSlice'
 import { useHistory } from 'react-router-dom'
+import getConfig from 'next/config'
 
 export function Index(): JSX.Element {
+  const { publicRuntimeConfig } = getConfig()
   const isStarted = useAppSelector(getIsStarted)
   const history = useHistory()
 
+  //withoutInteractiveCanvas
+  console.log('publicRuntimeConfig.withoutInteractiveCanvas', publicRuntimeConfig.withoutInteractiveCanvas)
   useEffect(() => {
+    if (publicRuntimeConfig.withoutInteractiveCanvas) {
+      history.push('/home')
+    }
     if (isStarted) {
       history.push('/home')
     }

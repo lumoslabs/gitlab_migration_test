@@ -14,6 +14,9 @@ export function getRandomElement<T>(input: Record<string, T> | T[]): T {
   return input[keys[getRandomInt(keys.length)]]
 }
 
+export const getPublicUrlFromConv = (conv: ConversationV3) => {
+  return serverRuntimeConfig.publicUrl || ('https://' + conv.headers?.host?.toString())
+}
 
 export const sendCommand = async ({ conv, command = undefined, payload = undefined, suppressMic = false, continuousMatchPhrases = undefined }: {
   conv: ConversationV3,
@@ -30,7 +33,7 @@ export const sendCommand = async ({ conv, command = undefined, payload = undefin
       expectedPhrases: continuousMatchPhrases,
       durationSeconds: 180,
     } : undefined,
-    url: serverRuntimeConfig.publicUrl || ('https://' + conv.headers?.host?.toString()),
+    url: getPublicUrlFromConv(conv),
     suppressMic,
     data: command ? [{
       command,

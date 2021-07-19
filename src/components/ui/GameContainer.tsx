@@ -33,11 +33,12 @@ type IGameEventData = number | IGameCompletedData | IGameSpeechData | null
 export interface IGameContainerProps {
   game: GameConfig;
   onComplete: (data: IGameCompletedData) => void;
+  onEvent: (eventName: string, data: any) => void;
 }
 
 
 //TODO: should we split logic to simplest functions?
-const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element => {
+const GameContainer = ({ game, onComplete, onEvent }: IGameContainerProps): JSX.Element => {
   const dispatch = useAppDispatch()
 
   // Set the dimensions of the screen for game layout
@@ -77,9 +78,7 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
     }
   }, [lastGameCommand])
 
-  // Save game run into db and clear window before remove component
   useEffect(() => {
-    // TODO: create game on backend
     return () => {
       // Clear cocos3 scope
       window?.cc?.director?.end()
@@ -104,8 +103,10 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
         }
         break
       case 'game:loadComplete':
+        onEvent(eventName, eventData)
         break
       case 'game:start':
+        onEvent(eventName, eventData)
         setShowProgress(false)
         break
       case 'game:nest_cmm_start':
@@ -114,6 +115,7 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
         dispatch(sendTextQuery({ query: 'Invoke Start Game', state: { 'slug': game.id } }))
         break
       case 'game:complete':
+        onEvent(eventName, eventData)
         //TODO: fix redux-toolkit thunk types
         //@ts-ignore
         dispatch(exitContinuousMatchMode())
