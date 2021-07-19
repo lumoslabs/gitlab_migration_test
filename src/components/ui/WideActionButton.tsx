@@ -11,7 +11,6 @@ export interface IWideActionButtonProps {
   buttonText: string;
   onClick?(e: React.MouseEvent<any>): any;
   id: string;
-  currentPage: string;
 }
 
 const WideActionButton = (props: IWideActionButtonProps): JSX.Element => {

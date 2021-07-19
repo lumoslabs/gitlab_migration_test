@@ -44,7 +44,7 @@ const LoadingComponent = ({ title, titleDivHeight = '20vh', loadingDivHeight  = 
         </div>
       )}
       <div className={css([commonStyles.flexColumnAllCenter, customizedStyles.loadingdiv])}>
-        <div className="loader" />
+        <div className='loader' />
       </div>
     </div>
   )

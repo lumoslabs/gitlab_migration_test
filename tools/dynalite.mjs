@@ -23,15 +23,15 @@ dynaliteServer.listen(dynamodbPort, function (err) {
   const dynamodb = new AWS.DynamoDB({
     region: process.env.DYNAMODB_REGION || 'local',
     endpoint: 'http://localhost:' + dynamodbPort,
-  });
-  const dynClient = new AWS.DynamoDB.DocumentClient({ service: dynamodb });
-  const app = createServer(dynamodb, dynClient);
+  })
+  const dynClient = new AWS.DynamoDB.DocumentClient({ service: dynamodb })
+  const app = createServer(dynamodb, dynClient)
 
-  const adminPort = env.parsed?.DYNAMODB_ADMIN_PORT || 8001;
-  const server = app.listen(adminPort);
+  const adminPort = env.parsed?.DYNAMODB_ADMIN_PORT || 8001
+  const server = app.listen(adminPort)
   server.on('listening', () => {
-    const address = server.address();
-    console.log(`dynamodb-admin listening on http://0.0.0.0:${address.port}`);
-  });
+    const address = server.address()
+    console.log(`dynamodb-admin listening on http://0.0.0.0:${address.port}`)
+  })
 
 })

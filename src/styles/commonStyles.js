@@ -1,5 +1,5 @@
-import { StyleSheet } from 'aphrodite';
-import { base } from './colors';
+import { StyleSheet } from 'aphrodite'
+import { base } from './colors'
 
 const commonStyles = StyleSheet.create({
   simpleFlex: {
@@ -113,6 +113,6 @@ const commonStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignSelf: 'normal'
   }
-});
+})
 
-export default commonStyles;
+export default commonStyles

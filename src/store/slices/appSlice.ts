@@ -39,12 +39,30 @@ export const exitContinuousMatchMode = createAsyncThunk(
   }
 )
 
+export const outputTts = createAsyncThunk(
+  'interactiveCanvas/outputTts',
+  async ({ text, prompt }: {
+    text: string,
+    prompt: boolean
+  }) => {
+    try {
+      window.interactiveCanvas?.outputTts(text, prompt)
+    } catch (e) {
+      console.error('interactiveCanvas - outputTts - exception', e)
+    }
+  }
+)
+
+
 const initialState: {
   tts: TtsMarkName,
   started: boolean,
   lastTextQueryState: sendTextQueryState,
   continuousMatchMode: boolean,
-  lastGameCommand: Record<string, any> | null
+  lastGameCommand: {
+    payload: Record<string, any> | null,
+    timestamp: number
+  } | null
 } = {
   tts: TtsMarkName.START,
   started: false,
@@ -62,7 +80,7 @@ export const appSlice = createSlice({
       state: Draft<typeof initialState>,
       action: PayloadAction<{ tts: TtsMarkName }>
     ) => {
-      state.tts = action.payload.tts;
+      state.tts = action.payload.tts
     },
     setStarted: (
       state: Draft<typeof initialState>
@@ -79,7 +97,10 @@ export const appSlice = createSlice({
       state: Draft<typeof initialState>,
       action: PayloadAction<Record<string, any>>
     ) => {
-      state.lastGameCommand = action.payload
+      state.lastGameCommand = {
+        timestamp: (new Date().getTime()),
+        payload: action.payload
+      }
     }
   },
   extraReducers: (builder) => {

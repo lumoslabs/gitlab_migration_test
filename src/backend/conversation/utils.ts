@@ -1,6 +1,6 @@
-import { Canvas, ConversationV3 } from "actions-on-google"
-import { ExpectedPhrase } from "actions-on-google/dist/api/schema"
-import appSharedActions from "@store/slices/appSharedActions"
+import { Canvas, ConversationV3 } from 'actions-on-google'
+import { ExpectedPhrase } from 'actions-on-google/dist/api/schema'
+import appSharedActions from '@store/slices/appSharedActions'
 import getConfig from 'next/config'
 
 const { serverRuntimeConfig } = getConfig()
