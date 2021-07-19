@@ -1,9 +1,9 @@
-import '@testing-library/jest-dom';
-import * as Aphrodite from 'aphrodite';
-import * as AphroditeNoImportant from 'aphrodite/no-important';
+import '@testing-library/jest-dom'
+import * as Aphrodite from 'aphrodite'
+import * as AphroditeNoImportant from 'aphrodite/no-important'
 
-Aphrodite.StyleSheetTestUtils.suppressStyleInjection();
-AphroditeNoImportant.StyleSheetTestUtils.suppressStyleInjection();
+Aphrodite.StyleSheetTestUtils.suppressStyleInjection()
+AphroditeNoImportant.StyleSheetTestUtils.suppressStyleInjection()
 
 jest.setTimeout(100000)
 

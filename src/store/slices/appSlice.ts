@@ -80,7 +80,7 @@ export const appSlice = createSlice({
       state: Draft<typeof initialState>,
       action: PayloadAction<{ tts: TtsMarkName }>
     ) => {
-      state.tts = action.payload.tts;
+      state.tts = action.payload.tts
     },
     setStarted: (
       state: Draft<typeof initialState>

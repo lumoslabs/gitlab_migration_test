@@ -4,7 +4,7 @@ import LoadingComponent from '@components/ui/LoadingComponent'
 import { useEffect } from 'react'
 import { useAppSelector } from '@store/hooks'
 import { getIsStarted } from '@store/slices/appSlice'
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom'
 
 export function Index(): JSX.Element {
   const isStarted = useAppSelector(getIsStarted)
@@ -71,5 +71,5 @@ const styles = StyleSheet.create({
   iconImage: {
     height: '13.66vh',
     width: '31.25vw'
-  },
+  }
 })

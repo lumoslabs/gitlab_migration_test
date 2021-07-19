@@ -3,7 +3,7 @@ import getConfig from 'next/config'
 import {
   conversation,
   StandardResponse,
-} from "actions-on-google"
+} from 'actions-on-google'
 
 import onStartApp from '@backend/conversation/onStartApp'
 import onOpenGame from '@backend/conversation/onOpenGame'

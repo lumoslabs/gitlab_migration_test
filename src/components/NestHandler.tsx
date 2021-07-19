@@ -6,14 +6,14 @@ import { useHistory } from "react-router-dom"
 import { useEffect } from 'react'
 
 const debugBarStyle = {
-  "background": "white",
-  "position": 'absolute' as Property.Position,
-  "whiteSpace": "pre-wrap" as Property.WhiteSpace,
-  "overflow": "auto",
-  "border": "1px red solid",
-  "zIndex": "100" as Property.ZIndex,
-  "right": "0px",
-  "bottom": "0px",
+  'background': 'white',
+  'position': 'absolute' as Property.Position,
+  'whiteSpace': 'pre-wrap' as Property.WhiteSpace,
+  'overflow': 'auto',
+  'border': '1px red solid',
+  'zIndex': '100' as Property.ZIndex,
+  'right': '0px',
+  'bottom': '0px',
 }
 
 function NestHandler(): JSX.Element {

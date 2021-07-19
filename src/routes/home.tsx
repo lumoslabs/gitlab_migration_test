@@ -6,7 +6,7 @@ import UserBar from '@components/ui/UserBar'
 import UserInfo from '@components/ui/UserInfo'
 import commonStyles from '@styles/commonStyles'
 import { GameConfig } from '@backend/models/config'
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
   const history = useHistory()
@@ -48,6 +48,6 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
 const styles = StyleSheet.create({
   topSpace: {
     height: '100%',
-    marginTop: '10vmin',
+    marginTop: '10vmin'
   }
 })
