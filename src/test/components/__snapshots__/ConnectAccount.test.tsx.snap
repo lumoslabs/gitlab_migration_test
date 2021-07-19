@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flexColumnAlignCenter_1ndpwxc container"
+  >
+    <div
+      class="flexRowAllCenter_1cn94ih row"
+    >
+      <p
+        class="title_wdqd43"
+      >
+        By clicking Connect, Google Assistant will collect your Lumosity audio commands, and their Terms and Privacy Policy will also apply along with Lumosity’s.
+        <br />
+        <br />
+        To remove Google Assistant’s access, please visit Lumosity's Help Center.
+      </p>
+    </div>
+    <div
+      class="flexRowAllCenter_1cn94ih row"
+    >
+      <div
+        class="flexColumnAllCenter_1vexgx1-o_O-buttonDiv_1rece6a col"
+      >
+        <button
+          class="button_ssaaah"
+        >
+          Cancel
+        </button>
+      </div>
+      <div
+        class="flexColumnAllCenter_1vexgx1-o_O-buttonDiv_1rece6a col"
+      >
+        <button
+          class="button_ssaaah"
+        >
+          Connect
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
