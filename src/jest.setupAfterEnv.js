@@ -10,7 +10,7 @@ jest.setTimeout(100000)
 jest.mock('next/config', () => () => ({
   serverRuntimeConfig: {
     google: {
-      client_id: 'google_client_id'
+      clientId: 'google_client_id'
     },
     public_url: 'http://nest.dev',
     dynamodb: {

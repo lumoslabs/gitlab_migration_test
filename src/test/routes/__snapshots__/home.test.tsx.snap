@@ -51,40 +51,7 @@ exports[`Home page matches snapshot 1`] = `
           <div
             class="flexRowAllCenter_1cn94ih-o_O-gridCol_1f8v8h4"
           >
-            <a
-              href="/game/train-of-thought-nest"
-            >
-              <div
-                class="flexRowAllCenter_1cn94ih-o_O-gridCol_1f8v8h4"
-              >
-                <div
-                  class="flexColumnAllCenter_1vexgx1-o_O-card_2cv6tx card"
-                >
-                  <img
-                    alt="Game icon"
-                    class="card-img-top cardImg_1inpevm"
-                    src="https://assets.nest.lumosity.com/frontend_assets/banner/train_of_thought_header.png"
-                  />
-                  <div
-                    class="flexColumn_n8t8ll-o_O-cardBody_ly1891 card-body"
-                  >
-                    <p
-                      class="pageTitle_1a3u8g5-o_O-subTitle_rlrlr4"
-                    >
-                      ATTENTION
-                    </p>
-                    <div
-                      class="title_1wry8v1 card-title h5"
-                    >
-                      Train of Thought
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-            <a
-              href="/game/color-match-nest"
-            >
+            <a>
               <div
                 class="flexRowAllCenter_1cn94ih-o_O-gridCol_1f8v8h4"
               >
@@ -113,13 +80,7 @@ exports[`Home page matches snapshot 1`] = `
                 </div>
               </div>
             </a>
-          </div>
-          <div
-            class="flexRowAllCenter_1cn94ih-o_O-gridCol_1f8v8h4"
-          >
-            <a
-              href="/game/ebb-and-flow-nest"
-            >
+            <a>
               <div
                 class="flexRowAllCenter_1cn94ih-o_O-gridCol_1f8v8h4"
               >
@@ -148,9 +109,11 @@ exports[`Home page matches snapshot 1`] = `
                 </div>
               </div>
             </a>
-            <a
-              href="/game/raindrops-nest"
-            >
+          </div>
+          <div
+            class="flexRowAllCenter_1cn94ih-o_O-gridCol_1f8v8h4"
+          >
+            <a>
               <div
                 class="flexRowAllCenter_1cn94ih-o_O-gridCol_1f8v8h4"
               >
@@ -179,13 +142,40 @@ exports[`Home page matches snapshot 1`] = `
                 </div>
               </div>
             </a>
+            <a>
+              <div
+                class="flexRowAllCenter_1cn94ih-o_O-gridCol_1f8v8h4"
+              >
+                <div
+                  class="flexColumnAllCenter_1vexgx1-o_O-card_2cv6tx card"
+                >
+                  <img
+                    alt="Game icon"
+                    class="card-img-top cardImg_1inpevm"
+                    src="https://assets.nest.lumosity.com/frontend_assets/banner/train_of_thought_header.png"
+                  />
+                  <div
+                    class="flexColumn_n8t8ll-o_O-cardBody_ly1891 card-body"
+                  >
+                    <p
+                      class="pageTitle_1a3u8g5-o_O-subTitle_rlrlr4"
+                    >
+                      ATTENTION
+                    </p>
+                    <div
+                      class="title_1wry8v1 card-title h5"
+                    >
+                      Train of Thought
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
           </div>
           <div
             class="flexRowAllCenter_1cn94ih-o_O-gridCol_1f8v8h4"
           >
-            <a
-              href="/game/word-snatchers-nest"
-            >
+            <a>
               <div
                 class="flexRowAllCenter_1cn94ih-o_O-gridCol_1f8v8h4"
               >

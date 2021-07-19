@@ -20,7 +20,7 @@ export default function withUser<T>(handler: (req: NextApiRequest, res: NextApiR
     const token = req.headers?.authorization?.replace('Bearer ', '')
     const requestUser = token ? await authService.parseToken(token) : null
 
-    if (!requestUser && serverRuntimeConfig?.guest_user) {
+    if (!requestUser && serverRuntimeConfig?.guestUser) {
       (req as NextApiRequestWithUser).user = guestUser
     } else if (!requestUser) {
       throw new ForbiddenError()

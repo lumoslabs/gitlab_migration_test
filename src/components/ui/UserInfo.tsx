@@ -91,7 +91,6 @@ const UserInfo = (props: IUserInfoProps): JSX.Element => {
           buttonText='Logout'
           onClick={logoutCallback}
           id='logout'
-          currentPage='account_info_modal'
         />
       </Modal.Body>
     </Modal>
@@ -109,7 +108,7 @@ const styles = StyleSheet.create({
     boxShadow: `0px 1px 1px 0px rgba(0, 0, 0, 0.11),
       0px 2px 4px 0px rgba(0, 0, 0, 0.13),
       0px 2px 6px 0px rgba(0, 0, 0, 0.1)`
-},
+  },
 
   title: {
     color: base.lumosBlack,
@@ -121,24 +120,24 @@ const styles = StyleSheet.create({
     padding: '0px',
     marginLeft: '3.12vw',
     marginTop: '5.33vh'
-},
+  },
 
   avatarDiv: {
     marginBottom: '3vh'
-},
+  },
 
   avatarImg: {
     width: '15vh',
     height: '15vh',
     borderRadius: '50%'
-},
+  },
 
   labelsText: {
     color: base.lumosBlack,
     fontFamily: 'MuseoSans700',
     fontSize: '3.33vh',
     fontWeight: 700
-},
+  },
 
   valueText: {
     color: base.lumosBlack,
@@ -148,7 +147,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     flex: 1,
     marginRight: '2.34vw'
-},
+  },
 
   email: {
     whiteSpace: 'nowrap',
@@ -160,7 +159,7 @@ const styles = StyleSheet.create({
     height: '10vh',
     width: '15vw',
     borderRadius: '36px'
-}
+  }
 })
 
 export default UserInfo

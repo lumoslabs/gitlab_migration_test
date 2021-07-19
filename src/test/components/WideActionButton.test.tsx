@@ -24,9 +24,7 @@ it('matches snapshot', () => {
       buttonText='WideActionButton'
       onClick={handleClick}
       id='WideActionButton'
-      currentPage={currentPage}
-
-   />, {}
+    />, {}
   )
   expect(asFragment()).toMatchSnapshot()
 })

@@ -3,41 +3,39 @@ import { Card } from 'react-bootstrap'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import commonStyles from '@styles/commonStyles'
 import { base } from '@styles/colors'
-import Link from 'next/link'
 
 export interface IGameCardProps {
   brainArea: string;
   bannerUrl: string;
   title: string;
   slug: string;
+  onClick: (slug: string) => void;
 }
 
 const GameCard = (props: IGameCardProps): JSX.Element => {
-  const { bannerUrl, brainArea, title, slug } = props
+  const { bannerUrl, brainArea, title, slug, onClick } = props
 
   return (
-    <Link href={`/game/${slug}`}>
-      <a>
-        <div className={css([commonStyles.flexRowAllCenter, styles.gridCol])}>
-          <Card className={css([commonStyles.flexColumnAllCenter, styles.card])}
-          >
-            <Card.Img className={css(styles.cardImg)}
-              variant='top'
-              src={bannerUrl}
-              alt='Game icon'
-            />
-            <Card.Body className={css([commonStyles.flexColumn, styles.cardBody])}>
-              <p className={css([commonStyles.pageTitle, styles.subTitle])}>
-                {brainArea}
-              </p>
-              <Card.Title className={css(styles.title)}>
-                {title}
-              </Card.Title>
-            </Card.Body>
-          </Card>
-        </div>
-      </a>
-    </Link>
+    <a onClick={() => { onClick(slug) }}>
+      <div className={css([commonStyles.flexRowAllCenter, styles.gridCol])}>
+        <Card className={css([commonStyles.flexColumnAllCenter, styles.card])}
+        >
+          <Card.Img className={css(styles.cardImg)}
+            variant='top'
+            src={bannerUrl}
+            alt='Game icon'
+          />
+          <Card.Body className={css([commonStyles.flexColumn, styles.cardBody])}>
+            <p className={css([commonStyles.pageTitle, styles.subTitle])}>
+              {brainArea}
+            </p>
+            <Card.Title className={css(styles.title)}>
+              {title}
+            </Card.Title>
+          </Card.Body>
+        </Card>
+      </div>
+    </a>
   )
 }
 

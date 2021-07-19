@@ -12,5 +12,6 @@ export default async (conv: ConversationV3) => {
     conv,
     command: appSharedActions.GO_TO,
     payload: `/game/${gameSlug}`,
+    suppressMic: true,
   })
 }

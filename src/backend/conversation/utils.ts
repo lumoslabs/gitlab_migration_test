@@ -1,4 +1,5 @@
 import { Canvas, ConversationV3 } from 'actions-on-google'
+import { ExpectedPhrase } from 'actions-on-google/dist/api/schema'
 import appSharedActions from '@store/slices/appSharedActions'
 import getConfig from 'next/config'
 
@@ -13,20 +14,30 @@ export function getRandomElement<T>(input: Record<string, T> | T[]): T {
   return input[keys[getRandomInt(keys.length)]]
 }
 
+export const getPublicUrlFromConv = (conv: ConversationV3) => {
+  return serverRuntimeConfig.publicUrl || ('https://' + conv.headers?.host?.toString())
+}
 
-export const sendCommand = async ({ conv, command, payload = undefined, suppressMic = false }: {
+export const sendCommand = async ({ conv, command = undefined, payload = undefined, suppressMic = false, continuousMatchPhrases = undefined }: {
   conv: ConversationV3,
-  command: appSharedActions,
+  command?: appSharedActions,
+  continuousMatchPhrases?: ExpectedPhrase[],
   payload?: any,
   suppressMic?: boolean
 }) => {
   conv.add(new Canvas({
-    url: serverRuntimeConfig.public_url || ('https://' + conv.headers?.host?.toString()),
+    //TODO: check this property in actions-on-google lib
+    //@ts-ignore
     enableFullScreen: true,
+    continuousMatchConfig: continuousMatchPhrases ? {
+      expectedPhrases: continuousMatchPhrases,
+      durationSeconds: 180,
+    } : undefined,
+    url: getPublicUrlFromConv(conv),
     suppressMic,
-    data: [{
+    data: command ? [{
       command,
       payload
-    }]
+    }] : []
   }))
 }
