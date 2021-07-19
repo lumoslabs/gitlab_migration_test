@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from '@store/hooks'
 import { Property } from 'csstype'
 import { useHistory } from "react-router-dom"
 import { useEffect } from 'react'
+import getConfig from 'next/config'
 
 const debugBarStyle = {
   'background': 'white',
@@ -17,12 +18,11 @@ const debugBarStyle = {
 }
 
 function NestHandler(): JSX.Element {
+  const { publicRuntimeConfig } = getConfig()
+
   const isStarted = useAppSelector(getIsStarted)
-
   const router = useHistory()
-
   const debugState = useAppSelector(getAppState)
-
   const dispatch = useAppDispatch()
 
   const onLoad = () => {
@@ -79,9 +79,12 @@ function NestHandler(): JSX.Element {
 
   return (
     <>
-      <div style={debugBarStyle}>
-        {(`${JSON.stringify(debugState, null, 4)}`)}
-      </div>
+      {
+        publicRuntimeConfig.debugBar &&
+        <div style={debugBarStyle}>
+          {(`${JSON.stringify(debugState, null, 4)}`)}
+        </div>
+      }
     </>
   )
 }
