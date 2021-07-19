@@ -16,7 +16,7 @@ import onGameWelcomeMessage from '@backend/conversation/onGameWelcomeMessage'
 const { serverRuntimeConfig } = getConfig()
 
 const conversationApp = conversation({
-  clientId: serverRuntimeConfig.google.client_id,
+  clientId: serverRuntimeConfig.google.clientId,
 })
 
 conversationApp.handle('StartApp', onStartApp)

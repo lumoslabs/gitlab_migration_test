@@ -30,7 +30,7 @@ export const sendCommand = async ({ conv, command = undefined, payload = undefin
       expectedPhrases: continuousMatchPhrases,
       durationSeconds: 180,
     } : undefined,
-    url: serverRuntimeConfig.public_url || ('https://' + conv.headers?.host?.toString()),
+    url: serverRuntimeConfig.publicUrl || ('https://' + conv.headers?.host?.toString()),
     suppressMic,
     data: command ? [{
       command,

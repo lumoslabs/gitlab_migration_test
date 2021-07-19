@@ -177,7 +177,7 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
           />
         </Card.Body>
       </Card>
-      {publicRuntimeConfig.game_skip && (
+      {publicRuntimeConfig.gameSkip && (
         <div className={css([commonStyles.flexRowAllCenter, styles.skipGameDiv])}>
           <Button buttonStyles={styles.skipGameButton}
             onClick={() => { window.sendToJavaScript('game:complete', { score: 0 }) }}

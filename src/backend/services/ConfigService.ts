@@ -14,7 +14,7 @@ export default class CatalogService {
   }
 
   async getCatalogGames() {
-    const catalog: CatalogConfig = await this.getRow(serverRuntimeConfig?.misc?.config_catalog_id || 1, ConfigTypes.CATALOG)
+    const catalog: CatalogConfig = await this.getRow(serverRuntimeConfig?.misc?.configCatalogId || 1, ConfigTypes.CATALOG)
     //n+1, copy paste from prev version, should be handled by cache decorator
     const games = ((await Promise.all(catalog?.values?.games?.map((game) => {
       return this.getCatalogGameBySlug(game.slug)

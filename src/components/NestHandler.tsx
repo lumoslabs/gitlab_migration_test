@@ -40,9 +40,7 @@ function NestHandler(): JSX.Element {
         })
       },
       onTtsMark(tts: TtsMarkName) {
-        console.log('onTtsMark', tts)
         if (!isStarted) {
-          //hack for case when device already sent StartApp request
           dispatch(actions.setStarted())
         }
         dispatch(actions.setTts({ tts }))
@@ -72,7 +70,11 @@ function NestHandler(): JSX.Element {
   }
 
   useEffect(() => {
-    onLoad()
+    if (window.interactiveCanvas) {
+      onLoad()
+    } else {
+      console.error('Interactive Canvas doesn\'t exists')
+    }
   }, [])
 
   return (
