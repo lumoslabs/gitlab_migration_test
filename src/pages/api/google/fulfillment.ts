@@ -7,6 +7,7 @@ import {
 
 import onStartApp from '@backend/conversation/onStartApp'
 import onOpenGame from '@backend/conversation/onOpenGame'
+import onPlayScore from '@backend/conversation/onPlayScore'
 import logger from '@backend/libs/logger'
 import onHome from '@backend/conversation/onHome'
 import onStartGame from '@backend/conversation/onStartGame'
@@ -34,6 +35,9 @@ conversationApp.handle('StartGame', onStartGame)
 conversationApp.handle('RestartCMM', onStartGame)
 conversationApp.handle('ResumeGame', onStartGame)
 conversationApp.handle('RestartGame', onStartGame)
+
+// TODO: implement this
+conversationApp.handle('PlayScore', onPlayScore)
 
 //GoogleAccountLink
 //GoogleAccountLinkRejected
