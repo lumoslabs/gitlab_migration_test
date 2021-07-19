@@ -1,3 +1,6 @@
 import pino from 'pino'
 
-export default pino()
+export default pino({
+  prettyPrint: true,
+  level: 'debug'
+})

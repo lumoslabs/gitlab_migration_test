@@ -1,5 +1,5 @@
-import 'setimmediate';
-import "jest-dynalite/withDb";
+import 'setimmediate'
+import 'jest-dynalite/withDb'
 import GameService from '@backend/services/GameService'
 import GameRunModel, { GameEvents, GameRunState, table } from '@backend/models/gameRun'
 

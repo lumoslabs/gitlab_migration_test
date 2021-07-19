@@ -24,7 +24,6 @@ export interface IGameScoreCardProps {
   topScoresData: ITopScoreData[];
   actionButtonText: string;
   actionButtonHandler(e: React.MouseEvent<any>): any;
-  currentPage: string;
   statLabel: string;
   stat: number;
 }
@@ -136,7 +135,6 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
           buttonText={props.actionButtonText}
           onClick={props.actionButtonHandler}
           id='game_next'
-          currentPage={props.currentPage}
         />
       </div>
     </div>

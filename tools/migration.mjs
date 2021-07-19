@@ -18,13 +18,13 @@ const dynamodbPrefix = env.parsed?.DYNAMODB_PREFIX || 'dev_'
 const dynamodb = new AWS.DynamoDB({
   region: process.env.DYNAMODB_REGION || 'local',
   endpoint: 'http://localhost:' + dynamodbPort,
-});
+})
 
 const documentClient = new AWS.DynamoDB.DocumentClient({
   region: process.env.DYNAMODB_REGION || 'local',
   endpoint: 'http://localhost:' + dynamodbPort,
   service: dynamodb
-});
+})
 
 const files = fs.readdirSync(path.join(process.cwd(), './tools/tables'))
 const tables = (await dynamodb.listTables().promise()).TableNames

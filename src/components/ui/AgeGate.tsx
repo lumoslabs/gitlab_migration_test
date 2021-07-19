@@ -8,9 +8,10 @@ import Button from '@components/ui/Button'
 
 export interface IAgeGateProps {
   onSubmit(isUnderage: boolean): any;
+  max?: Date,
 }
 
-const AgeGate = (({ onSubmit }: IAgeGateProps): JSX.Element => {
+const AgeGate = (({ onSubmit, max = (new Date(Date.now() - 86400000)) }: IAgeGateProps): JSX.Element => {
 
   // default date
   const [date, setDate] = useState(new Date('1985-01-02'))
@@ -75,7 +76,7 @@ const AgeGate = (({ onSubmit }: IAgeGateProps): JSX.Element => {
           onChange={(date) => { setDate(new Date(date)) }}
           isOpen={true}
           isPopup={false}
-          max={new Date(Date.now() - 86400000)}
+          max={max}
           min={new Date('1900-01-02')}
         />
       </Row>

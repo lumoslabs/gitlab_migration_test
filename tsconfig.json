@@ -28,6 +28,9 @@
       "@pages/*": [
         "src/pages/*"
       ],
+      "@routes/*": [
+        "src/routes/*"
+      ],
       "@backend/*": [
         "src/backend/*"
       ],
@@ -36,6 +39,12 @@
       ],
       "@assets/*": [
         "public/assets/*"
+      ],
+      "@test/*": [
+        "src/test/*"
+      ],
+      "@api/*": [
+        "src/api/*"
       ]
     }
   },
