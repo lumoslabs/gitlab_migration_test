@@ -70,16 +70,20 @@ export default class GameService {
     const createEqualsConditionExpression = (column: string, value) : ConditionExpression => {
       return createConditionExpression(equals, column, value)
     }
+
     const equalsUserIdCondition: ConditionExpression = createEqualsConditionExpression('user_id', userId)
     const equalsGameSlugCondition: ConditionExpression = createEqualsConditionExpression('game_url_slug', gameSlug)
-    // const equalsGameStateCondition: ConditionExpression = createEqualsConditionExpression('game_state', GameState.ENDED_GAME)
+    const equalsGameStateCondition: ConditionExpression = createEqualsConditionExpression('game_state', GameRunState.ENDED)
     const scoreCondition = createGreaterThanOrEqualToConditionExpression('score', 0)
 
     const queryAndCondition: AndExpression = createAndExpression([
       equalsUserIdCondition,
       scoreCondition,
     ])
-    const filterAndCondition: AndExpression = createAndExpression([equalsGameSlugCondition])
+    const filterAndCondition: AndExpression = createAndExpression([
+      equalsGameSlugCondition,
+      equalsGameStateCondition,
+    ])
 
     const queryOptions: QueryOptions = {
       limit,
@@ -89,21 +93,7 @@ export default class GameService {
       projection: ['score', 'game_url_slug', 'game_version', 'created_at', 'updated_at', 'user_id']
     }
 
-    await GameRunModel.get(
-
-    // async function query(tableModel, condition, extras = {}) {
-    //   const foundItems = [];
-    //   // logger.info(`QUERY: ${JSON.stringify(condition)}, ${JSON.stringify(extras)}`);
-    //   for await (const item of getMapper().query(tableModel, condition, extras)) {
-    //     logger.info(`query: ${JSON.stringify(item)}`);
-    //     foundItems.push(item);
-    //   }
-    //   return foundItems;
-    // }
-    
-
-    // return query(GameRunModel, queryAndCondition, queryOptions)
-    return GameRunModel, queryAndCondition, queryOptions
+    await GameRunModel.query('GameRun', queryAndCondition, queryOptions)
   }
 
 }
