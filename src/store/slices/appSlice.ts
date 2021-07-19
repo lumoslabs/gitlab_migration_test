@@ -59,7 +59,10 @@ const initialState: {
   started: boolean,
   lastTextQueryState: sendTextQueryState,
   continuousMatchMode: boolean,
-  lastGameCommand: Record<string, any> | null
+  lastGameCommand: {
+    payload: Record<string, any> | null,
+    timestamp: number
+  } | null
 } = {
   tts: TtsMarkName.START,
   started: false,
@@ -94,7 +97,10 @@ export const appSlice = createSlice({
       state: Draft<typeof initialState>,
       action: PayloadAction<Record<string, any>>
     ) => {
-      state.lastGameCommand = action.payload
+      state.lastGameCommand = {
+        timestamp: (new Date().getTime()),
+        payload: action.payload
+      }
     }
   },
   extraReducers: (builder) => {

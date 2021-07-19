@@ -68,8 +68,8 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
 
   //Send parsed phrase to cocos
   useEffect(() => {
-    if (lastGameCommand && window.sendEventToCocos) {
-      window.sendEventToCocos(clonedeep(lastGameCommand))
+    if (lastGameCommand && lastGameCommand.payload && window.sendEventToCocos) {
+      window.sendEventToCocos(clonedeep(lastGameCommand.payload))
     }
   }, [lastGameCommand])
 
