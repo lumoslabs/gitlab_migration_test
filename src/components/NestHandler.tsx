@@ -1,14 +1,9 @@
-import Script from 'next/script'
-import getConfig from 'next/config'
-
 import { TtsMarkName, actions, getAppState, getIsStarted } from '@store/slices/appSlice'
 import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions'
-
 import { useAppSelector, useAppDispatch } from '@store/hooks'
-
 import { Property } from 'csstype'
-
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom"
+import { useEffect } from 'react'
 
 const debugBarStyle = {
   'background': 'white',
@@ -22,7 +17,6 @@ const debugBarStyle = {
 }
 
 function NestHandler(): JSX.Element {
-  const { publicRuntimeConfig } = getConfig()
   const isStarted = useAppSelector(getIsStarted)
 
   const router = useHistory()
@@ -46,6 +40,7 @@ function NestHandler(): JSX.Element {
         })
       },
       onTtsMark(tts: TtsMarkName) {
+        console.log('onTtsMark', tts)
         if (!isStarted) {
           //hack for case when device already sent StartApp request
           dispatch(actions.setStarted())
@@ -72,17 +67,19 @@ function NestHandler(): JSX.Element {
       onPhraseMatched(data) {
         dispatch(actions.setGameCommand(data))
       },
-
     }
     window.interactiveCanvas.ready(callbacks)
   }
+
+  useEffect(() => {
+    onLoad()
+  }, [])
 
   return (
     <>
       <div style={debugBarStyle}>
         {(`${JSON.stringify(debugState, null, 4)}`)}
       </div>
-      <Script src={publicRuntimeConfig.interactiveCanvasLibUrl} onLoad={onLoad} />
     </>
   )
 }

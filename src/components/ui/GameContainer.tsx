@@ -11,6 +11,7 @@ import GameProgressBar from '@components/ui/GameProgressBar'
 import Button from '@components/ui/Button'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getLastGameCommand, sendTextQuery, outputTts, exitContinuousMatchMode } from '@store/slices/appSlice'
+import clonedeep from 'lodash.clonedeep'
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -71,10 +72,8 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
 
   //Send parsed phrase to cocos
   useEffect(() => {
-    console.log('lastGameCommand: ' + JSON.stringify(Object.assign({}, lastGameCommand)))
-    if (lastGameCommand && window.sendEventToCocos) {
-      // game needs to be able to modify object
-      window.sendEventToCocos(JSON.parse(JSON.stringify(lastGameCommand)))
+    if (lastGameCommand && lastGameCommand.payload && window.sendEventToCocos) {
+      window.sendEventToCocos(clonedeep(lastGameCommand.payload))
     }
   }, [lastGameCommand])
 
