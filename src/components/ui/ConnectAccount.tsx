@@ -17,8 +17,7 @@ const ConnectAccount = (props: IConnectAccountProps): JSX.Element => {
     <Container className={css(commonStyles.flexColumnAlignCenter)}>
       <Row className={css(commonStyles.flexRowAllCenter)}>
         <p className={css(styles.title)}>
-          By clicking Connect, Google Assistant will collect your Lumosity audio commands,
-          and their Terms and Privacy Policy will also apply along with Lumosity’s.
+          {"By clicking Connect, Google Assistant will collect your Lumosity audio commands, and their Terms and Privacy Policy will also apply along with Lumosity’s."}
           <br />
           <br />
           {"To remove Google Assistant’s access, please visit Lumosity's Help Center."}
