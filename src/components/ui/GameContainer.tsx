@@ -11,6 +11,7 @@ import GameProgressBar from '@components/ui/GameProgressBar'
 import Button from '@components/ui/Button'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getLastGameCommand, sendTextQuery, outputTts, exitContinuousMatchMode } from '@store/slices/appSlice'
+import clonedeep from 'lodash.clonedeep'
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -68,7 +69,7 @@ const GameContainer = ({ game, onComplete }: IGameContainerProps): JSX.Element =
   //Send parsed phrase to cocos
   useEffect(() => {
     if (lastGameCommand && window.sendEventToCocos) {
-      window.sendEventToCocos(Object.assign({}, lastGameCommand))
+      window.sendEventToCocos(clonedeep(lastGameCommand))
     }
   }, [lastGameCommand])
 
