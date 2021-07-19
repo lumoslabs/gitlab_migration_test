@@ -16,7 +16,6 @@ import NestHandler from '@components/NestHandler'
 import ConfigService from "@backend/services/ConfigService"
 
 export function Index({ games }: { games: GameConfig[] }): JSX.Element {
-  console.log('games', games)
   const gameRoutes = games.map((game) => {
     return <Route exact path={`/game/${game.id}`} key={game.id}>
       <GamePage game={game} />
