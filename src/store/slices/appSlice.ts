@@ -57,6 +57,7 @@ export const outputTts = createAsyncThunk(
 const initialState: {
   tts: TtsMarkName,
   started: boolean,
+  baseUrl: string,
   lastTextQueryState: sendTextQueryState,
   continuousMatchMode: boolean,
   lastGameCommand: {
@@ -66,6 +67,7 @@ const initialState: {
 } = {
   tts: TtsMarkName.START,
   started: false,
+  baseUrl: '',
   lastTextQueryState: sendTextQueryState.UNKNOWN,
   continuousMatchMode: false,
   lastGameCommand: null
@@ -83,9 +85,13 @@ export const appSlice = createSlice({
       state.tts = action.payload.tts
     },
     setStarted: (
-      state: Draft<typeof initialState>
+      state: Draft<typeof initialState>,
+      action: PayloadAction<{ baseUrl: string }>
     ) => {
       state.started = true
+      if (action?.payload?.baseUrl) {
+        state.baseUrl = action?.payload?.baseUrl
+      }
     },
     setContinuousMatchMode: (
       state: Draft<typeof initialState>,
@@ -119,6 +125,7 @@ export const appSlice = createSlice({
 export const getAppState = (state) => state.app
 export const getTts = (state) => state.app.tts
 export const getIsStarted = (state) => state.app.started
+export const getBaseUrl = (state) => state.app.baseUrl
 export const getSendTextQueryState = (state) => state.app.lastTextQueryState
 export const getContinuousMatchMode = (state) => state.app.continuousMatchMode
 export const getLastGameCommand = (state) => state.app.lastGameCommand

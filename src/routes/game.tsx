@@ -1,15 +1,31 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { GameConfig } from '@backend/models/config'
 import GameContainer from '@components/ui/GameContainer'
 import GameScoreCard from '@components/ui/GameScoreCard'
-import { useHistory } from 'react-router-dom'
+import gameRunCreate from '@api/gameRunCreate'
+import gameRunUpdate from '@api/gameRunUpdate'
 
 export default function Game({ game }: { game: GameConfig }): JSX.Element {
+  const history = useHistory()
   const [result, setResult] = useState(null)
+  const [gameRunId, setGameRunId] = useState('')
   const onComplete = (data: any) => {
     setResult(data)
   }
-  const history = useHistory()
+
+  const onEvent = (eventName: string, eventData: any) => {
+    if (gameRunId) {
+      gameRunUpdate(gameRunId, eventName, eventData)
+    }
+  }
+
+  useEffect(() => {
+    gameRunCreate(game.id).then((gameRunId) => {
+      setGameRunId(gameRunId)
+    })
+  }, [])
+
   // TODO: make this bring you to next game during a workout
   const actionButtonHandler = () => { history.push('/home') }
 
@@ -37,6 +53,7 @@ export default function Game({ game }: { game: GameConfig }): JSX.Element {
         <GameContainer
           game={game}
           onComplete={onComplete}
+          onEvent={onEvent}
         />
       )}
       {result && (

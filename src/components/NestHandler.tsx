@@ -1,4 +1,4 @@
-import { TtsMarkName, actions, getAppState, getIsStarted } from '@store/slices/appSlice'
+import { TtsMarkName, actions, getAppState } from '@store/slices/appSlice'
 import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions'
 import { useAppSelector, useAppDispatch } from '@store/hooks'
 import { Property } from 'csstype'
@@ -20,7 +20,6 @@ const debugBarStyle = {
 function NestHandler(): JSX.Element {
   const { publicRuntimeConfig } = getConfig()
 
-  const isStarted = useAppSelector(getIsStarted)
   const router = useHistory()
   const debugState = useAppSelector(getAppState)
   const dispatch = useAppDispatch()
@@ -28,11 +27,10 @@ function NestHandler(): JSX.Element {
   const onLoad = () => {
     const callbacks = {
       onUpdate(data: unknown[]) {
-        console.log('NestHandler onUpdate', data)
         data.forEach((row) => {
           const action = asSharedAction(row)
           if (action && actions[action.command]) {
-            dispatch(actions[action.command]())
+            dispatch(actions[action.command](action.payload))
           }
           if (action.command == appSharedActions.GO_TO) {
             router.push(action.payload)
@@ -40,9 +38,6 @@ function NestHandler(): JSX.Element {
         })
       },
       onTtsMark(tts: TtsMarkName) {
-        if (!isStarted) {
-          dispatch(actions.setStarted())
-        }
         dispatch(actions.setTts({ tts }))
         dispatch(actions.setGameCommand({ action: 'tts_' + tts.toLowerCase() }))
       },

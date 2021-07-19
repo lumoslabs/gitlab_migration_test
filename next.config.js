@@ -44,6 +44,7 @@ module.exports = () => {
       // Will be available on both server and client
       gameSkip: true,
       debugBar: true,
+      withoutInteractiveCanvas: true,
       interactiveCanvasLibUrl: 'https://www.gstatic.com/assistant/interactivecanvas/api/interactive_canvas_eap.min.js',
       rollbar: {
         clientToken: null, //'d858493f24794689b215a6b72b4324eb',
