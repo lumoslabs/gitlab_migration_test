@@ -1,3 +1,4 @@
+import ConnectAccount from '@components/ui/ConnectAccount'
 import AgeGate from '@components/ui/AgeGate'
 import LoadingComponent from '@components/ui/LoadingComponent'
 import GameProgressBar from '@components/ui/GameProgressBar'
@@ -28,7 +29,8 @@ export default function Test(): JSX.Element {
 
   return (
     <main>
-      <AgeGate onSubmit={handleAgeGateClick} />
+      <ConnectAccount handleCancel={handleClick} handleConnect={handleClick} />
+      {/* <AgeGate onSubmit={handleAgeGateClick} /> */}
       {/* <UserInfo
         show={true}
         handleClose={handleClick}
