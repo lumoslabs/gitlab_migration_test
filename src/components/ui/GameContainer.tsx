@@ -120,6 +120,9 @@ const GameContainer = ({ game, onComplete, onEvent }: IGameContainerProps): JSX.
         //@ts-ignore
         dispatch(exitContinuousMatchMode())
         onComplete(eventData as IGameCompletedData)
+        //TODO: fix redux-toolkit thunk types
+        //@ts-ignore
+        dispatch(sendTextQuery({ query: 'Invoke Score Screen Score TTS', state: { 'score': eventData.score} }))
         break
       case 'game:nest_cmm_restart':
         //TODO: fix redux-toolkit thunk types
