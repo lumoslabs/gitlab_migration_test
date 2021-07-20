@@ -20,7 +20,6 @@ export interface IGameScoreCardProps {
   showTrophy: boolean;
   trainingIcon?: string;
   currentScore: number;
-  topScoreTodaysScoreIndex: number;
   topScoresData: ITopScoreData[];
   actionButtonText: string;
   actionButtonHandler(e: React.MouseEvent<any>): any;
@@ -90,7 +89,7 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
                     {props.topScoresData.map((topScoreData, i) => {
                       return (
                         <Row key={'row' + i} className={css(styles.topScoreRow)}>
-                          {props.showTrophy && props.topScoreTodaysScoreIndex == i && (
+                          {topScoreData.score === props.currentScore && (
                             <>
                               <img
                                 src='/assets/trophy.svg'
@@ -134,7 +133,6 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
           extendStyles={styles.nextButton}
           buttonText={props.actionButtonText}
           onClick={props.actionButtonHandler}
-          id='game_next'
         />
       </div>
     </div>

@@ -1,8 +1,5 @@
-import GameRunModel, { GameEventData, GameEvents, GameRun, GameRunState } from '@backend/models/gameRun'
+import GameRunModel, { GameEventData, GameEvents, GameRun, GameRunState, table } from '@backend/models/gameRun'
 import { v4 as uuidv4 } from 'uuid'
-import { ConditionExpression,  AndExpression, equals, greaterThanOrEqualTo } from '@aws/dynamodb-expressions'
-import { QueryOptions } from '@aws/dynamodb-data-mapper'
-import { User } from '@backend/models/user'
 
 export default class GameService {
 
@@ -47,53 +44,23 @@ export default class GameService {
     return id
   }
 
-  async getUserTopScoresForGameSlug(gameSlug: string, userId: string, limit = 5): Promise<string> {
-
-    const createConditionExpression = (conditionFunction, column: string, value) : ConditionExpression => {
-      return {
-        ...conditionFunction(value),
-        subject: column,
-      }
-    }
-
-    const createAndExpression = (conditions) : AndExpression => {
-      return {
-        type: 'And',
-        conditions,
-      }
-    }
-
-    const createGreaterThanOrEqualToConditionExpression = (column: string, value) : ConditionExpression => {
-      return createConditionExpression(greaterThanOrEqualTo, column, value)
-    }
-
-    const createEqualsConditionExpression = (column: string, value) : ConditionExpression => {
-      return createConditionExpression(equals, column, value)
-    }
-
-    const equalsUserIdCondition: ConditionExpression = createEqualsConditionExpression('user_id', userId)
-    const equalsGameSlugCondition: ConditionExpression = createEqualsConditionExpression('game_url_slug', gameSlug)
-    const equalsGameStateCondition: ConditionExpression = createEqualsConditionExpression('game_state', GameRunState.ENDED)
-    const scoreCondition = createGreaterThanOrEqualToConditionExpression('score', 0)
-
-    const queryAndCondition: AndExpression = createAndExpression([
-      equalsUserIdCondition,
-      scoreCondition,
-    ])
-    const filterAndCondition: AndExpression = createAndExpression([
-      equalsGameSlugCondition,
-      equalsGameStateCondition,
-    ])
-
-    const queryOptions: QueryOptions = {
-      limit,
-      indexName: 'GameRunUserScoreIndex',
-      scanIndexForward: false,
-      filter: filterAndCondition,
-      projection: ['score', 'game_url_slug', 'game_version', 'created_at', 'updated_at', 'user_id']
-    }
-
-    await GameRunModel.query('GameRun', queryAndCondition, queryOptions)
+  async getUserTopScoresForGameSlug(gameSlug: string, userId: string, limit = 5): Promise<Array<{ score: number, updated_at: string }>> {
+    const result = await table.query(userId, {
+      index: 'GameRunUserScoreIndex',
+      attributes: ['score', 'updated_at'],
+      limit: limit * 10,
+      gte: 0,
+      filters: [
+        {
+          attr: 'game_slug', eq: gameSlug
+        },
+        {
+          attr: 'game_state', eq: 'ENDED'
+        }
+      ],
+    }, {
+      ScanIndexForward: false,
+    })
+    return result?.Items?.slice(0, 5) || []
   }
-
 }
