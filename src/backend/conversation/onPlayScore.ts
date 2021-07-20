@@ -4,6 +4,7 @@ import { sendCommand } from '@backend/conversation/utils'
 export default async (conv: ConversationV3) => {
   const score = conv.context?.canvas?.state?.score
 
+  // TODO: implement different messages based off workout or freeplay, number of plays
   // Workout first play with more games to play
   const workoutIncompleteFirstPlayText = `You scored ${score} points. Great first play! Are you ready for the next game?`
 
@@ -42,7 +43,7 @@ export default async (conv: ConversationV3) => {
   conv.add(singlePlayFirstPlayText)
 
   sendCommand({
-    suppressMic: true,
+    suppressMic: false,
     conv,
   })
 }

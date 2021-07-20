@@ -36,7 +36,7 @@ conversationApp.handle('RestartCMM', onStartGame)
 conversationApp.handle('ResumeGame', onStartGame)
 conversationApp.handle('RestartGame', onStartGame)
 
-// TODO: implement this
+// Game score screen
 conversationApp.handle('PlayScore', onPlayScore)
 
 //GoogleAccountLink
