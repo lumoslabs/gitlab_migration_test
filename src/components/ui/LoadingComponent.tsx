@@ -4,12 +4,6 @@ import base from '@styles/colors/base'
 import commonStyles from '@styles/commonStyles'
 
 const baseStyles = StyleSheet.create({
-  loadingAnimdiv: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh'
-  },
   loadingTitle: {
     color: base.lumosBlack,
     fontFamily: 'MuseoSans500',

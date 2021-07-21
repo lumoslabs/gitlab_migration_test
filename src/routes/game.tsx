@@ -66,7 +66,6 @@ export default function Game({ game }: { game: GameConfig }): JSX.Element {
     }
   }, [eventSyncLoading, result])
 
-
   // TODO: make this bring you to next game during a workout
   const actionButtonHandler = () => { history.push('/home') }
 
