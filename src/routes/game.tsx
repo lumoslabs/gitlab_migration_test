@@ -6,7 +6,7 @@ import GameScoreCard from '@components/ui/GameScoreCard'
 import LoadingComponent from '@components/ui/LoadingComponent'
 import gameRunCreate from '@api/gameRunCreate'
 import gameRunUpdate from '@api/gameRunUpdate'
-import gameGetHighScore from '@api/gameGetHighScore'
+import gameTopScoresForUser from '@api/gameTopScoresForUser'
 
 /*
 Example:
@@ -50,9 +50,9 @@ export default function Game({ game }: { game: GameConfig }): JSX.Element {
   // Retrieve Top 5 scores
   useEffect(() => {
     if (!eventSyncLoading && result) {
-      gameGetHighScore(game.id).then((topScores) => {
+      gameTopScoresForUser(game.id).then((topScores) => {
         setScores(topScores)
-          // Determine if current score is a Top 5 score and which score to highlight
+        // Determine if current score is a Top 5 score and which score to highlight
         topScores.forEach((topScore, i) => {
           if (dayjs(topScore.updated_at).isToday() && topScore.score === currentScore) {
             todayIndex = i

@@ -95,6 +95,20 @@ describe('GameService', () => {
     const game_version = 'nest-1'
     const excepted = []
     const fakeDate = 'date'
+
+    //first, big score
+
+    const id = await service.createGameRun({
+      game_version,
+      game_slug,
+      user_id: user
+    })
+    await service.updateGameRun(id, GameEvents.COMPLETED, { score: 1000 })
+    excepted.unshift({
+      score: 1000,
+      updated_at: fakeDate
+    })
+
     // generate data 
     for (let score = 10; score < 20; score++) {
       const id = await service.createGameRun({
@@ -133,7 +147,7 @@ describe('GameService', () => {
       return score
     })
 
-    expect(scoresWithoutDate).toEqual(excepted.slice(0, 5))
+    expect(scoresWithoutDate).toEqual(excepted.sort((a, b) => { return b.score - a.score }).slice(0, 5))
   })
 
 })
