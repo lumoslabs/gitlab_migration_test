@@ -1,9 +1,10 @@
-import ConfigService from '@backend/services/ConfigService'
-
+import GameService from '@backend/services/GameService'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  const service = (new ConfigService)
-  const result = await service.getGameContinuousMatchPhrases('color-match-nest')
-  res.send(result)
+  const game = new GameService()
+  const result = await game.getUserTopScoresForGameSlug('color-match-nest', 'guest')
+  res.send({
+    result
+  })
 }

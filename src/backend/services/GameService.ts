@@ -1,4 +1,4 @@
-import GameRunModel, { GameEventData, GameEvents, GameRun, GameRunState } from '@backend/models/gameRun'
+import GameRunModel, { GameEventData, GameEvents, GameRun, GameRunState, table } from '@backend/models/gameRun'
 import { v4 as uuidv4 } from 'uuid'
 
 export default class GameService {
@@ -22,7 +22,7 @@ export default class GameService {
     return id
   }
 
-  async updateGameRun(id: string, eventName: GameEvents, eventData?: GameEventData) {
+  async updateGameRun(id: string, eventName: GameEvents, eventData?: GameEventData): Promise<string> {
     if (eventName === GameEvents.LOADED) {
       await GameRunModel.update({
         id: id,
@@ -44,4 +44,23 @@ export default class GameService {
     return id
   }
 
+  async getUserTopScoresForGameSlug(gameSlug: string, userId: string, limit = 5): Promise<Array<{ score: number, updated_at: string }>> {
+    const result = await table.query(userId, {
+      index: 'GameRunUserScoreIndex',
+      attributes: ['score', 'updated_at'],
+      limit: limit * 10,
+      gte: 0,
+      filters: [
+        {
+          attr: 'game_slug', eq: gameSlug
+        },
+        {
+          attr: 'game_state', eq: 'ENDED'
+        }
+      ],
+    }, {
+      ScanIndexForward: false,
+    })
+    return result?.Items?.slice(0, 5) || []
+  }
 }
