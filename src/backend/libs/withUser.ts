@@ -1,5 +1,4 @@
 import ForbiddenError from '@backend/errors/ForbiddenError'
-import ValidationError from '@backend/errors/ValidationError'
 import AuthService, { TokenPayload } from '@backend/services/AuthService'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import getConfig from 'next/config'

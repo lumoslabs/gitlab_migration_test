@@ -1,7 +1,6 @@
 import axios from './index'
 
-
-export default async function (slug): Promise<Array<{ score: number; updated_at: string; }>> {
+export default async function (slug: string): Promise<Array<{ score: number; updated_at: string; }>> {
   const result = await axios.get('/api/games/scores', {
     params: {
       slug

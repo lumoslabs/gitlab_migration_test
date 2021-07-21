@@ -29,7 +29,7 @@ export default function Test(): JSX.Element {
 
   return (
     <main>
-      <ConnectAccount handleCancel={handleClick} handleConnect={handleClick} />
+      {/* <ConnectAccount handleCancel={handleClick} handleConnect={handleClick} /> */}
       {/* <AgeGate onSubmit={handleAgeGateClick} /> */}
       {/* <UserInfo
         show={true}
@@ -40,7 +40,7 @@ export default function Test(): JSX.Element {
         timezone='Australian Central Western Standard Time'
       /> */}
       {/* <GameProgressBar name='Train of Thought' progressLevel={50} /> */}
-      {/* <LoadingComponent title=''/> */}
+      <LoadingComponent title=''/>
       {/* <GameScoreCard
         title='Color Match'
         description='description'

@@ -56,7 +56,7 @@ export default class GameService {
         },
         {
           attr: 'game_state', eq: 'ENDED'
-        }
+        },
       ],
     }, {
       ScanIndexForward: false,
