@@ -16,8 +16,6 @@
   },
   "dependencies": {
     "@assistant/conversation": "^3.8.0",
-    "@aws/dynamodb-data-mapper": "^0.7.3",
-    "@aws/dynamodb-expressions": "^0.7.3",
     "@reduxjs/toolkit": "^1.6.0",
     "actions-on-google": "https://storage.googleapis.com/studio-eap.appspot.com/assistant-conversation-v3.6.0.tgz",
     "aphrodite": "^2.4.0",

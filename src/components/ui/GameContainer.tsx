@@ -123,6 +123,8 @@ const GameContainer = ({ game, onComplete, onEvent }: IGameContainerProps): JSX.
         //TODO: fix redux-toolkit thunk types
         //@ts-ignore
         dispatch(sendTextQuery({ query: 'Invoke Score Screen Score TTS', state: { 'score': eventData.score} }))
+        // unload game
+        window?.cc?.director?.end()
         break
       case 'game:nest_cmm_restart':
         //TODO: fix redux-toolkit thunk types
@@ -157,6 +159,7 @@ const GameContainer = ({ game, onComplete, onEvent }: IGameContainerProps): JSX.
     case 'game:quit':
       setEndContinuousMatch(true);
       props.abortGame();
+      window?.cc?.director?.end()
       break;
   */
   return (
