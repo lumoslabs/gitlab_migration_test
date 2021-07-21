@@ -115,7 +115,7 @@ describe('GameService', () => {
       user_id: 'fake_user'
     })
     await service.updateGameRun(fakeUserGameRunId, GameEvents.COMPLETED, { score: 1000 })
-    /*
+
     //fake game
     const fakeSlugGameRunId = await service.createGameRun({
       game_version,
@@ -123,7 +123,6 @@ describe('GameService', () => {
       user_id: user
     })
     await service.updateGameRun(fakeSlugGameRunId, GameEvents.COMPLETED, { score: 1000 })
-*/
 
     const scores = await service.getUserTopScoresForGameSlug(game_slug, user, 5)
 
