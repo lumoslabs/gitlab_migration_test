@@ -134,7 +134,6 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
           extendStyles={styles.nextButton}
           buttonText={props.actionButtonText}
           onClick={props.actionButtonHandler}
-          id='game_next'
         />
       </div>
     </div>
@@ -281,7 +280,7 @@ const styles = StyleSheet.create({
 
   trophyBannerImage: {
     height: '4.625vmin',
-    width: '55vmin',
+    width: '60vmin',
     position: 'absolute',
     left: '-5vw',
     top: '-0.5vh',

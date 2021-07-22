@@ -48,7 +48,7 @@ exports[`matches snapshot 1`] = `
             <p
               class="currentScoreText_1jdtvvp"
             >
-              100000
+              600000
             </p>
             <div
               class="flexColumnAlignCenter_1ndpwxc-o_O-currentStatDiv_vsjic1"
@@ -102,7 +102,7 @@ exports[`matches snapshot 1`] = `
                 />
                 <img
                   alt="trophy banner"
-                  class="trophyBannerImage_9sbp0a"
+                  class="trophyBannerImage_gzo3g"
                   src="/assets/trophy_banner.svg"
                 />
                 <div

@@ -10,7 +10,7 @@ export interface IWideActionButtonProps {
   extendStyles: any;
   buttonText: string;
   onClick?(e: React.MouseEvent<any>): any;
-  id: string;
+  id?: string;
 }
 
 const WideActionButton = (props: IWideActionButtonProps): JSX.Element => {

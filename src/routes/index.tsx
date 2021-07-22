@@ -12,8 +12,6 @@ export function Index(): JSX.Element {
   const isStarted = useAppSelector(getIsStarted)
   const history = useHistory()
 
-  //withoutInteractiveCanvas
-  console.log('publicRuntimeConfig.withoutInteractiveCanvas', publicRuntimeConfig.withoutInteractiveCanvas)
   useEffect(() => {
     if (publicRuntimeConfig.withoutInteractiveCanvas) {
       history.push('/home')

@@ -1,23 +1,17 @@
 import type { NextApiResponse } from 'next'
-import CatalogService from '@backend/services/ConfigService'
 import GameService from '@backend/services/GameService'
 import withUser, { NextApiRequestWithUser } from '@backend/libs/withUser'
 import withExceptionHandler from '@backend/libs/withExceptionHandler'
 import ValidationError, { ValidationRules } from '@backend/errors/ValidationError'
 
 /**
- * @curl
- * curl -v -XPOST -H "Content-type: application/json" -d '{"slug":"color-match-nest"}' 'http://localhost:7300/api/games/create'
- */
-
-/**
  * @swagger
- * /api/games/create:
- *   post:
+ * /api/games/scores:
+ *   get:
  *     tags:
  *      - Game run
- *     description: Create new game run
- *     requestBody:
+ *     description: Get high scores data for user
+ *     Q:
  *      content:
  *        application/json:
  *          schema:
@@ -35,31 +29,21 @@ import ValidationError, { ValidationRules } from '@backend/errors/ValidationErro
  *            schema:
  *              type: Object
  *              properties:
- *                id:
- *                  type: string
+ *                score:
+ *                  type: number
  *            example:
- *              id: 'uuid-uuid-uuid'
+ *              id: 'qwerqwer-1234234-234234'
  */
-const handler = (async (req: NextApiRequestWithUser, res: NextApiResponse): Promise<void> => {
-  const catalogService = new CatalogService()
+const handler = async (req: NextApiRequestWithUser, res: NextApiResponse): Promise<void> => {
   const gameService = new GameService()
-  const slug = req.body?.slug
+  const slug = req.query?.slug
 
-  if (!slug) {
+  if ((!slug) || (typeof slug != 'string')) {
     throw new ValidationError('slug', ValidationRules.REQUIRED)
   }
-  const game = await catalogService.getCatalogGameBySlug(slug)
-  if (!game) {
-    throw new ValidationError('slug', ValidationRules.INCORRECT)
-  }
-  const id = await gameService.createGameRun({
-    game_version: game.values?.last_version?.id,
-    game_slug: game.id,
-    user_id: req.user?.id
-  })
-  res.send({
-    id
-  })
-})
+
+  const result = await gameService.getUserTopScoresForGameSlug(slug, req.user?.id)
+  res.send(result)
+}
 
 export default withExceptionHandler(withUser(handler))
