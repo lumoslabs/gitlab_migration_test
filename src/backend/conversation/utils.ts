@@ -23,11 +23,9 @@ export const sendCommand = async ({ conv, command = undefined, payload = undefin
   command?: appSharedActions,
   continuousMatchPhrases?: ExpectedPhrase[],
   payload?: any,
-  suppressMic?: boolean
+  suppressMic?: boolean,
 }) => {
   conv.add(new Canvas({
-    //TODO: check this property in actions-on-google lib
-    //@ts-ignore
     enableFullScreen: true,
     continuousMatchConfig: continuousMatchPhrases ? {
       expectedPhrases: continuousMatchPhrases,
@@ -40,4 +38,13 @@ export const sendCommand = async ({ conv, command = undefined, payload = undefin
       payload
     }] : []
   }))
+}
+
+export const setIsFirstLogin = (conv: ConversationV3) => {
+  conv.session.params.isFirstPlay = true
+}
+
+
+export const getIsFirstLogin = (conv: ConversationV3) => {
+  return conv.session.params.isFirstPlay
 }

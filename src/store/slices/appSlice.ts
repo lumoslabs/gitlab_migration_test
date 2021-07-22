@@ -58,6 +58,7 @@ const initialState: {
   tts: TtsMarkName,
   started: boolean,
   baseUrl: string,
+  authToken?: string,
   lastTextQueryState: sendTextQueryState,
   continuousMatchMode: boolean,
   lastGameCommand: {
@@ -68,6 +69,7 @@ const initialState: {
   tts: TtsMarkName.START,
   started: false,
   baseUrl: '',
+  authToken: null,
   lastTextQueryState: sendTextQueryState.UNKNOWN,
   continuousMatchMode: false,
   lastGameCommand: null
@@ -86,11 +88,14 @@ export const appSlice = createSlice({
     },
     setStarted: (
       state: Draft<typeof initialState>,
-      action: PayloadAction<{ baseUrl: string }>
+      action: PayloadAction<{ baseUrl: string, authToken: string }>
     ) => {
       state.started = true
       if (action?.payload?.baseUrl) {
         state.baseUrl = action?.payload?.baseUrl
+      }
+      if (action?.payload?.authToken) {
+        state.authToken = action?.payload?.authToken
       }
     },
     setContinuousMatchMode: (
@@ -126,6 +131,7 @@ export const getAppState = (state) => state.app
 export const getTts = (state) => state.app.tts
 export const getIsStarted = (state) => state.app.started
 export const getBaseUrl = (state) => state.app.baseUrl
+export const getAuthToken = (state) => state.app.authToken
 export const getSendTextQueryState = (state) => state.app.lastTextQueryState
 export const getContinuousMatchMode = (state) => state.app.continuousMatchMode
 export const getLastGameCommand = (state) => state.app.lastGameCommand
