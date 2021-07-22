@@ -79,86 +79,80 @@ const GameContainer = ({ game, onComplete, onEvent }: IGameContainerProps): JSX.
   }, [lastGameCommand])
 
   useEffect(() => {
+    // Handle game events
+    window.sendToJavaScript = (data: string | [string, IGameEventData], argData: IGameEventData) => {
+      const [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
+      let parsedData = eventData
+      switch (eventName) {
+        case 'game:loadStart':
+          setShowProgress(true)
+          //TODO: fix redux-toolkit thunk types
+          //@ts-ignore
+          dispatch(sendTextQuery({ query: 'Invoke Game Name Welcome Message', state: { 'name': game.values?.title } }))
+          break
+        case 'game:loadProgress':
+          parsedData = Math.floor(Number(eventData) * 100)
+          if (parsedData > progressLevel) {
+            setProgressLevel(parsedData)
+          }
+          break
+        case 'game:loadComplete':
+          onEvent(eventName, eventData)
+          break
+        case 'game:start':
+          onEvent(eventName, eventData)
+          setShowProgress(false)
+          break
+        case 'game:nest_cmm_start':
+          //TODO: fix redux-toolkit thunk types
+          //@ts-ignore
+          dispatch(sendTextQuery({ query: 'Invoke Start Game', state: { 'slug': game.id } }))
+          break
+        case 'game:complete':
+          onEvent(eventName, eventData)
+          //TODO: fix redux-toolkit thunk types
+          //@ts-ignore
+          dispatch(exitContinuousMatchMode())
+          onComplete(eventData as IGameCompletedData)
+          //TODO: fix redux-toolkit thunk types
+          //@ts-ignore
+          dispatch(sendTextQuery({ query: 'Invoke Score Screen Score TTS', state: { 'score': eventData.score } }))
+          break
+        case 'game:nest_cmm_restart':
+          //TODO: fix redux-toolkit thunk types
+          //@ts-ignore
+          dispatch(sendTextQuery({ query: 'Restart Continuous Match Mode', state: { 'slug': game.id } }))
+          break
+        case 'game:speech':
+          parsedData = eventData as IGameSpeechData
+          //@ts-ignore
+          dispatch(outputTts(parsedData))
+          break
+        case 'game:pause':
+          break
+        case 'game:nest_cmm_pause':
+          //TODO: fix redux-toolkit thunk types
+          //@ts-ignore
+          dispatch(exitContinuousMatchMode())
+          break
+        case 'game:quit':
+          //TODO: move to main menu
+          break
+        //case 'game:resume':
+        //case 'game:abort_update':
+        //case 'game:nest_cmm_resume':
+        default:
+          console.log('unhandled game event', eventName, eventData)
+      }
+    }
     return () => {
+      //eslint-disable-next-line @typescript-eslint/no-empty-function
+      window.sendToJavaScript = () => { }
       // Clear cocos3 scope
       window?.cc?.director?.end()
     }
   }, [])
 
-  // Handle game events
-  window.sendToJavaScript = (data: string | [string, IGameEventData], argData: IGameEventData) => {
-    const [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
-    let parsedData = eventData
-    switch (eventName) {
-      case 'game:loadStart':
-        setShowProgress(true)
-        //TODO: fix redux-toolkit thunk types
-        //@ts-ignore
-        dispatch(sendTextQuery({ query: 'Invoke Game Name Welcome Message', state: { 'name': game.values?.title } }))
-        break
-      case 'game:loadProgress':
-        parsedData = Math.floor(Number(eventData) * 100)
-        if (parsedData > progressLevel) {
-          setProgressLevel(parsedData)
-        }
-        break
-      case 'game:loadComplete':
-        onEvent(eventName, eventData)
-        break
-      case 'game:start':
-        onEvent(eventName, eventData)
-        setShowProgress(false)
-        break
-      case 'game:nest_cmm_start':
-        //TODO: fix redux-toolkit thunk types
-        //@ts-ignore
-        dispatch(sendTextQuery({ query: 'Invoke Start Game', state: { 'slug': game.id } }))
-        break
-      case 'game:complete':
-        onEvent(eventName, eventData)
-        //TODO: fix redux-toolkit thunk types
-        //@ts-ignore
-        dispatch(exitContinuousMatchMode())
-        onComplete(eventData as IGameCompletedData)
-        //TODO: fix redux-toolkit thunk types
-        //@ts-ignore
-        dispatch(sendTextQuery({ query: 'Invoke Score Screen Score TTS', state: { 'score': eventData.score} }))
-        break
-      case 'game:nest_cmm_restart':
-        //TODO: fix redux-toolkit thunk types
-        //@ts-ignore
-        dispatch(sendTextQuery({ query: 'Restart Continuous Match Mode', state: { 'slug': game.id } }))
-        break
-      case 'game:speech':
-        parsedData = eventData as IGameSpeechData
-        //@ts-ignore
-        dispatch(outputTts(parsedData))
-        break
-      case 'game:pause':
-        break
-      case 'game:nest_cmm_pause':
-        //TODO: fix redux-toolkit thunk types
-        //@ts-ignore
-        dispatch(exitContinuousMatchMode())
-        break
-      default:
-        console.log('unhandled game event', eventName, eventData)
-    }
-  }
-  /*
-    case 'game:nest_cmm_restart':
-      debugger;
-      setRestartContinuousMatch(true);
-      break;
-    case 'game:resume':
-    case 'game:nest_cmm_resume':
-      setResumeContinuousMatch(true);
-      break;
-    case 'game:quit':
-      setEndContinuousMatch(true);
-      props.abortGame();
-      break;
-  */
   return (
     <div className={css([commonStyles.fullWidth, commonStyles.flexColumnAllCenter])}>
       {error && <Alert variant='danger'>Something went wrong</Alert>}
