@@ -23,7 +23,6 @@ it('matches snapshot', () => {
       extendStyles={styles.nextButton}
       buttonText='WideActionButton'
       onClick={handleClick}
-      id='WideActionButton'
     />, {}
   )
   expect(asFragment()).toMatchSnapshot()

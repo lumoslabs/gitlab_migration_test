@@ -40,7 +40,7 @@ export default function Test(): JSX.Element {
         timezone='Australian Central Western Standard Time'
       /> */}
       {/* <GameProgressBar name='Train of Thought' progressLevel={50} /> */}
-      <LoadingComponent title=''/>
+      {/* <LoadingComponent title=''/> */}
       {/* <GameScoreCard
         title='Color Match'
         description='description'
@@ -57,14 +57,12 @@ export default function Test(): JSX.Element {
         stat={10}
         statLabel='Cards'
       /> */}
-      {/* <Button onClick={handleClick} text='Button' />
+      {/* <Button onClick={handleClick} text='Button' /> */}
       <WideActionButton
         onClick={handleClick}
         buttonText='Wide Action Button'
-        extendStyles={styles.nextButton}
-        id='test'
-        currentPage={window.location.href}
-        /> */}
+        eventData={{'id': 'test'}}
+        />
       <UserBar clickHandler={handleClick} />
     </main>
   )

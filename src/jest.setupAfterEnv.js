@@ -21,6 +21,9 @@ jest.mock('next/config', () => () => ({
     }
   },
   publicRuntimeConfig: {
+    amplitude: {
+      apiKey: 'amplitude_api_key'
+    },
     interactiveCanvasLibUrl: 'https://www.gstatic.com/assistant/interactivecanvas/api/interactive_canvas.min.js',
     rollbar: {
       clientToken: '-',

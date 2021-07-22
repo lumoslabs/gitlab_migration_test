@@ -42,6 +42,9 @@ module.exports = () => {
     },
     publicRuntimeConfig: {
       // Will be available on both server and client
+      amplitude: {
+        apiKey: process.env.AMPLITUDE_API_KEY
+      },
       gameSkip: true,
       debugBar: true,
       withoutInteractiveCanvas: true,

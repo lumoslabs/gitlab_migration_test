@@ -34,7 +34,7 @@ const WorkoutCard = (props: IWorkoutCardProps): JSX.Element => {
             extendStyles={styles.cta}
             buttonText={props.buttonText || 'Start My Workout'}
             onClick={props.clickHandler}
-            id='start_workout'
+            eventData={{id: 'start_workout', message: props.buttonText || 'Start My Workout'}}
           />
         </Card.Body>
       </Card>

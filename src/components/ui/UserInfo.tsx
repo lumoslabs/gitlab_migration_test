@@ -90,7 +90,7 @@ const UserInfo = (props: IUserInfoProps): JSX.Element => {
           extendStyles={styles.cta}
           buttonText='Logout'
           onClick={logoutCallback}
-          id='logout'
+          eventData={{id: 'logout', message: 'Logout' }}
         />
       </Modal.Body>
     </Modal>

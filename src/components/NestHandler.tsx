@@ -8,10 +8,10 @@ import getConfig from 'next/config'
 
 const debugBarStyle = {
   'background': 'white',
+  'opacity': .5,
   'position': 'absolute' as Property.Position,
   'whiteSpace': 'pre-wrap' as Property.WhiteSpace,
   'overflow': 'auto',
-  'border': '1px red solid',
   'zIndex': '100' as Property.ZIndex,
   'right': '0px',
   'bottom': '0px',
