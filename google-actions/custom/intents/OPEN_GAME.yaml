@@ -1,0 +1,27 @@
+parameters:
+- name: game_name
+  type:
+    name: gameName
+trainingPhrases:
+- Choose Random Game
+- Select Random Game
+- Play a random game
+- Play a game
+- Open settings
+- Open misc
+- Open pinball
+- Open ($game_name 'Ebb and Flow' auto=true)
+- Open ($game_name 'Word Snatchers' auto=true)
+- Open ($game_name 'Train of Thought' auto=true)
+- Open ($game_name 'Raindrops' auto=true)
+- Open ($game_name 'Color Match' auto=true)
+- Start ($game_name 'Ebb and Flow' auto=false)
+- Play ($game_name 'Ebb and Flow' auto=false)
+- Start ($game_name 'Train of Thought' auto=false)
+- Play ($game_name 'Train of Thought' auto=false)
+- Start ($game_name 'Word Snatchers' auto=false)
+- Play ($game_name 'Word Snatchers' auto=false)
+- Start ($game_name 'Raindrops' auto=false)
+- Play ($game_name 'Raindrops' auto=false)
+- Start ($game_name 'Color Match' auto=false)
+- Play ($game_name 'Color Match' auto=false)

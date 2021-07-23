@@ -1,0 +1,27 @@
+synonym:
+  acceptUnknownValues: true
+  entities:
+    Color Match:
+      synonyms:
+      - Color Match
+    Ebb and Flow:
+      synonyms:
+      - Ebb and Flow
+      - Ab and Flow
+      - Ed and Flow
+      - Urban Flow
+      - ebenflow
+      - Evan Flow
+    Raindrops:
+      synonyms:
+      - Raindrops
+    Train of Thought:
+      synonyms:
+      - Train of Thought
+      - Rain of Thought
+      - Drain of Thought
+      - Brain of Thought
+    Word Snatchers:
+      synonyms:
+      - Word Snatchers
+  matchType: EXACT_MATCH

@@ -115,4 +115,9 @@ yarn lint
 
 TODO
 
+### Scenes and intents managments
+
+//TODO: describe flow of scenes managment
+
+[gactions cli tool](https://developers.google.com/assistant/actionssdk/gactions?hl=en&authuser=3)
  

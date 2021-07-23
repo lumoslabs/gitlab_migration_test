@@ -1,0 +1,23 @@
+handlers:
+- name: StartApp
+- name: NoMatch
+- name: StartGame
+- name: Home
+- name: OpenGame
+- name: Training
+- name: RestartCMM
+- name: GoogleAccountLink
+- name: GoogleAccountLinkRejected
+- name: FEInvokeTTS
+- name: "Yes"
+- name: "No"
+- name: PlayScore
+- name: StartAccountLinkingMonologue
+- name: Help
+- name: UserLogout
+- name: GameWelcomeMessage
+- name: ResumeGame
+- name: RestartGame
+httpsEndpoint:
+  baseUrl: https://nest-backend.prod.eks.lumoslabs.net/google/fulfillment
+  endpointApiVersion: 2
