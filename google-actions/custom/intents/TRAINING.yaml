@@ -1,0 +1,13 @@
+parameters:
+- name: dateTime1
+  type:
+    name: actions.type.DateTime
+trainingPhrases:
+- Let's train
+- Start workout
+- Do a workout
+- Begin Training
+- Start ($dateTime1 'Today' auto=true)'s Training
+- Start Daily Training
+- Open Training
+- Start Training
