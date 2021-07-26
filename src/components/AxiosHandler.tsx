@@ -10,7 +10,7 @@ function AxiosHandler(): JSX.Element {
     axios.defaults.baseURL = baseUrl
   }, [baseUrl])
   useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
   }, [authToken])
   return <></>
 }

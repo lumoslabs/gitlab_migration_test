@@ -181,3 +181,10 @@ GameEventName -
 //TODO: describe flow of scenes managment
 
 [gactions cli tool](https://developers.google.com/assistant/actionssdk/gactions?hl=en&authuser=3)
+ 
+
+### Known issues 
+
+#### User Storage is always empty
+Just a allow "Web & App Activity" on the [Activity controls](https://myactivity.google.com/u/3/activitycontrols?pli=1) page
+
