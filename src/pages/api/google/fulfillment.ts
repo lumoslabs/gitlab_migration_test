@@ -13,6 +13,7 @@ import onHome from '@backend/conversation/onHome'
 import onStartGame from '@backend/conversation/onStartGame'
 import onNoMatch from '@backend/conversation/onNoMatch'
 import onGameWelcomeMessage from '@backend/conversation/onGameWelcomeMessage'
+import onUserLogout from '@backend/conversation/onUserLogout'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -39,12 +40,16 @@ conversationApp.handle('RestartGame', onStartGame)
 // Game score screen
 conversationApp.handle('PlayScore', onPlayScore)
 
+conversationApp.handle('UserLogout', onUserLogout)
+
 //GoogleAccountLink
 //GoogleAccountLinkRejected
 //StartAccountLinkingMonologue
+
 //Training
+
 //FEInvokeTTS
-//PlayScore
+
 //Yes
 //No
 //Help

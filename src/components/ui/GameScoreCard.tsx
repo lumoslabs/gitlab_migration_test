@@ -5,22 +5,21 @@ import { css, StyleSheet } from 'aphrodite/no-important'
 import commonStyles from '@styles/commonStyles'
 import WideActionButton from '@components/ui/WideActionButton'
 import base from '@styles/colors/base'
+import dayjs from 'dayjs'
 
 const { black, gray7, lumosOrange } = base
 
 export interface ITopScoreData {
   score: number;
-  updated_at: string;
+  date: string;
 }
 
 export interface IGameScoreCardProps {
   title: string;
   gameIcon?: string;
   showTrainingIcon: boolean;
-  showTrophy: boolean;
   trainingIcon?: string;
   currentScore: number;
-  topScoreTodaysScoreIndex: number;
   topScoresData: ITopScoreData[];
   actionButtonText: string;
   actionButtonHandler(e: React.MouseEvent<any>): any;
@@ -29,8 +28,12 @@ export interface IGameScoreCardProps {
 }
 
 const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
-  const dayjs = require('dayjs')
-  const formattedDate = (date: string) => dayjs(date).format('MMM DD, YYYY')
+
+  const trophyIndex = props.topScoresData?.findIndex((score) => {
+    if (score.score === props.currentScore)
+      return true
+    return false
+  })
 
   return (
     <div className={css([commonStyles.flexColumnAlignCenter, commonStyles.fullWidth])}>
@@ -90,7 +93,7 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
                     {props.topScoresData.map((topScoreData, i) => {
                       return (
                         <Row key={'row' + i} className={css(styles.topScoreRow)}>
-                          {props.showTrophy && props.topScoreTodaysScoreIndex == i && (
+                          {trophyIndex === i && (
                             <>
                               <img
                                 src='/assets/trophy.svg'
@@ -116,7 +119,7 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
                           </Col>
                           <Col xs={7} className={css(styles.alignRight)}>
                             <p key={'col_date'} className={css(styles.topScoreDate)}>
-                              {formattedDate(topScoreData.updated_at)}
+                              {dayjs(topScoreData.date).format('MMM DD, YYYY')}
                             </p>
                           </Col>
                         </Row>

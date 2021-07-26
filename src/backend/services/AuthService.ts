@@ -33,7 +33,7 @@ export default class AuthService {
     return new Promise((resolve, reject) => {
       jwt.verify(token, serverRuntimeConfig.jwt.secret, function (err, decoded) {
         if (err) {
-          reject(err)
+          resolve(null)
         } else {
           resolve(decoded)
         }

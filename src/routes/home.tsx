@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useState } from 'react'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import WorkoutCard from '@components/ui/WorkoutCard'
@@ -7,9 +8,12 @@ import UserInfo from '@components/ui/UserInfo'
 import commonStyles from '@styles/commonStyles'
 import { GameConfig } from '@backend/models/config'
 import { useHistory } from 'react-router-dom'
+import { sendTextQuery } from '@store/slices/appSlice'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
   const history = useHistory()
+  const dispatch = useAppDispatch()
 
   const [showAccountModal, setShowAccountModal] = useState(false)
   const handleAccountModalClose = () => setShowAccountModal(false)
@@ -17,7 +21,8 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
 
   const handleLogout = () => {
     setShowAccountModal(false)
-    // TODO: Handle logout
+    //@ts-ignore
+    dispatch(sendTextQuery({ query: 'Invoke User Logout' }))
   }
 
   // TODO launch workout function

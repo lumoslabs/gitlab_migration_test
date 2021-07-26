@@ -44,6 +44,8 @@ export default class GameService {
     return id
   }
 
+
+  //TODO: check it and remove this function with dynamo indexes
   async getUserTopScoresForGameSlug(gameSlug: string, userId: string, limit = 5): Promise<Array<{ score: number, updated_at: string }>> {
     const result = await table.query(userId, {
       index: 'GameRunUserScoreIndex',

@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice, Draft, PayloadAction } from '@reduxjs/toolkit'
 
+//TODO: split slice to redux folder format
+
 export enum TtsMarkName {
   START = 'START',
   END = 'END',
@@ -65,6 +67,7 @@ const initialState: {
     payload: Record<string, any> | null,
     timestamp: number
   } | null
+  scores: Record<string, { score: number, data: string }>
 } = {
   tts: TtsMarkName.START,
   started: false,
@@ -72,7 +75,8 @@ const initialState: {
   authToken: null,
   lastTextQueryState: sendTextQueryState.UNKNOWN,
   continuousMatchMode: false,
-  lastGameCommand: null
+  lastGameCommand: null,
+  scores: {}
 } as const
 
 
@@ -112,6 +116,12 @@ export const appSlice = createSlice({
         timestamp: (new Date().getTime()),
         payload: action.payload
       }
+    },
+    setTopScores: (
+      state: Draft<typeof initialState>,
+      action: PayloadAction<{ slug: string, scores: { score: number, data: string } }>
+    ) => {
+      state.scores[action.payload.slug] = action.payload.scores
     }
   },
   extraReducers: (builder) => {
@@ -135,6 +145,7 @@ export const getAuthToken = (state) => state.app.authToken
 export const getSendTextQueryState = (state) => state.app.lastTextQueryState
 export const getContinuousMatchMode = (state) => state.app.continuousMatchMode
 export const getLastGameCommand = (state) => state.app.lastGameCommand
+export const getTopScores = (state) => state.app.scores
 
 // Reducers and actions
 export const actions = appSlice.actions
