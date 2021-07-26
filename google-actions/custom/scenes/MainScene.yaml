@@ -1,0 +1,53 @@
+intentEvents:
+- handler:
+    webhookHandler: OpenGame
+  intent: OPEN_GAME
+- handler:
+    webhookHandler: StartGame
+  intent: START_GAME
+- handler:
+    webhookHandler: Home
+  intent: HOME
+- handler:
+    webhookHandler: Training
+  intent: TRAINING
+- handler:
+    webhookHandler: RestartCMM
+  intent: RESTART_CMM
+- handler:
+    webhookHandler: FEInvokeTTS
+  intent: FE_INVOKE_TTS
+- intent: LINK_ACCOUNT
+  transitionToScene: AccountLinkingOrigin
+- handler:
+    webhookHandler: "Yes"
+  intent: "YES"
+- handler:
+    webhookHandler: "No"
+  intent: "NO"
+- handler:
+    webhookHandler: PlayScore
+  intent: PLAY_SCORE
+- handler:
+    webhookHandler: StartAccountLinkingMonologue
+  intent: ACCOUNT_LINK_MONOLOGUE
+- handler:
+    webhookHandler: Help
+  intent: HELP
+- handler:
+    webhookHandler: UserLogout
+  intent: LOGOUT
+- handler:
+    webhookHandler: StartApp
+  intent: LOGIN
+- handler:
+    webhookHandler: GameWelcomeMessage
+  intent: GAME_WELCOME_MESSAGE
+- handler:
+    webhookHandler: ResumeGame
+  intent: RESUME_GAME
+- handler:
+    webhookHandler: RestartGame
+  intent: RESTART_GAME
+onEnter:
+  webhookHandler: StartApp

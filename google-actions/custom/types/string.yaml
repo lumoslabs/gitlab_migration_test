@@ -1,0 +1,3 @@
+synonym:
+  acceptUnknownValues: true
+  matchType: EXACT_MATCH

@@ -175,4 +175,9 @@ GameEventName -
       text (string) - text to send through TTS
       prompt (boolean) - true if Assistant should open a voice prompt after TTS is completed
 * game:start - Game has started
- 
+
+### Scenes and intents managments
+
+//TODO: describe flow of scenes managment
+
+[gactions cli tool](https://developers.google.com/assistant/actionssdk/gactions?hl=en&authuser=3)
