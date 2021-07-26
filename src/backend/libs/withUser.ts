@@ -17,7 +17,6 @@ export default function withUser<T>(handler: (req: NextApiRequest, res: NextApiR
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const authService = new AuthService()
     const token = req.headers?.authorization?.replace('Bearer ', '')
-    console.log('token', token)
     const requestUser = token ? await authService.parseToken(token) : null
 
     if (!requestUser && serverRuntimeConfig?.guestUser) {
