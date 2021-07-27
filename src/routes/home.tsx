@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import WorkoutCard from '@components/ui/WorkoutCard'
 import GameSection from '@components/ui/GameSection'
@@ -7,9 +7,16 @@ import UserInfo from '@components/ui/UserInfo'
 import commonStyles from '@styles/commonStyles'
 import { GameConfig } from '@backend/models/config'
 import { useHistory } from 'react-router-dom'
+import useAmplitude from '@hooks/useAmplitude'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
   const history = useHistory()
+  const track = useAmplitude()
+
+  useEffect(() => {
+    track('page_view')
+  }, [])
+
 
   const [showAccountModal, setShowAccountModal] = useState(false)
   const handleAccountModalClose = () => setShowAccountModal(false)

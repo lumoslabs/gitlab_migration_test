@@ -6,11 +6,17 @@ import { useAppSelector } from '@store/hooks'
 import { getIsStarted } from '@store/slices/appSlice'
 import { useHistory } from 'react-router-dom'
 import getConfig from 'next/config'
+import useAmplitude from '@hooks/useAmplitude'
 
 export function Index(): JSX.Element {
   const { publicRuntimeConfig } = getConfig()
   const isStarted = useAppSelector(getIsStarted)
   const history = useHistory()
+
+  const track = useAmplitude()
+  useEffect(() => {
+    track('page_view')
+  }, [])
 
   useEffect(() => {
     if (publicRuntimeConfig.withoutInteractiveCanvas) {

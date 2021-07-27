@@ -7,6 +7,7 @@ import LoadingComponent from '@components/ui/LoadingComponent'
 import gameRunCreate from '@api/gameRunCreate'
 import gameRunUpdate from '@api/gameRunUpdate'
 import gameTopScoresForUser from '@api/gameTopScoresForUser'
+import useAmplitude from '@hooks/useAmplitude'
 
 /*
 Example:
@@ -15,6 +16,10 @@ window.sendToJavaScript('game:complete', {"score":4500,"session_level":0,"user_l
 
 export default function Game({ game }: { game: GameConfig }): JSX.Element {
   const history = useHistory()
+  const track = useAmplitude()
+  useEffect(() => {
+    track('page_view')
+  }, [])
   const [result, setResult] = useState(null)
   const [gameRunId, setGameRunId] = useState('')
   const [eventSyncLoading, setEventSyncLoading] = useState(false)

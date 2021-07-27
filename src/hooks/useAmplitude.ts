@@ -1,16 +1,22 @@
-import amplitude from 'amplitude-js'
 import { useAppSelector } from '@store/hooks'
 import { getBaseUrl } from '@store/slices/appSlice'
-import getConfig from 'next/config'
-const { publicRuntimeConfig } = getConfig()
-
-const instance = amplitude.getInstance().init(publicRuntimeConfig.amplitude.apiKey)
+import { useLocation } from 'react-router-dom'
 
 export default function useAmplitude() {
+  //TODO: get userId from 
+  const baseUrl = useAppSelector(getBaseUrl)
+  const location = useLocation()
   const track = (eventName: string, eventProps = {}) => {
-    instance.logEvent(eventName, {
+    console.log('track to amplitude', {
       ...eventProps,
-      userId: useAppSelector(getBaseUrl)
+      userId: baseUrl,
+      currentPage: location.pathname
+    })
+    const instance = window.amplitude?.getInstance()
+    instance?.logEvent(eventName, {
+      ...eventProps,
+      userId: baseUrl,
+      currentPage: location.pathname
     })
   }
 

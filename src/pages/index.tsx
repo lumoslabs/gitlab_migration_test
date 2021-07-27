@@ -11,9 +11,6 @@ import HomePage from '@routes/home'
 import GamePage from '@routes/game'
 import NestHandler from '@components/NestHandler'
 import ConfigService from '@backend/services/ConfigService'
-import useAmplitude from '@hooks/useAmplitude'
-import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 
 export function Index({ games }: { games: GameConfig[] }): JSX.Element {
   const gameRoutes = games.map((game) => {
@@ -21,13 +18,6 @@ export function Index({ games }: { games: GameConfig[] }): JSX.Element {
       <GamePage game={game} />
     </Route>
   })
-
-  useEffect(() => {
-    const location = useLocation()
-    const track = useAmplitude()
-
-    track('page_view', { currentPage: location.pathname })
-  }, [])
 
   return (
     <Router>

@@ -17,5 +17,6 @@ export declare global {
     cc: any;
     sendToJavaScript: (data: string | [string, any], argData: any | null) => void;
     sendEventToCocos: (data: any) => void;
+    amplitude: any;
   }
 }
