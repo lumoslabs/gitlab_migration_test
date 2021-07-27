@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, css } from 'aphrodite'
 import base from '@styles/colors/base'
+import useAmplitude from '@hooks/useAmplitude'
 
 const { lumosWhite, lumosOrange, darkOrange } = base
 
@@ -40,14 +41,25 @@ export interface IButtonProps {
   text: string;
   onClick?(e: React.MouseEvent<any>): any;
   buttonStyles?: any;
+  eventData?: Record<string, any>
 }
 
-const Button = (({ onClick = () => void (0), text, buttonStyles }: IButtonProps): JSX.Element => {
+const Button = (props: IButtonProps): JSX.Element => {
+  const track = useAmplitude()
+  const { text, onClick, buttonStyles, eventData } = props
+
   return (
-    <button className={css([styles.button, buttonStyles])} onClick={onClick} >
+    <button
+      className={css([styles.button, buttonStyles])}
+      onClick={e => {
+        track('button_click', eventData)
+        onClick(e)
+        e.preventDefault()
+      }}
+    >
       {text}
     </button>
   )
-})
+}
 
 export default Button

@@ -25,10 +25,18 @@ const ConnectAccount = (props: IConnectAccountProps): JSX.Element => {
       </Row>
       <Row className={css(commonStyles.flexRowAllCenter)}>
         <Col className={css(commonStyles.flexColumnAllCenter, styles.buttonDiv)}>
-          <Button onClick={handleCancel} text='Cancel' />
+          <Button
+            onClick={handleCancel}
+            text='Cancel'
+            eventData={{id: 'cancel_connect_account', message: 'Cancel'}}
+          />
         </Col>
         <Col className={css(commonStyles.flexColumnAllCenter, styles.buttonDiv)}>
-          <Button onClick={handleConnect} text='Connect' />
+          <Button
+            onClick={handleConnect}
+            text='Connect'
+            eventData={{id: 'connect_account', message: 'Connect'}}
+          />
         </Col>
       </Row>
     </Container>

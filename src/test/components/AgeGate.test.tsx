@@ -6,6 +6,18 @@ const onSubmit = (isUnderage: boolean) => {
   window.location.href = 'https://lumos-assistant.ngrok.io/test_page',
     console.log('isUnderage: ' + isUnderage)
 }
+
+jest.mock('react-router-dom', () => ({
+  __esModule: true,
+  useLocation: jest.fn().mockReturnValue({
+    pathname: '/another-route',
+    search: '',
+    hash: '',
+    state: null,
+    key: '5nvxpbdafa',
+  }),
+}))
+
 it('matches snapshot', () => {
   const { asFragment } = render(
     <AgeGate

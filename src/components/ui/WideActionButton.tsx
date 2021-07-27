@@ -12,17 +12,17 @@ export interface IWideActionButtonProps {
 }
 
 const WideActionButton = (props: IWideActionButtonProps): JSX.Element => {
-  const extendStyles = props.extendStyles || []
+  const { buttonText, onClick, extendStyles, eventData } = props
   const track = useAmplitude()
 
   return (
     <div className={css(commonStyles.flexJustifyCenter)}>
       <Button
         buttonStyles={[styles.wideAction, extendStyles]}
-        text={props.buttonText}
+        text={buttonText}
         onClick={e => {
-          track('button_click', props.eventData)
-          props.onClick(e)
+          track('button_click', eventData)
+          onClick(e)
           e.preventDefault()
         }}
       />

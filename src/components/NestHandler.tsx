@@ -2,7 +2,7 @@ import { TtsMarkName, actions, getAppState } from '@store/slices/appSlice'
 import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions'
 import { useAppSelector, useAppDispatch } from '@store/hooks'
 import { Property } from 'csstype'
-import { useHistory } from "react-router-dom"
+import { useHistory } from 'react-router-dom'
 import { useEffect } from 'react'
 import getConfig from 'next/config'
 

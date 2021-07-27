@@ -81,7 +81,11 @@ const AgeGate = (({ onSubmit, max = (new Date(Date.now() - 86400000)) }: IAgeGat
         />
       </Row>
       <Row className={css(commonStyles.flexRowAllCenter, styles.buttonDiv)}>
-        <Button onClick={handleClick} text='Submit' />
+        <Button
+          onClick={handleClick}
+          text='Submit'
+          eventData={{id: 'submit_birthdate', message: 'Submit'}}
+        />
       </Row>
     </Container>
   )
