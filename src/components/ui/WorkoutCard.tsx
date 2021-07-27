@@ -7,20 +7,20 @@ import WideActionButton from '@components/ui/WideActionButton'
 
 export interface IWorkoutCardProps {
   clickHandler(e: React.MouseEvent<any>): any;
-  workoutImage?: string;
-  buttonText?: string;
+  remains: number,
+  all: number
 }
 
-const WorkoutCard = (props: IWorkoutCardProps): JSX.Element => {
-
+const WorkoutCard = ({ clickHandler, remains = 3, all = 3 }: IWorkoutCardProps): JSX.Element => {
+  const imageToUrl = remains === 0 ? '/assets/training_complete.svg' : `/assets/training_${all - remains}by3.svg`
   return (
     <div className={css([commonStyles.flexColumnAllCenter, styles.section])}>
       <Card className={css([commonStyles.flexColumnAllCenter, styles.card])}
-        onClick={props.clickHandler}
+        onClick={clickHandler}
       >
         <Card.Body className={css([commonStyles.flexColumnAllCenter, styles.cardBody])}>
           <Card.Img className={css(styles.cardImg)}
-            src={props.workoutImage || '/assets/workout_icon.svg'}
+            src={imageToUrl}
             alt='Workout Icon'
           >
           </Card.Img>
@@ -28,12 +28,13 @@ const WorkoutCard = (props: IWorkoutCardProps): JSX.Element => {
             {'Daily Workout'}
           </Card.Title>
           <Card.Subtitle className={css(styles.cardSubtitle)}>
-            {'Your daily workout of 3 games.'}
+            {remains ? `Your daily workout of ${all} games.` : `Workout completed`}
           </Card.Subtitle>
           <WideActionButton
+            disabled={remains === 0}
             extendStyles={styles.cta}
-            buttonText={props.buttonText || 'Start My Workout'}
-            onClick={props.clickHandler}
+            buttonText={(remains === all) ? 'Start My Workout' : 'Resume Workout'}
+            onClick={clickHandler}
             id='start_workout'
           />
         </Card.Body>

@@ -4,6 +4,7 @@ import appSharedActions from '@store/slices/appSharedActions'
 import AuthService from '@backend/services/AuthService'
 import { AccountLinkingStatus } from 'actions-on-google/dist/api/schema'
 import logger from '@backend/libs/logger'
+import TrainingManager from '@backend/libs/TrainingManager'
 
 export default async (conv: ConversationV3) => {
   const service = new AuthService()
@@ -33,13 +34,19 @@ export default async (conv: ConversationV3) => {
     }
   }
 
+  const trainingManager = new TrainingManager(conv.user.params.training)
+  const training = await trainingManager.get()
+
+  conv.user.params.training = training
+
   sendCommand({
     conv,
     command: appSharedActions.SET_STARTED,
     suppressMic: false,
     payload: {
       baseUrl: getPublicUrlFromConv(conv),
-      authToken
+      authToken,
+      training
     }
   })
 }

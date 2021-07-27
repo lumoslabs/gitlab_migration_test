@@ -18,7 +18,6 @@ export interface IGameScoreCardProps {
   title: string;
   gameIcon?: string;
   showTrainingIcon: boolean;
-  trainingIcon?: string;
   currentScore: number;
   topScoresData: ITopScoreData[];
   actionButtonText: string;
@@ -51,7 +50,7 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
             {props.showTrainingIcon && (
               <div className={css([commonStyles.flexRowAllCenter, styles.trainingIconTitleDiv])}>
                 <img
-                  src={props.trainingIcon}
+                  src='/assets/workout_icon.svg'
                   className={css(styles.trainingIconImage)}
                   alt='Training Icon'
                 />

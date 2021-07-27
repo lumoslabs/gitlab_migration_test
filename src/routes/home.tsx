@@ -8,12 +8,13 @@ import UserInfo from '@components/ui/UserInfo'
 import commonStyles from '@styles/commonStyles'
 import { GameConfig } from '@backend/models/config'
 import { useHistory } from 'react-router-dom'
-import { sendTextQuery } from '@store/slices/appSlice'
+import { getTraining, sendTextQuery } from '@store/slices/appSlice'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
   const history = useHistory()
   const dispatch = useAppDispatch()
+  const training = useAppSelector(getTraining)
 
   const [showAccountModal, setShowAccountModal] = useState(false)
   const handleAccountModalClose = () => setShowAccountModal(false)
@@ -25,8 +26,9 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
     dispatch(sendTextQuery({ query: 'Invoke User Logout' }))
   }
 
-  // TODO launch workout function
-  const handleClick = () => { window.location.href = 'https://lumos-assistant.ngrok.io' }
+  const handleClick = () => {
+    history.push(`/training`)
+  }
 
   const onGameClick = (slug: string) => {
     history.push(`/game/${slug}`)
@@ -36,7 +38,7 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
     <main>
       <div className={css(commonStyles.flexRowJustifyCenter, commonStyles.fullWidth, styles.topSpace)}>
         <div className={css(commonStyles.flexAlignCenter)}>
-          <WorkoutCard clickHandler={handleClick} />
+          <WorkoutCard all={training?.size} remains={training?.games?.length} clickHandler={handleClick} />
           <GameSection onClick={onGameClick} games={games} />
         </div>
       </div>

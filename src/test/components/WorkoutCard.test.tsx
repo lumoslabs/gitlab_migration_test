@@ -6,7 +6,7 @@ const handleClick = () => { window.location.href = '/' }
 
 it('matches snapshot', () => {
   const { asFragment } = render(
-    <WorkoutCard clickHandler={handleClick}/>, {}
+    <WorkoutCard clickHandler={handleClick} all={3} remains={3} />, {}
   )
   expect(asFragment()).toMatchSnapshot()
 })

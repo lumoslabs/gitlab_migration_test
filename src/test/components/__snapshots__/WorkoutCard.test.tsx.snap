@@ -14,7 +14,7 @@ exports[`matches snapshot 1`] = `
         <img
           alt="Workout Icon"
           class="card-img cardImg_3mv33q"
-          src="/assets/workout_icon.svg"
+          src="/assets/training_0by3.svg"
         />
         <div
           class="cardTitle_ena3cq card-title h5"
@@ -30,7 +30,7 @@ exports[`matches snapshot 1`] = `
           class="flexJustifyCenter_jfsfb5"
         >
           <button
-            class="button_ssaaah-o_O-wideAction_4zoj1f-o_O-cta_1jbl92e"
+            class="button_15gg8qi-o_O-wideAction_4zoj1f-o_O-cta_1jbl92e"
           >
             Start My Workout
           </button>
