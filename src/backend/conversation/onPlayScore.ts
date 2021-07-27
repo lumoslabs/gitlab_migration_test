@@ -29,7 +29,7 @@ export default async (conv: ConversationV3) => {
     conv.user.params.scores[slug].push({
       score,
       date: getCurrentUTCString(),
-      i: conv.user.params.scores[slug].length + 1
+      i: Number(conv.user.params.scores[slug].reduce((accum, current) => accum > current.i ? accum : current.i, 0)) + 1
     })
     conv.user.params.scores[slug] = conv.user.params.scores[slug].sort((a, b) => {
       if (a.score === b.score) {
