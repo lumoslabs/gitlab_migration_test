@@ -9,6 +9,11 @@ class MyDocument extends Document {
         <Head>
           <InteractiveCanvasScript />
           <Rollbar />
+          <script dangerouslySetInnerHTML={{
+            __html: `
+              console.log = () => {}
+            `
+          }} />
         </Head>
         <body>
           <Main />

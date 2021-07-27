@@ -74,6 +74,7 @@ const GameContainer = ({ game, onComplete, onEvent }: IGameContainerProps): JSX.
   //Send parsed phrase to cocos
   useEffect(() => {
     if (lastGameCommand && lastGameCommand.payload && window.sendEventToCocos) {
+      console.debug('sendEventToCocos', lastGameCommand.payload)
       window.sendEventToCocos(clonedeep(lastGameCommand.payload))
     }
   }, [lastGameCommand])
@@ -82,6 +83,7 @@ const GameContainer = ({ game, onComplete, onEvent }: IGameContainerProps): JSX.
     // Handle game events
     window.sendToJavaScript = (data: string | [string, IGameEventData], argData: IGameEventData) => {
       const [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
+      console.debug('sendToJavaScript', eventName, eventData)
       let parsedData = eventData
       switch (eventName) {
         case 'game:loadStart':
