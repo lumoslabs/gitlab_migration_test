@@ -3,7 +3,6 @@ import GamePlay from '@components/GamePlay'
 import { GameConfig } from '@backend/models/config'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getTraining, actions } from '@store/slices/appSlice'
-// import { getRandomElement } from '@backend/conversation/utils'
 import { useEffect, useState } from 'react'
 
 export default function Training({ games }: { games: GameConfig[] }): JSX.Element {
