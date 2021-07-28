@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
       <AxiosHandler />
       <Layout>
         <Head>
-          <title>Nest</title>
+          <title>Lumosity Google Assistant</title>
         </Head>
         <Component {...pageProps} />
       </Layout>

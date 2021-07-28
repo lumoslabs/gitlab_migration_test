@@ -2,16 +2,16 @@ import { TtsMarkName, actions, getAppState } from '@store/slices/appSlice'
 import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions'
 import { useAppSelector, useAppDispatch } from '@store/hooks'
 import { Property } from 'csstype'
-import { useHistory } from "react-router-dom"
+import { useHistory } from 'react-router-dom'
 import { useEffect } from 'react'
 import getConfig from 'next/config'
 
 const debugBarStyle = {
   'background': 'white',
+  'opacity': .5,
   'position': 'absolute' as Property.Position,
   'whiteSpace': 'pre-wrap' as Property.WhiteSpace,
   'overflow': 'auto',
-  'border': '1px red solid',
   'zIndex': '100' as Property.ZIndex,
   'right': '0px',
   'bottom': '0px',

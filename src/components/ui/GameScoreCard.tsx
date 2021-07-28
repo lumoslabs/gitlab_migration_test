@@ -26,10 +26,20 @@ export interface IGameScoreCardProps {
   stat: number;
 }
 
-const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
+const GameScoreCard = ({
+  title,
+  gameIcon,
+  showTrainingIcon,
+  currentScore,
+  topScoresData,
+  actionButtonText,
+  actionButtonHandler,
+  statLabel,
+  stat
+ }: IGameScoreCardProps): JSX.Element => {
 
-  const trophyIndex = props.topScoresData?.findIndex((score) => {
-    if (score.score === props.currentScore)
+  const trophyIndex = topScoresData?.findIndex((score) => {
+    if (score.score === currentScore)
       return true
     return false
   })
@@ -40,14 +50,14 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
         <Card.Body className={css(styles.cardBody)}>
           <div className={css([commonStyles.flexRowAllCenter, styles.titleDiv])}>
             <img
-              src={props.gameIcon || '/assets/check_mark_done.png'}
+              src={gameIcon || '/assets/check_mark_done.png'}
               className={css(styles.gameIconImage)}
               alt='Game Icon'
             />
             <p className={css(styles.title)}>
-              {props.title}
+              {title}
             </p>
-            {props.showTrainingIcon && (
+            {showTrainingIcon && (
               <div className={css([commonStyles.flexRowAllCenter, styles.trainingIconTitleDiv])}>
                 <img
                   src='/assets/workout_icon.svg'
@@ -63,19 +73,19 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
                 {'Your Score'}
               </p>
               <p className={css(styles.currentScoreText)}>
-                {props.currentScore}
+                {currentScore}
               </p>
               <div className={css([commonStyles.flexColumnAlignCenter, styles.currentStatDiv])}>
                 <Container>
                   <Row>
                     <Col xs={6} className={css(styles.alignLeft)}>
                       <p className={css(styles.statLabel)}>
-                        {props.statLabel}
+                        {statLabel}
                       </p>
                     </Col>
                     <Col xs={6}>
                       <p className={css(styles.statNumber)}>
-                        {props.stat}
+                        {stat}
                       </p>
                     </Col>
                   </Row>
@@ -83,13 +93,13 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
               </div>
             </div>
             <div className={css([commonStyles.flexColumnAllCenter, styles.topScoreDiv])}>
-              {props.topScoresData && (
+              {topScoresData && (
                 <>
                   <p className={css(styles.topScoresTitle)}>
                     {'Top Scores'}
                   </p>
                   <Container className={css([commonStyles.flexColumnAlignCenter, styles.topScoreValueDiv])}>
-                    {props.topScoresData.map((topScoreData, i) => {
+                    {topScoresData.map((topScoreData, i) => {
                       return (
                         <Row key={'row' + i} className={css(styles.topScoreRow)}>
                           {trophyIndex === i && (
@@ -134,8 +144,8 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
       <div className={css(commonStyles.flexColumnAllCenter)}>
         <WideActionButton
           extendStyles={styles.nextButton}
-          buttonText={props.actionButtonText}
-          onClick={props.actionButtonHandler}
+          buttonText={actionButtonText}
+          onClick={actionButtonHandler}
         />
       </div>
     </div>

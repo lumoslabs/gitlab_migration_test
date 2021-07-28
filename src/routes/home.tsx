@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import WorkoutCard from '@components/ui/WorkoutCard'
 import GameSection from '@components/ui/GameSection'
@@ -7,11 +8,18 @@ import UserBar from '@components/ui/UserBar'
 import UserInfo from '@components/ui/UserInfo'
 import commonStyles from '@styles/commonStyles'
 import { GameConfig } from '@backend/models/config'
-import { useHistory } from 'react-router-dom'
 import { getTraining, sendTextQuery } from '@store/slices/appSlice'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
+import useAmplitude from '@hooks/useAmplitude'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
+
+  const track = useAmplitude()
+
+  useEffect(() => {
+    track('page_view')
+  }, [])
+
   const history = useHistory()
   const dispatch = useAppDispatch()
   const training = useAppSelector(getTraining)

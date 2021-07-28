@@ -1,36 +1,29 @@
 import React from 'react'
 import { css, StyleSheet } from 'aphrodite'
 import Button from '@components/ui/Button'
-
-import commonStyles from '../../styles/commonStyles'
-// TODO:
-// import { analyticsTrack } from '../segment/analytics';
+import commonStyles from '@styles/commonStyles'
+import useAmplitude from '@hooks/useAmplitude'
 
 export interface IWideActionButtonProps {
-  extendStyles: any;
+  extendStyles?: any;
   buttonText: string;
   onClick?(e: React.MouseEvent<any>): any;
-  id?: string;
+  eventData?: Record<string, any>
   disabled?: boolean;
 }
 
-const WideActionButton = (props: IWideActionButtonProps): JSX.Element => {
-  const extendStyles = props.extendStyles || []
+const WideActionButton = ({ buttonText, onClick, extendStyles, eventData, disabled }: IWideActionButtonProps): JSX.Element => {
+  const track = useAmplitude()
 
   return (
     <div className={css(commonStyles.flexJustifyCenter)}>
       <Button
-        disabled={props.disabled}
+        disabled={disabled}
         buttonStyles={[styles.wideAction, extendStyles]}
-        text={props.buttonText}
+        text={buttonText}
         onClick={e => {
-          // TODO:
-          // analyticsTrack('button_click', {
-          //   id: props.id,
-          //   current_page: props.currentPage,
-          //   message: props.buttonText,
-          // });
-          props.onClick(e)
+          track('button_click', eventData)
+          onClick(e)
           e.preventDefault()
         }}
       />
@@ -42,7 +35,7 @@ const styles = StyleSheet.create({
   wideAction: {
     width: 327,
     height: 56
-  },
+  }
 })
 
 export default WideActionButton

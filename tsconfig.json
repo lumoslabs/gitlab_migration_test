@@ -34,6 +34,9 @@
       "@backend/*": [
         "src/backend/*"
       ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
       "@store/*": [
         "src/store/*"
       ],

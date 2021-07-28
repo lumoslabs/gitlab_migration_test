@@ -50,9 +50,9 @@ const WorkoutCard = ({ clickHandler, remainingGamesCount = 3, totalGameCount = 3
           <WideActionButton
             disabled={remainingGamesCount === 0}
             extendStyles={styles.cta}
-            buttonText={buttonText}
+            buttonText={buttonText || 'Start My Workout'}
             onClick={clickHandler}
-            id='start_workout'
+            eventData={{id: 'start_workout'}}
           />
         </Card.Body>
       </Card>
