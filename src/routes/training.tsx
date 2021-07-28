@@ -16,7 +16,7 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
   }
 
   useEffect(() => {
-    if (!training?.games.length) {
+    if (!training?.games?.length) {
       // If there's no workout ready, select a random game
       const randomGameConfig = games[Math.floor(Math.random() * games.length)]
       history.push(`/game/${randomGameConfig.id}`)
