@@ -30,7 +30,7 @@ return (
       <GamePlay
         game={currentGame}
         isTraining={true}
-        scoreActionButtonText={training.games.length ? 'Next Game' : 'Main Menu'}
+        scoreActionButtonText={training.games.length > 0 ? 'Next Game' : 'Main Menu'}
         onFinishHandler={onFinish}
         remainingGamesCount={training?.games?.length}
         totalGameCount={training?.size}
