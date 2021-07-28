@@ -1,0 +1,28 @@
+accountLinking:
+  enableAccountCreation: true
+  linkingType: GOOGLE_SIGN_IN
+category: GAMES_AND_TRIVIA
+defaultLocale: en
+localizedSettings:
+  developerEmail: nest@lumoslabs.com
+  developerName: Lumos Labs, Inc.
+  displayName: Lumosity
+  fullDescription: Lumosity's comprehensive brain training program is made up of fun
+    games that exercise attention, flexibility, and more.
+  privacyPolicyUrl: https://www.lumosity.com/en/legal/privacy_policy/
+  pronunciation: Lumosity
+  sampleInvocations:
+  - Talk to Lumosity
+  shortDescription: Lumosity
+  smallLogoImage: https://lh3.googleusercontent.com/P1z_TKt2TJGXhSVjFG-Z7LGV5pAijdPFmyEEH9ROhWige59ia7MSXLcFWk3oN1jIzfCfqO6eEQNb
+  termsOfServiceUrl: https://www.lumosity.com/en/legal/terms_of_service
+  voice: female_1
+projectId: lumos-nest-prod
+surfaceRequirements:
+  minimumRequirements:
+  - capability: AUDIO_OUTPUT
+  - capability: SCREEN_OUTPUT
+  - capability: INTERACTIVE_CANVAS
+testingInstructions: Entering games requires a "start game" command. This will be
+  removed in the future.
+usesInteractiveCanvas: true
