@@ -17,7 +17,7 @@ const WorkoutCard = ({ clickHandler, remainingGamesCount = 3, totalGameCount = 3
   if (remainingGamesCount === 0) {
     workoutIconUrl = '/assets/training_complete.svg'
   }
-  if (remainingGamesCount < totalGameCount) {
+  if (remainingGamesCount < totalGameCount && remainingGamesCount > 0) {
     workoutIconUrl = `/assets/training_${totalGameCount - remainingGamesCount}by3.svg`
   }
 
@@ -41,6 +41,7 @@ const WorkoutCard = ({ clickHandler, remainingGamesCount = 3, totalGameCount = 3
             alt='Workout Icon'
           >
           </Card.Img>
+          {console.log(totalGameCount)}
           <Card.Title className={css(styles.cardTitle)}>
             {'Daily Workout'}
           </Card.Title>
