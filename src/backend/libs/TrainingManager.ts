@@ -10,13 +10,14 @@ export interface ITraining {
 }
 
 export default class TrainingManager {
-  protected training: ITraining | null;
-  protected size = 3;
-  protected version = 1;
+  protected training: ITraining | null
+  // Workouts are 3 games
+  protected size = 3
+  protected version = 1
 
   constructor(training?: ITraining | null) {
     if ((training?.version === this.version) && (training?.deadline > dayjs.unix())) {
-      this.training = training;
+      this.training = training
     }
   }
 
@@ -46,11 +47,11 @@ export default class TrainingManager {
     return training
   }
 
-  public getAllGamesCount = () => {
+  public getWorkoutGamesCount = () => {
     return Number(this.training?.size)
   }
 
-  public getRemainGamesCount = () => {
+  public getUnplayedGamedCount = () => {
     return Number(this.training?.games?.length)
   }
 

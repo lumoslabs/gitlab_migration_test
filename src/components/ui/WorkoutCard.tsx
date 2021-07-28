@@ -7,12 +7,29 @@ import WideActionButton from '@components/ui/WideActionButton'
 
 export interface IWorkoutCardProps {
   clickHandler(e: React.MouseEvent<any>): any;
-  remains: number,
-  all: number
+  remainingGamesCount: number,
+  totalGameCount: number
 }
 
-const WorkoutCard = ({ clickHandler, remains = 3, all = 3 }: IWorkoutCardProps): JSX.Element => {
-  const imageToUrl = remains === 0 ? '/assets/training_complete.svg' : `/assets/training_${all - remains}by3.svg`
+const WorkoutCard = ({ clickHandler, remainingGamesCount = 3, totalGameCount = 3 }: IWorkoutCardProps): JSX.Element => {
+  // Workout Card Icon
+  let workoutIconUrl = '/assets/workout_icon.svg'
+  if (remainingGamesCount === 0) {
+    workoutIconUrl = '/assets/training_complete.svg'
+  }
+  if (remainingGamesCount < totalGameCount) {
+    workoutIconUrl = `/assets/training_${totalGameCount - remainingGamesCount}by3.svg`
+  }
+
+  // Workout Card Button Text
+  let buttonText = 'Start My Workout'
+  if (remainingGamesCount < totalGameCount) {
+    buttonText = 'Resume Workout'
+  }
+  if (remainingGamesCount === 0) {
+    buttonText = 'Workout Complete'
+  }
+
   return (
     <div className={css([commonStyles.flexColumnAllCenter, styles.section])}>
       <Card className={css([commonStyles.flexColumnAllCenter, styles.card])}
@@ -20,7 +37,7 @@ const WorkoutCard = ({ clickHandler, remains = 3, all = 3 }: IWorkoutCardProps):
       >
         <Card.Body className={css([commonStyles.flexColumnAllCenter, styles.cardBody])}>
           <Card.Img className={css(styles.cardImg)}
-            src={imageToUrl}
+            src={workoutIconUrl}
             alt='Workout Icon'
           >
           </Card.Img>
@@ -28,12 +45,12 @@ const WorkoutCard = ({ clickHandler, remains = 3, all = 3 }: IWorkoutCardProps):
             {'Daily Workout'}
           </Card.Title>
           <Card.Subtitle className={css(styles.cardSubtitle)}>
-            {remains ? `Your daily workout of ${all} games.` : `Workout completed`}
+            {'Your daily workout of 3 games.'}
           </Card.Subtitle>
           <WideActionButton
-            disabled={remains === 0}
+            disabled={remainingGamesCount === 0}
             extendStyles={styles.cta}
-            buttonText={(remains === all) ? 'Start My Workout' : 'Resume Workout'}
+            buttonText={buttonText}
             onClick={clickHandler}
             id='start_workout'
           />

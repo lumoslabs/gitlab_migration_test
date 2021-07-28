@@ -21,7 +21,7 @@ exports[`Home page matches snapshot 1`] = `
               <img
                 alt="Workout Icon"
                 class="card-img cardImg_3mv33q"
-                src="/assets/training_0by3.svg"
+                src="/assets/workout_icon.svg"
               />
               <div
                 class="cardTitle_ena3cq card-title h5"

@@ -5,7 +5,7 @@ import TrainingManager from '@backend/libs/TrainingManager'
 
 export default async (conv: ConversationV3) => {
   const trainingManager = new TrainingManager(conv.user.params.training)
-  if (trainingManager.getRemainGamesCount() === 0) {
+  if (trainingManager.getUnplayedGamedCount() === 0) {
     conv.add('Your daily workout is completed')
     sendCommand({ conv })
   } else {

@@ -43,8 +43,8 @@ export default async (conv: ConversationV3) => {
   if (isTraining) {
     const trainingManager = new TrainingManager(conv.user.params.training)
     trainingManager.markGameCompleted(slug)
-    const allGamesCount = trainingManager.getAllGamesCount()
-    const remainGamesCount = trainingManager.getRemainGamesCount()
+    const allGamesCount = trainingManager.getWorkoutGamesCount()
+    const remainGamesCount = trainingManager.getUnplayedGamedCount()
 
     if (allGamesCount - remainGamesCount === 1) {
       tts = `You scored ${score} points. Great first play! Are you ready for the next game?`
