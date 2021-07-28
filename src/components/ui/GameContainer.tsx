@@ -179,7 +179,7 @@ const GameContainer = ({ game, onComplete, onEvent }: IGameContainerProps): JSX.
       {publicRuntimeConfig.gameSkip && (
         <div className={css([commonStyles.flexRowAllCenter, styles.skipGameDiv])}>
           <Button buttonStyles={styles.skipGameButton}
-            onClick={() => { window.sendToJavaScript('game:complete', { score: Math.floor(Math.random() * 100) }) }}
+            onClick={() => { window.sendToJavaScript('game:complete', { score: Math.floor(Math.random() * 1000) }) }}
             text='Skip Game'
           />
         </div>
