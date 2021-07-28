@@ -1,6 +1,6 @@
 import { ConversationV3 } from 'actions-on-google'
-import { sendCommand, getRandomElement } from '@backend/conversation/utils'
-import dayjs, { getCurrentUTCString } from '@backend/libs/dayjs'
+import { sendCommand, getRandomElement, getTraining, setTraining } from '@backend/conversation/utils'
+import { getCurrentUTCString } from '@backend/libs/dayjs'
 import appSharedActions from '@store/slices/appSharedActions'
 import TrainingManager from '@backend/libs/TrainingManager'
 
@@ -27,6 +27,7 @@ export default async (conv: ConversationV3) => {
     ])
   }
 
+  //Push to gameruns array new element, sorting by scores and index and cut array to 5 top elements
   conv.user.params.scores[slug].push({
     score,
     date: getCurrentUTCString(),
@@ -41,7 +42,7 @@ export default async (conv: ConversationV3) => {
 
 
   if (isTraining) {
-    const trainingManager = new TrainingManager(conv.user.params.training)
+    const trainingManager = new TrainingManager(getTraining(conv))
     trainingManager.markGameCompleted(slug)
     const allGamesCount = trainingManager.getWorkoutGamesCount()
     const remainGamesCount = trainingManager.getUnplayedGamedCount()
@@ -64,7 +65,8 @@ export default async (conv: ConversationV3) => {
         `You scored ${score} points that time. Nice play! Ready for the next one?`
       ])
     }
-    conv.user.params.training = await trainingManager.get()
+    const training = await trainingManager.get()
+    setTraining(conv, training)
   }
 
   if (tts) {
