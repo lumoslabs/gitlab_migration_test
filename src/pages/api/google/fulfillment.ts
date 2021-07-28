@@ -14,6 +14,7 @@ import onStartGame from '@backend/conversation/onStartGame'
 import onNoMatch from '@backend/conversation/onNoMatch'
 import onGameWelcomeMessage from '@backend/conversation/onGameWelcomeMessage'
 import onUserLogout from '@backend/conversation/onUserLogout'
+import onTraining from '@backend/conversation/onTraining'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -37,23 +38,22 @@ conversationApp.handle('RestartCMM', onStartGame)
 conversationApp.handle('ResumeGame', onStartGame)
 conversationApp.handle('RestartGame', onStartGame)
 
-// Game score screen
 conversationApp.handle('PlayScore', onPlayScore)
 
 conversationApp.handle('UserLogout', onUserLogout)
+
+conversationApp.handle('Training', onTraining)
 
 //GoogleAccountLink
 //GoogleAccountLinkRejected
 //StartAccountLinkingMonologue
 
-//Training
 
 //FEInvokeTTS
 
 //Yes
 //No
 //Help
-//UserLogout
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {

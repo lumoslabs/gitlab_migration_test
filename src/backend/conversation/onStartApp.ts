@@ -1,9 +1,10 @@
 import { ConversationV3 } from 'actions-on-google'
-import { sendCommand, getPublicUrlFromConv, getIsFirstLogin, setIsFirstLogin } from '@backend/conversation/utils'
+import { sendCommand, getPublicUrlFromConv, getIsFirstLogin, setIsFirstLogin, setTraining, getTraining } from '@backend/conversation/utils'
 import appSharedActions from '@store/slices/appSharedActions'
 import AuthService from '@backend/services/AuthService'
 import { AccountLinkingStatus } from 'actions-on-google/dist/api/schema'
 import logger from '@backend/libs/logger'
+import TrainingManager from '@backend/libs/TrainingManager'
 
 export default async (conv: ConversationV3) => {
   const service = new AuthService()
@@ -20,7 +21,7 @@ export default async (conv: ConversationV3) => {
 
   const authToken = await service.generateToken(user)
 
-  logger.debug(`onStartAppEvent user #${conv.user.params.id}`)
+  logger.debug(`onStartAppEvent user #${conv.user.params?.id}`)
 
   conv.user.params.id = user.id
   if (getIsFirstLogin(conv)) {
@@ -33,13 +34,19 @@ export default async (conv: ConversationV3) => {
     }
   }
 
+  const trainingManager = new TrainingManager(getTraining(conv))
+  const training = await trainingManager.get()
+
+  setTraining(conv, training)
+
   sendCommand({
     conv,
     command: appSharedActions.SET_STARTED,
     suppressMic: false,
     payload: {
       baseUrl: getPublicUrlFromConv(conv),
-      authToken
+      authToken,
+      training
     }
   })
 }

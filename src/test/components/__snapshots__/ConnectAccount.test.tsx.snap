@@ -24,7 +24,7 @@ exports[`matches snapshot 1`] = `
         class="flexColumnAllCenter_1vexgx1-o_O-buttonDiv_1rece6a col"
       >
         <button
-          class="button_ssaaah"
+          class="button_15gg8qi"
         >
           Cancel
         </button>
@@ -33,7 +33,7 @@ exports[`matches snapshot 1`] = `
         class="flexColumnAllCenter_1vexgx1-o_O-buttonDiv_1rece6a col"
       >
         <button
-          class="button_ssaaah"
+          class="button_15gg8qi"
         >
           Connect
         </button>
