@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice, Draft, PayloadAction } from '@reduxjs/toolkit'
 
+//TODO: split slice to redux folder format
+
 export enum TtsMarkName {
   START = 'START',
   END = 'END',
@@ -58,19 +60,29 @@ const initialState: {
   tts: TtsMarkName,
   started: boolean,
   baseUrl: string,
+  authToken?: string,
   lastTextQueryState: sendTextQueryState,
   continuousMatchMode: boolean,
   lastGameCommand: {
     payload: Record<string, any> | null,
     timestamp: number
   } | null
+  scores: Record<string, { score: number, data: string }>,
+  training: {
+    games: string[],
+    count: number,
+    deadline: number
+  } | null
 } = {
   tts: TtsMarkName.START,
   started: false,
   baseUrl: '',
+  authToken: null,
   lastTextQueryState: sendTextQueryState.UNKNOWN,
   continuousMatchMode: false,
-  lastGameCommand: null
+  lastGameCommand: null,
+  scores: {},
+  training: null
 } as const
 
 
@@ -86,11 +98,17 @@ export const appSlice = createSlice({
     },
     setStarted: (
       state: Draft<typeof initialState>,
-      action: PayloadAction<{ baseUrl: string }>
+      action: PayloadAction<{ baseUrl: string, authToken: string, training: (typeof initialState.training) }>
     ) => {
       state.started = true
       if (action?.payload?.baseUrl) {
         state.baseUrl = action?.payload?.baseUrl
+      }
+      if (action?.payload?.authToken) {
+        state.authToken = action?.payload?.authToken
+      }
+      if (action.payload?.training) {
+        state.training = action.payload?.training
       }
     },
     setContinuousMatchMode: (
@@ -107,6 +125,23 @@ export const appSlice = createSlice({
         timestamp: (new Date().getTime()),
         payload: action.payload
       }
+    },
+    setTopScores: (
+      state: Draft<typeof initialState>,
+      action: PayloadAction<{ slug: string, scores: { score: number, data: string } }>
+    ) => {
+      state.scores[action.payload.slug] = action.payload.scores
+    },
+    resetTopScores: (
+      state: Draft<typeof initialState>
+    ) => {
+      state.scores = {}
+    },
+    setTrainingGameCompleted: (
+      state: Draft<typeof initialState>,
+      action: PayloadAction<string>
+    ) => {
+      state.training.games = state.training.games.filter((game) => game !== action.payload)
     }
   },
   extraReducers: (builder) => {
@@ -126,9 +161,12 @@ export const getAppState = (state) => state.app
 export const getTts = (state) => state.app.tts
 export const getIsStarted = (state) => state.app.started
 export const getBaseUrl = (state) => state.app.baseUrl
+export const getAuthToken = (state) => state.app.authToken
 export const getSendTextQueryState = (state) => state.app.lastTextQueryState
 export const getContinuousMatchMode = (state) => state.app.continuousMatchMode
 export const getLastGameCommand = (state) => state.app.lastGameCommand
+export const getTopScores = (state) => state.app.scores
+export const getTraining = (state) => state.app.training
 
 // Reducers and actions
 export const actions = appSlice.actions

@@ -181,3 +181,105 @@ GameEventName -
 //TODO: describe flow of scenes managment
 
 [gactions cli tool](https://developers.google.com/assistant/actionssdk/gactions?hl=en&authuser=3)
+
+### User Storage
+
+[docs](https://developers.google.com/assistant/conversational/storage-user?hl=en&authuser=3%2F%3Fq%3Dconversion)
+
+User params properties
+
+#### id
+uuid of user from dynamodb, stored in StartApp handler
+```
+{
+  "id" : string
+}
+```
+
+#### scores
+Top scores of the user, where key is a game id and value is array with 5 last top gameplay info,
+
+```
+  {
+    "scores": Record<string, {
+      "score": number, // gamerun scores
+      "date": string, // gamerun complete datetime
+      "i": number // index number for gamerun, useful for fast sorting
+    }[]>
+  }
+```
+
+Example - 
+```
+{
+  "color-match-nest": [
+    {
+      "i": 4,
+      "score": 92,
+      "date": "2021-07-26T13:43:44Z"
+    },
+    {
+      "score": 92,
+      "date": "2021-07-27T13:48:11Z",
+      "i": 1
+    },
+    {
+      "score": 82,
+      "i": 2,
+      "date": "2021-07-27T09:51:13Z"
+    },
+    {
+      "date": "2021-07-26T14:33:03Z",
+      "i": 6,
+      "score": 56
+    },
+    {
+      "score": 52,
+      "i": 4,
+      "date": "2021-07-27T14:33:05Z"
+    }
+  ],
+}
+```
+
+
+#### training
+
+Last workout information
+
+```
+  {
+    "training": {
+      "version": number, // current TrainingManager version, useful for invalidate all current user trainings
+      "games": string[], // list of uncompleted games
+      "size": number // total games count
+      "deadline": number // unix timestamp, ttl system for training manager
+    }
+  }
+```
+
+Example -
+
+```
+{
+  "training": {
+    "version": 1,
+    "games": [
+      "train-of-thought-nest",
+      "ebb-and-flow-nest",
+      "color-match-nest"
+    ],
+    "size": 3,
+    "deadline": 1627516800
+  }
+}
+```
+
+
+
+
+### Known issues 
+
+#### User Storage is always empty
+Just a allow "Web & App Activity" on the [Activity controls](https://myactivity.google.com/u/3/activitycontrols?pli=1) page
+

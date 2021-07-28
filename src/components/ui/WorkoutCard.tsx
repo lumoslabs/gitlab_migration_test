@@ -7,20 +7,37 @@ import WideActionButton from '@components/ui/WideActionButton'
 
 export interface IWorkoutCardProps {
   clickHandler(e: React.MouseEvent<any>): any;
-  workoutImage?: string;
-  buttonText?: string;
+  remainingGamesCount: number,
+  totalGameCount: number
 }
 
-const WorkoutCard = (props: IWorkoutCardProps): JSX.Element => {
+const WorkoutCard = ({ clickHandler, remainingGamesCount = 3, totalGameCount = 3 }: IWorkoutCardProps): JSX.Element => {
+  // Workout Card Icon
+  let workoutIconUrl = '/assets/workout_icon.svg'
+  if (remainingGamesCount === 0) {
+    workoutIconUrl = '/assets/training_complete.svg'
+  }
+  if (remainingGamesCount < totalGameCount) {
+    workoutIconUrl = `/assets/training_${totalGameCount - remainingGamesCount}by3.svg`
+  }
+
+  // Workout Card Button Text
+  let buttonText = 'Start My Workout'
+  if (remainingGamesCount < totalGameCount) {
+    buttonText = 'Resume Workout'
+  }
+  if (remainingGamesCount === 0) {
+    buttonText = 'Workout Complete'
+  }
 
   return (
     <div className={css([commonStyles.flexColumnAllCenter, styles.section])}>
       <Card className={css([commonStyles.flexColumnAllCenter, styles.card])}
-        onClick={props.clickHandler}
+        onClick={clickHandler}
       >
         <Card.Body className={css([commonStyles.flexColumnAllCenter, styles.cardBody])}>
           <Card.Img className={css(styles.cardImg)}
-            src={props.workoutImage || '/assets/workout_icon.svg'}
+            src={workoutIconUrl}
             alt='Workout Icon'
           >
           </Card.Img>
@@ -31,10 +48,11 @@ const WorkoutCard = (props: IWorkoutCardProps): JSX.Element => {
             {'Your daily workout of 3 games.'}
           </Card.Subtitle>
           <WideActionButton
+            disabled={remainingGamesCount === 0}
             extendStyles={styles.cta}
-            buttonText={props.buttonText || 'Start My Workout'}
-            onClick={props.clickHandler}
-            eventData={{id: 'start_workout', message: props.buttonText || 'Start My Workout'}}
+            buttonText={buttonText || 'Start My Workout'}
+            onClick={clickHandler}
+            eventData={{id: 'start_workout'}}
           />
         </Card.Body>
       </Card>

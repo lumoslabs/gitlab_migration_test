@@ -2,6 +2,7 @@ import { Canvas, ConversationV3 } from 'actions-on-google'
 import { ExpectedPhrase } from 'actions-on-google/dist/api/schema'
 import appSharedActions from '@store/slices/appSharedActions'
 import getConfig from 'next/config'
+import { ITraining } from '@backend/libs/TrainingManager'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -23,11 +24,9 @@ export const sendCommand = async ({ conv, command = undefined, payload = undefin
   command?: appSharedActions,
   continuousMatchPhrases?: ExpectedPhrase[],
   payload?: any,
-  suppressMic?: boolean
+  suppressMic?: boolean,
 }) => {
   conv.add(new Canvas({
-    //TODO: check this property in actions-on-google lib
-    //@ts-ignore
     enableFullScreen: true,
     continuousMatchConfig: continuousMatchPhrases ? {
       expectedPhrases: continuousMatchPhrases,
@@ -40,4 +39,21 @@ export const sendCommand = async ({ conv, command = undefined, payload = undefin
       payload
     }] : []
   }))
+}
+
+export const setIsFirstLogin = (conv: ConversationV3): void => {
+  conv.session.params.isFirstPlay = true
+}
+
+
+export const getIsFirstLogin = (conv: ConversationV3): boolean => {
+  return Boolean(conv.session.params.isFirstPlay)
+}
+
+export const setTraining = (conv: ConversationV3, training: ITraining) => {
+  conv.user.params.training = training
+}
+
+export const getTraining = (conv: ConversationV3): ITraining | undefined => {
+  return conv.user.params.training
 }

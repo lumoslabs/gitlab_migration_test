@@ -9,15 +9,16 @@ export interface IWideActionButtonProps {
   buttonText: string;
   onClick?(e: React.MouseEvent<any>): any;
   eventData?: Record<string, any>
+  disabled?: boolean;
 }
 
-const WideActionButton = (props: IWideActionButtonProps): JSX.Element => {
-  const { buttonText, onClick, extendStyles, eventData } = props
+const WideActionButton = ({ buttonText, onClick, extendStyles, eventData, disabled }: IWideActionButtonProps): JSX.Element => {
   const track = useAmplitude()
 
   return (
     <div className={css(commonStyles.flexJustifyCenter)}>
       <Button
+        disabled={disabled}
         buttonStyles={[styles.wideAction, extendStyles]}
         text={buttonText}
         onClick={e => {

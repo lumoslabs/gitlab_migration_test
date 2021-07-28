@@ -5,22 +5,20 @@ import { css, StyleSheet } from 'aphrodite/no-important'
 import commonStyles from '@styles/commonStyles'
 import WideActionButton from '@components/ui/WideActionButton'
 import base from '@styles/colors/base'
+import dayjs from 'dayjs'
 
 const { black, gray7, lumosOrange } = base
 
 export interface ITopScoreData {
   score: number;
-  updated_at: string;
+  date: string;
 }
 
 export interface IGameScoreCardProps {
   title: string;
   gameIcon?: string;
   showTrainingIcon: boolean;
-  showTrophy: boolean;
-  trainingIcon?: string;
   currentScore: number;
-  topScoreTodaysScoreIndex: number;
   topScoresData: ITopScoreData[];
   actionButtonText: string;
   actionButtonHandler(e: React.MouseEvent<any>): any;
@@ -28,24 +26,24 @@ export interface IGameScoreCardProps {
   stat: number;
 }
 
-const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
-  const dayjs = require('dayjs')
-  const formattedDate = (date: string) => dayjs(date).format('MMM DD, YYYY')
-  const {
-    title,
-    gameIcon,
-    showTrainingIcon,
-    showTrophy,
-    trainingIcon,
-    currentScore,
-    topScoreTodaysScoreIndex,
-    topScoresData,
-    actionButtonText,
-    actionButtonHandler,
-    statLabel,
-    stat
-   } = props
+const GameScoreCard = ({
+  title,
+  gameIcon,
+  showTrainingIcon,
+  currentScore,
+  topScoresData,
+  actionButtonText,
+  actionButtonHandler,
+  statLabel,
+  stat
+ }: IGameScoreCardProps): JSX.Element => {
 
+  const trophyIndex = topScoresData?.findIndex((score) => {
+    if (score.score === currentScore)
+      return true
+    return false
+  })
+  //TODO: show different training icons depending on workout progress
   return (
     <div className={css([commonStyles.flexColumnAlignCenter, commonStyles.fullWidth])}>
       <Card className={css([commonStyles.flexColumnAlignCenter, styles.card])}>
@@ -62,7 +60,7 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
             {showTrainingIcon && (
               <div className={css([commonStyles.flexRowAllCenter, styles.trainingIconTitleDiv])}>
                 <img
-                  src={trainingIcon}
+                  src='/assets/workout_icon.svg'
                   className={css(styles.trainingIconImage)}
                   alt='Training Icon'
                 />
@@ -104,7 +102,7 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
                     {topScoresData.map((topScoreData, i) => {
                       return (
                         <Row key={'row' + i} className={css(styles.topScoreRow)}>
-                          {showTrophy && topScoreTodaysScoreIndex == i && (
+                          {trophyIndex === i && (
                             <>
                               <img
                                 src='/assets/trophy.svg'
@@ -130,7 +128,7 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
                           </Col>
                           <Col xs={7} className={css(styles.alignRight)}>
                             <p key={'col_date'} className={css(styles.topScoreDate)}>
-                              {formattedDate(topScoreData.updated_at)}
+                              {dayjs(topScoreData.date).format('MMM DD, YYYY')}
                             </p>
                           </Col>
                         </Row>
@@ -148,7 +146,6 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
           extendStyles={styles.nextButton}
           buttonText={actionButtonText}
           onClick={actionButtonHandler}
-          eventData={{id: 'game_score_button', message: actionButtonText}}
         />
       </div>
     </div>
@@ -167,10 +164,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     height: '60vmin'
   },
+
   cardBody: {
     width: '100%',
     padding: 0
   },
+
   titleDiv: {
     marginTop: '5.875vmin',
     marginLeft: '4.5vmin',
@@ -179,20 +178,24 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flex: 2,
   },
+
   trainingIconTitleDiv: {
     flex: 1,
     justifyContent: 'flex-end'
   },
+
   gameIconImage: {
     height: '8vmin',
     width: '8vmin',
     borderRadius: '1.5vmin',
     objectFit: 'cover'
   },
+
   trainingIconImage: {
     height: '8vmin',
     width: '8vmin'
   },
+
   title: {
     color: black,
     fontFamily: 'MuseoSans500',
@@ -203,6 +206,7 @@ const styles = StyleSheet.create({
     padding: '0px',
     marginLeft: '5vmin'
   },
+
   scoresContainer: {
     marginTop: '5vmin',
     marginLeft: '14vmin',
@@ -210,6 +214,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'flex-start'
   },
+
   subTitle: {
     color: black,
     fontFamily: 'MuseoSans700',
@@ -220,6 +225,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     width: '100%'
   },
+
   currentScoreText: {
     color: lumosOrange,
     fontFamily: 'MuseoSans700',
@@ -231,10 +237,12 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     width: '100%'
   },
+
   leftScoreDiv: {
     justifyContent: 'flex-start',
     width: '16.9vw'
   },
+
   currentStatDiv: {
     width: '16.9vw',
     justifyContent: 'flex-start',
@@ -246,18 +254,22 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     flex: 1
   },
+
   statLabel: {
     color: black,
   },
+
   statNumber: {
     color: gray7
   },
+
   topScoreDiv: {
     justifyContent: 'flex-start',
     width: '29.6vw',
     marginLeft: '7.6vw',
     alignItems: 'flex-start'
   },
+
   topScoresTitle: {
     color: black,
     fontFamily: 'MuseoSans700',
@@ -268,6 +280,8 @@ const styles = StyleSheet.create({
     width: '100%',
     margin: 0
   },
+
+
   trophyImage: {
     height: '7.44vmin',
     width: '7.595vmin',
@@ -275,6 +289,7 @@ const styles = StyleSheet.create({
     left: '-5.86vw',
     top: '-2.33vh'
   },
+
   trophyBannerImage: {
     height: '4.625vmin',
     width: '60vmin',
@@ -283,12 +298,14 @@ const styles = StyleSheet.create({
     top: '-0.5vh',
     zIndex: -1
   },
+
   topScoreValueDiv: {
     justifyContent: 'center',
     alignItems: 'flex-start',
     width: '100%',
     padding: 0
   },
+
   topScoreRow: {
     marginTop: '1.66vh',
     width: '90%',
@@ -298,13 +315,16 @@ const styles = StyleSheet.create({
     position: 'relative',
     zIndex: 1
   },
+
   alignLeft: {
     textAlign: 'left',
     padding: 0
   },
+
   alignRight: {
     textAlign: 'right'
   },
+
   topScoreBold: {
     color: black,
     fontFamily: 'MuseoSans500',
@@ -313,6 +333,7 @@ const styles = StyleSheet.create({
     lineHeight: '3.4vmin',
     padding: 0
   },
+
   topScoreDate: {
     textAlign: 'right',
     color: gray7,
@@ -324,6 +345,7 @@ const styles = StyleSheet.create({
     flexGrow: 0,
     padding: 0
   },
+
   nextButton: {
     height: '8.75vmin',
     width: '31.75vmin',

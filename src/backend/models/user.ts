@@ -3,12 +3,8 @@ import { Table, Entity } from 'dynamodb-toolbox'
 
 export interface User {
   id: string;
-  profile: any;
-  type: any;
-  state: any;
-  last_login_at: string;
-  name?: string;
   email?: string;
+  lumosity_user_id?: string;
   oauth_access_token?: string;
   updated_at?: string;
   created_at?: string;
