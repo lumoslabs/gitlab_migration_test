@@ -15,6 +15,7 @@ const debugBarStyle = {
   'zIndex': '100' as Property.ZIndex,
   'right': '0px',
   'bottom': '0px',
+  'maxWidth': '40%'
 }
 
 function NestHandler(): JSX.Element {
@@ -61,11 +62,11 @@ function NestHandler(): JSX.Element {
         dispatch(actions.setGameCommand(data))
       },
     }
-    window.interactiveCanvas.ready(callbacks)
+    window.interactiveCanvasProxy.ready(callbacks)
   }
 
   useEffect(() => {
-    if (window.interactiveCanvas) {
+    if (window.interactiveCanvasProxy) {
       onLoad()
     } else {
       console.error('Interactive Canvas doesn\'t exists')

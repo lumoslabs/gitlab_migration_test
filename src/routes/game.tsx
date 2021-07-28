@@ -6,7 +6,9 @@ import GameScoreCard from '@components/ui/GameScoreCard'
 import LoadingComponent from '@components/ui/LoadingComponent'
 import gameRunCreate from '@api/gameRunCreate'
 import gameRunUpdate from '@api/gameRunUpdate'
-import gameTopScoresForUser from '@api/gameTopScoresForUser'
+
+import { useAppSelector } from '@store/hooks'
+import { getTopScores } from '@store/slices/appSlice'
 
 /*
 Example:
@@ -17,18 +19,15 @@ export default function Game({ game }: { game: GameConfig }): JSX.Element {
   const history = useHistory()
   const [result, setResult] = useState(null)
   const [gameRunId, setGameRunId] = useState('')
-  const [eventSyncLoading, setEventSyncLoading] = useState(false)
-  const [topScores, setScores] = useState(null)
+  const topScores = useAppSelector(getTopScores)[game.id]
+
   const onComplete = (data: any) => {
     setResult(data)
   }
 
   const onEvent = (eventName: string, eventData: any) => {
     if (gameRunId) {
-      setEventSyncLoading(true)
-      gameRunUpdate(gameRunId, eventName, eventData).then(() => {
-        setEventSyncLoading(false)
-      })
+      gameRunUpdate(gameRunId, eventName, eventData)
     }
   }
 
@@ -39,49 +38,19 @@ export default function Game({ game }: { game: GameConfig }): JSX.Element {
     })
   }, [])
 
-  // Set up date and index for Top 5 calculations
-  const dayjs = require('dayjs')
-  const isToday = require('dayjs/plugin/isToday')
-  dayjs.extend(isToday)
-  const [todaysScoreIndex, setTodaysScoreIndex] = useState(null)
-  const [showTrophy, setShowTrophy] = useState(false)
-  let todayIndex = -1
-
-  // Retrieve Top 5 scores
-  useEffect(() => {
-    if (!eventSyncLoading && result) {
-      gameTopScoresForUser(game.id).then((topScores) => {
-        setScores(topScores)
-        // Determine if current score is a Top 5 score and which score to highlight
-        topScores.forEach((topScore, i) => {
-          if (dayjs(topScore.updated_at).isToday() && topScore.score === currentScore) {
-            todayIndex = i
-          }
-        })
-        setTodaysScoreIndex(todayIndex)
-        if (todayIndex >= 0) {
-          setShowTrophy(true)
-        }
-      })
-    }
-  }, [eventSyncLoading, result])
-
   // TODO: make this bring you to next game during a workout
   const actionButtonHandler = () => { history.push('/home') }
+
 
   // TODO: handle data for these
   const showTrainingIcon = true
   const trainingIcon = '/assets/workout_icon.svg'
   const actionButtonText = 'Main Menu'
 
-  // Data from Game Config
-  const title = game.values.title
-  const gameIcon = game.values.score_thumbnail_url
   // shall we simplify this data structure in the database?
   const statLabel = game.values.frontend_data.scores[0].score_screen_score_key.replace('scoreScreen', '')
 
   // Data from current game result
-  const currentScore = result?.score
   const stat = result?.stat
 
   return (
@@ -98,13 +67,11 @@ export default function Game({ game }: { game: GameConfig }): JSX.Element {
 
       {result && (topScores !== null) && (
         <GameScoreCard
-          title={title}
-          gameIcon={gameIcon}
+          title={game.values.title}
+          gameIcon={game.values.score_thumbnail_url}
           showTrainingIcon={showTrainingIcon}
-          showTrophy={showTrophy}
-          topScoreTodaysScoreIndex={todaysScoreIndex}
           trainingIcon={trainingIcon}
-          currentScore={currentScore}
+          currentScore={result?.score}
           topScoresData={topScores}
           actionButtonText={actionButtonText}
           actionButtonHandler={actionButtonHandler}

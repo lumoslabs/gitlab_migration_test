@@ -106,7 +106,7 @@ const GameContainer = ({ game, onComplete, onEvent }: IGameContainerProps): JSX.
         case 'game:nest_cmm_start':
           //TODO: fix redux-toolkit thunk types
           //@ts-ignore
-          dispatch(sendTextQuery({ query: 'Invoke Start Game', state: { 'slug': game.id } }))
+          dispatch(sendTextQuery({ query: 'Invoke Start Game', state: { slug: game.id } }))
           break
         case 'game:complete':
           onEvent(eventName, eventData)
@@ -116,12 +116,12 @@ const GameContainer = ({ game, onComplete, onEvent }: IGameContainerProps): JSX.
           onComplete(eventData as IGameCompletedData)
           //TODO: fix redux-toolkit thunk types
           //@ts-ignore
-          dispatch(sendTextQuery({ query: 'Invoke Score Screen Score TTS', state: { 'score': eventData.score } }))
+          dispatch(sendTextQuery({ query: 'Invoke Score Screen Score TTS', state: { score: eventData.score, slug: game.id } }))
           break
         case 'game:nest_cmm_restart':
           //TODO: fix redux-toolkit thunk types
           //@ts-ignore
-          dispatch(sendTextQuery({ query: 'Restart Continuous Match Mode', state: { 'slug': game.id } }))
+          dispatch(sendTextQuery({ query: 'Restart Continuous Match Mode', state: { slug: game.id } }))
           break
         case 'game:speech':
           parsedData = eventData as IGameSpeechData
@@ -179,7 +179,7 @@ const GameContainer = ({ game, onComplete, onEvent }: IGameContainerProps): JSX.
       {publicRuntimeConfig.gameSkip && (
         <div className={css([commonStyles.flexRowAllCenter, styles.skipGameDiv])}>
           <Button buttonStyles={styles.skipGameButton}
-            onClick={() => { window.sendToJavaScript('game:complete', { score: 0 }) }}
+            onClick={() => { window.sendToJavaScript('game:complete', { score: Math.floor(Math.random() * 1000) }) }}
             text='Skip Game'
           />
         </div>

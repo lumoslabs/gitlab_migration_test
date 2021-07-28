@@ -1,6 +1,7 @@
 enum appSharedActions {
   SET_STARTED = 'setStarted',
   GO_TO = 'goTo',
+  SET_TOP_SCORES = 'setTopScores'
 }
 
 export default appSharedActions

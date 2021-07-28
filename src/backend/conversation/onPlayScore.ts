@@ -1,9 +1,47 @@
 import { ConversationV3 } from 'actions-on-google'
-import { sendCommand } from '@backend/conversation/utils'
+import { sendCommand, getRandomElement } from '@backend/conversation/utils'
+import dayjs, { getCurrentUTCString } from '@backend/libs/dayjs'
+import appSharedActions from '@store/slices/appSharedActions'
 
 export default async (conv: ConversationV3) => {
-  const score = conv.context?.canvas?.state?.score
+  const score = Number(conv.context?.canvas?.state?.score)
+  const slug = String(conv.context?.canvas?.state?.slug)
+  console.log('onPlayScore', score, slug)
+  let tts = null
 
+  if (!conv.user.params.scores) {
+    //first play
+    conv.user.params.scores = {}
+  }
+  if (!conv.user.params.scores[slug]) {
+    //first play in current game
+    tts = `You scored ${score} points. Great first play! Would you like to return to the Lumosity main menu?`
+    conv.user.params.scores[slug] = []
+  } else {
+    tts = getRandomElement([
+      `You scored ${score} points. Well done! Would you like to return to the Lumosity main menu?`,
+      `You scored ${score} points. Great job! Would you like to return to the Lumosity main menu?`,
+      `You scored ${score} points. Congrats on a job well done. Would you like to return to the main menu?`,
+    ])
+  }
+
+  try {
+    conv.user.params.scores[slug].push({
+      score,
+      date: getCurrentUTCString(),
+      i: Number(conv.user.params.scores[slug].reduce((accum, current) => accum > current.i ? accum : current.i, 0)) + 1
+    })
+    conv.user.params.scores[slug] = conv.user.params.scores[slug].sort((a, b) => {
+      if (a.score === b.score) {
+        return b.i - a.i
+      }
+      return b.score - a.score
+    }).slice(0, 5)
+  } catch (error) {
+    console.log('error', error)
+  }
+
+  /*
   // TODO: implement different messages based off workout or freeplay, number of plays
   // Workout first play with more games to play
   const workoutIncompleteFirstPlayText = `You scored ${score} points. Great first play! Are you ready for the next game?`
@@ -28,22 +66,19 @@ export default async (conv: ConversationV3) => {
     `You scored ${score} points and completed your workout. Congrats on a job well done. 
       Would you like to end your workout and return to the main menu?`,
   ]
+*/
 
-  // Freeplay first play
-  const singlePlayFirstPlayText = `You scored ${score} points. Great first play! 
-  Would you like to return to the Lumosity main menu?`
-
-  // Freeplay non first play
-  const singlePlayNonFirstPlayTexts = [
-    `You scored ${score} points. Well done! Would you like to return to the Lumosity main menu?`,
-    `You scored ${score} points. Great job! Would you like to return to the Lumosity main menu?`,
-    `You scored ${score} points. Congrats on a job well done. Would you like to return to the main menu?`,
-  ]
-
-  conv.add(singlePlayFirstPlayText)
+  if (tts) {
+    conv.add(tts)
+  }
 
   sendCommand({
-    suppressMic: false,
     conv,
+    suppressMic: false,
+    command: appSharedActions.SET_TOP_SCORES,
+    payload: {
+      slug,
+      scores: conv.user.params.scores[slug]
+    }
   })
 }

@@ -20,25 +20,20 @@ export default class AuthService {
   }
 
   async createNewUser() {
-    /*
-        const user : User = {
-          id: uuidv4(),
-          profile: {};
-          state: any;
-          email: string;
-          last_login_at: string;
-          updated_at?: string;
-          created_at?: string;
-        
-        }
-    */
+    const id = uuidv4()
+    const user: User = {
+      id
+    }
+    await UserModel.put(user)
+    return user
   }
+
 
   parseToken(token: string): Promise<TokenPayload> {
     return new Promise((resolve, reject) => {
       jwt.verify(token, serverRuntimeConfig.jwt.secret, function (err, decoded) {
         if (err) {
-          reject(err)
+          resolve(null)
         } else {
           resolve(decoded)
         }
