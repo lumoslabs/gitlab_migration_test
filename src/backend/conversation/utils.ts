@@ -2,6 +2,7 @@ import { Canvas, ConversationV3 } from 'actions-on-google'
 import { ExpectedPhrase } from 'actions-on-google/dist/api/schema'
 import appSharedActions from '@store/slices/appSharedActions'
 import getConfig from 'next/config'
+import { ITraining } from '@backend/libs/TrainingManager'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -40,11 +41,19 @@ export const sendCommand = async ({ conv, command = undefined, payload = undefin
   }))
 }
 
-export const setIsFirstLogin = (conv: ConversationV3) => {
+export const setIsFirstLogin = (conv: ConversationV3): void => {
   conv.session.params.isFirstPlay = true
 }
 
 
-export const getIsFirstLogin = (conv: ConversationV3) => {
-  return conv.session.params.isFirstPlay
+export const getIsFirstLogin = (conv: ConversationV3): boolean => {
+  return Boolean(conv.session.params.isFirstPlay)
+}
+
+export const setTraining = (conv: ConversationV3, training: ITraining) => {
+  conv.user.params.training = training
+}
+
+export const getTraining = (conv: ConversationV3): ITraining | undefined => {
+  return conv.user.params.training
 }
