@@ -18,17 +18,8 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
   useEffect(() => {
     if (!training?.games.length) {
       // If there's no workout ready, select a random game
-      const randomGameSlug = 'color-match-nest'
-      // TODO: fix this, it errors with: ./node_modules/google-auth-library/build/src/auth/googleauth.js:17:0
-      // Module not found: Can't resolve 'child_process'
-      // const randomGameSlug = getRandomElement([
-      //   'color-match-nest',
-      //   'ebb-and-flow-nest',
-      //   'raindrops-nest',
-      //   'train-of-thought-nest',
-      //   'word-snatchers-nest',
-      // ])
-      history.push(`/game/${randomGameSlug}`)
+      const randomGameConfig = games[Math.floor(Math.random() * games.length)]
+      history.push(`/game/${randomGameConfig.id}`)
     } else {
       setCurrentGame(games.find((game) => game.id === training.games[0]))
     }
