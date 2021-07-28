@@ -32,6 +32,8 @@ return (
         isTraining={true}
         scoreActionButtonText={training.games.length ? 'Next Game' : 'Main Menu'}
         onFinishHandler={onFinish}
+        remainingGamesCount={training?.games?.length}
+        totalGameCount={training?.size}
       />
     )}
   </>

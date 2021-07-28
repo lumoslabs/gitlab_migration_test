@@ -24,6 +24,8 @@ export interface IGameScoreCardProps {
   actionButtonHandler(e: React.MouseEvent<any>): any;
   statLabel: string;
   stat: number;
+  remainingGamesCount?: number;
+  totalGameCount?: number;
 }
 
 const GameScoreCard = ({
@@ -35,7 +37,9 @@ const GameScoreCard = ({
   actionButtonText,
   actionButtonHandler,
   statLabel,
-  stat
+  stat,
+  remainingGamesCount,
+  totalGameCount
  }: IGameScoreCardProps): JSX.Element => {
 
   const trophyIndex = topScoresData?.findIndex((score) => {
@@ -43,7 +47,19 @@ const GameScoreCard = ({
       return true
     return false
   })
-  //TODO: show different training icons depending on workout progress
+
+  // Workout Card Icon
+  let workoutIconUrl = '/assets/workout_icon.svg'
+
+  if (showTrainingIcon && remainingGamesCount && totalGameCount) {
+    if (remainingGamesCount === 0) {
+      workoutIconUrl = '/assets/training_complete.svg'
+    }
+    if (remainingGamesCount < totalGameCount) {
+      workoutIconUrl = `/assets/training_${totalGameCount - remainingGamesCount}by3.svg`
+    }
+  }
+
   return (
     <div className={css([commonStyles.flexColumnAlignCenter, commonStyles.fullWidth])}>
       <Card className={css([commonStyles.flexColumnAlignCenter, styles.card])}>
@@ -60,7 +76,7 @@ const GameScoreCard = ({
             {showTrainingIcon && (
               <div className={css([commonStyles.flexRowAllCenter, styles.trainingIconTitleDiv])}>
                 <img
-                  src='/assets/workout_icon.svg'
+                  src={workoutIconUrl}
                   className={css(styles.trainingIconImage)}
                   alt='Training Icon'
                 />

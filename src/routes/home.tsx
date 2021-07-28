@@ -46,7 +46,11 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
     <main>
       <div className={css(commonStyles.flexRowJustifyCenter, commonStyles.fullWidth, styles.topSpace)}>
         <div className={css(commonStyles.flexAlignCenter)}>
-          <WorkoutCard totalGameCount={training?.size} remainingGamesCount={training?.games?.length} clickHandler={handleClick} />
+          <WorkoutCard
+            totalGameCount={training?.size}
+            remainingGamesCount={training?.games?.length}
+            clickHandler={handleClick}
+          />
           <GameSection onClick={onGameClick} games={games} />
         </div>
       </div>
