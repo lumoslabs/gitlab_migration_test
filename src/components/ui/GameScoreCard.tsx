@@ -33,7 +33,7 @@ const GameScoreCard = (props: IGameScoreCardProps): JSX.Element => {
       return true
     return false
   })
-
+  //TODO: show different training icons depending on workout progress
   return (
     <div className={css([commonStyles.flexColumnAlignCenter, commonStyles.fullWidth])}>
       <Card className={css([commonStyles.flexColumnAlignCenter, styles.card])}>
