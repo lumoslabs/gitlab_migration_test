@@ -21,7 +21,6 @@ export interface IGameSpeechData {
 }
 
 export interface IGameCompletedData {
-  //TODO: extend it
   score: number;
   session_level: number;
   user_level: number;
@@ -37,8 +36,6 @@ export interface IGameContainerProps {
   isTraining: boolean;
 }
 
-
-//TODO: should we split logic to simplest functions?
 const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainerProps): JSX.Element => {
   const dispatch = useAppDispatch()
 
@@ -79,8 +76,8 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
     }
   }, [lastGameCommand])
 
+  // Handle game events
   useEffect(() => {
-    // Handle game events
     window.sendToJavaScript = (data: string | [string, IGameEventData], argData: IGameEventData) => {
       const [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
       let parsedData = eventData
