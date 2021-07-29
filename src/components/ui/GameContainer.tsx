@@ -95,7 +95,7 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
           //TODO: fix redux-toolkit thunk types
           //@ts-ignore
           dispatch(sendTextQuery({ query: 'Invoke Game Name Welcome Message', state: { 'name': game.values?.title } }))
-          track('game_load', eventTracking)
+          track('game_load_start', eventTracking)
           break
         case 'game:loadProgress':
           parsedData = Math.floor(Number(eventData) * 100)
@@ -126,7 +126,7 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
           //TODO: fix redux-toolkit thunk types
           //@ts-ignore
           dispatch(sendTextQuery({ query: 'Invoke Score Screen Score TTS', state: { score: eventData.score, slug: game.id, isTraining: isTraining } }))
-          track('game_complete', eventTracking)
+          track('game_finish', eventTracking)
           break
         case 'game:nest_cmm_restart':
           //TODO: fix redux-toolkit thunk types
