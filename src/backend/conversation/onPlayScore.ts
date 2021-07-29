@@ -45,11 +45,11 @@ export default async (conv: ConversationV3) => {
     const trainingManager = new TrainingManager(getTraining(conv))
     trainingManager.markGameCompleted(slug)
     const allGamesCount = trainingManager.getWorkoutGamesCount()
-    const remainGamesCount = trainingManager.getUnplayedGamedCount()
+    const remainingGamesCount = trainingManager.getUnplayedGamedCount()
 
-    if (allGamesCount - remainGamesCount === 1) {
+    if (allGamesCount - remainingGamesCount === 1) {
       tts = `You scored ${score} points. Great first play! Are you ready for the next game?`
-    } else if (remainGamesCount === 0) {
+    } else if (remainingGamesCount === 0) {
       tts = getRandomElement([
         `You scored ${score} points and completed your workout for today. Well done! 
         Would you like to return to the Lumosity main menu?`,

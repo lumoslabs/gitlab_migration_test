@@ -8,14 +8,15 @@ import getConfig from 'next/config'
 
 const debugBarStyle = {
   'background': 'white',
-  'opacity': .5,
+  'opacity': .4,
   'position': 'absolute' as Property.Position,
   'whiteSpace': 'pre-wrap' as Property.WhiteSpace,
   'overflow': 'auto',
   'zIndex': '100' as Property.ZIndex,
   'right': '0px',
   'bottom': '0px',
-  'maxWidth': '40%'
+  'top': '0px',
+  'maxWidth': '30%'
 }
 
 function NestHandler(): JSX.Element {
