@@ -4,8 +4,10 @@ import { GameConfig } from '@backend/models/config'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getTraining, actions } from '@store/slices/appSlice'
 import { useEffect, useState } from 'react'
+import useAmplitude from '@hooks/useAmplitude'
 
 export default function Training({ games }: { games: GameConfig[] }): JSX.Element {
+  const track = useAmplitude()
   const dispatch = useAppDispatch()
   const history = useHistory()
   const training = useAppSelector(getTraining)
@@ -14,11 +16,14 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
     dispatch(actions.setTrainingGameCompleted(currentGame.id))
   }
 
+  // TODO: fire event when training is completed: track('training_complete')
+
   useEffect(() => {
     if (!training?.games?.length) {
       // If there's no workout ready, select a random game
       const randomGameConfig = games[Math.floor(Math.random() * games.length)]
       history.push(`/game/${randomGameConfig.id}`)
+      track('training_complete_random_game')
     } else {
       setCurrentGame(games.find((game) => game.id === training.games[0]))
     }

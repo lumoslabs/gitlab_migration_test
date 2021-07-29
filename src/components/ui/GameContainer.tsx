@@ -12,6 +12,7 @@ import Button from '@components/ui/Button'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getLastGameCommand, sendTextQuery, outputTts, exitContinuousMatchMode } from '@store/slices/appSlice'
 import clonedeep from 'lodash.clonedeep'
+import useAmplitude from '@hooks/useAmplitude'
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -37,6 +38,7 @@ export interface IGameContainerProps {
 }
 
 const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainerProps): JSX.Element => {
+  const track = useAmplitude()
   const dispatch = useAppDispatch()
 
   // Set the dimensions of the screen for game layout
@@ -80,13 +82,16 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
   useEffect(() => {
     window.sendToJavaScript = (data: string | [string, IGameEventData], argData: IGameEventData) => {
       const [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
+      const eventTracking = { slug: game.id, version: game.values.last_version, gameData: eventData }
       let parsedData = eventData
+
       switch (eventName) {
         case 'game:loadStart':
           setShowProgress(true)
           //TODO: fix redux-toolkit thunk types
           //@ts-ignore
           dispatch(sendTextQuery({ query: 'Invoke Game Name Welcome Message', state: { 'name': game.values?.title } }))
+          track('game_load', eventTracking)
           break
         case 'game:loadProgress':
           parsedData = Math.floor(Number(eventData) * 100)
@@ -96,10 +101,12 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
           break
         case 'game:loadComplete':
           onEvent(eventName, eventData)
+          track('game_load_complete', eventTracking)
           break
         case 'game:start':
           onEvent(eventName, eventData)
           setShowProgress(false)
+          track('game_start', eventTracking)
           break
         case 'game:nest_cmm_start':
           //TODO: fix redux-toolkit thunk types
@@ -115,6 +122,7 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
           //TODO: fix redux-toolkit thunk types
           //@ts-ignore
           dispatch(sendTextQuery({ query: 'Invoke Score Screen Score TTS', state: { score: eventData.score, slug: game.id, isTraining: isTraining } }))
+          track('game_complete', eventTracking)
           break
         case 'game:nest_cmm_restart':
           //TODO: fix redux-toolkit thunk types
@@ -134,6 +142,7 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
           dispatch(exitContinuousMatchMode())
           break
         case 'game:quit':
+          track('game_quit', eventTracking)
           //TODO: move to main menu
           break
         //case 'game:resume':
