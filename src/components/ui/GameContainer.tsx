@@ -82,7 +82,11 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
   useEffect(() => {
     window.sendToJavaScript = (data: string | [string, IGameEventData], argData: IGameEventData) => {
       const [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
-      const eventTracking = { slug: game?.id, version: game?.values?.last_version, gameData: eventData }
+      const eventTracking = { slug: game?.id, version: game?.values?.last_version?.id }
+      if (eventData) {
+        eventTracking['gameData'] = eventData
+      }
+
       let parsedData = eventData
 
       switch (eventName) {
