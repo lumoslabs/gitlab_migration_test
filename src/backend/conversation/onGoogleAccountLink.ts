@@ -10,19 +10,19 @@ export default async (conv: ConversationV3) => {
   const userId = conv.user.params.id
 
   try {
-    //try to login with google token
+    // Attempt to login with google token
     await linkingService.linkExistingUserByToken(userId, token)
     conv.user.params.isLinked = true
   } catch (signinError) {
     try {
-      //looks like user doesn't exists in lumosity site
+      // This user cannot be found in the lumosity database
       await linkingService.createNewUser(token)
       await linkingService.linkExistingUserByToken(userId, token)
       conv.user.params.isLinked = true
     } catch (signupError) {
       //something went wrong with api or current user storage
-      logger.error(signupError, 'Linking user error')
-      conv.add('Error linking account. Please try again later.')
+      logger.error(signupError, 'Error linking user account')
+      conv.add('There was an error linking your account. Please try again later.')
     }
   }
 

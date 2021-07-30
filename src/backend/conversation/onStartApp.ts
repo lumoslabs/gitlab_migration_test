@@ -1,5 +1,13 @@
 import { ConversationV3 } from 'actions-on-google'
-import { sendCommand, getPublicUrlFromConv, getIsFirstLogin, setIsFirstLogin, setTraining, getTraining, convToUser } from '@backend/conversation/utils'
+import {
+  sendCommand,
+  getPublicUrlFromConv,
+  getIsFirstLogin,
+  setIsFirstLogin,
+  setTraining,
+  getTraining,
+  convToUser
+} from '@backend/conversation/utils'
 import appSharedActions from '@store/slices/appSharedActions'
 import AuthService from '@backend/services/AuthService'
 import { AccountLinkingStatus, VerificationStatus } from 'actions-on-google/dist/api/schema'

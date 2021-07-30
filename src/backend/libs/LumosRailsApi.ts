@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios"
+import axios, { AxiosInstance } from 'axios'
 import getConfig from 'next/config'
 
 const { serverRuntimeConfig } = getConfig()
@@ -16,10 +16,10 @@ export default class LumosRailsApi {
       headers: {
         Accept: 'application/json'
       }
-    });
+    })
   }
 
-  loginByGoogleToken = async (token: string): Promise<{ access_token: string, scope: "user" | string }> => {
+  loginByGoogleToken = async (token: string): Promise<{ access_token: string, scope: 'user' | string }> => {
     const uri = 'api/oauth/token'
     const params = {
       client_id: this.clientId,
@@ -37,17 +37,17 @@ export default class LumosRailsApi {
 
   getApiAccessToken = async (): Promise<{
     access_token: string,
-    scope: "confidential_client" | string
+    scope: 'confidential_client' | string
   }> => {
     const uri = 'api/oauth/token'
     const params = {
       client_id: this.clientId,
       client_secret: this.clientSecret,
       grant_type: 'client_credentials'
-    };
+    }
 
-    const response = await this.axios.post(uri, params);
-    return response.data;
+    const response = await this.axios.post(uri, params)
+    return response.data
   }
 
   createAccountWithGoogleIdToken = async (confidentialToken: string, userToken: string) => {
@@ -57,13 +57,13 @@ export default class LumosRailsApi {
         auth_type: 'google',
         id_token: userToken,
       }
-    };
+    }
     const response = await this.axios.post(uri, params, {
       headers: {
         Authorization: `OAuth ${confidentialToken}`
       }
-    });
-    return response.data;
+    })
+    return response.data
   }
 
 
@@ -76,7 +76,7 @@ export default class LumosRailsApi {
       }
     }, {
       headers: { Authorization: `OAuth ${accessToken}` }
-    });
+    })
     return response.data
   }
 
