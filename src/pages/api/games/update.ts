@@ -5,6 +5,9 @@ import withExceptionHandler from '@backend/libs/withExceptionHandler'
 import { GameEvents } from '@backend/models/gameRun'
 import ValidationError, { ValidationRules } from '@backend/errors/ValidationError'
 import ForbiddenError from '@backend/errors/ForbiddenError'
+import LumosRailsApi from '@backend/libs/LumosRailsApi'
+import AuthService from '@backend/services/AuthService'
+import logger from '@backend/libs/logger'
 
 /**
  * @curl
@@ -73,6 +76,17 @@ const handler = async (req: NextApiRequestWithUser, res: NextApiResponse): Promi
     eventName,
     req.body?.eventData
   )
+
+  if (req.user.id && (eventName === GameEvents.COMPLETED)) {
+    const user = await (new AuthService()).getUser(req.user.id)
+    if (user.lumosity_access_token) {
+      try {
+        await (new LumosRailsApi()).saveGameResult(user.lumosity_access_token, gameRun.game_slug, req.body?.eventData)
+      } catch (error) {
+        logger.error(error, 'Game result sync error')
+      }
+    }
+  }
 
   res.send({
     id

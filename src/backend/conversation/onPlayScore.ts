@@ -76,10 +76,14 @@ export default async (conv: ConversationV3) => {
   sendCommand({
     conv,
     suppressMic: false,
-    command: appSharedActions.SET_TOP_SCORES,
-    payload: {
-      slug,
-      scores: conv.user.params.scores[slug]
-    }
+    commands: [
+      {
+        command: appSharedActions.SET_TOP_SCORES,
+        payload: {
+          slug,
+          scores: conv.user.params.scores[slug]
+        }
+      }
+    ]
   })
 }

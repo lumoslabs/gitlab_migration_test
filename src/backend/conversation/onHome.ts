@@ -6,7 +6,11 @@ export default async (conv: ConversationV3) => {
   conv.add('Back to Main Menu')
   sendCommand({
     conv,
-    command: appSharedActions.GO_TO,
-    payload: '/home'
+    commands: [
+      {
+        command: appSharedActions.GO_TO,
+        payload: '/home'
+      }
+    ]
   })
 }

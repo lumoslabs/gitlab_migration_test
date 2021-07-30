@@ -28,6 +28,14 @@ export default class AuthService {
     return user
   }
 
+  async saveUser(id: string, data: Partial<User>): Promise<string> {
+    await UserModel.update({
+      id,
+      ...data
+    })
+    return id
+  }
+
 
   parseToken(token: string): Promise<TokenPayload> {
     return new Promise((resolve, reject) => {

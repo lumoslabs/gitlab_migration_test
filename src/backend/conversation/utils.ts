@@ -1,5 +1,5 @@
 import { Canvas, ConversationV3 } from 'actions-on-google'
-import { ExpectedPhrase } from 'actions-on-google/dist/api/schema'
+import { ExpectedPhrase, VerificationStatus } from 'actions-on-google/dist/api/schema'
 import appSharedActions from '@store/slices/appSharedActions'
 import getConfig from 'next/config'
 import { ITraining } from '@backend/libs/TrainingManager'
@@ -19,12 +19,14 @@ export const getPublicUrlFromConv = (conv: ConversationV3) => {
   return serverRuntimeConfig.publicUrl || ('https://' + conv.headers?.host?.toString())
 }
 
-export const sendCommand = async ({ conv, command = undefined, payload = undefined, suppressMic = false, continuousMatchPhrases = undefined }: {
+export const sendCommand = async ({ conv, commands = [], suppressMic = false, continuousMatchPhrases = undefined }: {
   conv: ConversationV3,
-  command?: appSharedActions,
   continuousMatchPhrases?: ExpectedPhrase[],
-  payload?: any,
   suppressMic?: boolean,
+  commands?: {
+    command: appSharedActions,
+    payload: any
+  }[]
 }) => {
   conv.add(new Canvas({
     enableFullScreen: true,
@@ -34,10 +36,7 @@ export const sendCommand = async ({ conv, command = undefined, payload = undefin
     } : undefined,
     url: getPublicUrlFromConv(conv),
     suppressMic,
-    data: command ? [{
-      command,
-      payload
-    }] : []
+    data: commands ? commands : []
   }))
 }
 
@@ -56,4 +55,16 @@ export const setTraining = (conv: ConversationV3, training: ITraining) => {
 
 export const getTraining = (conv: ConversationV3): ITraining | undefined => {
   return conv.user.params.training
+}
+
+export const convToUser = (conv: ConversationV3): any => {
+  return {
+    id: conv.user.params.id,
+    name: conv.user.params?.tokenPayload?.name,
+    email: conv.user.params?.tokenPayload?.email,
+    avatar: conv.user.params?.tokenPayload?.picture,
+    timezone: '',
+    isGuest: conv.user.verificationStatus === VerificationStatus.Guest,
+    isLinked: Boolean(conv.user.params?.isLinked)
+  }
 }

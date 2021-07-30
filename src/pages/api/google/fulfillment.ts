@@ -15,6 +15,9 @@ import onNoMatch from '@backend/conversation/onNoMatch'
 import onGameWelcomeMessage from '@backend/conversation/onGameWelcomeMessage'
 import onUserLogout from '@backend/conversation/onUserLogout'
 import onTraining from '@backend/conversation/onTraining'
+import onGoogleAccountLink from '@backend/conversation/onGoogleAccountLink'
+import onStartAccountLinkingMonologue from '@backend/conversation/onStartAccountLinkingMonologue'
+import onGoogleAccountLinkRejected from '@backend/conversation/onGoogleAccountLinkRejected'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -44,20 +47,26 @@ conversationApp.handle('UserLogout', onUserLogout)
 
 conversationApp.handle('Training', onTraining)
 
-//GoogleAccountLink
+//Google account link flow
+conversationApp.handle('StartAccountLinkingMonologue', onStartAccountLinkingMonologue)
+conversationApp.handle('GoogleAccountLink', onGoogleAccountLink)
+conversationApp.handle('GoogleAccountLinkRejected', onGoogleAccountLinkRejected)
+
 //GoogleAccountLinkRejected
-//StartAccountLinkingMonologue
+//
 
+//Should be moved into diff scenes 
+conversationApp.handle('Yes', onNoMatch)
+conversationApp.handle('No', onNoMatch)
+conversationApp.handle('Help', onNoMatch)
 
+//TODO: remove it from intence
 //FEInvokeTTS
 
-//Yes
-//No
-//Help
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    logger.debug(req.body, 'Fulfullment Request')
+    logger.debug(req.body, `Fulfullment Request ${req.body?.handler?.name}`)
     const result: StandardResponse = await conversationApp(req.body, req.headers)
     logger.debug(result.body, 'Fulfillment Result')
     return res.status(result.status).json(result.body)

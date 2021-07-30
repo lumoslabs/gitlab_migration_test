@@ -3,9 +3,7 @@ import { Table, Entity } from 'dynamodb-toolbox'
 
 export interface User {
   id: string;
-  email?: string;
-  lumosity_user_id?: string;
-  oauth_access_token?: string;
+  lumosity_access_token?: string;
   updated_at?: string;
   created_at?: string;
 }
@@ -19,8 +17,11 @@ export const table = new Table({
 
 const UserModel = new Entity<User>({
   name: 'User',
+  modified: 'updated_at',
+  created: 'created_at',
   attributes: {
     id: { partitionKey: true },
+    lumosity_access_token: { type: 'string' },
   },
   table
 })
