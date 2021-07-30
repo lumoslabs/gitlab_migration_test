@@ -4,7 +4,6 @@ import logger from '@backend/libs/logger'
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
 
-
   const service = new LumosRailsApi()
   const accessToken = 'bgsi2uge4jsa86pw613ib4tgz'
 

@@ -5,7 +5,7 @@ export default async (conv: ConversationV3) => {
 
   conv.user.params = {}
 
-  conv.add('Bye')
+  conv.add('You’ve been logged out')
   //TODO: test it on device
   //TODO: unlink account
   //TODO: close the app

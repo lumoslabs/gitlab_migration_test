@@ -15,8 +15,7 @@ export interface IUserInfoProps {
   logoutCallback(e: React.MouseEvent<any>): any;
 }
 
-const UserInfo = (props: IUserInfoProps): JSX.Element => {
-  const { show, handleClose, profilePicUrl, email, name, timezone, logoutCallback } = props
+const UserInfo = ({ show, handleClose, profilePicUrl, email, name, timezone, logoutCallback }: IUserInfoProps): JSX.Element => {
 
   return (
     <Modal className={css(styles.modal)}

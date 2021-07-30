@@ -27,14 +27,14 @@ const ConnectAccount = ({ handleCancel, handleConnect }: IConnectAccountProps): 
           <Button
             onClick={handleCancel}
             text='Cancel'
-            eventData={{ id: 'cancel_connect_account' }}
+            eventData={{ id: 'cancel_connect_account', message: 'Cancel' }}
           />
         </Col>
         <Col className={css(commonStyles.flexColumnAllCenter, styles.buttonDiv)}>
           <Button
             onClick={handleConnect}
             text='Connect'
-            eventData={{ id: 'connect_account' }}
+            eventData={{ id: 'connect_account', message: 'Connect' }}
           />
         </Col>
       </Row>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     paddingRight: '20vh',
     paddingLeft: '20vh',
     marginTop: '20vh',
-    textAlign: 'center'
+    textAlign: 'left'
   },
   buttonDiv: {
     padding: '20px'

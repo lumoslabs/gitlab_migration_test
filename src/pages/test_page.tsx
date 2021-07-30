@@ -12,6 +12,7 @@ import Button from '@components/ui/Button'
 import WideActionButton from '@components/ui/WideActionButton'
 import WorkoutCard from '@components/ui/WorkoutCard'
 import commonStyles from '@styles/commonStyles'
+import ConnectGuestAccount from '@components/ui/ConnectGuestAccount'
 
 const styles = StyleSheet.create({
   topSpace: {
@@ -29,6 +30,7 @@ export default function Test(): JSX.Element {
 
   return (
     <main>
+      <ConnectGuestAccount handleCancel={handleClick} />
       {/* <ConnectAccount handleCancel={handleClick} handleConnect={handleClick} /> */}
       {/* <AgeGate onSubmit={handleAgeGateClick} /> */}
       {/* <UserInfo
@@ -58,12 +60,12 @@ export default function Test(): JSX.Element {
         statLabel='Cards'
       /> */}
       {/* <Button onClick={handleClick} text='Button' /> */}
-      <WideActionButton
+      {/* <WideActionButton
         onClick={handleClick}
         buttonText='Wide Action Button'
         eventData={{'id': 'test'}}
         />
-      <UserBar clickHandler={handleClick} />
+      <UserBar clickHandler={handleClick} /> */}
     </main>
   )
 }
