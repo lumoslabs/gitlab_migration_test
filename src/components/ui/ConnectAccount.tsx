@@ -27,14 +27,14 @@ const ConnectAccount = ({ handleCancel, handleConnect }: IConnectAccountProps): 
           <Button
             onClick={handleCancel}
             text='Cancel'
-            eventData={{ id: 'cancel_connect_account', message: 'Cancel' }}
+            eventData={{ id: 'cancel_connect_account' }}
           />
         </Col>
         <Col className={css(commonStyles.flexColumnAllCenter, styles.buttonDiv)}>
           <Button
             onClick={handleConnect}
             text='Connect'
-            eventData={{ id: 'connect_account', message: 'Connect' }}
+            eventData={{ id: 'connect_account' }}
           />
         </Col>
       </Row>

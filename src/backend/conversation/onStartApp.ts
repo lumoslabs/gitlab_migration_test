@@ -10,7 +10,7 @@ import {
 } from '@backend/conversation/utils'
 import appSharedActions from '@store/slices/appSharedActions'
 import AuthService from '@backend/services/AuthService'
-import { AccountLinkingStatus, VerificationStatus } from 'actions-on-google/dist/api/schema'
+import { AccountLinkingStatus } from 'actions-on-google/dist/api/schema'
 import logger from '@backend/libs/logger'
 import TrainingManager from '@backend/libs/TrainingManager'
 
