@@ -2,7 +2,7 @@
 // import { getBaseUrl } from '@store/slices/appSlice'
 import { useLocation } from 'react-router-dom'
 
-export default function useAmplitude(): (eventName: string, eventProps?: any) => void {
+export default function amplitudeEvent(): (eventName: string, eventProps?: any) => void {
   //TODO: get userId from storage
   // const baseUrl = useAppSelector(getBaseUrl)
   const userId = 'guest'

@@ -1,12 +1,12 @@
 import { useHistory } from 'react-router-dom'
 import GamePlay from '@components/GamePlay'
 import { GameConfig } from '@backend/models/config'
-import useAmplitude from '@hooks/useAmplitude'
+import amplitudeEvent from '@hooks/amplitudeEvent'
 import { useEffect } from 'react'
 
 export default function Game({ game }: { game: GameConfig }): JSX.Element {
   const history = useHistory()
-  const track = useAmplitude()
+  const track = amplitudeEvent()
 
   useEffect(() => {
     track('page_view')

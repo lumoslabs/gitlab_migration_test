@@ -10,11 +10,11 @@ import commonStyles from '@styles/commonStyles'
 import { GameConfig } from '@backend/models/config'
 import { getTraining, sendTextQuery } from '@store/slices/appSlice'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import useAmplitude from '@hooks/useAmplitude'
+import amplitudeEvent from '@hooks/amplitudeEvent'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
 
-  const track = useAmplitude()
+  const track = amplitudeEvent()
 
   useEffect(() => {
     track('page_view')

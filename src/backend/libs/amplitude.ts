@@ -11,7 +11,7 @@ export interface IAmplitudeEventProps {
   data?: Record<string, any>;
 }
 
-const amplitudeEvent = async (props: IAmplitudeEventProps): Promise<void> => {
+const amplitudeBackendEvent = async (props: IAmplitudeEventProps): Promise<void> => {
   const { eventName, data, userId } = props
   const time = new Date().getTime()
 
@@ -26,4 +26,4 @@ const amplitudeEvent = async (props: IAmplitudeEventProps): Promise<void> => {
   client.flush()
 }
 
-export default amplitudeEvent
+export default amplitudeBackendEvent

@@ -6,14 +6,14 @@ import { useAppSelector } from '@store/hooks'
 import { getIsStarted } from '@store/slices/appSlice'
 import { useHistory } from 'react-router-dom'
 import getConfig from 'next/config'
-import useAmplitude from '@hooks/useAmplitude'
+import amplitudeEvent from '@hooks/amplitudeEvent'
 
 export function Index(): JSX.Element {
   const { publicRuntimeConfig } = getConfig()
   const isStarted = useAppSelector(getIsStarted)
   const history = useHistory()
 
-  const track = useAmplitude()
+  const track = amplitudeEvent()
   useEffect(() => {
     track('page_view')
   }, [])

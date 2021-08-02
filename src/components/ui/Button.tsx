@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, css } from 'aphrodite/no-important'
 import base from '@styles/colors/base'
-import useAmplitude from '@hooks/useAmplitude'
+import amplitudeEvent from '@hooks/amplitudeEvent'
 
 const { lumosWhite, lumosOrange, darkOrange } = base
 
@@ -46,7 +46,7 @@ export interface IButtonProps {
 }
 
 const Button = ({ text, onClick, buttonStyles, eventData, disabled }: IButtonProps): JSX.Element => {
-  const track = useAmplitude()
+  const track = amplitudeEvent()
 
   return (
     <button
