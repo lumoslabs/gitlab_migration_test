@@ -45,7 +45,7 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
           game={currentGame}
           isTraining={true}
           onGameComplete={onGameComplete}
-          scoreActionButtonText={training.games.length > 0 ? 'Next Game' : 'Main Menu'}
+          scoreActionButtonText={training.games.length > 1 ? 'Next Game' : 'Main Menu'}
           onFinishHandler={onFinish}
           remainingGamesCount={training?.games?.length}
           totalGameCount={training?.size}

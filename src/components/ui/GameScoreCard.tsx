@@ -51,11 +51,11 @@ const GameScoreCard = ({
   // Workout Card Icon
   let workoutIconUrl = '/assets/workout_icon.svg'
 
-  if (showTrainingIcon && remainingGamesCount && totalGameCount) {
+  if (showTrainingIcon && totalGameCount) {
     if (remainingGamesCount === 0) {
       workoutIconUrl = '/assets/training_complete.svg'
     }
-    if ((remainingGamesCount < totalGameCount) && (remainingGamesCount > 0)) {
+    else if ((remainingGamesCount < totalGameCount) && (remainingGamesCount > 0)) {
       workoutIconUrl = `/assets/training_${totalGameCount - remainingGamesCount}by3.svg`
     }
   }

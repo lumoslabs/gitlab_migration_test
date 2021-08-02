@@ -77,8 +77,6 @@ export default function GamePlay({
       )}
 
       {result && (topScores === null) && <LoadingComponent />}
-      {console.log('remainingGamesCount: ' + remainingGamesCount)}
-      {console.log('totalGameCount: ' + totalGameCount)}
       {result && (topScores !== null) && (
         <GameScoreCard
           title={game.values.title}
