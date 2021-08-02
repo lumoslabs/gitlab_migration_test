@@ -11,14 +11,11 @@ export interface IAmplitudeEventProps {
   data?: Record<string, any>;
 }
 
-const amplitudeBackendEvent = async (props: IAmplitudeEventProps): Promise<void> => {
-  const { eventName, data, userId } = props
-  const time = new Date().getTime()
+const amplitudeBackendEvent = async ({ eventName, data, userId }: IAmplitudeEventProps): Promise<void> => {
 
   client.logEvent({
     event_type: eventName,
     user_id: userId,
-    time: time,
     event_properties: data
   })
   // Send any events that are currently queued for sending.

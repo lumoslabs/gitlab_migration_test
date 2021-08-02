@@ -1,20 +1,13 @@
-// import { useAppSelector } from '@store/hooks'
-// import { getBaseUrl } from '@store/slices/appSlice'
+import { useAppSelector } from '@store/hooks'
+import { getUser } from '@store/slices/appSlice'
 import { useLocation } from 'react-router-dom'
 
 export default function amplitudeEvent(): (eventName: string, eventProps?: any) => void {
-  //TODO: get userId from storage
-  // const baseUrl = useAppSelector(getBaseUrl)
-  const userId = 'guest'
+  const user = useAppSelector(getUser)
+  const userId = user?.id
 
   const location = useLocation()
   const track = (eventName: string, eventProps = {}) => {
-    console.log(`Tracking data sent to amplitude: ${eventName}`, JSON.stringify({
-      ...eventProps,
-      userId: userId,
-      currentPage: location.pathname
-    }))
-
     const instance = window.amplitude?.getInstance()
     instance?.logEvent(eventName, {
       ...eventProps,

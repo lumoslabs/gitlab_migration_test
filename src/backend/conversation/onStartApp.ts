@@ -29,7 +29,7 @@ export default async (conv: ConversationV3) => {
 
   const authToken = await service.generateToken(user)
 
-  logger.debug(`onStartAppEvent user #${conv.user.params?.id}`)
+  logger.debug(`onStartAppEvent user #${conv.user?.params?.id}`)
   logger.debug(conv.user.params.isLinked, `conv.user.params.isLinked ${conv.user.params.isLinked}`)
   conv.user.params.id = user.id
   if (getIsFirstLogin(conv)) {
