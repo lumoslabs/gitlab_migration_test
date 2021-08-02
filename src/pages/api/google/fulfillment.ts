@@ -15,6 +15,7 @@ import onNoMatch from '@backend/conversation/onNoMatch'
 import onGameWelcomeMessage from '@backend/conversation/onGameWelcomeMessage'
 import onUserLogout from '@backend/conversation/onUserLogout'
 import onTraining from '@backend/conversation/onTraining'
+import amplitudeEvent from '@backend/libs/amplitude'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -58,6 +59,11 @@ conversationApp.handle('Training', onTraining)
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
     logger.debug(req.body, 'Fulfullment Request')
+    amplitudeEvent({
+      eventName: req.body?.handler?.name,
+      userId: req.body?.user?.params?.id,
+      data: req.body
+    })
     const result: StandardResponse = await conversationApp(req.body, req.headers)
     logger.debug(result.body, 'Fulfillment Result')
     return res.status(result.status).json(result.body)
@@ -65,3 +71,5 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     return res.send(e)
   }
 }
+
+

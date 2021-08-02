@@ -2,6 +2,38 @@
 # yarn lockfile v1
 
 
+"@amplitude/identify@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@amplitude/identify/-/identify-1.8.0.tgz#ac88e13861008f9e516ef05d1eac23b188bf1170"
+  integrity sha512-YMYFQDgmFH0aILwvkV9Bcf6qyqvBuW/MmyVIe2G1F5pOfV/PVmt48S8N9cBcD6IctGnQPXjuj92zt87rYvDdtg==
+  dependencies:
+    "@amplitude/types" "^1.8.0"
+    "@amplitude/utils" "^1.8.0"
+    tslib "^1.9.3"
+
+"@amplitude/node@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@amplitude/node/-/node-1.8.0.tgz#c2989065394c3ff3438cd1107e2e2f6f3159c015"
+  integrity sha512-11m5Ws/6hKTYjI0ObBIRgxdAcb7npTKUb9Ifba5d9dPmmPagu22+wvtzlbUiNQlPWQFI1ogq0qP2NOamEuZWkA==
+  dependencies:
+    "@amplitude/identify" "^1.8.0"
+    "@amplitude/types" "^1.8.0"
+    "@amplitude/utils" "^1.8.0"
+    tslib "^1.9.3"
+
+"@amplitude/types@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@amplitude/types/-/types-1.8.0.tgz#58f65f52c05b5ba844322f66b2158eab35651b24"
+  integrity sha512-Jomb5ypMM4fuS+4LThY33mbiLdNgDa3KAypH7bRmTqGnXKd3h2olM0HkHrQtAAbl2tln/hd9IPiSKjRVqoQ3fQ==
+
+"@amplitude/utils@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@amplitude/utils/-/utils-1.8.0.tgz#e687d8bb89579bc64455704a6f6d7badee78d3be"
+  integrity sha512-Hl9U2jc8Xp/2/c3QcCQ2ulKzYrdd6DISSHp6Un7v/lW9GdCXwk8aZU8B0MEvmBaAkvMnzJqJsIKqfVOU9iT0Gg==
+  dependencies:
+    "@amplitude/types" "^1.8.0"
+    tslib "^1.9.3"
+
 "@apidevtools/json-schema-ref-parser@^9.0.6":
   version "9.0.9"
   resolved "https://registry.yarnpkg.com/@apidevtools/json-schema-ref-parser/-/json-schema-ref-parser-9.0.9.tgz#d720f9256e3609621280584f2b47ae165359268b"
