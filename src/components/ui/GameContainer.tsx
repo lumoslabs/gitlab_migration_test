@@ -91,10 +91,10 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
 
       switch (eventName) {
         case 'game:loadStart':
-          setShowProgress(true)
           //TODO: fix redux-toolkit thunk types
           //@ts-ignore
           dispatch(sendTextQuery({ query: 'Invoke Game Name Welcome Message', state: { 'name': game.values?.title } }))
+          setShowProgress(true)
           track('game_load_start', eventTracking)
           break
         case 'game:loadProgress':
