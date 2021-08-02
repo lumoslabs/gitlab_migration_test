@@ -276,6 +276,35 @@ Example -
 ```
 
 
+#### isLinked
+
+boolean, is user already linked to rails account
+
+
+#### tokenPayload
+
+Payload of google auth token
+
+Example -
+
+```
+  "tokenPayload": {
+    "iss": "https://accounts.google.com",
+    "nbf": 1627662520,
+    "aud": "140360206587-q7naddm3fnd6qndt2m95v9fhp112vskq.apps.googleusercontent.com",
+    "sub": "109181940190210131768",
+    "hd": "lumoslabs.com",
+    "email": "yura.borue@lumoslabs.com",
+    "email_verified": true,
+    "name": "Yuriy Borue",
+    "picture": "https://lh3.googleusercontent.com/a/AATXAJzuL8BcrufWSjXfi4lKvgw0E1qldItmPwwU0c2r=s96-c",
+    "given_name": "Yuriy",
+    "family_name": "Borue",
+    "iat": 1627662820,
+    "exp": 1627666420,
+    "jti": "31fc96f08cf3dd9ff81878342c3f469a691ed7d6"
+  }
+```
 
 
 ### Known issues 
@@ -283,3 +312,10 @@ Example -
 #### User Storage is always empty
 Just a allow "Web & App Activity" on the [Activity controls](https://myactivity.google.com/u/3/activitycontrols?pli=1) page
 
+#### Clear User Storage
+
+You can clear user storage on the [App page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) , with *Stop Lumosity from remembering me (?)* button
+
+#### isGuest always true
+
+You can change it on app page https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o with Allow Lumosity to remember me (?) button

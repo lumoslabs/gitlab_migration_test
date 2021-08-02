@@ -3,6 +3,7 @@ import appSharedActions from '@store/slices/appSharedActions'
 import { convToUser, sendCommand } from './utils'
 import LinkingService from '@backend/services/LinkingService'
 import logger from '@backend/libs/logger'
+import rollbar from '@backend/libs/rollbar'
 
 export default async (conv: ConversationV3) => {
   const linkingService = new LinkingService()
@@ -21,6 +22,7 @@ export default async (conv: ConversationV3) => {
       conv.user.params.isLinked = true
     } catch (signupError) {
       //something went wrong with api or current user storage
+      rollbar?.error(signupError)
       logger.error(signupError, 'Error linking user account')
       conv.add('There was an error linking your account. Please try again later.')
     }

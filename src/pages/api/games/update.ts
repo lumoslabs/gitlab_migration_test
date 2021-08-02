@@ -8,6 +8,7 @@ import ForbiddenError from '@backend/errors/ForbiddenError'
 import LumosRailsApi from '@backend/libs/LumosRailsApi'
 import AuthService from '@backend/services/AuthService'
 import logger from '@backend/libs/logger'
+import rollbar from '@backend/libs/rollbar'
 
 /**
  * @curl
@@ -79,10 +80,11 @@ const handler = async (req: NextApiRequestWithUser, res: NextApiResponse): Promi
 
   if (req.user.id && (eventName === GameEvents.COMPLETED)) {
     const user = await (new AuthService()).getUser(req.user.id)
-    if (user.lumosity_access_token) {
+    if (user?.lumosity_access_token) {
       try {
         await (new LumosRailsApi()).saveGameResult(user.lumosity_access_token, gameRun.game_slug, req.body?.eventData)
       } catch (error) {
+        rollbar?.error(error, req)
         logger.error(error, 'Game result sync error')
       }
     }

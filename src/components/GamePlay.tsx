@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { GameConfig } from '@backend/models/config'
 import GameContainer from '@components/ui/GameContainer'
 import GameScoreCard from '@components/ui/GameScoreCard'
@@ -21,36 +21,36 @@ export default function GamePlay({
   scoreActionButtonText,
   remainingGamesCount,
   totalGameCount
-  }: {
-    game: GameConfig,
-    onFinishHandler: () => void,
-    isTraining: boolean,
-    scoreActionButtonText: string,
-    remainingGamesCount?: number,
-    totalGameCount?: number
-  }): JSX.Element {
+}: {
+  game: GameConfig,
+  onFinishHandler: () => void,
+  isTraining: boolean,
+  scoreActionButtonText: string,
+  remainingGamesCount?: number,
+  totalGameCount?: number
+}): JSX.Element {
   const dispatch = useAppDispatch()
   const [result, setResult] = useState(null)
-  const [gameRunId, setGameRunId] = useState('')
   const topScores = useAppSelector(getTopScores)[game.id]
+  const gameRunIdRef = useRef('')
 
   const onComplete = (data: any) => {
     setResult(data)
   }
 
   const onEvent = (eventName: string, eventData: any) => {
-    if (gameRunId) {
-      gameRunUpdate(gameRunId, eventName, eventData)
+    if (gameRunIdRef.current) {
+      gameRunUpdate(gameRunIdRef.current, eventName, eventData)
     }
   }
 
   // Create game run/results
   useEffect(() => {
+    gameRunIdRef.current = ''
     dispatch(actions.resetTopScores())
-    setGameRunId('')
     setResult(null)
     gameRunCreate(game.id).then((gameRunId) => {
-      setGameRunId(gameRunId)
+      gameRunIdRef.current = gameRunId
     })
   }, [game])
 
@@ -74,8 +74,6 @@ export default function GamePlay({
       )}
 
       {result && (topScores === null) && <LoadingComponent />}
-      {console.log('remainingGamesCount: ' + remainingGamesCount)}
-      {console.log('totalGameCount: ' + totalGameCount)}
       {result && (topScores !== null) && (
         <GameScoreCard
           title={game.values.title}
