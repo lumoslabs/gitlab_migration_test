@@ -45,7 +45,7 @@ export default async (conv: ConversationV3) => {
     const trainingManager = new TrainingManager(getTraining(conv))
     trainingManager.markGameCompleted(slug)
     const allGamesCount = trainingManager.getWorkoutGamesCount()
-    const remainingGamesCount = trainingManager.getUnplayedGamedCount()
+    const remainingGamesCount = trainingManager.getUnplayedGamedCount() - 1
 
     if (allGamesCount - remainingGamesCount === 1) {
       tts = `You scored ${score} points. Great first play! Are you ready for the next game?`
@@ -76,10 +76,14 @@ export default async (conv: ConversationV3) => {
   sendCommand({
     conv,
     suppressMic: false,
-    command: appSharedActions.SET_TOP_SCORES,
-    payload: {
-      slug,
-      scores: conv.user.params.scores[slug]
-    }
+    commands: [
+      {
+        command: appSharedActions.SET_TOP_SCORES,
+        payload: {
+          slug,
+          scores: conv.user.params.scores[slug]
+        }
+      }
+    ]
   })
 }

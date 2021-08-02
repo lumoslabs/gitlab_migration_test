@@ -12,8 +12,7 @@ export interface IGameCardProps {
   onClick: (slug: string) => void;
 }
 
-const GameCard = (props: IGameCardProps): JSX.Element => {
-  const { bannerUrl, brainArea, title, slug, onClick } = props
+const GameCard = ({ bannerUrl, brainArea, title, slug, onClick }: IGameCardProps): JSX.Element => {
 
   return (
     <a onClick={() => { onClick(slug) }}>

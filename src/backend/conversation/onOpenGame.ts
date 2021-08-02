@@ -9,8 +9,12 @@ export default async (conv: ConversationV3) => {
   const gameSlug = games[gameNameResolved] ? games[gameNameResolved] : getRandomElement<string>(games)
   sendCommand({
     conv,
-    command: appSharedActions.GO_TO,
-    payload: `/game/${gameSlug}`,
+    commands: [
+      {
+        command: appSharedActions.GO_TO,
+        payload: `/game/${gameSlug}`
+      }
+    ],
     suppressMic: true,
   })
 }

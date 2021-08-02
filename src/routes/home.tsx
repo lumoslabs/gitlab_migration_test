@@ -8,12 +8,11 @@ import UserBar from '@components/ui/UserBar'
 import UserInfo from '@components/ui/UserInfo'
 import commonStyles from '@styles/commonStyles'
 import { GameConfig } from '@backend/models/config'
-import { getTraining, sendTextQuery } from '@store/slices/appSlice'
+import { getTraining, getUser, sendTextQuery } from '@store/slices/appSlice'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import useAmplitude from '@hooks/useAmplitude'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
-
   const track = useAmplitude()
 
   useEffect(() => {
@@ -23,10 +22,17 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
   const history = useHistory()
   const dispatch = useAppDispatch()
   const training = useAppSelector(getTraining)
-
+  const user = useAppSelector(getUser)
   const [showAccountModal, setShowAccountModal] = useState(false)
   const handleAccountModalClose = () => setShowAccountModal(false)
-  const handleAccountModalShow = () => setShowAccountModal(true)
+
+  const onUserBarClick = () => {
+    if (!user?.isLinked) {
+      history.push('/account-linking')
+    } else {
+      setShowAccountModal(true)
+    }
+  }
 
   const handleLogout = () => {
     setShowAccountModal(false)
@@ -58,8 +64,12 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
         show={showAccountModal}
         handleClose={handleAccountModalClose}
         logoutCallback={handleLogout}
+        name={user?.name}
+        email={user?.email}
+        profilePicUrl={user?.avatar}
+        timezone={user?.timezone}
       />
-      <UserBar clickHandler={handleAccountModalShow} />
+      <UserBar clickHandler={onUserBarClick} name={user?.name} profilePicUrl={user?.avatar} />
     </main>
   )
 }

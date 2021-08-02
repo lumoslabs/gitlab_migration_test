@@ -39,6 +39,11 @@ module.exports = () => {
       // Should be disabled for production
       guestUser: true,
       apidoc: true,
+      rails: {
+        url: process.env.RAILS_URL,
+        clientId: process.env.RAILS_CLIENT_ID,
+        clientSecret: process.env.RAILS_CLIENT_SECRET,
+      }
     },
     publicRuntimeConfig: {
       // Will be available on both server and client

@@ -1,5 +1,5 @@
 enum appSharedActions {
-  SET_STARTED = 'setStarted',
+  SET_STORE = 'setStore',
   GO_TO = 'goTo',
   SET_TOP_SCORES = 'setTopScores'
 }

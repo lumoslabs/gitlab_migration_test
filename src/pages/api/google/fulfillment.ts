@@ -15,6 +15,9 @@ import onNoMatch from '@backend/conversation/onNoMatch'
 import onGameWelcomeMessage from '@backend/conversation/onGameWelcomeMessage'
 import onUserLogout from '@backend/conversation/onUserLogout'
 import onTraining from '@backend/conversation/onTraining'
+import onGoogleAccountLink from '@backend/conversation/onGoogleAccountLink'
+import onStartAccountLinkingMonologue from '@backend/conversation/onStartAccountLinkingMonologue'
+import onGoogleAccountLinkRejected from '@backend/conversation/onGoogleAccountLinkRejected'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -22,42 +25,54 @@ const conversationApp = conversation({
   clientId: serverRuntimeConfig.google.clientId,
 })
 
+// On app launch
 conversationApp.handle('StartApp', onStartApp)
+
+// When the user voice input cannot be matched to an intent
 conversationApp.handle('NoMatch', onNoMatch)
 
+// Launch a game per user request
 conversationApp.handle('OpenGame', onOpenGame)
+// Inform user we are starting the game
 conversationApp.handle('GameWelcomeMessage', onGameWelcomeMessage)
 
-//
+// Back to Main Menu
 conversationApp.handle('Home', onHome)
 conversationApp.handle('Games', onHome)
 
-//
+// Gameplay
 conversationApp.handle('StartGame', onStartGame)
 conversationApp.handle('RestartCMM', onStartGame)
 conversationApp.handle('ResumeGame', onStartGame)
 conversationApp.handle('RestartGame', onStartGame)
 
+// Game Score Screen
 conversationApp.handle('PlayScore', onPlayScore)
 
+// Log Out User and close app
 conversationApp.handle('UserLogout', onUserLogout)
 
+// Start Training Session
 conversationApp.handle('Training', onTraining)
 
-//GoogleAccountLink
+//Google account link flow
+conversationApp.handle('StartAccountLinkingMonologue', onStartAccountLinkingMonologue)
+conversationApp.handle('GoogleAccountLink', onGoogleAccountLink)
 //GoogleAccountLinkRejected
-//StartAccountLinkingMonologue
+conversationApp.handle('GoogleAccountLinkRejected', onGoogleAccountLinkRejected)
 
+//Should be moved into diff scenes
+conversationApp.handle('Yes', onNoMatch)
+conversationApp.handle('No', onNoMatch)
+conversationApp.handle('Help', onNoMatch)
 
+//TODO: remove this from intents
 //FEInvokeTTS
 
-//Yes
-//No
-//Help
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    logger.debug(req.body, 'Fulfullment Request')
+    logger.debug(req.body, `Fulfillment Request: ${req.body?.handler?.name}`)
     const result: StandardResponse = await conversationApp(req.body, req.headers)
     logger.debug(result.body, 'Fulfillment Result')
     return res.status(result.status).json(result.body)
