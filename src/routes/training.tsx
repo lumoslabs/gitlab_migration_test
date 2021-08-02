@@ -16,30 +16,41 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
     dispatch(actions.setTrainingGameCompleted(currentGame.id))
   }
 
-  // TODO: fire event when training is completed: track('training_complete')
+  const onGameComplete = () => {
+    if (training?.games?.length === 1) {
+      track('training_session_finish')
+    }
+  }
 
   useEffect(() => {
     if (!training?.games?.length) {
       // If there's no workout ready, select a random game
       const randomGameConfig = games[Math.floor(Math.random() * games.length)]
       history.push(`/game/${randomGameConfig.id}`)
-      track('training_complete_random_game')
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!training?.games?.length) {
+      history.push(`/home`)
     } else {
       setCurrentGame(games.find((game) => game.id === training.games[0]))
     }
   }, [training])
 
-return (
-  <>
-    {currentGame && (
-      <GamePlay
-        game={currentGame}
-        isTraining={true}
-        scoreActionButtonText={training.games.length > 0 ? 'Next Game' : 'Main Menu'}
-        onFinishHandler={onFinish}
-        remainingGamesCount={training?.games?.length}
-        totalGameCount={training?.size}
-      />
-    )}
-  </>
-)}
+  return (
+    <>
+      {currentGame && (
+        <GamePlay
+          game={currentGame}
+          isTraining={true}
+          onGameComplete={onGameComplete}
+          scoreActionButtonText={training.games.length > 0 ? 'Next Game' : 'Main Menu'}
+          onFinishHandler={onFinish}
+          remainingGamesCount={training?.games?.length}
+          totalGameCount={training?.size}
+        />
+      )}
+    </>
+  )
+}
