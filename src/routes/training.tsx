@@ -4,8 +4,10 @@ import { GameConfig } from '@backend/models/config'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getTraining, actions } from '@store/slices/appSlice'
 import { useEffect, useState } from 'react'
+import useAmplitude from '@hooks/useAmplitude'
 
 export default function Training({ games }: { games: GameConfig[] }): JSX.Element {
+  const track = useAmplitude()
   const dispatch = useAppDispatch()
   const history = useHistory()
   const training = useAppSelector(getTraining)
@@ -14,27 +16,41 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
     dispatch(actions.setTrainingGameCompleted(currentGame.id))
   }
 
+  const onGameComplete = () => {
+    if (training?.games?.length === 1) {
+      track('training_session_finish')
+    }
+  }
+
   useEffect(() => {
     if (!training?.games?.length) {
       // If there's no workout ready, select a random game
       const randomGameConfig = games[Math.floor(Math.random() * games.length)]
       history.push(`/game/${randomGameConfig.id}`)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!training?.games?.length) {
+      history.push(`/home`)
     } else {
       setCurrentGame(games.find((game) => game.id === training.games[0]))
     }
   }, [training])
 
-return (
-  <>
-    {currentGame && (
-      <GamePlay
-        game={currentGame}
-        isTraining={true}
-        scoreActionButtonText={training.games.length > 0 ? 'Next Game' : 'Main Menu'}
-        onFinishHandler={onFinish}
-        remainingGamesCount={training?.games?.length}
-        totalGameCount={training?.size}
-      />
-    )}
-  </>
-)}
+  return (
+    <>
+      {currentGame && (
+        <GamePlay
+          game={currentGame}
+          isTraining={true}
+          onGameComplete={onGameComplete}
+          scoreActionButtonText={training.games.length > 1 ? 'Next Game' : 'Main Menu'}
+          onFinishHandler={onFinish}
+          remainingGamesCount={training?.games?.length}
+          totalGameCount={training?.size}
+        />
+      )}
+    </>
+  )
+}

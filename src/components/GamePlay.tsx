@@ -20,14 +20,16 @@ export default function GamePlay({
   isTraining,
   scoreActionButtonText,
   remainingGamesCount,
-  totalGameCount
+  totalGameCount,
+  onGameComplete,
 }: {
   game: GameConfig,
   onFinishHandler: () => void,
   isTraining: boolean,
   scoreActionButtonText: string,
   remainingGamesCount?: number,
-  totalGameCount?: number
+  totalGameCount?: number,
+  onGameComplete?: () => any,
 }): JSX.Element {
   const dispatch = useAppDispatch()
   const [result, setResult] = useState(null)
@@ -36,6 +38,7 @@ export default function GamePlay({
 
   const onComplete = (data: any) => {
     setResult(data)
+    onGameComplete && onGameComplete()
   }
 
   const onEvent = (eventName: string, eventData: any) => {
@@ -85,7 +88,7 @@ export default function GamePlay({
           actionButtonHandler={onFinishHandler}
           stat={stat}
           statLabel={statLabel}
-          remainingGamesCount={remainingGamesCount}
+          remainingGamesCount={remainingGamesCount - 1}
           totalGameCount={totalGameCount}
         />
       )}
