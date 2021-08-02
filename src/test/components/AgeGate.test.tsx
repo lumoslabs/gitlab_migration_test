@@ -22,6 +22,7 @@ it('matches snapshot', () => {
   const { asFragment } = render(
     <AgeGate
       max={new Date(Date.UTC(2021, 7, 16, 17, 33, 0, 0))}
+      min={new Date(Date.UTC(1900, 7, 16, 17, 33, 0, 0))}
       onSubmit={onSubmit}
     />, {}
   )
