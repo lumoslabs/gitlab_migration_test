@@ -60,9 +60,9 @@ export const getTraining = (conv: ConversationV3): ITraining | undefined => {
 export const convToUser = (conv: ConversationV3): any => {
   return {
     id: conv.user.params.id,
-    name: conv.user.params?.tokenPayload?.name,
-    email: conv.user.params?.tokenPayload?.email,
-    avatar: conv.user.params?.tokenPayload?.picture,
+    name: conv.user.params?.isLinked ? conv.user.params?.tokenPayload?.name : '',
+    email: conv.user.params?.isLinked ? conv.user.params?.tokenPayload?.email : '',
+    avatar: conv.user.params?.isLinked ? conv.user.params?.tokenPayload?.picture : '',
     timezone: '',
     isGuest: conv.user.verificationStatus === VerificationStatus.Guest,
     isLinked: Boolean(conv.user.params?.isLinked)
