@@ -19,7 +19,7 @@ export function Index(): JSX.Element {
   }, [])
 
   useEffect(() => {
-    if (publicRuntimeConfig.withoutInteractiveCanvas) {
+    if (publicRuntimeConfig.withoutInteractiveCanvas && !process.browser) {
       history.push('/home')
     }
     if (isStarted) {

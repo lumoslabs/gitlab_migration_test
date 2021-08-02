@@ -7,34 +7,25 @@ import Button from '@components/ui/Button'
 
 export interface IConnectAccountProps {
   handleCancel(e: React.MouseEvent<any>): any;
-  handleConnect(e: React.MouseEvent<any>): any;
 }
 
-const ConnectAccount = ({ handleCancel, handleConnect }: IConnectAccountProps): JSX.Element => {
+const ConnectGuestAccount = ({ handleCancel }: IConnectAccountProps): JSX.Element => {
+  const text = 'We are unable to verify your account. If you would like to save your scores and progress, please update your Google Voice Match settings in the Google Home app. Then exit and restart Lumosity.'
+  const buttonText = 'Return to Main Menu'
 
   return (
     <Container className={css(commonStyles.flexColumnAlignCenter)}>
       <Row className={css(commonStyles.flexRowAllCenter)}>
         <p className={css(styles.title)}>
-          {"By clicking Connect, Google Assistant will collect your Lumosity audio commands, and their Terms and Privacy Policy will also apply along with Lumosity’s."}
-          <br />
-          <br />
-          {"To remove Google Assistant’s access, please visit Lumosity's Help Center."}
+          {text}
         </p>
       </Row>
       <Row className={css(commonStyles.flexRowAllCenter)}>
         <Col className={css(commonStyles.flexColumnAllCenter, styles.buttonDiv)}>
           <Button
             onClick={handleCancel}
-            text='Cancel'
-            eventData={{ id: 'cancel_connect_account' }}
-          />
-        </Col>
-        <Col className={css(commonStyles.flexColumnAllCenter, styles.buttonDiv)}>
-          <Button
-            onClick={handleConnect}
-            text='Connect'
-            eventData={{ id: 'connect_account' }}
+            text={buttonText}
+            eventData={{ id: 'connect_guest_return_to_main_menu', message: buttonText }}
           />
         </Col>
       </Row>
@@ -42,7 +33,7 @@ const ConnectAccount = ({ handleCancel, handleConnect }: IConnectAccountProps): 
   )
 }
 
-export default ConnectAccount
+export default ConnectGuestAccount
 
 const styles = StyleSheet.create({
   title: {

@@ -72,7 +72,16 @@ const initialState: {
     games: string[],
     count: number,
     deadline: number
-  } | null
+  } | null,
+  user?: {
+    id?: string,
+    name?: string,
+    email?: string,
+    avatar?: string,
+    timezone?: string,
+    isLinked?: boolean,
+    isGuest?: boolean
+  }
 } = {
   tts: TtsMarkName.START,
   started: false,
@@ -82,7 +91,8 @@ const initialState: {
   continuousMatchMode: false,
   lastGameCommand: null,
   scores: {},
-  training: null
+  training: null,
+  user: null
 } as const
 
 
@@ -96,20 +106,15 @@ export const appSlice = createSlice({
     ) => {
       state.tts = action.payload.tts
     },
-    setStarted: (
+    setStore: (
       state: Draft<typeof initialState>,
-      action: PayloadAction<{ baseUrl: string, authToken: string, training: (typeof initialState.training) }>
+      action: PayloadAction<Partial<typeof initialState>>
     ) => {
       state.started = true
-      if (action?.payload?.baseUrl) {
-        state.baseUrl = action?.payload?.baseUrl
-      }
-      if (action?.payload?.authToken) {
-        state.authToken = action?.payload?.authToken
-      }
-      if (action.payload?.training) {
-        state.training = action.payload?.training
-      }
+      state.baseUrl = action?.payload?.baseUrl ?? state.baseUrl
+      state.authToken = action?.payload?.authToken ?? state.authToken
+      state.training = action.payload?.training ?? state.training
+      state.user = action.payload?.user ?? state.user
     },
     setContinuousMatchMode: (
       state: Draft<typeof initialState>,
@@ -167,6 +172,7 @@ export const getContinuousMatchMode = (state) => state.app.continuousMatchMode
 export const getLastGameCommand = (state) => state.app.lastGameCommand
 export const getTopScores = (state) => state.app.scores
 export const getTraining = (state) => state.app.training
+export const getUser = (state) => state.app.user
 
 // Reducers and actions
 export const actions = appSlice.actions

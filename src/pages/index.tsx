@@ -10,6 +10,7 @@ import IndexPage from '@routes/index'
 import HomePage from '@routes/home'
 import GamePage from '@routes/game'
 import TrainingPage from '@routes/training'
+import AccountLinkingPage from '@routes/accountLinking'
 import NestHandler from '@components/NestHandler'
 import ConfigService from '@backend/services/ConfigService'
 
@@ -32,6 +33,9 @@ export function Index({ games }: { games: GameConfig[] }): JSX.Element {
         </Route>
         <Route exact path='/training'>
           <TrainingPage games={games} />
+        </Route>
+        <Route exact path='/account-linking'>
+          <AccountLinkingPage />
         </Route>
         {gameRoutes}
       </Switch>
