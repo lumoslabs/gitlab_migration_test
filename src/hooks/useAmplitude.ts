@@ -9,7 +9,7 @@ export default function useAmplitude(): (eventName: string, eventProps?: any) =>
 
   const location = useLocation()
   const track = (eventName: string, eventProps = {}) => {
-    console.log('Tracking data sent to amplitude: ', JSON.stringify({
+    console.log(`Tracking data sent to amplitude: ${eventName}`, JSON.stringify({
       ...eventProps,
       userId: userId,
       currentPage: location.pathname

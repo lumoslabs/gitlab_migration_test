@@ -40,7 +40,7 @@ const GameScoreCard = ({
   stat,
   remainingGamesCount,
   totalGameCount
- }: IGameScoreCardProps): JSX.Element => {
+}: IGameScoreCardProps): JSX.Element => {
 
   const trophyIndex = topScoresData?.findIndex((score) => {
     if (score.score === currentScore)
@@ -55,7 +55,7 @@ const GameScoreCard = ({
     if (remainingGamesCount === 0) {
       workoutIconUrl = '/assets/training_complete.svg'
     }
-    if (remainingGamesCount < totalGameCount && remainingGamesCount > 0) {
+    if ((remainingGamesCount < totalGameCount) && (remainingGamesCount > 0)) {
       workoutIconUrl = `/assets/training_${totalGameCount - remainingGamesCount}by3.svg`
     }
   }
