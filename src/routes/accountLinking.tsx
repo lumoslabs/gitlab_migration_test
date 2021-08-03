@@ -7,17 +7,21 @@ import ConnectGuestAccount from '@components/ui/ConnectGuestAccount'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 
 export default function accountLinking(): JSX.Element {
-  const history = useHistory()
   const user = useAppSelector(getUser)
-  const { sendTextQuery } = useInteractiveCanvas()
+  const { outputTts, sendTextQuery } = useInteractiveCanvas()
 
   useEffect(() => {
-    sendTextQuery('Invoke Account Linking Monologue TTS')
+    if (user?.isGuest) {
+      outputTts(`You're currently in guest mode. If you would like to save your scores and progress, check your Google Voice match settings and restart Lumosity. You can say "Home" to go to the main menu.`)
+    } else {
+      outputTts(`You are currently playing as a guest user. To save scores and progress, you need to link your Lumosity account. Press connect to link your account.`)
+    }
   }, [])
 
   const handleCancel = () => {
-    history.push('/home')
+    sendTextQuery('Home')
   }
+
   const handleConnect = () => {
     sendTextQuery('Invoke link google account')
   }

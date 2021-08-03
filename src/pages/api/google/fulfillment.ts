@@ -57,7 +57,6 @@ conversationApp.handle('UserLogout', onUserLogout)
 conversationApp.handle('Training', onTraining)
 
 //Google account link flow
-conversationApp.handle('StartAccountLinkingMonologue', onStartAccountLinkingMonologue)
 conversationApp.handle('GoogleAccountLink', onGoogleAccountLink)
 //GoogleAccountLinkRejected
 conversationApp.handle('GoogleAccountLinkRejected', onGoogleAccountLinkRejected)
@@ -65,10 +64,11 @@ conversationApp.handle('GoogleAccountLinkRejected', onGoogleAccountLinkRejected)
 //Should be moved into diff scenes
 conversationApp.handle('Yes', onNoMatch)
 conversationApp.handle('No', onNoMatch)
-conversationApp.handle('Help', onNoMatch)
 
-//TODO: remove this from intents
-//FEInvokeTTS
+//TODO: remove from code and from intence
+conversationApp.handle('StartAccountLinkingMonologue', onStartAccountLinkingMonologue)
+conversationApp.handle('FEInvokeTTS', onNoMatch)
+
 
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {

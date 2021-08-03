@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 export default function useInteractiveCanvas() {
   const location = useLocation()
 
-  const outputTts = (text: string, prompt: boolean) => {
+  const outputTts = (text: string, prompt: boolean = false) => {
     try {
       window.interactiveCanvas?.outputTts(text, prompt)
     } catch (e) {

@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, Draft, PayloadAction } from '@reduxjs/toolkit'
-
+import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '@store/index'
 //TODO: split slice to redux folder format
 
 export enum TtsMarkName {
@@ -27,10 +27,10 @@ interface appState {
     payload: Record<string, any> | null,
     timestamp: number
   } | null
-  scores: Record<string, { score: number, data: string }>,
+  scores: Record<string, { score: number, date: string }[]>,
   training: {
     games: string[],
-    count: number,
+    size: number,
     deadline: number
   } | null,
   user?: {
@@ -95,7 +95,7 @@ export const appSlice = createSlice({
     },
     setTopScores: (
       state: Draft<typeof initialState>,
-      action: PayloadAction<{ slug: string, scores: { score: number, data: string } }>
+      action: PayloadAction<{ slug: string, scores: { score: number, date: string }[] }>
     ) => {
       state.scores[action.payload.slug] = action.payload.scores
     },
@@ -115,17 +115,17 @@ export const appSlice = createSlice({
 
 
 // Selectors
-export const getAppState = (state) => state.app
-export const getTts = (state) => state.app.tts
-export const getIsStarted = (state) => state.app.started
-export const getBaseUrl = (state) => state.app.baseUrl
-export const getAuthToken = (state) => state.app.authToken
-export const getSendTextQueryState = (state) => state.app.lastTextQueryState
-export const getContinuousMatchMode = (state) => state.app.continuousMatchMode
-export const getLastGameCommand = (state) => state.app.lastGameCommand
-export const getTopScores = (state) => state.app.scores
-export const getTraining = (state) => state.app.training
-export const getUser = (state) => state.app.user
+export const getAppState = (state: RootState) => state.app
+export const getTts = (state: RootState) => state.app.tts
+export const getIsStarted = (state: RootState) => state.app.started
+export const getBaseUrl = (state: RootState) => state.app.baseUrl
+export const getAuthToken = (state: RootState) => state.app.authToken
+export const getSendTextQueryState = (state: RootState) => state.app.lastTextQueryState
+export const getContinuousMatchMode = (state: RootState) => state.app.continuousMatchMode
+export const getLastGameCommand = (state: RootState) => state.app.lastGameCommand
+export const getTopScores = (state: RootState) => state.app.scores
+export const getTraining = (state: RootState) => state.app.training
+export const getUser = (state: RootState) => state.app.user
 
 // Reducers and actions
 export const actions = appSlice.actions
