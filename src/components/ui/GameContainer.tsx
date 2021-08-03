@@ -92,7 +92,6 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
 
       switch (eventName) {
         case 'game:loadStart':
-          sendTextQuery('Invoke Game Name Welcome Message', { 'name': game.values?.title })
           setShowProgress(true)
           track('game_load_start', eventTracking)
           break

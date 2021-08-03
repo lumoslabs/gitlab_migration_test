@@ -34,8 +34,6 @@ conversationApp.handle('NoMatch', onNoMatch)
 
 // Launch a game per user request
 conversationApp.handle('OpenGame', onOpenGame)
-// Inform user we are starting the game
-conversationApp.handle('GameWelcomeMessage', onGameWelcomeMessage)
 
 // Back to Main Menu
 conversationApp.handle('Home', onHome)
@@ -66,6 +64,7 @@ conversationApp.handle('Yes', onNoMatch)
 conversationApp.handle('No', onNoMatch)
 
 //TODO: remove from code and from intence
+conversationApp.handle('GameWelcomeMessage', onGameWelcomeMessage)
 conversationApp.handle('StartAccountLinkingMonologue', onStartAccountLinkingMonologue)
 conversationApp.handle('FEInvokeTTS', onNoMatch)
 
