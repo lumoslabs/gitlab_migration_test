@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import Script from 'react-load-script'
@@ -9,10 +8,11 @@ import { GameConfig } from '@backend/models/config'
 import commonStyles from '@styles/commonStyles'
 import GameProgressBar from '@components/ui/GameProgressBar'
 import Button from '@components/ui/Button'
-import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { getLastGameCommand, sendTextQuery, outputTts, exitContinuousMatchMode } from '@store/slices/appSlice'
+import { useAppSelector } from '@store/hooks'
+import { getLastGameCommand } from '@store/slices/appSlice'
 import clonedeep from 'lodash.clonedeep'
 import useAmplitude from '@hooks/useAmplitude'
+import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -39,7 +39,7 @@ export interface IGameContainerProps {
 
 const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainerProps): JSX.Element => {
   const track = useAmplitude()
-  const dispatch = useAppDispatch()
+  const { sendTextQuery, outputTts, exitContinuousMatchMode } = useInteractiveCanvas()
 
   // Set the dimensions of the screen for game layout
   const [clientHeight, setHeight] = useState(0)
@@ -82,18 +82,17 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
   useEffect(() => {
     window.sendToJavaScript = (data: string | [string, IGameEventData], argData: IGameEventData) => {
       const [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
-      const eventTracking = { slug: game?.id, version: game?.values?.last_version?.id }
-      if (eventData) {
-        eventTracking['gameData'] = eventData
+      const eventTracking = {
+        slug: game?.id,
+        version: game?.values?.last_version?.id,
+        gameData: eventData ? eventData : undefined
       }
 
       let parsedData = eventData
 
       switch (eventName) {
         case 'game:loadStart':
-          //TODO: fix redux-toolkit thunk types
-          //@ts-ignore
-          dispatch(sendTextQuery({ query: 'Invoke Game Name Welcome Message', state: { 'name': game.values?.title } }))
+          sendTextQuery('Invoke Game Name Welcome Message', { 'name': game.values?.title })
           setShowProgress(true)
           track('game_load_start', eventTracking)
           break
@@ -113,37 +112,27 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
           track('game_start', eventTracking)
           break
         case 'game:nest_cmm_start':
-          //TODO: fix redux-toolkit thunk types
-          //@ts-ignore
-          dispatch(sendTextQuery({ query: 'Invoke Start Game', state: { slug: game.id } }))
+          sendTextQuery('Invoke Start Game', { slug: game.id })
           break
         case 'game:complete':
           onEvent(eventName, eventData)
-          //TODO: fix redux-toolkit thunk types
-          //@ts-ignore
-          dispatch(exitContinuousMatchMode())
+          exitContinuousMatchMode()
           onComplete(eventData as IGameCompletedData)
-          //TODO: fix redux-toolkit thunk types
-          //@ts-ignore
-          dispatch(sendTextQuery({ query: 'Invoke Score Screen Score TTS', state: { score: eventData.score, slug: game.id, isTraining: isTraining } }))
+          parsedData = eventData as IGameCompletedData
+          sendTextQuery('Invoke Score Screen Score TTS', { score: parsedData.score, slug: game.id, isTraining: isTraining })
           track('game_finish', eventTracking)
           break
         case 'game:nest_cmm_restart':
-          //TODO: fix redux-toolkit thunk types
-          //@ts-ignore
-          dispatch(sendTextQuery({ query: 'Restart Continuous Match Mode', state: { slug: game.id } }))
+          sendTextQuery('Restart Continuous Match Mode', { slug: game.id })
           break
         case 'game:speech':
           parsedData = eventData as IGameSpeechData
-          //@ts-ignore
-          dispatch(outputTts(parsedData))
+          outputTts(parsedData.text, parsedData.prompt)
           break
         case 'game:pause':
           break
         case 'game:nest_cmm_pause':
-          //TODO: fix redux-toolkit thunk types
-          //@ts-ignore
-          dispatch(exitContinuousMatchMode())
+          exitContinuousMatchMode()
           break
         case 'game:quit':
           track('game_quit', eventTracking)
@@ -161,6 +150,8 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
       window.sendToJavaScript = () => { }
       // Clear cocos3 scope
       window?.cc?.director?.end()
+      // try to exit from cmm
+      exitContinuousMatchMode()
     }
   }, [])
 

@@ -16,47 +16,7 @@ export enum sendTextQueryState {
   ERROR = 'ERROR',
 }
 
-export const sendTextQuery = createAsyncThunk(
-  'interactiveCanvas/sendTextQuery',
-  async ({ query, state }: { query: string, state: Record<any, any> }) => {
-    if (state) {
-      window.interactiveCanvas?.setCanvasState(state)
-    }
-    const result = await window.interactiveCanvas?.sendTextQuery(query)
-    if (result !== 'SUCCESS') {
-      console.error('interactiveCanvas - sendTextQuery - incorrect result', { query, state }, result)
-    }
-    return result as string
-  }
-)
-
-export const exitContinuousMatchMode = createAsyncThunk(
-  'interactiveCanvas/exitContinuousMatchMode',
-  async () => {
-    try {
-      window.interactiveCanvas?.exitContinuousMatchMode()
-    } catch (e) {
-      console.error('interactiveCanvas - exitContinuousMatchMode - exception', e)
-    }
-  }
-)
-
-export const outputTts = createAsyncThunk(
-  'interactiveCanvas/outputTts',
-  async ({ text, prompt }: {
-    text: string,
-    prompt: boolean
-  }) => {
-    try {
-      window.interactiveCanvas?.outputTts(text, prompt)
-    } catch (e) {
-      console.error('interactiveCanvas - outputTts - exception', e)
-    }
-  }
-)
-
-
-const initialState: {
+interface appState {
   tts: TtsMarkName,
   started: boolean,
   baseUrl: string,
@@ -82,7 +42,9 @@ const initialState: {
     isLinked?: boolean,
     isGuest?: boolean
   }
-} = {
+}
+
+const initialState: appState = {
   tts: TtsMarkName.START,
   started: false,
   baseUrl: '',
@@ -148,16 +110,7 @@ export const appSlice = createSlice({
     ) => {
       state.training.games = state.training.games.filter((game) => game !== action.payload)
     }
-  },
-  extraReducers: (builder) => {
-    builder.addCase(sendTextQuery.fulfilled, (state, action) => {
-      state.lastTextQueryState = action.payload as sendTextQueryState
-    }).addCase(sendTextQuery.rejected, (state) => {
-      state.lastTextQueryState = sendTextQueryState.ERROR
-    }).addCase(sendTextQuery.pending, (state) => {
-      state.lastTextQueryState = sendTextQueryState.PENDING
-    })
-  },
+  }
 })
 
 

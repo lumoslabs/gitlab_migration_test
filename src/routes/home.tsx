@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { css, StyleSheet } from 'aphrodite/no-important'
@@ -8,9 +7,10 @@ import UserBar from '@components/ui/UserBar'
 import UserInfo from '@components/ui/UserInfo'
 import commonStyles from '@styles/commonStyles'
 import { GameConfig } from '@backend/models/config'
-import { getTraining, getUser, sendTextQuery } from '@store/slices/appSlice'
-import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { getTraining, getUser } from '@store/slices/appSlice'
+import { useAppSelector } from '@store/hooks'
 import useAmplitude from '@hooks/useAmplitude'
+import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
   const track = useAmplitude()
@@ -20,9 +20,9 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
   }, [])
 
   const history = useHistory()
-  const dispatch = useAppDispatch()
   const training = useAppSelector(getTraining)
   const user = useAppSelector(getUser)
+  const { sendTextQuery } = useInteractiveCanvas()
   const [showAccountModal, setShowAccountModal] = useState(false)
   const handleAccountModalClose = () => setShowAccountModal(false)
 
@@ -36,8 +36,7 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
 
   const handleLogout = () => {
     setShowAccountModal(false)
-    //@ts-ignore
-    dispatch(sendTextQuery({ query: 'Invoke User Logout' }))
+    sendTextQuery('Invoke User Logout')
   }
 
   const handleClick = () => {
