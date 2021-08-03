@@ -11,8 +11,8 @@ export interface ITraining {
 
 export default class TrainingManager {
   protected training: ITraining | null
-  protected size = 3
-  protected version = 1
+  protected size = 3 // Workouts are 3 games
+  protected version = 1   // 1 session per day, change this to get more
   protected timezone = 'America/Los_Angeles' // default timezone
 
   constructor(training?: ITraining | null, timezone?: string) {
