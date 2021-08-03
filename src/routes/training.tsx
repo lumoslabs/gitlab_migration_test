@@ -4,10 +4,10 @@ import { GameConfig } from '@backend/models/config'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getTraining, actions } from '@store/slices/appSlice'
 import { useEffect, useState } from 'react'
-import amplitudeEvent from '@hooks/amplitudeEvent'
+import useAmplitude from '@hooks/useAmplitude'
 
 export default function Training({ games }: { games: GameConfig[] }): JSX.Element {
-  const track = amplitudeEvent()
+  const track = useAmplitude()
   const dispatch = useAppDispatch()
   const history = useHistory()
   const training = useAppSelector(getTraining)

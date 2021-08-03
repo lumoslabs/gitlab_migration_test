@@ -2,7 +2,7 @@ import { useAppSelector } from '@store/hooks'
 import { getUser } from '@store/slices/appSlice'
 import { useLocation } from 'react-router-dom'
 
-export default function amplitudeEvent(): (eventName: string, eventProps?: any) => void {
+export default function useAmplitude(): (eventName: string, eventProps?: any) => void {
   const user = useAppSelector(getUser)
   const userId = user?.id
 

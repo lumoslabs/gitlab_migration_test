@@ -12,7 +12,7 @@ import Button from '@components/ui/Button'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getLastGameCommand, sendTextQuery, outputTts, exitContinuousMatchMode } from '@store/slices/appSlice'
 import clonedeep from 'lodash.clonedeep'
-import amplitudeEvent from '@hooks/amplitudeEvent'
+import useAmplitude from '@hooks/useAmplitude'
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -38,7 +38,7 @@ export interface IGameContainerProps {
 }
 
 const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainerProps): JSX.Element => {
-  const track = amplitudeEvent()
+  const track = useAmplitude()
   const dispatch = useAppDispatch()
 
   // Set the dimensions of the screen for game layout
