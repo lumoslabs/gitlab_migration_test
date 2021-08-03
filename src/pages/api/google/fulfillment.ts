@@ -18,6 +18,7 @@ import onTraining from '@backend/conversation/onTraining'
 import onGoogleAccountLink from '@backend/conversation/onGoogleAccountLink'
 import onStartAccountLinkingMonologue from '@backend/conversation/onStartAccountLinkingMonologue'
 import onGoogleAccountLinkRejected from '@backend/conversation/onGoogleAccountLinkRejected'
+import rollbar from '@backend/libs/rollbar'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -77,6 +78,8 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     logger.debug(result.body, 'Fulfillment Result')
     return res.status(result.status).json(result.body)
   } catch (e) {
+    rollbar?.error(e, req)
+    logger.error(e, 'fulfillment.ts')
     return res.send(e)
   }
 }
