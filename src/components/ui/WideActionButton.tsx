@@ -2,7 +2,6 @@ import React from 'react'
 import { css, StyleSheet } from 'aphrodite'
 import Button from '@components/ui/Button'
 import commonStyles from '@styles/commonStyles'
-import useAmplitude from '@hooks/useAmplitude'
 
 export interface IWideActionButtonProps {
   extendStyles?: any;
@@ -13,7 +12,6 @@ export interface IWideActionButtonProps {
 }
 
 const WideActionButton = ({ buttonText, onClick, extendStyles, eventData, disabled }: IWideActionButtonProps): JSX.Element => {
-  const track = useAmplitude()
 
   return (
     <div className={css(commonStyles.flexJustifyCenter)}>
@@ -21,11 +19,8 @@ const WideActionButton = ({ buttonText, onClick, extendStyles, eventData, disabl
         disabled={disabled}
         buttonStyles={[styles.wideAction, extendStyles]}
         text={buttonText}
-        onClick={e => {
-          track('button_click', eventData)
-          onClick(e)
-          e.preventDefault()
-        }}
+        eventData={eventData}
+        onClick={onClick}
       />
     </div>
   )

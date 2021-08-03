@@ -9,4 +9,18 @@ export const getCurrentUTCString = () => {
   return dayjs.utc().format()
 }
 
+export const getDayjsWithTimezone = (tz) => {
+  return dayjs.tz(new Date(), tz)
+}
+
+export const isValidTimezone = (tz) => {
+  try {
+    Intl.DateTimeFormat(undefined, { timeZone: tz });
+    return true;
+  }
+  catch (ex) {
+    return false;
+  }
+}
+
 export default dayjs.utc()

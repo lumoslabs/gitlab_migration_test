@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "PORT=7300 next dev",
+    "dev-inspect": "NODE_OPTIONS='--inspect' PORT=7300 next dev",
     "build": "next build",
     "start": "next start",
     "check-types": "tsc --pretty --noEmit",
