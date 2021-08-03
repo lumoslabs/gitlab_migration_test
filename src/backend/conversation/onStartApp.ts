@@ -32,20 +32,24 @@ export default async (conv: ConversationV3) => {
   logger.debug(`onStartAppEvent user #${conv.user.params?.id}`)
   logger.debug(conv.user.params.isLinked, `conv.user.params.isLinked ${conv.user.params.isLinked}`)
   conv.user.params.id = user.id
-  if (getIsFirstLogin(conv)) {
-    conv.add('Welcome to Lumosity. You can say play a game or do a workout. What would you like to do today?')
-  } else {
-    if (conv.user.accountLinkingStatus !== AccountLinkingStatus.Linked) {
-      conv.add('Welcome back. What would you like to do today?')
-    } else {
-      conv.add('You can say play a game or do a workout. What would you like to do today?');
-    }
-  }
 
   const trainingManager = new TrainingManager(getTraining(conv))
   const training = await trainingManager.get()
 
   setTraining(conv, training)
+
+  if (getIsFirstLogin(conv) && training.games.length > 0) {
+    conv.add('Welcome to Lumosity. You can say play a game or do a workout. What would you like to do today?')
+  } else {
+    if (conv.user.accountLinkingStatus === AccountLinkingStatus.Linked || training.games.length <= 0) {
+      conv.add('Welcome back. What would you like to do today?')
+    }
+    else {
+      conv.add(`Welcome back. By the way, your score and progress will not be saved
+         until you link your Lumosity account. If you would like to link your Lumosity account, 
+         you can tap "Guest" on the Main Menu.`)
+    }
+  }
 
   sendCommand({
     conv,
