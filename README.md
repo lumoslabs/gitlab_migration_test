@@ -188,7 +188,7 @@ GameEventName -
 
 User params properties
 
-#### id
+#### ID
 uuid of user from dynamodb, stored in StartApp handler
 ```
 {
@@ -196,8 +196,8 @@ uuid of user from dynamodb, stored in StartApp handler
 }
 ```
 
-#### scores
-Top scores of the user, where key is a game id and value is array with 5 last top gameplay info,
+#### Scores
+Top scores of the user, where key is a game id and value is array with 5 last top gameplay info:
 
 ```
   {
@@ -243,7 +243,7 @@ Example -
 ```
 
 
-#### training
+#### Training
 
 Last workout information
 
@@ -307,15 +307,19 @@ Example -
 ```
 
 
-### Known issues 
+### Known issues
+
+#### Linking account does not work with localhost on staging
+You cannot link with staging while on a device because staging requires VPN.
+To link your account to a staging account, you must use the simulator while on the VPN.
 
 #### User Storage is always empty
-Just a allow "Web & App Activity" on the [Activity controls](https://myactivity.google.com/u/3/activitycontrols?pli=1) page
+Just allow "Web & App Activity" on Google's [Activity controls](https://myactivity.google.com/u/3/activitycontrols?pli=1) page
 
 #### Clear User Storage
 
-You can clear user storage on the [App page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) , with *Stop Lumosity from remembering me (?)* button
+You can clear user storage on the [App page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o), with the *Stop Lumosity from remembering me (?)* link
 
 #### isGuest always true
 
-You can change it on [app page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) with Allow Lumosity to remember me (?) button
+You can change it on [app page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) with the *Allow Lumosity to remember me (?)* link

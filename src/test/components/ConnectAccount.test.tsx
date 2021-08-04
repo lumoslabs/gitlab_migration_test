@@ -1,6 +1,6 @@
 import React from 'react'
 import ConnectAccount from '@components/ui/ConnectAccount'
-import { render } from '@testing-library/react'
+import { render } from '@test/render-with-redux'
 
 const handleClick = () => { window.location.href = '/' }
 
@@ -17,8 +17,7 @@ jest.mock('react-router-dom', () => ({
 
 it('matches snapshot', () => {
   const { asFragment } = render(
-    <ConnectAccount handleCancel={handleClick} handleConnect={handleClick}
-   />, {}
+    <ConnectAccount handleCancel={handleClick} handleConnect={handleClick} />
   )
   expect(asFragment()).toMatchSnapshot()
 })

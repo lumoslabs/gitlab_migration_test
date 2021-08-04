@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from '@store/hooks'
 import useAmplitude from '@hooks/useAmplitude'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
+
   const track = useAmplitude()
 
   useEffect(() => {

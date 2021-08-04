@@ -14,7 +14,7 @@ jest.mock('react-router-dom', () => ({
     hash: '',
     state: null,
     key: '5nvxpbdafa',
-  }),
+  })
 }))
 
 describe('Home page', () => {
