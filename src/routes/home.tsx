@@ -14,6 +14,7 @@ import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import useAppBusListener from '@hooks/useAppBusListener'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
+
   const track = useAmplitude()
 
   useEffect(() => {

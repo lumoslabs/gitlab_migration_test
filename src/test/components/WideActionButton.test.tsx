@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet } from 'aphrodite'
 import WideActionButton from '@components/ui/WideActionButton'
-import { render } from '@testing-library/react'
+import { render } from '@test/render-with-redux'
 
 let currentPage = window.location.href
 const handleClick = () => { currentPage = '/' }
@@ -34,7 +34,7 @@ it('matches snapshot', () => {
       extendStyles={styles.nextButton}
       buttonText='WideActionButton'
       onClick={handleClick}
-    />, {}
+    />
   )
   expect(asFragment()).toMatchSnapshot()
 })

@@ -15,12 +15,13 @@ import onNoMatch from '@backend/conversation/onNoMatch'
 import onGameWelcomeMessage from '@backend/conversation/onGameWelcomeMessage'
 import onUserLogout from '@backend/conversation/onUserLogout'
 import onTraining from '@backend/conversation/onTraining'
-import onGoogleAccountLink from '@backend/conversation/onGoogleAccountLink'
 import onStartAccountLinkingMonologue from '@backend/conversation/onStartAccountLinkingMonologue'
+import onGoogleAccountLink from '@backend/conversation/onGoogleAccountLink'
 import onGoogleAccountLinkRejected from '@backend/conversation/onGoogleAccountLinkRejected'
 import rollbar from '@backend/libs/rollbar'
 import onYes from '@backend/conversation/onYes'
 import onNo from '@backend/conversation/onNo'
+import amplitudeBackendEvent from '@backend/libs/amplitude'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -75,7 +76,14 @@ conversationApp.handle('FEInvokeTTS', onNoMatch)
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    logger.debug(req.body, `Fulfillment Request: ${req.body?.handler?.name}`)
+    logger.debug(req.body, 'Fulfullment Request')
+
+    amplitudeBackendEvent({
+      eventName: `intent_${req.body?.handler?.name}`,
+      userId: req.body?.user?.params?.id,
+      data: req.body
+    })
+
     const result: StandardResponse = await conversationApp(req.body, req.headers)
     logger.debug(result.body, 'Fulfillment Result')
     return res.status(result.status).json(result.body)
@@ -85,3 +93,5 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     return res.send(e)
   }
 }
+
+
