@@ -30,7 +30,6 @@ export default function useInteractiveCanvas() {
       pathname: location.pathname
     })
     const result = await window.interactiveCanvas?.sendTextQuery(query)
-    console.log('sendTextQuery', query, result)
     if (result !== 'SUCCESS') {
       console.error('interactiveCanvas - sendTextQuery - incorrect result', { query, state }, result)
     }
