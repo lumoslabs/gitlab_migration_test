@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getTraining, actions } from '@store/slices/appSlice'
 import { useEffect, useState } from 'react'
 import useAmplitude from '@hooks/useAmplitude'
+import sample from 'lodash.sample'
 
 export default function Training({ games }: { games: GameConfig[] }): JSX.Element {
   const track = useAmplitude()
@@ -24,19 +25,21 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
 
   useEffect(() => {
     if (!training?.games?.length) {
-      // If there's no workout ready, select a random game
-      const randomGameConfig = games[Math.floor(Math.random() * games.length)]
-      history.push(`/game/${randomGameConfig.id}`)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!training?.games?.length) {
       history.push(`/home`)
     } else {
       setCurrentGame(games.find((game) => game.id === training.games[0]))
     }
   }, [training])
+
+
+  //Should be the last useEffect here
+  useEffect(() => {
+    if (!training?.games?.length) {
+      // If there's no workout ready, select a random game
+      const randomGameConfig = sample(games)
+      history.push(`/game/${randomGameConfig.id}`)
+    }
+  }, [])
 
   return (
     <>

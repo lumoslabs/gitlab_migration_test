@@ -18,6 +18,7 @@ import onTraining from '@backend/conversation/onTraining'
 import onStartAccountLinkingMonologue from '@backend/conversation/onStartAccountLinkingMonologue'
 import onGoogleAccountLink from '@backend/conversation/onGoogleAccountLink'
 import onGoogleAccountLinkRejected from '@backend/conversation/onGoogleAccountLinkRejected'
+import rollbar from '@backend/libs/rollbar'
 import amplitudeBackendEvent from '@backend/libs/amplitude'
 
 const { serverRuntimeConfig } = getConfig()
@@ -34,14 +35,13 @@ conversationApp.handle('NoMatch', onNoMatch)
 
 // Launch a game per user request
 conversationApp.handle('OpenGame', onOpenGame)
-// Inform user we are starting the game
-conversationApp.handle('GameWelcomeMessage', onGameWelcomeMessage)
 
 // Back to Main Menu
 conversationApp.handle('Home', onHome)
 conversationApp.handle('Games', onHome)
 
 // Gameplay
+//TODO: move it to frontend
 conversationApp.handle('StartGame', onStartGame)
 conversationApp.handle('RestartCMM', onStartGame)
 conversationApp.handle('ResumeGame', onStartGame)
@@ -57,7 +57,6 @@ conversationApp.handle('UserLogout', onUserLogout)
 conversationApp.handle('Training', onTraining)
 
 //Google account link flow
-conversationApp.handle('StartAccountLinkingMonologue', onStartAccountLinkingMonologue)
 conversationApp.handle('GoogleAccountLink', onGoogleAccountLink)
 //GoogleAccountLinkRejected
 conversationApp.handle('GoogleAccountLinkRejected', onGoogleAccountLinkRejected)
@@ -65,10 +64,12 @@ conversationApp.handle('GoogleAccountLinkRejected', onGoogleAccountLinkRejected)
 //Should be moved into diff scenes
 conversationApp.handle('Yes', onNoMatch)
 conversationApp.handle('No', onNoMatch)
-conversationApp.handle('Help', onNoMatch)
 
-//TODO: remove this from intents
-//FEInvokeTTS
+//TODO: remove from code and from intence
+conversationApp.handle('GameWelcomeMessage', onGameWelcomeMessage)
+conversationApp.handle('StartAccountLinkingMonologue', onStartAccountLinkingMonologue)
+conversationApp.handle('FEInvokeTTS', onNoMatch)
+
 
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
@@ -85,6 +86,8 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     logger.debug(result.body, 'Fulfillment Result')
     return res.status(result.status).json(result.body)
   } catch (e) {
+    rollbar?.error(e, req)
+    logger.error(e, 'fulfillment.ts')
     return res.send(e)
   }
 }

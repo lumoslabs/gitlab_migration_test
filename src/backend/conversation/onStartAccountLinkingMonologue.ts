@@ -1,3 +1,5 @@
+//MOVED TO FRONTEND
+//TODO: remove it from gactions
 import { ConversationV3 } from 'actions-on-google'
 import { VerificationStatus } from 'actions-on-google/dist/api/schema'
 import { sendCommand } from './utils'

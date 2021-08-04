@@ -41,7 +41,6 @@ const WorkoutCard = ({ clickHandler, remainingGamesCount = 3, totalGameCount = 3
             alt='Workout Icon'
           >
           </Card.Img>
-          {console.log(totalGameCount)}
           <Card.Title className={css(styles.cardTitle)}>
             {'Daily Workout'}
           </Card.Title>
@@ -53,7 +52,7 @@ const WorkoutCard = ({ clickHandler, remainingGamesCount = 3, totalGameCount = 3
             extendStyles={styles.cta}
             buttonText={buttonText || 'Start My Workout'}
             onClick={clickHandler}
-            eventData={{id: 'start_workout'}}
+            eventData={{ id: 'start_workout' }}
           />
         </Card.Body>
       </Card>

@@ -68,7 +68,7 @@ const UserInfo = ({ show, handleClose, profilePicUrl, email, name, timezone, log
             </Col>
             <Col xs={8}>
               <p className={css(styles.valueText)}>
-                {timezone || 'Pacific Time USA & Canada'}
+                {timezone}
               </p>
             </Col>
           </Row>
@@ -89,7 +89,7 @@ const UserInfo = ({ show, handleClose, profilePicUrl, email, name, timezone, log
           extendStyles={styles.cta}
           buttonText='Logout'
           onClick={logoutCallback}
-          eventData={{id: 'logout', message: 'Logout' }}
+          eventData={{ id: 'logout' }}
         />
       </Modal.Body>
     </Modal>

@@ -1,4 +1,4 @@
-import dayjs from '@backend/libs/dayjs'
+import dayjs, { getDayjsWithTimezone, isValidTimezone } from '@backend/libs/dayjs'
 import samplesize from 'lodash.samplesize'
 import ConfigService from '@backend/services/ConfigService'
 
@@ -11,13 +11,16 @@ export interface ITraining {
 
 export default class TrainingManager {
   protected training: ITraining | null
-  // Workouts are 3 games
-  protected size = 3
-  protected version = 1
+  protected size = 3 // Workouts are 3 games
+  protected version = 1   // Version of current training manager, if you want to invalidate all trainings increase this int
+  protected timezone = 'America/Los_Angeles' // default timezone
 
-  constructor(training?: ITraining | null) {
+  constructor(training?: ITraining | null, timezone?: string) {
     if ((training?.version === this.version) && (training?.deadline > dayjs.unix())) {
       this.training = training
+    }
+    if (timezone && isValidTimezone(timezone)) {
+      this.timezone = timezone
     }
   }
 
@@ -28,7 +31,7 @@ export default class TrainingManager {
       version: this.version,
       games: samplesize(allGames, this.size),
       size: this.size,
-      deadline: dayjs.add(1, 'day').hour(0).minute(0).second(0).unix() // TODO: add timezone logic
+      deadline: getDayjsWithTimezone(this.timezone).endOf('day').unix()
     }
   }
 

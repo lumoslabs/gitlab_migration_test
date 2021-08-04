@@ -8,6 +8,8 @@ import gameRunUpdate from '@api/gameRunUpdate'
 
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getTopScores, actions } from '@store/slices/appSlice'
+import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
+import sample from 'lodash.sample'
 
 /*
 Example:
@@ -35,6 +37,7 @@ export default function GamePlay({
   const [result, setResult] = useState(null)
   const topScores = useAppSelector(getTopScores)[game.id]
   const gameRunIdRef = useRef('')
+  const { outputTts } = useInteractiveCanvas()
 
   const onComplete = (data: any) => {
     setResult(data)
@@ -52,6 +55,30 @@ export default function GamePlay({
     gameRunIdRef.current = ''
     dispatch(actions.resetTopScores())
     setResult(null)
+
+    //GameWelcomeMessage
+    if (!isTraining) {
+      outputTts(`Okay. Let's play ${game.values?.title}`)
+    } else {
+      if (remainingGamesCount === totalGameCount) {
+        outputTts(sample([
+          `Okay, let's start with ${game.values?.title}.`,
+          `Okay, today we'll start with ${game.values?.title}.`,
+        ]))
+      } else if (remainingGamesCount === 1) {
+        outputTts(sample([
+          `Your last game today is ${game.values?.title}.`,
+          `Your final game today is ${game.values?.title}.`,
+          `And finally, you'll play ${game.values?.title}.`,
+        ]))
+      } else {
+        outputTts(sample([
+          `Next, we'll play ${game.values?.title}.`,
+          `Next up, we have ${game.values?.title}.`,
+        ]))
+      }
+    }
+
     gameRunCreate(game.id).then((gameRunId) => {
       gameRunIdRef.current = gameRunId
     })

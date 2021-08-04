@@ -1,9 +1,9 @@
 // @ts-check
-
+const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
-module.exports = () => {
+module.exports = (phase) => {
   return {
     async rewrites() {
       return [
@@ -13,6 +13,14 @@ module.exports = () => {
         },
         {
           source: '/game/:game*',
+          destination: `/`,
+        },
+        {
+          source: '/training',
+          destination: `/`,
+        },
+        {
+          source: '/account-linking',
           destination: `/`,
         },
       ]
@@ -36,13 +44,17 @@ module.exports = () => {
       misc: {
         configCatalogId: 1
       },
-      // Should be disabled for production
       guestUser: true,
-      apidoc: true,
+      // Should be disabled for production
+      apidoc: (phase === PHASE_DEVELOPMENT_SERVER),
       rails: {
         url: process.env.RAILS_URL,
         clientId: process.env.RAILS_CLIENT_ID,
         clientSecret: process.env.RAILS_CLIENT_SECRET,
+      },
+      rollbar: {
+        serverToken: process.env.ROLLBAR_SERVER_TOKEN,
+        enviroment: process.env.ROLLBAR_ENV
       }
     },
     publicRuntimeConfig: {
@@ -50,14 +62,13 @@ module.exports = () => {
       amplitude: {
         apiKey: process.env.AMPLITUDE_API_KEY
       },
-      gameSkip: true,
-      debugBar: true,
-      withoutInteractiveCanvas: true,
+      gameSkip: (phase === PHASE_DEVELOPMENT_SERVER),
+      debugBar: (phase === PHASE_DEVELOPMENT_SERVER),
+      withoutInteractiveCanvas: (phase === PHASE_DEVELOPMENT_SERVER),
       interactiveCanvasLibUrl: 'https://www.gstatic.com/assistant/interactivecanvas/api/interactive_canvas_eap.min.js',
       rollbar: {
-        clientToken: null, //'d858493f24794689b215a6b72b4324eb',
-        serverToken: 'd858493f24794689b215a6b72b4324eb',
-        enviroment: 'dev'
+        clientToken: process.env.ROLLBAR_CLIENT_TOKEN,
+        enviroment: process.env.ROLLBAR_ENV
       }
     }
   }

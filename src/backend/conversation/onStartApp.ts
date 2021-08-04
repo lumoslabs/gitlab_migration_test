@@ -33,7 +33,7 @@ export default async (conv: ConversationV3) => {
   logger.debug(conv.user.params.isLinked, `conv.user.params.isLinked ${conv.user.params.isLinked}`)
   conv.user.params.id = user.id
 
-  const trainingManager = new TrainingManager(getTraining(conv))
+  const trainingManager = new TrainingManager(getTraining(conv), conv?.device?.timeZone?.id)
   const training = await trainingManager.get()
 
   setTraining(conv, training)
@@ -63,6 +63,10 @@ export default async (conv: ConversationV3) => {
           training,
           user: convToUser(conv)
         }
+      },
+      {
+        command: appSharedActions.GO_TO,
+        payload: '/home'
       }
     ]
   })

@@ -63,7 +63,7 @@ export const convToUser = (conv: ConversationV3): any => {
     name: conv.user.params?.isLinked ? conv.user.params?.tokenPayload?.name : '',
     email: conv.user.params?.isLinked ? conv.user.params?.tokenPayload?.email : '',
     avatar: conv.user.params?.isLinked ? conv.user.params?.tokenPayload?.picture : '',
-    timezone: '',
+    timezone: conv?.device?.timeZone?.id,
     isGuest: conv.user.verificationStatus === VerificationStatus.Guest,
     isLinked: Boolean(conv.user.params?.isLinked)
   }
