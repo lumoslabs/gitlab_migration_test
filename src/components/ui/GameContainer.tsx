@@ -115,10 +115,11 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
           break
         case 'game:complete':
           onEvent(eventName, eventData)
-          exitContinuousMatchMode()
           onComplete(eventData as IGameCompletedData)
-          parsedData = eventData as IGameCompletedData
-          sendTextQuery('Invoke Score Screen Score TTS', { score: parsedData.score, slug: game.id, isTraining: isTraining })
+          exitContinuousMatchMode().then(() => {
+            parsedData = eventData as IGameCompletedData
+            sendTextQuery('Invoke Score Screen Score TTS', { score: parsedData?.score, slug: game.id, isTraining: isTraining })
+          })
           track('game_finish', eventTracking)
           break
         case 'game:nest_cmm_restart':

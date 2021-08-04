@@ -11,12 +11,17 @@ export default function useInteractiveCanvas() {
     }
   }
 
-  const exitContinuousMatchMode = () => {
-    try {
-      window.interactiveCanvas?.exitContinuousMatchMode()
-    } catch (e) {
-      console.error('interactiveCanvas - exitContinuousMatchMode - exception', e)
-    }
+  const exitContinuousMatchMode = async (): Promise<void> => {
+    return new Promise((resolve) => {
+      try {
+        window.interactiveCanvas?.exitContinuousMatchMode()
+      } catch (e) {
+        console.error('interactiveCanvas - exitContinuousMatchMode - exception', e)
+      }
+      setTimeout(() => {
+        resolve()
+      }, 0)
+    })
   }
 
   const sendTextQuery = async (query: string, state: Record<any, any> = {}) => {
@@ -25,11 +30,13 @@ export default function useInteractiveCanvas() {
       pathname: location.pathname
     })
     const result = await window.interactiveCanvas?.sendTextQuery(query)
+    console.log('sendTextQuery', query, result)
     if (result !== 'SUCCESS') {
       console.error('interactiveCanvas - sendTextQuery - incorrect result', { query, state }, result)
     }
     return result as string
   }
+
 
   return {
     outputTts,

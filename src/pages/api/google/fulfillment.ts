@@ -40,6 +40,7 @@ conversationApp.handle('Home', onHome)
 conversationApp.handle('Games', onHome)
 
 // Gameplay
+//TODO: move it to frontend
 conversationApp.handle('StartGame', onStartGame)
 conversationApp.handle('RestartCMM', onStartGame)
 conversationApp.handle('ResumeGame', onStartGame)
