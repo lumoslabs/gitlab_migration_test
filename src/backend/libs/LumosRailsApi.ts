@@ -66,7 +66,7 @@ export default class LumosRailsApi {
     return response.data
   }
 
-
+  // https://www.lumosity.com/api_v2/docs/v2/game_results/create.html
   saveGameResult = async (accessToken: string, gameSlug: string, gameResult: any) => {
     const uri = 'api/v2/game_results'
     const response = await this.axios.post(uri, {

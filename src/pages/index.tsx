@@ -13,6 +13,7 @@ import TrainingPage from '@routes/training'
 import AccountLinkingPage from '@routes/accountLinking'
 import NestHandler from '@components/NestHandler'
 import ConfigService from '@backend/services/ConfigService'
+import AppBusProvider from '@contexts/AppBusContext'
 
 export function Index({ games }: { games: GameConfig[] }): JSX.Element {
   const gameRoutes = games.map((game) => {
@@ -23,22 +24,24 @@ export function Index({ games }: { games: GameConfig[] }): JSX.Element {
 
   return (
     <Router>
-      <NestHandler />
-      <Switch>
-        <Route exact path='/'>
-          <IndexPage />
-        </Route>
-        <Route exact path='/home'>
-          <HomePage games={games} />
-        </Route>
-        <Route exact path='/training'>
-          <TrainingPage games={games} />
-        </Route>
-        <Route exact path='/account-linking'>
-          <AccountLinkingPage />
-        </Route>
-        {gameRoutes}
-      </Switch>
+      <AppBusProvider>
+        <NestHandler />
+        <Switch>
+          <Route exact path='/'>
+            <IndexPage />
+          </Route>
+          <Route exact path='/home'>
+            <HomePage games={games} />
+          </Route>
+          <Route exact path='/training'>
+            <TrainingPage games={games} />
+          </Route>
+          <Route exact path='/account-linking'>
+            <AccountLinkingPage />
+          </Route>
+          {gameRoutes}
+        </Switch>
+      </AppBusProvider>
     </Router>
   )
 }

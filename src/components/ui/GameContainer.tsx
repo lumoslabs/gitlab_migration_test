@@ -8,12 +8,9 @@ import { GameConfig } from '@backend/models/config'
 import commonStyles from '@styles/commonStyles'
 import GameProgressBar from '@components/ui/GameProgressBar'
 import Button from '@components/ui/Button'
-import { useAppSelector } from '@store/hooks'
-import { getLastGameCommand } from '@store/slices/appSlice'
-import clonedeep from 'lodash.clonedeep'
 import useAmplitude from '@hooks/useAmplitude'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
-
+import useAppBusListener from '@hooks/useAppBusListener'
 const { publicRuntimeConfig } = getConfig()
 
 export interface IGameSpeechData {
@@ -55,9 +52,6 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
   const [showProgress, setShowProgress] = useState(true)
   const [error, setError] = useState(false)
 
-  // Selectors for app state
-  const lastGameCommand = useAppSelector(getLastGameCommand)
-
   // Game info
   const gameUrl = game.values?.last_version?.overrides?.game_url
   const gameFile = game.values?.invoke_file
@@ -71,12 +65,18 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
     },
   }
 
-  //Send parsed phrase to cocos
-  useEffect(() => {
-    if (lastGameCommand && lastGameCommand.payload && window.sendEventToCocos) {
-      window.sendEventToCocos(clonedeep(lastGameCommand.payload))
-    }
-  }, [lastGameCommand])
+  //Handle interactive canvas events
+  useAppBusListener("onPhraseMatched", (data) => {
+    window.sendEventToCocos(data)
+  })
+
+  useAppBusListener("onListeningModeChanged", (isCmm) => {
+    window.sendEventToCocos({ action: isCmm ? 'cmm_start' : 'cmm_end' })
+  })
+
+  useAppBusListener("onTtsMark", (tts) => {
+    window.sendEventToCocos({ action: 'tts_' + tts.toLowerCase() })
+  })
 
   // Handle game events
   useEffect(() => {
@@ -136,7 +136,7 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
           break
         case 'game:quit':
           track('game_quit', eventTracking)
-          //TODO: move to main menu
+          sendTextQuery('Home')
           break
         //case 'game:resume':
         //case 'game:abort_update':

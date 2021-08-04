@@ -11,6 +11,7 @@ import { getTraining, getUser } from '@store/slices/appSlice'
 import { useAppSelector } from '@store/hooks'
 import useAmplitude from '@hooks/useAmplitude'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
+import useAppBusListener from '@hooks/useAppBusListener'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
 

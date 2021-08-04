@@ -1,10 +1,6 @@
+import { interactiveCanvasCallbacks } from '@sharedTypes/interactiveCanvas'
+
 export declare global {
-  interface interactiveCanvasCallbacks {
-    onUpdate: (data: any[]) => any,
-    onTtsMark: (markName: "START" | "END" | "ERROR") => any,
-    onListeningModeChanged: (data: "TURN_BASED" | "CONTINUOUS_MATCH", reason: string) => any,
-    onPhraseMatched: (data: string) => any,
-  }
   interface Window {
     interactiveCanvas: {
       ready: (callbacks: interactiveCanvasCallbacks) => any,
