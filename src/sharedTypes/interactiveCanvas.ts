@@ -1,5 +1,5 @@
-export type TtsMarkName = "START" | "END" | "ERROR"
-export type ListeningMode = "TURN_BASED" | "CONTINUOUS_MATCH"
+export type TtsMarkName = 'START' | 'END' | 'ERROR'
+export type ListeningMode = 'TURN_BASED' | 'CONTINUOUS_MATCH'
 
 export interface interactiveCanvasCallbacks {
   onUpdate: (data: any[]) => any,
