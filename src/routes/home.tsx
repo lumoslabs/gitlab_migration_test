@@ -13,6 +13,7 @@ import useAmplitude from '@hooks/useAmplitude'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
+
   const track = useAmplitude()
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import GameScoreCard from '@components/ui/GameScoreCard'
-import { render } from '@testing-library/react'
+import { render } from '@test/render-with-redux'
 
 const handleClick = () => { window.location.href = '/' }
 
@@ -27,7 +27,7 @@ it('matches snapshot', () => {
       actionButtonHandler={handleClick}
       stat={10}
       statLabel='Cards'
-    />, {}
+    />
   )
   expect(asFragment()).toMatchSnapshot()
 })

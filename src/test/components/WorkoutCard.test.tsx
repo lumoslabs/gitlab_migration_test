@@ -1,6 +1,6 @@
 import React from 'react'
 import WorkoutCard from '@components/ui/WorkoutCard'
-import { render } from '@testing-library/react'
+import { render } from '@test/render-with-redux'
 
 const handleClick = () => { window.location.href = '/' }
 
@@ -17,7 +17,7 @@ jest.mock('react-router-dom', () => ({
 
 it('matches snapshot', () => {
   const { asFragment } = render(
-    <WorkoutCard clickHandler={handleClick} remainingGamesCount={3} totalGameCount={3} />, {}
+    <WorkoutCard clickHandler={handleClick} remainingGamesCount={3} totalGameCount={3} />
   )
   expect(asFragment()).toMatchSnapshot()
 })

@@ -16,6 +16,7 @@
     "migrate": "yarn run ts-node tools/migration.mjs"
   },
   "dependencies": {
+    "@amplitude/node": "^1.8.0",
     "@assistant/conversation": "^3.8.0",
     "@reduxjs/toolkit": "^1.6.0",
     "actions-on-google": "https://storage.googleapis.com/studio-eap.appspot.com/assistant-conversation-v3.6.0.tgz",

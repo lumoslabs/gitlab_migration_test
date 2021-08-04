@@ -1,6 +1,6 @@
 import React from 'react'
 import UserInfo from '@components/ui/UserInfo'
-import { render } from '@testing-library/react'
+import { render } from '@test/render-with-redux'
 import ReactDOM from 'react-dom'
 
 beforeAll(() => {
@@ -17,7 +17,7 @@ jest.mock('react-router-dom', () => ({
     hash: '',
     state: null,
     key: '5nvxpbdafa',
-  }),
+  })
 }))
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -32,7 +32,7 @@ it('matches snapshot', () => {
       email='email@example.com'
       name='Lumosity User'
       timezone='Pacific Time'
-    />, {}
+    />
   )
   expect(asFragment()).toMatchSnapshot()
 })
@@ -47,7 +47,7 @@ test('UserBar displays the correct info', () => {
       email='email@example.com'
       name='Lumosity User'
       timezone='Pacific Time'
-    />, {}
+    />
   )
   expect(asFragment()).toMatchSnapshot()
 })
