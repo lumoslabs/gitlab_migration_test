@@ -19,6 +19,8 @@ import onGoogleAccountLink from '@backend/conversation/onGoogleAccountLink'
 import onStartAccountLinkingMonologue from '@backend/conversation/onStartAccountLinkingMonologue'
 import onGoogleAccountLinkRejected from '@backend/conversation/onGoogleAccountLinkRejected'
 import rollbar from '@backend/libs/rollbar'
+import onYes from '@backend/conversation/onYes'
+import onNo from '@backend/conversation/onNo'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -60,9 +62,9 @@ conversationApp.handle('GoogleAccountLink', onGoogleAccountLink)
 //GoogleAccountLinkRejected
 conversationApp.handle('GoogleAccountLinkRejected', onGoogleAccountLinkRejected)
 
-//Should be moved into diff scenes
-conversationApp.handle('Yes', onNoMatch)
-conversationApp.handle('No', onNoMatch)
+//TODO: should be moved to frontend
+conversationApp.handle('Yes', onYes)
+conversationApp.handle('No', onNo)
 
 //TODO: remove from code and from intence
 conversationApp.handle('GameWelcomeMessage', onGameWelcomeMessage)

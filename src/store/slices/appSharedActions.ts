@@ -1,7 +1,8 @@
 enum appSharedActions {
   SET_STORE = 'setStore',
   GO_TO = 'goTo',
-  SET_TOP_SCORES = 'setTopScores'
+  SET_TOP_SCORES = 'setTopScores',
+  EMIT_EVENT = 'emitEvent'
 }
 
 export default appSharedActions

@@ -48,6 +48,12 @@
       ],
       "@api/*": [
         "src/api/*"
+      ],
+      "@contexts/*": [
+        "src/contexts/*"
+      ],
+      "@sharedTypes/*": [
+        "src/sharedTypes/*"
       ]
     }
   },

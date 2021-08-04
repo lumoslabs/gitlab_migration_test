@@ -11,7 +11,6 @@ import {
 import appSharedActions from '@store/slices/appSharedActions'
 import AuthService from '@backend/services/AuthService'
 import { AccountLinkingStatus } from 'actions-on-google/dist/api/schema'
-import logger from '@backend/libs/logger'
 import TrainingManager from '@backend/libs/TrainingManager'
 
 export default async (conv: ConversationV3) => {
@@ -29,8 +28,6 @@ export default async (conv: ConversationV3) => {
 
   const authToken = await service.generateToken(user)
 
-  logger.debug(`onStartAppEvent user #${conv.user.params?.id}`)
-  logger.debug(conv.user.params.isLinked, `conv.user.params.isLinked ${conv.user.params.isLinked}`)
   conv.user.params.id = user.id
 
   const trainingManager = new TrainingManager(getTraining(conv), conv?.device?.timeZone?.id)

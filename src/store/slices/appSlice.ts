@@ -1,32 +1,13 @@
 import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '@store/index'
-//TODO: split slice to redux folder format
-
-export enum TtsMarkName {
-  START = 'START',
-  END = 'END',
-  ERROR = 'ERROR'
-}
-
-export enum sendTextQueryState {
-  READY = 'READY',
-  BLOCKED = 'BLOCKED',
-  UNKNOWN = 'UNKNOWN',
-  PENDING = 'PENDING',
-  ERROR = 'ERROR',
-}
+import { TtsMarkName } from '@sharedTypes/interactiveCanvas'
 
 interface appState {
-  tts: TtsMarkName,
+  tts?: TtsMarkName,
   started: boolean,
   baseUrl: string,
   authToken?: string,
-  lastTextQueryState: sendTextQueryState,
   continuousMatchMode: boolean,
-  lastGameCommand: {
-    payload: Record<string, any> | null,
-    timestamp: number
-  } | null
   scores: Record<string, { score: number, date: string }[]>,
   training: {
     games: string[],
@@ -45,13 +26,11 @@ interface appState {
 }
 
 const initialState: appState = {
-  tts: TtsMarkName.START,
+  tts: null,
   started: false,
   baseUrl: '',
   authToken: null,
-  lastTextQueryState: sendTextQueryState.UNKNOWN,
   continuousMatchMode: false,
-  lastGameCommand: null,
   scores: {},
   training: null,
   user: null
@@ -84,15 +63,6 @@ export const appSlice = createSlice({
     ) => {
       state.continuousMatchMode = Boolean(action?.payload?.cmm)
     },
-    setGameCommand: (
-      state: Draft<typeof initialState>,
-      action: PayloadAction<Record<string, any>>
-    ) => {
-      state.lastGameCommand = {
-        timestamp: (new Date().getTime()),
-        payload: action.payload
-      }
-    },
     setTopScores: (
       state: Draft<typeof initialState>,
       action: PayloadAction<{ slug: string, scores: { score: number, date: string }[] }>
@@ -120,9 +90,7 @@ export const getTts = (state: RootState) => state.app.tts
 export const getIsStarted = (state: RootState) => state.app.started
 export const getBaseUrl = (state: RootState) => state.app.baseUrl
 export const getAuthToken = (state: RootState) => state.app.authToken
-export const getSendTextQueryState = (state: RootState) => state.app.lastTextQueryState
 export const getContinuousMatchMode = (state: RootState) => state.app.continuousMatchMode
-export const getLastGameCommand = (state: RootState) => state.app.lastGameCommand
 export const getTopScores = (state: RootState) => state.app.scores
 export const getTraining = (state: RootState) => state.app.training
 export const getUser = (state: RootState) => state.app.user

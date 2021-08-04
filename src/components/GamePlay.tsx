@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getTopScores, actions } from '@store/slices/appSlice'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import sample from 'lodash.sample'
+import useAppBusListener from '@hooks/useAppBusListener'
 
 /*
 Example:
@@ -83,6 +84,10 @@ export default function GamePlay({
       gameRunIdRef.current = gameRunId
     })
   }, [game])
+
+  useAppBusListener('onIntentYes', () => {
+    onFinishHandler()
+  })
 
   const showTrainingIcon = isTraining
 
