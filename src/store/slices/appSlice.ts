@@ -14,6 +14,10 @@ interface appState {
     size: number,
     deadline: number
   } | null,
+  tutorial: {
+    showTutorial: boolean,
+    slug: string
+  },
   user?: {
     id?: string,
     name?: string,
@@ -33,7 +37,11 @@ const initialState: appState = {
   continuousMatchMode: false,
   scores: {},
   training: null,
-  user: null
+  user: null,
+  tutorial: {
+    showTutorial: true,
+    slug: null
+  }
 } as const
 
 
@@ -79,7 +87,13 @@ export const appSlice = createSlice({
       action: PayloadAction<string>
     ) => {
       state.training.games = state.training.games.filter((game) => game !== action.payload)
-    }
+    },
+    setTutorial: (
+      state: Draft<typeof initialState>,
+      action: PayloadAction<{ tutorial: boolean, slug: string }>
+    ) => {
+      state.tutorial[action.payload.slug] = true
+    },
   }
 })
 
@@ -93,6 +107,7 @@ export const getAuthToken = (state: RootState) => state.app.authToken
 export const getContinuousMatchMode = (state: RootState) => state.app.continuousMatchMode
 export const getTopScores = (state: RootState) => state.app.scores
 export const getTraining = (state: RootState) => state.app.training
+export const getTutorialFlag = (state: RootState) => state.app.tutorial
 export const getUser = (state: RootState) => state.app.user
 
 // Reducers and actions

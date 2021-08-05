@@ -7,7 +7,7 @@ import gameRunCreate from '@api/gameRunCreate'
 import gameRunUpdate from '@api/gameRunUpdate'
 
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { getTopScores, actions } from '@store/slices/appSlice'
+import { getTopScores, actions, getTutorialFlag } from '@store/slices/appSlice'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import sample from 'lodash.sample'
 import useAppBusListener from '@hooks/useAppBusListener'
@@ -39,10 +39,12 @@ export default function GamePlay({
   const topScores = useAppSelector(getTopScores)[game.id]
   const gameRunIdRef = useRef('')
   const { outputTts } = useInteractiveCanvas()
+  const showTutorial = useAppSelector(getTutorialFlag)[game.id]
 
   const onComplete = (data: any) => {
     setResult(data)
     onGameComplete && onGameComplete()
+    dispatch(actions.setTutorial({ tutorial: false, slug: game.id }))
   }
 
   const onEvent = (eventName: string, eventData: any) => {
@@ -101,13 +103,13 @@ export default function GamePlay({
     <main>
       {(!result) && (
         <GameContainer
+          showTutorial={showTutorial}
           game={game}
           onComplete={onComplete}
           onEvent={onEvent}
           isTraining={isTraining}
         />
       )}
-
       {result && (topScores === null) && <LoadingComponent />}
       {result && (topScores !== null) && (
         <GameScoreCard
