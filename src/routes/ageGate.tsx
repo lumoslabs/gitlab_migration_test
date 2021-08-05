@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import { getUser } from '@store/slices/appSlice'
-import { useAppSelector } from '@store/hooks'
 import AgeGate from '@components/ui/AgeGate'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 
