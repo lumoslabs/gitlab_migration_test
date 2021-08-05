@@ -35,9 +35,6 @@ intentEvents:
     webhookHandler: Help
   intent: HELP
 - handler:
-    webhookHandler: UserLogout
-  intent: LOGOUT
-- handler:
     webhookHandler: StartApp
   intent: LOGIN
 - handler:
