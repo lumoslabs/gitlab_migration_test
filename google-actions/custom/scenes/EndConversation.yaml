@@ -1,0 +1,3 @@
+conditionalEvents:
+- condition: "true"
+  transitionToScene: actions.scene.END_CONVERSATION

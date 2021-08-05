@@ -6,6 +6,23 @@ import { ITraining } from '@backend/libs/TrainingManager'
 
 const { serverRuntimeConfig } = getConfig()
 
+export enum Scenes {
+  InitialScene = 'InitialScene',
+  Main = 'MainScene',
+  AgeGate = 'AgeGate',
+  AccountLinkingOrigin = 'AccountLinkingOrigin',
+  AccountLinkingOriginAccountLinking = 'AccountLinkingOrigin_AccountLinking', //TODO: rename to normal name
+  EndConversation = 'EndConversation',
+}
+
+export enum Pages {
+  Home = '/home',
+  Training = '/training',
+  AccountLinking = '/account-linking',
+  AgeGate = '/age-gate',
+  Game = '/game'
+}
+
 export function getRandomInt(max: number): number {
   return Math.floor(Math.random() * Math.floor(max))
 }
@@ -19,14 +36,15 @@ export const getPublicUrlFromConv = (conv: ConversationV3) => {
   return serverRuntimeConfig.publicUrl || ('https://' + conv.headers?.host?.toString())
 }
 
-export const sendCommand = async ({ conv, commands = [], suppressMic = false, continuousMatchPhrases = undefined }: {
+export const sendCommand = async ({ conv, commands = [], suppressMic = false, continuousMatchPhrases = undefined, scene }: {
   conv: ConversationV3,
   continuousMatchPhrases?: ExpectedPhrase[],
   suppressMic?: boolean,
   commands?: {
     command: appSharedActions,
     payload: any
-  }[]
+  }[],
+  scene?: string
 }) => {
   conv.add(new Canvas({
     enableFullScreen: true,
@@ -36,8 +54,11 @@ export const sendCommand = async ({ conv, commands = [], suppressMic = false, co
     } : undefined,
     url: getPublicUrlFromConv(conv),
     suppressMic,
-    data: commands ? commands : []
+    data: commands ? commands : [],
   }))
+  if (scene) {
+    conv.scene.next.name = scene
+  }
 }
 
 export const setIsFirstLogin = (conv: ConversationV3): void => {
@@ -67,4 +88,12 @@ export const convToUser = (conv: ConversationV3): any => {
     isGuest: conv.user.verificationStatus === VerificationStatus.Guest,
     isLinked: Boolean(conv.user.params?.isLinked)
   }
+}
+
+export const setBirthday = (conv: ConversationV3, birthday: string): any => {
+  conv.user.params.birthday = birthday
+}
+
+export const getBirthday = (conv: ConversationV3): any => {
+  return conv.user.params.birthday
 }

@@ -11,6 +11,7 @@ import HomePage from '@routes/home'
 import GamePage from '@routes/game'
 import TrainingPage from '@routes/training'
 import AccountLinkingPage from '@routes/accountLinking'
+import AgeGate from '@routes/ageGate'
 import NestHandler from '@components/NestHandler'
 import ConfigService from '@backend/services/ConfigService'
 import AppBusProvider from '@contexts/AppBusContext'
@@ -38,6 +39,9 @@ export function Index({ games }: { games: GameConfig[] }): JSX.Element {
           </Route>
           <Route exact path='/account-linking'>
             <AccountLinkingPage />
+          </Route>
+          <Route exact path='/age-gate'>
+            <AgeGate />
           </Route>
           {gameRoutes}
         </Switch>
