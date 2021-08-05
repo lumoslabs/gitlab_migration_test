@@ -6,7 +6,8 @@ export default function ageGate(): JSX.Element {
   const { outputTts, sendTextQuery } = useInteractiveCanvas()
   const [disabled, setDisabled] = useState(false)
   useEffect(() => {
-    outputTts(`Age gate welcome text`)
+    // TODO: Revise with legal approved copy
+    outputTts(`Please select your birthdate on the screen. Your birthdate will be stored to verify you meet the age requirements for Lumosity.`)
   }, [])
 
   const onSubmit = (birthday) => {
