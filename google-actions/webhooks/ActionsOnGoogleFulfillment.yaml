@@ -18,6 +18,8 @@ handlers:
 - name: GameWelcomeMessage
 - name: ResumeGame
 - name: RestartGame
+- name: AgeGateResult
+- name: MainScene
 httpsEndpoint:
   baseUrl: https://nest-backend.prod.eks.lumoslabs.net/google/fulfillment
   endpointApiVersion: 2

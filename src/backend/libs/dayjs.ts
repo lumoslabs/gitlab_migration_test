@@ -22,5 +22,5 @@ export const isValidTimezone = (tz) => {
     return false;
   }
 }
-
+export { dayjs }
 export default dayjs.utc()

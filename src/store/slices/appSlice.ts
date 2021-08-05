@@ -21,7 +21,8 @@ interface appState {
     avatar?: string,
     timezone?: string,
     isLinked?: boolean,
-    isGuest?: boolean
+    isGuest?: boolean,
+    isAgeVerified?: boolean,
   }
 }
 

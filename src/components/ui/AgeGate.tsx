@@ -7,24 +7,19 @@ import commonStyles from '@styles/commonStyles'
 import Button from '@components/ui/Button'
 
 export interface IAgeGateProps {
-  onSubmit(isUnderage: boolean): any;
+  onSubmit(birthday: Date): any;
   max?: Date,
-  min?: Date
+  min?: Date,
+  disabled?: boolean
 }
 
-const AgeGate = (({ onSubmit, max = (new Date(Date.now() - 86400000)), min = (new Date('1900-01-02')) }: IAgeGateProps): JSX.Element => {
+const AgeGate = (({ onSubmit, max = (new Date(Date.now() - 86400000)), min = (new Date('1900-01-02')), disabled = false }: IAgeGateProps): JSX.Element => {
 
-  // default date
   const [date, setDate] = useState(new Date('1985-01-02'))
 
-  // TODO: handle saving date
   const handleClick = () => {
-    // Are you under 13?
-    let isUnderage = true
-    if (new Date(Date.now()).getTime() - new Date(date).getTime() > 410310589331) {
-      isUnderage = false
-    }
-    onSubmit(isUnderage)
+    //    const isUnderage = !(new Date(Date.now()).getTime() - new Date(date).getTime() > 410310589331)
+    onSubmit(date)
   }
 
   const monthMap = {
@@ -60,6 +55,7 @@ const AgeGate = (({ onSubmit, max = (new Date(Date.now() - 86400000)), min = (ne
     },
   }
 
+  //TODO: add text like "your birthdate will be stored to verify you meet the age requirements to play this game"
   return (
     <Container className={css(commonStyles.flexColumnAlignCenter)}>
       <Row className={css(commonStyles.flexRowAllCenter)}>
@@ -83,9 +79,10 @@ const AgeGate = (({ onSubmit, max = (new Date(Date.now() - 86400000)), min = (ne
       </Row>
       <Row className={css(commonStyles.flexRowAllCenter, styles.buttonDiv)}>
         <Button
+          disabled={disabled}
           onClick={handleClick}
           text='Submit'
-          eventData={{id: 'submit_birthdate', message: 'Submit'}}
+          eventData={{ id: 'submit_birthdate', message: 'Submit' }}
         />
       </Row>
     </Container>

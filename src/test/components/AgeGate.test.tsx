@@ -2,9 +2,8 @@ import React from 'react'
 import AgeGate from '@components/ui/AgeGate'
 import { render } from '@test/render-with-redux'
 
-const onSubmit = (isUnderage: boolean) => {
-  window.location.href = 'https://lumos-assistant.ngrok.io/test_page',
-    console.log('isUnderage: ' + isUnderage)
+const onSubmit = (date: Date) => {
+  console.log('date: ' + date)
 }
 
 jest.mock('react-router-dom', () => ({

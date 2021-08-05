@@ -50,4 +50,4 @@ intentEvents:
     webhookHandler: RestartGame
   intent: RESTART_GAME
 onEnter:
-  webhookHandler: StartApp
+  webhookHandler: MainScene

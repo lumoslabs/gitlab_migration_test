@@ -64,7 +64,6 @@ module.exports = (phase) => {
       },
       gameSkip: (phase === PHASE_DEVELOPMENT_SERVER),
       debugBar: (phase === PHASE_DEVELOPMENT_SERVER),
-      withoutInteractiveCanvas: (phase === PHASE_DEVELOPMENT_SERVER),
       interactiveCanvasLibUrl: 'https://www.gstatic.com/assistant/interactivecanvas/api/interactive_canvas_eap.min.js',
       rollbar: {
         clientToken: process.env.ROLLBAR_CLIENT_TOKEN,

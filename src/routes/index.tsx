@@ -2,30 +2,14 @@ import dynamic from 'next/dynamic'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import LoadingComponent from '@components/ui/LoadingComponent'
 import { useEffect } from 'react'
-import { useAppSelector } from '@store/hooks'
-import { getIsStarted } from '@store/slices/appSlice'
-import { useHistory } from 'react-router-dom'
-import getConfig from 'next/config'
 import useAmplitude from '@hooks/useAmplitude'
 
 export function Index(): JSX.Element {
-  const { publicRuntimeConfig } = getConfig()
-  const isStarted = useAppSelector(getIsStarted)
-  const history = useHistory()
 
   const track = useAmplitude()
   useEffect(() => {
     track('page_view')
   }, [])
-
-  useEffect(() => {
-    if (publicRuntimeConfig.withoutInteractiveCanvas && !process.browser) {
-      history.push('/home')
-    }
-    if (isStarted) {
-      history.push('/home')
-    }
-  })
 
   return (
     <main>
