@@ -5,9 +5,11 @@ import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getTraining, actions } from '@store/slices/appSlice'
 import { useEffect, useState } from 'react'
 import useAmplitude from '@hooks/useAmplitude'
+import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import sample from 'lodash.sample'
 
 export default function Training({ games }: { games: GameConfig[] }): JSX.Element {
+  const { sendTextQuery } = useInteractiveCanvas()
   const track = useAmplitude()
   const dispatch = useAppDispatch()
   const history = useHistory()
@@ -25,7 +27,7 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
 
   useEffect(() => {
     if (!training?.games?.length) {
-      history.push(`/home`)
+      sendTextQuery('Home')
     } else {
       setCurrentGame(games.find((game) => game.id === training.games[0]))
     }

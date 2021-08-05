@@ -66,16 +66,18 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
   }
 
   //Handle interactive canvas events
-  useAppBusListener("onPhraseMatched", (data) => {
+  useAppBusListener('onPhraseMatched', (data) => {
     window.sendEventToCocos(data)
   })
 
-  useAppBusListener("onListeningModeChanged", (isCmm) => {
+  useAppBusListener('onListeningModeChanged', (isCmm) => {
     window.sendEventToCocos({ action: isCmm ? 'cmm_start' : 'cmm_end' })
   })
 
-  useAppBusListener("onTtsMark", (tts) => {
-    window.sendEventToCocos({ action: 'tts_' + tts.toLowerCase() })
+  useAppBusListener('onTtsMark', (tts) => {
+    if (window.sendEventToCocos) {
+      window.sendEventToCocos({ action: 'tts_' + tts.toLowerCase() })
+    }
   })
 
   // Handle game events
@@ -196,7 +198,6 @@ const styles = StyleSheet.create({
     background: 'transparent',
     border: '0px'
   },
-
   skipGameDiv: {
     position: 'absolute',
     left: 0,
@@ -205,7 +206,6 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0
   },
-
   skipGameButton: {
     backgroundColor: 'transparent'
   }
