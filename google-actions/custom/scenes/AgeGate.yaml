@@ -1,0 +1,4 @@
+intentEvents:
+- handler:
+    webhookHandler: AgeGateResult
+  intent: AGE_GATE_RESULT

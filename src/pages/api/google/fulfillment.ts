@@ -22,6 +22,8 @@ import rollbar from '@backend/libs/rollbar'
 import onYes from '@backend/conversation/onYes'
 import onNo from '@backend/conversation/onNo'
 import amplitudeBackendEvent from '@backend/libs/amplitude'
+import onAgeGateResult from '@backend/conversation/onAgeGateResult'
+import onMainScene from '@backend/conversation/onMainScene'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -31,6 +33,9 @@ const conversationApp = conversation({
 
 // On app launch
 conversationApp.handle('StartApp', onStartApp)
+
+
+conversationApp.handle('MainScene', onMainScene)
 
 // When the user voice input cannot be matched to an intent
 conversationApp.handle('NoMatch', onNoMatch)
@@ -60,8 +65,9 @@ conversationApp.handle('Training', onTraining)
 
 //Google account link flow
 conversationApp.handle('GoogleAccountLink', onGoogleAccountLink)
-//GoogleAccountLinkRejected
 conversationApp.handle('GoogleAccountLinkRejected', onGoogleAccountLinkRejected)
+
+conversationApp.handle('AgeGateResult', onAgeGateResult)
 
 //TODO: should be moved to frontend
 conversationApp.handle('Yes', onYes)

@@ -2,7 +2,7 @@ conditionalEvents:
 - condition: session.params.AccountLinkingSlot == "LINKED"
   handler:
     webhookHandler: GoogleAccountLink
-  transitionToScene: MainScene
+  transitionToScene: InitialScene
 - condition: session.params.AccountLinkingSlot == "ERROR"
   handler:
     staticPrompt:
@@ -11,11 +11,11 @@ conditionalEvents:
           firstSimple:
             variants:
             - speech: Sorry an unknown error has occured. Please try again later.
-  transitionToScene: MainScene
+  transitionToScene: InitialScene
 - condition: session.params.AccountLinkingSlot == "REJECTED"
   handler:
     webhookHandler: GoogleAccountLinkRejected
-  transitionToScene: MainScene
+  transitionToScene: InitialScene
 slots:
 - commitBehavior:
     writeSessionParam: AccountLinkingSlot
