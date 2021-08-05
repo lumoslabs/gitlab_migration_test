@@ -1,6 +1,6 @@
 import { ConversationV3 } from 'actions-on-google'
 import appSharedActions from '@store/slices/appSharedActions'
-import { convToUser, Pages, sendCommand } from './utils'
+import { convToUser, getBirthday, Pages, sendCommand } from './utils'
 import LinkingService from '@backend/services/LinkingService'
 import logger from '@backend/libs/logger'
 import rollbar from '@backend/libs/rollbar'
@@ -17,8 +17,9 @@ export default async (conv: ConversationV3) => {
   } catch (signinError) {
     try {
       // This user cannot be found in the lumosity database
-      await linkingService.createNewUser(token)
-      await linkingService.linkExistingUserByToken(userId, token)
+      const user = await linkingService.createNewUser(token)
+      const accessToken = await linkingService.linkExistingUserByToken(userId, token)
+      await linkingService.setUserBirthday(user.id, accessToken, getBirthday(conv))
       conv.user.params.isLinked = true
     } catch (signupError) {
       //something went wrong with api or current user storage
