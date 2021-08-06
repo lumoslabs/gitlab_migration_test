@@ -8,6 +8,11 @@ export type appBusEvents = {
   onTtsMark: TtsMarkName,
   onIntentYes: void;
   onIntentNo: void;
+  onIntentHelp: void;
+  //TODO: remove it with private game intence
+  onIntentRestartCMM: void;
+  onIntentRestartGame: void;
+  onIntentResumeGame: void;
 };
 
 export const BusContext = React.createContext<Emitter<appBusEvents>>(null)

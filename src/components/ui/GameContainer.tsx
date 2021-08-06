@@ -11,25 +11,12 @@ import Button from '@components/ui/Button'
 import useAmplitude from '@hooks/useAmplitude'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import useAppBusListener from '@hooks/useAppBusListener'
+import useGameCallbacks, { GameEventData, GameSpeechData, GameCompletedData } from '@hooks/useGameCallbacks'
 const { publicRuntimeConfig } = getConfig()
-
-export interface IGameSpeechData {
-  text: string,
-  prompt: boolean
-}
-
-export interface IGameCompletedData {
-  score: number;
-  session_level: number;
-  user_level: number;
-  game_result_data: unknown;
-}
-
-type IGameEventData = number | IGameCompletedData | IGameSpeechData | null
 
 export interface IGameContainerProps {
   game: GameConfig;
-  onComplete: (data: IGameCompletedData) => void;
+  onComplete: (data: GameCompletedData) => void;
   onEvent: (eventName: string, data: any) => void;
   isTraining: boolean;
 }
@@ -65,91 +52,99 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
     },
   }
 
+  // Handle game events
+  const { sendEventToCocos, sendFakeCompleteEvent } = useGameCallbacks((eventName: string, eventData: GameEventData) => {
+    const eventTracking = {
+      slug: game?.id,
+      version: game?.values?.last_version?.id,
+      gameData: eventData ? eventData : undefined
+    }
+
+    switch (eventName) {
+      case 'game:loadStart':
+        setShowProgress(true)
+        track('game_load_start', eventTracking)
+        break
+      case 'game:loadProgress':
+        eventData = Math.floor(Number(eventData) * 100)
+        if (eventData > progressLevel) {
+          setProgressLevel(eventData)
+        }
+        break
+      case 'game:loadComplete':
+        onEvent(eventName, eventData)
+        track('game_load_complete', eventTracking)
+        break
+      case 'game:start':
+        onEvent(eventName, eventData)
+        setShowProgress(false)
+        track('game_start', eventTracking)
+        break
+      case 'game:nest_cmm_start':
+        sendTextQuery('Invoke Start Game', { slug: game.id })
+        break
+      case 'game:complete':
+        onEvent(eventName, eventData)
+        onComplete(eventData as GameCompletedData)
+        exitContinuousMatchMode().then(() => {
+          eventData = eventData as GameCompletedData
+          sendTextQuery('Invoke Score Screen Score TTS', { score: eventData?.score, slug: game.id, isTraining: isTraining })
+        })
+        track('game_finish', eventTracking)
+        break
+      case 'game:nest_cmm_restart':
+        sendTextQuery('Restart Continuous Match Mode', { slug: game.id })
+        break
+      case 'game:speech':
+        eventData = eventData as GameSpeechData
+        outputTts(eventData.text, eventData.prompt)
+        break
+      case 'game:pause':
+        break
+      case 'game:nest_cmm_pause':
+        exitContinuousMatchMode()
+        break
+      case 'game:quit':
+        track('game_quit', eventTracking)
+        sendTextQuery('Home')
+        break
+      //case 'game:resume':
+      //case 'game:abort_update':
+      //case 'game:nest_cmm_resume':
+      default:
+        console.log('unhandled game event', eventName, eventData)
+    }
+  })
+
   //Handle interactive canvas events
   useAppBusListener('onPhraseMatched', (data) => {
-    window.sendEventToCocos(data)
+    sendEventToCocos(data)
   })
-
   useAppBusListener('onListeningModeChanged', (isCmm) => {
-    window.sendEventToCocos({ action: isCmm ? 'cmm_start' : 'cmm_end' })
+    sendEventToCocos({ action: isCmm ? 'cmm_start' : 'cmm_end' })
   })
-
   useAppBusListener('onTtsMark', (tts) => {
-    if (window.sendEventToCocos) {
-      window.sendEventToCocos({ action: 'tts_' + tts.toLowerCase() })
-    }
+    sendEventToCocos({ action: 'tts_' + tts.toLowerCase() })
   })
 
-  // Handle game events
+  //Handle webhook intences
+  useAppBusListener('onIntentHelp', () => {
+    sendEventToCocos({ action: 'tutorial' })
+  })
+
+  //TODO: remove it after migration to new version of interactiveCanvas
+  useAppBusListener('onIntentRestartCMM', () => {
+    sendEventToCocos({ action: 'continue' })
+  })
+  useAppBusListener('onIntentRestartGame', () => {
+    sendEventToCocos({ action: 'restart' })
+  })
+  useAppBusListener('onIntentResumeGame', () => {
+    sendEventToCocos({ action: 'resume' })
+  })
+
   useEffect(() => {
-    window.sendToJavaScript = (data: string | [string, IGameEventData], argData: IGameEventData) => {
-      const [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
-      const eventTracking = {
-        slug: game?.id,
-        version: game?.values?.last_version?.id,
-        gameData: eventData ? eventData : undefined
-      }
-
-      let parsedData = eventData
-
-      switch (eventName) {
-        case 'game:loadStart':
-          setShowProgress(true)
-          track('game_load_start', eventTracking)
-          break
-        case 'game:loadProgress':
-          parsedData = Math.floor(Number(eventData) * 100)
-          if (parsedData > progressLevel) {
-            setProgressLevel(parsedData)
-          }
-          break
-        case 'game:loadComplete':
-          onEvent(eventName, eventData)
-          track('game_load_complete', eventTracking)
-          break
-        case 'game:start':
-          onEvent(eventName, eventData)
-          setShowProgress(false)
-          track('game_start', eventTracking)
-          break
-        case 'game:nest_cmm_start':
-          sendTextQuery('Invoke Start Game', { slug: game.id })
-          break
-        case 'game:complete':
-          onEvent(eventName, eventData)
-          onComplete(eventData as IGameCompletedData)
-          exitContinuousMatchMode().then(() => {
-            parsedData = eventData as IGameCompletedData
-            sendTextQuery('Invoke Score Screen Score TTS', { score: parsedData?.score, slug: game.id, isTraining: isTraining })
-          })
-          track('game_finish', eventTracking)
-          break
-        case 'game:nest_cmm_restart':
-          sendTextQuery('Restart Continuous Match Mode', { slug: game.id })
-          break
-        case 'game:speech':
-          parsedData = eventData as IGameSpeechData
-          outputTts(parsedData.text, parsedData.prompt)
-          break
-        case 'game:pause':
-          break
-        case 'game:nest_cmm_pause':
-          exitContinuousMatchMode()
-          break
-        case 'game:quit':
-          track('game_quit', eventTracking)
-          sendTextQuery('Home')
-          break
-        //case 'game:resume':
-        //case 'game:abort_update':
-        //case 'game:nest_cmm_resume':
-        default:
-          console.log('unhandled game event', eventName, eventData)
-      }
-    }
     return () => {
-      //eslint-disable-next-line @typescript-eslint/no-empty-function
-      window.sendToJavaScript = () => { }
       // Clear cocos3 scope
       window?.cc?.director?.end()
       // try to exit from cmm
@@ -183,7 +178,7 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
       {publicRuntimeConfig.gameSkip && (
         <div className={css([commonStyles.flexRowAllCenter, styles.skipGameDiv])}>
           <Button buttonStyles={styles.skipGameButton}
-            onClick={() => { window.sendToJavaScript('game:complete', { score: Math.floor(Math.random() * 1000) }) }}
+            onClick={sendFakeCompleteEvent}
             text='Skip Game'
           />
         </div>

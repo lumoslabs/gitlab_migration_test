@@ -25,7 +25,7 @@ const ConnectGuestAccount = ({ handleCancel }: IConnectAccountProps): JSX.Elemen
           <Button
             onClick={handleCancel}
             text={buttonText}
-            eventData={{ id: 'connect_guest_return_to_main_menu', message: buttonText }}
+            eventData={{ id: 'connect_guest_return_to_main_menu' }}
           />
         </Col>
       </Row>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     color: base.lumosBlack,
     fontFamily: 'MuseoSans500',
     fontSize: '26px',
-    fontWeight: 700,
+    fontWeight: 500,
     display: 'flex',
     paddingRight: '20vh',
     paddingLeft: '20vh',
