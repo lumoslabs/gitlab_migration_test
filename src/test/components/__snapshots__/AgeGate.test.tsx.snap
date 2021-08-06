@@ -9,7 +9,7 @@ exports[`matches snapshot 1`] = `
       class="flexRowAllCenter_1cn94ih row"
     >
       <p
-        class="title_1lhbty9"
+        class="title_8noqbn"
       >
         Please select your birthdate:
       </p>
@@ -106,6 +106,11 @@ exports[`matches snapshot 1`] = `
                   <li
                     class=""
                   >
+                    27
+                  </li>
+                  <li
+                    class=""
+                  >
                     28
                   </li>
                   <li
@@ -147,11 +152,6 @@ exports[`matches snapshot 1`] = `
                     class=""
                   >
                     05
-                  </li>
-                  <li
-                    class=""
-                  >
-                    06
                   </li>
                 </ul>
               </div>
@@ -227,6 +227,11 @@ exports[`matches snapshot 1`] = `
         </div>
       </div>
     </div>
+    <p
+      class="disclaimer_kdqsn7"
+    >
+      Your birthdate will be stored to verify you meet the age requirements for Lumosity.
+    </p>
     <div
       class="flexRowAllCenter_1cn94ih-o_O-buttonDiv_120lt8p row"
     >
