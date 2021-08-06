@@ -5,8 +5,10 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Layout from '@components/ui/Layout'
 import { Provider } from 'react-redux'
-import store from '@store/index'
+import createAppStore from '@store/index'
 import AxiosHandler from '@components/AxiosHandler'
+
+const store = createAppStore()
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (

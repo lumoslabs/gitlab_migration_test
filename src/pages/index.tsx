@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import { GetServerSideProps } from 'next'
 import { GameConfig } from '@backend/models/config'
 import {
@@ -60,6 +59,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-export default dynamic(() => Promise.resolve(Index), {
-  ssr: false
-})
+export default Index

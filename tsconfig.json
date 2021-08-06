@@ -41,7 +41,7 @@
         "src/store/*"
       ],
       "@assets/*": [
-        "public/assets/*"
+        "src/assets/*"
       ],
       "@test/*": [
         "src/test/*"

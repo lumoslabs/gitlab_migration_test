@@ -23,6 +23,10 @@ import onNo from '@backend/conversation/onNo'
 import amplitudeBackendEvent from '@backend/libs/amplitude'
 import onAgeGateResult from '@backend/conversation/onAgeGateResult'
 import onMainScene from '@backend/conversation/onMainScene'
+import onRestartCMM from '@backend/conversation/onRestartCMM'
+import onHelp from '@backend/conversation/onHelp'
+import onResumeGame from '@backend/conversation/onResumeGame'
+import onRestartGame from '@backend/conversation/onRestartGame'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -49,9 +53,9 @@ conversationApp.handle('Games', onHome)
 // Gameplay
 //TODO: move it to frontend
 conversationApp.handle('StartGame', onStartGame)
-conversationApp.handle('RestartCMM', onStartGame)
-conversationApp.handle('ResumeGame', onStartGame)
-conversationApp.handle('RestartGame', onStartGame)
+conversationApp.handle('RestartCMM', onRestartCMM)
+conversationApp.handle('ResumeGame', onResumeGame)
+conversationApp.handle('RestartGame', onRestartGame)
 
 // Game Score Screen
 conversationApp.handle('PlayScore', onPlayScore)
@@ -68,6 +72,7 @@ conversationApp.handle('AgeGateResult', onAgeGateResult)
 //TODO: should be moved to frontend
 conversationApp.handle('Yes', onYes)
 conversationApp.handle('No', onNo)
+conversationApp.handle('Help', onHelp)
 
 //TODO: remove from code and from intence
 conversationApp.handle('GameWelcomeMessage', onGameWelcomeMessage)
@@ -76,7 +81,7 @@ conversationApp.handle('FEInvokeTTS', onNoMatch)
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    logger.debug(req.body, 'Fulfullment Request')
+    logger.debug(`Fulfullment Request ${req.body?.handler?.name}`)
 
     amplitudeBackendEvent({
       eventName: `intent_${req.body?.handler?.name}`,
@@ -85,7 +90,7 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     })
 
     const result: StandardResponse = await conversationApp(req.body, req.headers)
-    logger.debug(result.body, 'Fulfillment Result')
+    logger.debug(`Fulfullment Result ${req.body?.handler?.name}`)
     return res.status(result.status).json(result.body)
   } catch (e) {
     rollbar?.error(e, req)

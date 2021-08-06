@@ -1,6 +1,6 @@
 import React from 'react'
 import mitt, { Emitter } from 'mitt'
-import { TtsMarkName } from '@sharedTypes/interactiveCanvas';
+import { TtsMarkName } from '@sharedTypes/interactiveCanvas'
 
 export type appBusEvents = {
   onPhraseMatched: any;
@@ -8,7 +8,12 @@ export type appBusEvents = {
   onTtsMark: TtsMarkName,
   onIntentYes: void;
   onIntentNo: void;
-};
+  onIntentHelp: void;
+  //TODO: remove it with private game intents
+  onIntentRestartCMM: void;
+  onIntentRestartGame: void;
+  onIntentResumeGame: void;
+}
 
 export const BusContext = React.createContext<Emitter<appBusEvents>>(null)
 const P = BusContext.Provider

@@ -45,25 +45,17 @@ const styles = StyleSheet.create({
   },
 })
 
-const heightFromClient = (clientHeight) => StyleSheet.create({
-  fullHeight: {
-    height: `${clientHeight}px`,
-  },
-})
-
 function Layout({ children }: { children: React.ReactNode }): JSX.Element {
 
-  const [clientHeight, setClient] = useState(0)
+  const [customStyle, setCustomStyle] = useState<React.CSSProperties>({})
 
   useEffect(() => {
-    setClient(window.clientHeight)
+    setCustomStyle({ height: window.innerHeight + 'px' })
   }, [])
-
-  const stylesWithHeight = heightFromClient(clientHeight)
 
   return <>
     <main>
-      <div className={css([styles.app, stylesWithHeight.fullHeight])}>
+      <div style={customStyle} className={css([styles.app])}>
         {children}
       </div>
     </main>
