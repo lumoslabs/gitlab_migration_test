@@ -13,7 +13,6 @@ import onHome from '@backend/conversation/onHome'
 import onStartGame from '@backend/conversation/onStartGame'
 import onNoMatch from '@backend/conversation/onNoMatch'
 import onGameWelcomeMessage from '@backend/conversation/onGameWelcomeMessage'
-import onUserLogout from '@backend/conversation/onUserLogout'
 import onTraining from '@backend/conversation/onTraining'
 import onStartAccountLinkingMonologue from '@backend/conversation/onStartAccountLinkingMonologue'
 import onGoogleAccountLink from '@backend/conversation/onGoogleAccountLink'
@@ -57,9 +56,6 @@ conversationApp.handle('RestartGame', onStartGame)
 // Game Score Screen
 conversationApp.handle('PlayScore', onPlayScore)
 
-// Log Out User and close app
-conversationApp.handle('UserLogout', onUserLogout)
-
 // Start Training Session
 conversationApp.handle('Training', onTraining)
 
@@ -77,8 +73,6 @@ conversationApp.handle('No', onNo)
 conversationApp.handle('GameWelcomeMessage', onGameWelcomeMessage)
 conversationApp.handle('StartAccountLinkingMonologue', onStartAccountLinkingMonologue)
 conversationApp.handle('FEInvokeTTS', onNoMatch)
-
-
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
@@ -99,5 +93,3 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     return res.send(e)
   }
 }
-
-
