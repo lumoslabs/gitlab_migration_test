@@ -1,13 +1,12 @@
 import getConfig from 'next/config'
+import InteractiveCanvasProxySource from "@assets/interactiveCanvasProxy.js?raw"
 
 function InteractiveCanvasScript(): JSX.Element {
   const { publicRuntimeConfig } = getConfig()
   return <>
     <script src={publicRuntimeConfig.interactiveCanvasLibUrl} />
-    <script src={'/assets/interactive_canvas_proxy.js'} />
+    <script dangerouslySetInnerHTML={{ __html: InteractiveCanvasProxySource }} />
   </>
 }
-
-
 
 export default InteractiveCanvasScript

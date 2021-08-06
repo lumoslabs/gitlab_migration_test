@@ -12,7 +12,6 @@ export declare global {
     interactiveCanvasProxy: {
       ready: (callbacks: interactiveCanvasCallbacks) => any
     }
-    clientHeight: number;
     Lumos: any;
     cc: any;
     sendToJavaScript: (data: string | [string, any], argData: any | null) => void;

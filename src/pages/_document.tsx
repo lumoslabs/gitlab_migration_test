@@ -11,6 +11,7 @@ class MyDocument extends Document {
           <InteractiveCanvasScript />
           <Rollbar />
           <Amplitude />
+          <link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;," />
         </Head>
         <body>
           <Main />

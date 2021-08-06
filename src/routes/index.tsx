@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import LoadingComponent from '@components/ui/LoadingComponent'
 import { useEffect } from 'react'
@@ -22,9 +21,7 @@ export function Index(): JSX.Element {
   )
 }
 
-export default dynamic(() => Promise.resolve(Index), {
-  ssr: false
-})
+export default Index
 
 const styles = StyleSheet.create({
   app: {
@@ -44,13 +41,6 @@ const styles = StyleSheet.create({
     linear-gradient(-225deg, rgb(115, 229, 255) 0%, rgb(115, 229, 255) 4%, rgb(172, 240, 255) 23%, rgb(172, 240, 255) 70%, rgb(115, 229, 255) 100%),
     radial-gradient(ellipse 100% 0% at 100% 100%, rgb(193, 236, 255) 0%, rgb(115, 229, 255) 100%)`,
   },
-  header: {
-    width: '100%',
-    maxWidth: '100%',
-    margin: '0',
-    padding: '0',
-    backgroundColor: '#0C3040'
-  },
   mainContent: {
     padding: 0,
     margin: 0,
@@ -59,12 +49,5 @@ const styles = StyleSheet.create({
     maxWidth: '100%',
     display: 'flex',
     justifyContent: 'center'
-  },
-  footer: {
-    display: 'none'
-  },
-  iconImage: {
-    height: '13.66vh',
-    width: '31.25vw'
   }
 })

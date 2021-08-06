@@ -5,6 +5,13 @@ const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
  **/
 module.exports = (phase) => {
   return {
+    webpack: (config) => {
+      config.module.rules.push({
+        resourceQuery: /raw/,
+        type: 'asset/source',
+      })
+      return config
+    },
     async rewrites() {
       return [
         {
