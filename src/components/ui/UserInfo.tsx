@@ -3,7 +3,6 @@ import { Modal, Container, Row, Col } from 'react-bootstrap'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import commonStyles from '@styles/commonStyles'
 import { base } from '@styles/colors'
-import WideActionButton from '@components/ui/WideActionButton'
 
 export interface IUserInfoProps {
   show: boolean;
@@ -12,10 +11,9 @@ export interface IUserInfoProps {
   profilePicUrl?: string;
   timezone?: string;
   handleClose(e: React.MouseEvent<any>): any;
-  logoutCallback(e: React.MouseEvent<any>): any;
 }
 
-const UserInfo = ({ show, handleClose, profilePicUrl, email, name, timezone, logoutCallback }: IUserInfoProps): JSX.Element => {
+const UserInfo = ({ show, handleClose, profilePicUrl, email, name, timezone }: IUserInfoProps): JSX.Element => {
 
   return (
     <Modal className={css(styles.modal)}
@@ -35,62 +33,66 @@ const UserInfo = ({ show, handleClose, profilePicUrl, email, name, timezone, log
             alt='Avatar'
           />
         </div>
-        <Container>
+        <Container className={css(styles.container)} >
           <Row>
-            <Col xs={4}>
+            <Col xs={6}>
               <p className={css(styles.labelsText)}>
                 {'Email'}
               </p>
             </Col>
-            <Col xs={8}>
+            <Col xs={6}>
               <p className={css(styles.valueText, styles.email)}>
                 {email || ''}
               </p>
             </Col>
           </Row>
           <Row>
-            <Col xs={4}>
+            <Col xs={6}>
               <p className={css(styles.labelsText)}>
                 {'Name'}
               </p>
             </Col>
-            <Col xs={8}>
+            <Col xs={6}>
               <p className={css(styles.valueText)}>
                 {name}
               </p>
             </Col>
           </Row>
           <Row>
-            <Col xs={4}>
+            <Col xs={6}>
               <p className={css(styles.labelsText)}>
                 {'Time Zone'}
               </p>
             </Col>
-            <Col xs={8}>
+            <Col xs={6}>
               <p className={css(styles.valueText)}>
                 {timezone}
               </p>
             </Col>
           </Row>
           <Row>
-            <Col xs={4}>
+            <Col xs={6}>
               <p className={css(styles.labelsText)}>
                 {'Language'}
               </p>
             </Col>
-            <Col xs={8}>
+            <Col xs={6}>
               <p className={css(styles.valueText)}>
                 {'English'}
               </p>
             </Col>
           </Row>
+          <Row>
+            <Col className={css(styles.unlinkSection)}>
+              <p className={css(styles.valueText)}>
+                {/* TODO: Revise with legal approved copy */}
+                {'To unlink your Lumosity account from Google, visit myaccount.google.com/permissions.'}
+                <br/><br/>
+                {'To delete your Lumosity account, visit Lumosity.com.'}
+              </p>
+              </Col>
+          </Row>
         </Container>
-        <WideActionButton
-          extendStyles={styles.cta}
-          buttonText='Logout'
-          onClick={logoutCallback}
-          eventData={{ id: 'logout' }}
-        />
       </Modal.Body>
     </Modal>
   )
@@ -108,7 +110,6 @@ const styles = StyleSheet.create({
       0px 2px 4px 0px rgba(0, 0, 0, 0.13),
       0px 2px 6px 0px rgba(0, 0, 0, 0.1)`
   },
-
   title: {
     color: base.lumosBlack,
     fontFamily: 'MuseoSans700',
@@ -120,45 +121,41 @@ const styles = StyleSheet.create({
     marginLeft: '3.12vw',
     marginTop: '5.33vh'
   },
-
   avatarDiv: {
     marginBottom: '3vh'
   },
-
   avatarImg: {
     width: '15vh',
     height: '15vh',
     borderRadius: '50%'
   },
-
+  container: {
+    margin: '0 auto'
+  },
   labelsText: {
     color: base.lumosBlack,
     fontFamily: 'MuseoSans700',
-    fontSize: '3.33vh',
-    fontWeight: 700
+    fontSize: '26px',
+    fontWeight: 700,
+    textAlign: 'right',
+    marginRight: '2vw'
   },
-
   valueText: {
     color: base.lumosBlack,
     fontFamily: 'MuseoSans500',
-    fontSize: '3.33vh',
+    fontSize: '26px',
     fontWeight: 500,
     textAlign: 'left',
-    flex: 1,
-    marginRight: '2.34vw'
+    flex: 1
   },
-
   email: {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis'
   },
-
-  cta: {
-    height: '10vh',
-    width: '15vw',
-    borderRadius: '36px'
-  }
+  unlinkSection: {
+    marginLeft: '5vw'
+  },
 })
 
 export default UserInfo

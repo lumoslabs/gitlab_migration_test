@@ -36,11 +36,6 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
     }
   }
 
-  const handleLogout = () => {
-    setShowAccountModal(false)
-    sendTextQuery('Invoke User Logout')
-  }
-
   const handleClick = () => {
     history.push(`/training`)
   }
@@ -64,7 +59,6 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
       <UserInfo
         show={showAccountModal}
         handleClose={handleAccountModalClose}
-        logoutCallback={handleLogout}
         name={user?.name}
         email={user?.email}
         profilePicUrl={user?.avatar}
