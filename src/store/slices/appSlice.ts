@@ -84,7 +84,7 @@ export const appSlice = createSlice({
     ) => {
       state.training.games = state.training.games.filter((game) => game !== action.payload)
     },
-    setTutorial: (
+    setTutorialSeen: (
       state: Draft<typeof initialState>,
       action: PayloadAction<{ slug: string }>
     ) => {

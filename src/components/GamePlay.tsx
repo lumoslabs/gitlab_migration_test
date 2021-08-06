@@ -44,7 +44,7 @@ export default function GamePlay({
   const onComplete = (data: any) => {
     setResult(data)
     onGameComplete && onGameComplete()
-    dispatch(actions.setTutorial({ slug: game.id }))
+    dispatch(actions.setTutorialSeen({ slug: game.id }))
   }
 
   const onEvent = (eventName: string, eventData: any) => {
