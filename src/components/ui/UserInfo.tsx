@@ -20,11 +20,6 @@ const UserInfo = ({ show, handleClose, profilePicUrl, email, name, timezone }: I
       show={show}
       onHide={handleClose}
     >
-      <Modal.Title>
-        <p className={css(styles.title)}>
-          {'Your Profile'}
-        </p>
-      </Modal.Title>
       <Modal.Body>
         <div className={css([commonStyles.flexColumnAlignCenter, styles.avatarDiv])}>
           <img
@@ -83,8 +78,8 @@ const UserInfo = ({ show, handleClose, profilePicUrl, email, name, timezone }: I
             </Col>
           </Row>
           <Row>
-            <Col className={css(styles.unlinkSection)}>
-              <p className={css(styles.valueText)}>
+            <Col>
+              <p className={css(styles.valueText, styles.unlinkText)}>
                 {/* TODO: Revise with legal approved copy */}
                 {'To unlink your Lumosity account from Google, visit myaccount.google.com/permissions.'}
                 <br/><br/>
@@ -118,11 +113,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     margin: '0px',
     padding: '0px',
-    marginLeft: '3.12vw',
-    marginTop: '5.33vh'
+    marginLeft: '3.12vw'
   },
   avatarDiv: {
-    marginBottom: '3vh'
+    marginBottom: '20px'
   },
   avatarImg: {
     width: '15vh',
@@ -153,8 +147,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     textOverflow: 'ellipsis'
   },
-  unlinkSection: {
-    marginLeft: '5vw'
+  unlinkText: {
+    textAlign: 'center'
   },
 })
 
