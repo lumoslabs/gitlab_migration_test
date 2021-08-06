@@ -36,7 +36,6 @@ export default function Test(): JSX.Element {
       {/* <UserInfo
         show={true}
         handleClose={handleClick}
-        logoutCallback={handleClick}
         email='liina.laufer@australianemailswithreallylongdomains.com'
         name='Liina Laufer'
         timezone='Australian Central Western Standard Time'

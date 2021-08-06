@@ -13,7 +13,12 @@ export interface IAgeGateProps {
   disabled?: boolean
 }
 
-const AgeGate = (({ onSubmit, max = (new Date(Date.now() - 86400000)), min = (new Date('1900-01-02')), disabled = false }: IAgeGateProps): JSX.Element => {
+const AgeGate = (({
+  onSubmit,
+  max = (new Date(Date.now() - 86400000)),
+  min = (new Date('1900-01-02')),
+  disabled = false
+}: IAgeGateProps): JSX.Element => {
 
   const [date, setDate] = useState(new Date('1985-01-02'))
 
@@ -55,7 +60,6 @@ const AgeGate = (({ onSubmit, max = (new Date(Date.now() - 86400000)), min = (ne
     },
   }
 
-  //TODO: add text like "your birthdate will be stored to verify you meet the age requirements to play this game"
   return (
     <Container className={css(commonStyles.flexColumnAlignCenter)}>
       <Row className={css(commonStyles.flexRowAllCenter)}>
@@ -77,12 +81,16 @@ const AgeGate = (({ onSubmit, max = (new Date(Date.now() - 86400000)), min = (ne
           min={min}
         />
       </Row>
+      {/* TODO: Update with legal approved copy */}
+      <p className={css(styles.disclaimer)}>
+          {'Your birthdate will be stored to verify you meet the age requirements for Lumosity.'}
+        </p>
       <Row className={css(commonStyles.flexRowAllCenter, styles.buttonDiv)}>
         <Button
           disabled={disabled}
           onClick={handleClick}
           text='Submit'
-          eventData={{ id: 'submit_birthdate', message: 'Submit' }}
+          eventData={{ id: 'submit_birthdate' }}
         />
       </Row>
     </Container>
@@ -97,9 +105,16 @@ const styles = StyleSheet.create({
     fontFamily: 'MuseoSans500',
     fontSize: '32px',
     fontWeight: 700,
-    display: 'flex',
     padding: '0px',
-    marginTop: '10vh',
+    marginTop: '8vh',
+    textAlign: 'center'
+  },
+  disclaimer: {
+    color: base.lumosBlack,
+    fontFamily: 'MuseoSans500',
+    fontSize: '24px',
+    fontWeight: 500,
+    padding: '0px',
     textAlign: 'center'
   },
   buttonDiv: {

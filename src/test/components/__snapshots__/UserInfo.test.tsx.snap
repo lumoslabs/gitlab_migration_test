@@ -40,25 +40,25 @@ exports[`UserBar displays the correct info 1`] = `
             />
           </div>
           <div
-            class="container"
+            class="container_d8ev20 container"
           >
             <div
               class="row"
             >
               <div
-                class="col-4"
+                class="col-6"
               >
                 <p
-                  class="labelsText_1hh284c"
+                  class="labelsText_1tsmx9q"
                 >
                   Email
                 </p>
               </div>
               <div
-                class="col-8"
+                class="col-6"
               >
                 <p
-                  class="valueText_91azc3-o_O-email_1iurgbx"
+                  class="valueText_lf2rem-o_O-email_1iurgbx"
                 >
                   email@example.com
                 </p>
@@ -68,19 +68,19 @@ exports[`UserBar displays the correct info 1`] = `
               class="row"
             >
               <div
-                class="col-4"
+                class="col-6"
               >
                 <p
-                  class="labelsText_1hh284c"
+                  class="labelsText_1tsmx9q"
                 >
                   Name
                 </p>
               </div>
               <div
-                class="col-8"
+                class="col-6"
               >
                 <p
-                  class="valueText_91azc3"
+                  class="valueText_lf2rem"
                 >
                   Lumosity User
                 </p>
@@ -90,19 +90,19 @@ exports[`UserBar displays the correct info 1`] = `
               class="row"
             >
               <div
-                class="col-4"
+                class="col-6"
               >
                 <p
-                  class="labelsText_1hh284c"
+                  class="labelsText_1tsmx9q"
                 >
                   Time Zone
                 </p>
               </div>
               <div
-                class="col-8"
+                class="col-6"
               >
                 <p
-                  class="valueText_91azc3"
+                  class="valueText_lf2rem"
                 >
                   Pacific Time
                 </p>
@@ -112,33 +112,40 @@ exports[`UserBar displays the correct info 1`] = `
               class="row"
             >
               <div
-                class="col-4"
+                class="col-6"
               >
                 <p
-                  class="labelsText_1hh284c"
+                  class="labelsText_1tsmx9q"
                 >
                   Language
                 </p>
               </div>
               <div
-                class="col-8"
+                class="col-6"
               >
                 <p
-                  class="valueText_91azc3"
+                  class="valueText_lf2rem"
                 >
                   English
                 </p>
               </div>
             </div>
-          </div>
-          <div
-            class="flexJustifyCenter_jfsfb5"
-          >
-            <button
-              class="button_15gg8qi-o_O-wideAction_4zoj1f-o_O-cta_2yfb43"
+            <div
+              class="row"
             >
-              Logout
-            </button>
+              <div
+                class="unlinkSection_24n8q0 col"
+              >
+                <p
+                  class="valueText_lf2rem"
+                >
+                  To unlink your Lumosity account from Google, visit myaccount.google.com/permissions.
+                  <br />
+                  <br />
+                  To delete your Lumosity account, visit Lumosity.com.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -187,25 +194,25 @@ exports[`matches snapshot 1`] = `
             />
           </div>
           <div
-            class="container"
+            class="container_d8ev20 container"
           >
             <div
               class="row"
             >
               <div
-                class="col-4"
+                class="col-6"
               >
                 <p
-                  class="labelsText_1hh284c"
+                  class="labelsText_1tsmx9q"
                 >
                   Email
                 </p>
               </div>
               <div
-                class="col-8"
+                class="col-6"
               >
                 <p
-                  class="valueText_91azc3-o_O-email_1iurgbx"
+                  class="valueText_lf2rem-o_O-email_1iurgbx"
                 >
                   email@example.com
                 </p>
@@ -215,19 +222,19 @@ exports[`matches snapshot 1`] = `
               class="row"
             >
               <div
-                class="col-4"
+                class="col-6"
               >
                 <p
-                  class="labelsText_1hh284c"
+                  class="labelsText_1tsmx9q"
                 >
                   Name
                 </p>
               </div>
               <div
-                class="col-8"
+                class="col-6"
               >
                 <p
-                  class="valueText_91azc3"
+                  class="valueText_lf2rem"
                 >
                   Lumosity User
                 </p>
@@ -237,19 +244,19 @@ exports[`matches snapshot 1`] = `
               class="row"
             >
               <div
-                class="col-4"
+                class="col-6"
               >
                 <p
-                  class="labelsText_1hh284c"
+                  class="labelsText_1tsmx9q"
                 >
                   Time Zone
                 </p>
               </div>
               <div
-                class="col-8"
+                class="col-6"
               >
                 <p
-                  class="valueText_91azc3"
+                  class="valueText_lf2rem"
                 >
                   Pacific Time
                 </p>
@@ -259,33 +266,40 @@ exports[`matches snapshot 1`] = `
               class="row"
             >
               <div
-                class="col-4"
+                class="col-6"
               >
                 <p
-                  class="labelsText_1hh284c"
+                  class="labelsText_1tsmx9q"
                 >
                   Language
                 </p>
               </div>
               <div
-                class="col-8"
+                class="col-6"
               >
                 <p
-                  class="valueText_91azc3"
+                  class="valueText_lf2rem"
                 >
                   English
                 </p>
               </div>
             </div>
-          </div>
-          <div
-            class="flexJustifyCenter_jfsfb5"
-          >
-            <button
-              class="button_15gg8qi-o_O-wideAction_4zoj1f-o_O-cta_2yfb43"
+            <div
+              class="row"
             >
-              Logout
-            </button>
+              <div
+                class="unlinkSection_24n8q0 col"
+              >
+                <p
+                  class="valueText_lf2rem"
+                >
+                  To unlink your Lumosity account from Google, visit myaccount.google.com/permissions.
+                  <br />
+                  <br />
+                  To delete your Lumosity account, visit Lumosity.com.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

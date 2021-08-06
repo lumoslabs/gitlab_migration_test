@@ -28,7 +28,6 @@ it('matches snapshot', () => {
     <UserInfo
       show={true}
       handleClose={handleClick}
-      logoutCallback={handleClick}
       email='email@example.com'
       name='Lumosity User'
       timezone='Pacific Time'
@@ -43,7 +42,6 @@ test('UserBar displays the correct info', () => {
     <UserInfo
       show={true}
       handleClose={handleClick}
-      logoutCallback={handleClick}
       email='email@example.com'
       name='Lumosity User'
       timezone='Pacific Time'
