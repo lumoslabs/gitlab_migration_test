@@ -7,7 +7,7 @@ import gameRunCreate from '@api/gameRunCreate'
 import gameRunUpdate from '@api/gameRunUpdate'
 
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { getTopScores, actions, getTutorial } from '@store/slices/appSlice'
+import { getTopScores, actions, getTutorialSeen } from '@store/slices/appSlice'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import sample from 'lodash.sample'
 import useAppBusListener from '@hooks/useAppBusListener'
@@ -39,7 +39,7 @@ export default function GamePlay({
   const topScores = useAppSelector(getTopScores)[game.id]
   const gameRunIdRef = useRef('')
   const { outputTts } = useInteractiveCanvas()
-  const showTutorial = !useAppSelector(getTutorial)[game.id]
+  const showTutorial = !useAppSelector(getTutorialSeen)[game.id]
 
   const onComplete = (data: any) => {
     setResult(data)

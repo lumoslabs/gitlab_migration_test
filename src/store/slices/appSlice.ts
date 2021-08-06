@@ -14,7 +14,7 @@ interface appState {
     size: number,
     deadline: number
   } | null,
-  tutorial: Record<string, boolean>,
+  tutorialSeen: Record<string, boolean>,
   user?: {
     id?: string,
     name?: string,
@@ -36,7 +36,7 @@ const initialState: appState = {
   scores: {},
   training: null,
   user: null,
-  tutorial: {}
+  tutorialSeen: {}
 } as const
 
 
@@ -59,7 +59,7 @@ export const appSlice = createSlice({
       state.authToken = action?.payload?.authToken ?? state.authToken
       state.training = action.payload?.training ?? state.training
       state.user = action.payload?.user ?? state.user
-      state.tutorial = action.payload?.tutorial ?? state.tutorial
+      state.tutorialSeen = action.payload?.tutorialSeen ?? state.tutorialSeen
     },
     setContinuousMatchMode: (
       state: Draft<typeof initialState>,
@@ -88,7 +88,7 @@ export const appSlice = createSlice({
       state: Draft<typeof initialState>,
       action: PayloadAction<{ slug: string }>
     ) => {
-      state.tutorial[action.payload.slug] = true
+      state.tutorialSeen[action.payload.slug] = true
     },
   }
 })
@@ -103,7 +103,7 @@ export const getAuthToken = (state: RootState) => state.app.authToken
 export const getContinuousMatchMode = (state: RootState) => state.app.continuousMatchMode
 export const getTopScores = (state: RootState) => state.app.scores
 export const getTraining = (state: RootState) => state.app.training
-export const getTutorial = (state: RootState) => state.app.tutorial
+export const getTutorialSeen = (state: RootState) => state.app.tutorialSeen
 export const getUser = (state: RootState) => state.app.user
 
 // Reducers and actions

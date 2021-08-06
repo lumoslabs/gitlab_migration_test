@@ -39,7 +39,7 @@ export default async (conv: ConversationV3) => {
   setTraining(conv, training)
 
   //Generate tutorial object
-  const tutorial = Object.keys(conv.user.params?.scores ?? {}).reduce((accum, gameName) => {
+  const tutorialSeen = Object.keys(conv.user.params?.scores ?? {}).reduce((accum, gameName) => {
     accum[gameName] = true
     return accum
   }, {})
@@ -65,7 +65,7 @@ export default async (conv: ConversationV3) => {
           authToken,
           training,
           user: convToUser(conv),
-          tutorial,
+          tutorialSeen,
         }
       },
       {
