@@ -19,9 +19,10 @@ export interface IGameContainerProps {
   onComplete: (data: GameCompletedData) => void;
   onEvent: (eventName: string, data: any) => void;
   isTraining: boolean;
+  showTutorial: boolean;
 }
 
-const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainerProps): JSX.Element => {
+const GameContainer = ({ game, onComplete, onEvent, isTraining, showTutorial }: IGameContainerProps): JSX.Element => {
   const track = useAmplitude()
   const { sendTextQuery, outputTts, exitContinuousMatchMode } = useInteractiveCanvas()
 
@@ -49,6 +50,7 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
     gamevars: {
       ...game.values?.last_version?.overrides?.extras,
       game_resources_url: gameUrl,
+      show_tutorial: showTutorial
     },
   }
 

@@ -38,6 +38,12 @@ export default async (conv: ConversationV3) => {
 
   setTraining(conv, training)
 
+  //Generate tutorial object
+  const tutorialSeen = Object.keys(conv.user.params?.scores ?? {}).reduce((accum, gameName) => {
+    accum[gameName] = true
+    return accum
+  }, {})
+
 
   let nextScene = Scenes.Main
   let nextPage = Pages.Home
@@ -58,7 +64,8 @@ export default async (conv: ConversationV3) => {
           baseUrl: getPublicUrlFromConv(conv),
           authToken,
           training,
-          user: convToUser(conv)
+          user: convToUser(conv),
+          tutorialSeen,
         }
       },
       {
