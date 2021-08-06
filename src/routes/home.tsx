@@ -24,7 +24,7 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
   const history = useHistory()
   const training = useAppSelector(getTraining)
   const user = useAppSelector(getUser)
-  const { outputTts, sendTextQuery } = useInteractiveCanvas()
+  const { outputTts } = useInteractiveCanvas()
   const [showAccountModal, setShowAccountModal] = useState(false)
   const handleAccountModalClose = () => setShowAccountModal(false)
 
@@ -45,7 +45,7 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
   }
 
   useAppBusListener('onIntentHelp', () => {
-    outputTts('Here is what you can do, you can say "Play a game" to start a random game. "Start a workout" to play a series of three games. What would you like to do?')
+    outputTts('Here is what you can do: you can say "Play a game" to start a random game or "Start a workout" to play a series of three games. What would you like to do?')
   })
 
   return (

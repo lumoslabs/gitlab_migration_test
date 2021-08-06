@@ -127,7 +127,7 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining }: IGameContainer
     sendEventToCocos({ action: 'tts_' + tts.toLowerCase() })
   })
 
-  //Handle webhook intences
+  //Handle webhook intents
   useAppBusListener('onIntentHelp', () => {
     sendEventToCocos({ action: 'tutorial' })
   })

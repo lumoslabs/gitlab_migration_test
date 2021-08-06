@@ -1,5 +1,5 @@
 import getConfig from 'next/config'
-import InteractiveCanvasProxySource from "@assets/interactiveCanvasProxy.js?raw"
+import InteractiveCanvasProxySource from '@assets/interactiveCanvasProxy.js?raw'
 
 function InteractiveCanvasScript(): JSX.Element {
   const { publicRuntimeConfig } = getConfig()
