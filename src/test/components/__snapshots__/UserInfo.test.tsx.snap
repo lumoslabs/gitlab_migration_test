@@ -19,19 +19,10 @@ exports[`UserBar displays the correct info 1`] = `
         class="modal-content"
       >
         <div
-          class="modal-title h4"
-        >
-          <p
-            class="title_1809nyj"
-          >
-            Your Profile
-          </p>
-        </div>
-        <div
           class="modal-body"
         >
           <div
-            class="flexColumnAlignCenter_1ndpwxc-o_O-avatarDiv_1f3o2jp"
+            class="flexColumnAlignCenter_1ndpwxc-o_O-avatarDiv_tmuzvm"
           >
             <img
               alt="Avatar"
@@ -134,10 +125,10 @@ exports[`UserBar displays the correct info 1`] = `
               class="row"
             >
               <div
-                class="unlinkSection_24n8q0 col"
+                class="col"
               >
                 <p
-                  class="valueText_lf2rem"
+                  class="valueText_lf2rem-o_O-unlinkText_12to336"
                 >
                   To unlink your Lumosity account from Google, visit myaccount.google.com/permissions.
                   <br />
@@ -173,19 +164,10 @@ exports[`matches snapshot 1`] = `
         class="modal-content"
       >
         <div
-          class="modal-title h4"
-        >
-          <p
-            class="title_1809nyj"
-          >
-            Your Profile
-          </p>
-        </div>
-        <div
           class="modal-body"
         >
           <div
-            class="flexColumnAlignCenter_1ndpwxc-o_O-avatarDiv_1f3o2jp"
+            class="flexColumnAlignCenter_1ndpwxc-o_O-avatarDiv_tmuzvm"
           >
             <img
               alt="Avatar"
@@ -288,10 +270,10 @@ exports[`matches snapshot 1`] = `
               class="row"
             >
               <div
-                class="unlinkSection_24n8q0 col"
+                class="col"
               >
                 <p
-                  class="valueText_lf2rem"
+                  class="valueText_lf2rem-o_O-unlinkText_12to336"
                 >
                   To unlink your Lumosity account from Google, visit myaccount.google.com/permissions.
                   <br />
