@@ -1,0 +1,47 @@
+{
+  "id": "color-match-nest",
+  "name": "color-match-nest",
+  "values": {
+    "slug": "color-match-nest",
+    "id": 1,
+    "title": "Color Match",
+    "path": "color-match-nest",
+    "brain_area": "FLEXIBILITY",
+    "banner_url": "https://assets.nest.lumosity.com/frontend_assets/banner/color_match_header.png",
+    "score_thumbnail_url": "https://assets.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_color_match.png",
+    "invoke_file": "game.js",
+    "continuous_match_configs": [
+      "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
+      "https://assets.nest.lumosity.com/continuous_match_configs/color_match_phrases.yml"
+    ],
+    "frontend_data": {
+      "score_description_key": "colorMatchSummaryDescription",
+      "scores": [
+        {
+          "screens": [
+            "score"
+          ],
+          "score_screen_score_key": "scoreScreenCards",
+          "run_data_references": {
+            "num_correct": {
+              "key": "game_result_data.num_correct",
+              "default": 0
+            }
+          }
+        }
+      ]
+    },
+    "versions": [
+      {
+        "id": "nest_1.0",
+        "overrides": {
+          "game_url": "https://assets.nest.lumosity.com/game-assets/ColorMatch_CC/nest_lowres/a213a4c63155fa5fde7fbe266d42654a33b71a56/289067450/release/",
+          "extras": {
+            "skip_title": true,
+            "skip_stats": true
+          }
+        }
+      }
+    ]
+  }
+}

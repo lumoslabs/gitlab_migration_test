@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { GameConfig } from '@backend/models/config'
+import { GameConfig } from '@backend/services/ConfigService'
 import GameContainer from '@components/ui/GameContainer'
 import GameScoreCard from '@components/ui/GameScoreCard'
 import LoadingComponent from '@components/ui/LoadingComponent'

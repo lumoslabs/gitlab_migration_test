@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom'
 import GamePlay from '@components/GamePlay'
-import { GameConfig } from '@backend/models/config'
+import { GameConfig } from '@backend/services/ConfigService'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getTraining, actions } from '@store/slices/appSlice'
 import { useEffect, useState } from 'react'

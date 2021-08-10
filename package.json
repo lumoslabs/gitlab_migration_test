@@ -13,7 +13,8 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "dynalite": "ts-node ./tools/dynalite.mjs",
-    "migrate": "yarn run ts-node tools/migration.mjs"
+    "migrate": "yarn run ts-node tools/migration.mjs",
+    "cmm-config-refresh": "yarn run ts-node tools/download-continuous-match-configs.mjs"
   },
   "dependencies": {
     "@amplitude/node": "^1.8.0",

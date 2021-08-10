@@ -1,5 +1,5 @@
 import GamePlay from '@components/GamePlay'
-import { GameConfig } from '@backend/models/config'
+import { GameConfig } from '@backend/services/ConfigService'
 import useAmplitude from '@hooks/useAmplitude'
 import { useEffect } from 'react'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'

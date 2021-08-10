@@ -58,7 +58,8 @@ for (const fileName of files) {
 
 }
 
-const seeds = fs.readdirSync(path.join(process.cwd(), './tools/seeds'))
+const seedsDir = path.join(process.cwd(), './tools/seeds')
+const seeds = fs.existsSync(seedsDir) ? fs.readdirSync() : []
 
 console.log(`------ SEEDS`)
 

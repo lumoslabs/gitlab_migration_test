@@ -1,30 +1,74 @@
-import ConfigModel, { Config, CatalogConfig, GameConfig, ConfigTypes } from '@backend/models/config'
-import getConfig from 'next/config'
-import axios from 'axios'
-import YAML from 'yaml'
+import fs from 'fs'
 
-const { serverRuntimeConfig } = getConfig()
+export interface Config {
+  name: string;
+  id: string;
+  type: string;
+  values: any
+}
+
+export interface GameConfigVersion {
+  id: string;
+  overrides: {
+    extras: Record<string, string | boolean>,
+    game_url: string
+  }
+}
+
+export interface FrontEndData {
+  score_description_key: string;
+  scores: {
+    score_screen_score_key: string;
+    screens: any;
+    run_data_references: any;
+  }[]
+}
+
+export interface GameConfig extends Config {
+  values: {
+    id: number;
+    slug: string;
+    brain_area: string;
+    continuous_match_configs: string[];
+    frontend_data: FrontEndData;
+    invoke_file: string;
+    title: string;
+    score_thumbnail_url: string;
+    path: string;
+    versions: GameConfigVersion[];
+    banner_url: string;
+    last_version: GameConfigVersion;
+  }
+}
+
+export interface CMMPhrase {
+  "phrase": string,
+  "alternative_phrases": string[]
+}
 
 export default class CatalogService {
 
-  //TODO: wrap it with cache decorator
-  async getRow(id: string, type: string): Promise<Config | null> {
-    const row = await ConfigModel.get({ id, type })
-    return row?.Item ? row.Item as Config : null
+  async getFile<T>(fileName: string): Promise<T> {
+    return new Promise((resolve, reject) => {
+      fs.readFile(`./config-data/${fileName}.json`, (error, fileBuffer) => {
+        if (error) {
+          return reject(error)
+        }
+        return resolve(JSON.parse(fileBuffer.toString()))
+      })
+    })
   }
 
   async getCatalogGames() {
-    const catalog: CatalogConfig = await this.getRow(serverRuntimeConfig?.misc?.configCatalogId || 1, ConfigTypes.CATALOG)
-    //n+1, copy paste from prev version, should be handled by cache decorator
-    const games = ((await Promise.all(catalog?.values?.games?.map((game) => {
+    const catalog = await this.getFile<{ slug: string }[]>('catalog')
+    const games = (await Promise.all(catalog?.map((game) => {
       return this.getCatalogGameBySlug(game.slug)
-    }))) as GameConfig[]).sort((a, b) => (a?.values?.title > b?.values?.title) ? 1 : -1)
-
+    }))).sort((a, b) => (a?.values?.title > b?.values?.title) ? 1 : -1)
     return games
   }
 
   async getCatalogGameBySlug(slug: string) {
-    const game: Omit<GameConfig, "last_version"> | null = await this.getRow(slug, 'game')
+    const game: Omit<GameConfig, "last_version"> | null = await this.getFile<GameConfig>(`games/${slug}`)
     return game ? {
       ...game,
       values: {
@@ -34,30 +78,12 @@ export default class CatalogService {
     } as GameConfig : null
   }
 
-  //TODO: wrap it with cache decorator
   async getGameContinuousMatchPhrases(slug: string) {
-    const game = await this.getCatalogGameBySlug(slug)
-    if (!game || !game.values?.continuous_match_configs)
-      return null
-    const downloaded = await Promise.all(game.values?.continuous_match_configs.map((url) => {
-      return axios.get(url, { responseType: 'blob' })
-    }))
-    return downloaded.reduce((accumulator, yaml) => {
-      const parsed = YAML.parse(yaml.data)
-      if (parsed?.expected_phrases)
-        return accumulator.concat(parsed?.expected_phrases)
-      return accumulator
-    }, [])
+    return await this.getFile<CMMPhrase[]>(`continuous_match_configs/${slug}`)
   }
 
   async getVoiceGameMap() {
-    return {
-      'color match': 'color-match-nest',
-      'ebb and flow': 'ebb-and-flow-nest',
-      'raindrops': 'raindrops-nest',
-      'train of thought': 'train-of-thought-nest',
-      'word snatchers': 'word-snatchers-nest'
-    }
+    return await this.getFile<Record<string, string>>(`catalog_voice_map`)
   }
 }
 

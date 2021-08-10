@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next'
-import { GameConfig } from '@backend/models/config'
+import { GameConfig } from '@backend/services/ConfigService'
 import {
   MemoryRouter as Router,
   Switch,

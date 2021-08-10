@@ -1,0 +1,47 @@
+{
+  "id": "word-snatchers-nest",
+  "name": "word-snatchers-nest",
+  "values": {
+    "slug": "word-snatchers-nest",
+    "id": 5,
+    "title": "Word Snatchers",
+    "path": "word-snatchers-nest",
+    "brain_area": "LANGUAGE",
+    "banner_url": "https://assets.nest.lumosity.com/frontend_assets/banner/word_snatchers_header.png",
+    "score_thumbnail_url": "https://assets.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_word_snatchers.png",
+    "invoke_file": "game.js",
+    "continuous_match_configs": [
+      "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
+      "https://assets.nest.lumosity.com/continuous_match_configs/word_snatchers_phrases.yml"
+    ],
+    "frontend_data": {
+      "score_description_key": "wordSnatchersSummaryDescription",
+      "scores": [
+        {
+          "screens": [
+            "score"
+          ],
+          "score_screen_score_key": "scoreScreenLetters",
+          "run_data_references": {
+            "max_letters": {
+              "key": "game_result_data.max_letters",
+              "default": 0
+            }
+          }
+        }
+      ]
+    },
+    "versions": [
+      {
+        "id": "nest_1.0",
+        "overrides": {
+          "game_url": "https://assets.nest.lumosity.com/game-assets/WordSnatchers_CC/nest_lowres/65db28a8e7fa8b8bf3ea2a2a6c67ac6533956258/289509235/release/",
+          "extras": {
+            "skip_title": true,
+            "skip_stats": true
+          }
+        }
+      }
+    ]
+  }
+}
