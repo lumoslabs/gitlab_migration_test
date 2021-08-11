@@ -277,7 +277,7 @@ Example -
 ```
 
 
-### Known issues
+### Troubleshooting
 
 #### Linking account does not work with localhost on staging
 You cannot link with staging while on a device because staging requires VPN.
@@ -286,10 +286,10 @@ To link your account to a staging account, you must use the simulator while on t
 #### User Storage is always empty
 Just allow "Web & App Activity" on Google's [Activity controls](https://myactivity.google.com/u/3/activitycontrols?pli=1) page
 
-#### Clear User Storage
+#### Clear User Storage/Unlink Account
 
-You can clear user storage on the [App page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o), with the *Stop Lumosity from remembering me (?)* link
+You can clear user storage on the [App page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o), with the *Reset* link, or disconnect your account using the *Unlink* link. You can also click *Stop Lumosity from remembering me* to get into Guest mode.
 
 #### isGuest always true
 
-You can change it on [app page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) with the *Allow Lumosity to remember me (?)* link
+In order to connect your account to Google and turn off Guest mode, on the [app page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) click the *Allow Lumosity to remember me (?)* link.
