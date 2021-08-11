@@ -14,23 +14,7 @@
       "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
       "https://assets.nest.lumosity.com/continuous_match_configs/up_down_left_right_phrases.yml"
     ],
-    "frontend_data": {
-      "score_description_key": "ebbAndFlowSummaryDescription",
-      "scores": [
-        {
-          "screens": [
-            "score"
-          ],
-          "score_screen_score_key": "scoreScreenLeaves",
-          "run_data_references": {
-            "num_correct": {
-              "key": "game_result_data.num_correct",
-              "default": 0
-            }
-          }
-        }
-      ]
-    },
+    "stat_label": "Leaves",
     "versions": [
       {
         "id": "nest_1.0",

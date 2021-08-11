@@ -18,23 +18,7 @@ const games: GameConfig[] = [
         "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
         "https://assets.nest.lumosity.com/continuous_match_configs/color_match_phrases.yml"
       ],
-      "frontend_data": {
-        "score_description_key": "colorMatchSummaryDescription",
-        "scores": [
-          {
-            "screens": [
-              "score"
-            ],
-            "score_screen_score_key": "scoreScreenCards",
-            "run_data_references": {
-              "num_correct": {
-                "key": "game_result_data.num_correct",
-                "default": 0
-              }
-            }
-          }
-        ]
-      },
+      "stat_label": "Cards",
       "versions": [],
       "last_version": {
         "id": "nest_1.0",
@@ -65,23 +49,7 @@ const games: GameConfig[] = [
         "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
         "https://assets.nest.lumosity.com/continuous_match_configs/up_down_left_right_phrases.yml"
       ],
-      "frontend_data": {
-        "score_description_key": "ebbAndFlowSummaryDescription",
-        "scores": [
-          {
-            "screens": [
-              "score"
-            ],
-            "score_screen_score_key": "scoreScreenLeaves",
-            "run_data_references": {
-              "num_correct": {
-                "key": "game_result_data.num_correct",
-                "default": 0
-              }
-            }
-          }
-        ]
-      },
+      "stat_label": "Leaves",
       "versions": [],
       "last_version": {
         "id": "nest_1.0",
@@ -112,23 +80,7 @@ const games: GameConfig[] = [
         "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
         "https://assets.nest.lumosity.com/continuous_match_configs/raindrops_phrases.yml"
       ],
-      "frontend_data": {
-        "score_description_key": "raindropsSummaryDescription",
-        "scores": [
-          {
-            "screens": [
-              "score"
-            ],
-            "score_screen_score_key": "scoreScreenCorrect",
-            "run_data_references": {
-              "num_correct": {
-                "key": "game_result_data.num_correct",
-                "default": 0
-              }
-            }
-          }
-        ]
-      },
+      "stat_label": "Correct",
       "versions": [],
       "last_version": {
         "id": "nest_1.0",
@@ -159,23 +111,7 @@ const games: GameConfig[] = [
         "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
         "https://assets.nest.lumosity.com/continuous_match_configs/train_of_thought_phrases.yml"
       ],
-      "frontend_data": {
-        "score_description_key": "trainOfThoughtSummaryDescription",
-        "scores": [
-          {
-            "screens": [
-              "score"
-            ],
-            "score_screen_score_key": "scoreScreenTrains",
-            "run_data_references": {
-              "num_correct": {
-                "key": "game_result_data.num_correct",
-                "default": 0
-              }
-            }
-          }
-        ]
-      },
+      "stat_label": "Trains",
       "versions": [],
       "last_version": {
         "id": "nest_1.0",
@@ -206,23 +142,7 @@ const games: GameConfig[] = [
         "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
         "https://assets.nest.lumosity.com/continuous_match_configs/word_snatchers_phrases.yml"
       ],
-      "frontend_data": {
-        "score_description_key": "wordSnatchersSummaryDescription",
-        "scores": [
-          {
-            "screens": [
-              "score"
-            ],
-            "score_screen_score_key": "scoreScreenLetters",
-            "run_data_references": {
-              "max_letters": {
-                "key": "game_result_data.max_letters",
-                "default": 0
-              }
-            }
-          }
-        ]
-      },
+      "stat_label": "Letters",
       "versions": [],
       "last_version": {
         "id": "nest_1.0",

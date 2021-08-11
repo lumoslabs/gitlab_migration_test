@@ -15,22 +15,13 @@ export interface GameConfigVersion {
   }
 }
 
-export interface FrontEndData {
-  score_description_key: string;
-  scores: {
-    score_screen_score_key: string;
-    screens: any;
-    run_data_references: any;
-  }[]
-}
-
 export interface GameConfig extends Config {
   values: {
     id: number;
     slug: string;
     brain_area: string;
     continuous_match_configs: string[];
-    frontend_data: FrontEndData;
+    stat_label: string;
     invoke_file: string;
     title: string;
     score_thumbnail_url: string;

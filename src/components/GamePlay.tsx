@@ -91,8 +91,7 @@ export default function GamePlay({
 
   const showTrainingIcon = isTraining
 
-  // shall we simplify this data structure in the database?
-  const statLabel = game.values.frontend_data.scores[0].score_screen_score_key.replace('scoreScreen', '')
+  const statLabel = game.values.stat_label
 
   // Data from current game result
   const stat = result?.stat
