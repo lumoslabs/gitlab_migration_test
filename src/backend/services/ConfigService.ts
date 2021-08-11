@@ -4,7 +4,7 @@ export interface Config {
   name: string;
   id: string;
   type: string;
-  values: any
+  values: any;
 }
 
 export interface GameConfigVersion {
