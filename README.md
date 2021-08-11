@@ -323,3 +323,8 @@ You can clear user storage on the [App page](https://assistant.google.com/u/3/se
 #### isGuest always true
 
 You can change it on [app page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) with the *Allow Lumosity to remember me (?)* link
+
+
+### TODO:
+
+* remove jest-dynalite and dynalite info
