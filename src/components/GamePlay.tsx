@@ -58,7 +58,7 @@ export default function GamePlay({
           `Okay, let's start with ${game.values?.title}.`,
           `Okay, today we'll start with ${game.values?.title}.`,
         ]))
-      } else if (remainingGamesCount === 1) {
+      } else if (remainingGamesCount === 0) {
         outputTts(sample([
           `Your last game today is ${game.values?.title}.`,
           `Your final game today is ${game.values?.title}.`,
@@ -119,7 +119,7 @@ export default function GamePlay({
           actionButtonHandler={onFinishHandler}
           stat={stat}
           statLabel={statLabel}
-          remainingGamesCount={remainingGamesCount - 1}
+          remainingGamesCount={remainingGamesCount}
           totalGameCount={totalGameCount}
         />
       )}
