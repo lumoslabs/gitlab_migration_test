@@ -25,6 +25,7 @@
     "aws-sdk": "^2.935.0",
     "axios": "^0.21.1",
     "bootstrap": "4.6.0",
+    "crypto-js": "^4.1.1",
     "dayjs": "^1.10.5",
     "dynamodb-toolbox": "^0.3.4",
     "jsonwebtoken": "^8.5.1",

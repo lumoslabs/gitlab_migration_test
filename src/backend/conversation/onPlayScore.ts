@@ -1,15 +1,33 @@
 import { ConversationV3 } from 'actions-on-google'
-import { sendCommand, getRandomElement, getTraining, setTraining } from '@backend/conversation/utils'
+import { sendCommand, getRandomElement, getTraining, setTraining, getLumosToken, isLumosLinked } from '@backend/conversation/utils'
 import { getCurrentUTCString } from '@backend/libs/dayjs'
 import appSharedActions from '@store/slices/appSharedActions'
 import TrainingManager from '@backend/libs/TrainingManager'
+import onNoMatch from './onNoMatch'
+import LumosRailsApi from '@backend/libs/LumosRailsApi'
+import rollbar from '@backend/libs/rollbar'
+import logger from '@backend/libs/logger'
 
 export default async (conv: ConversationV3) => {
-  const score = Number(conv.context?.canvas?.state?.score)
+  const eventData = conv.context?.canvas?.state?.eventData
   const slug = String(conv.context?.canvas?.state?.slug)
+  if ((!eventData) || (!slug)) {
+    return onNoMatch(conv)
+  }
   const isTraining = Boolean(conv.context?.canvas?.state?.isTraining)
-
+  const score = Number(eventData?.score)
   let tts = null
+
+  if (isLumosLinked(conv)) {
+    try {
+      const lumosAccessToken = await getLumosToken(conv)
+      await (new LumosRailsApi()).saveGameResult(lumosAccessToken, slug, eventData)
+    } catch (error) {
+      rollbar?.error(error)
+      logger.error(error, 'Game result sync error')
+    }
+  }
+
 
   if (!conv.user.params.scores) {
     //first play

@@ -6,14 +6,12 @@ import Head from 'next/head'
 import Layout from '@components/ui/Layout'
 import { Provider } from 'react-redux'
 import createAppStore from '@store/index'
-import AxiosHandler from '@components/AxiosHandler'
 
 const store = createAppStore()
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <Provider store={store}>
-      <AxiosHandler />
       <Layout>
         <Head>
           <title>Lumosity Google Assistant</title>

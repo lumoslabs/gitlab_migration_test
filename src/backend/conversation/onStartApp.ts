@@ -1,7 +1,6 @@
 import { ConversationV3 } from 'actions-on-google'
 import {
   sendCommand,
-  getPublicUrlFromConv,
   setIsFirstLogin,
   setTraining,
   getTraining,
@@ -11,26 +10,16 @@ import {
   Pages
 } from '@backend/conversation/utils'
 import appSharedActions from '@store/slices/appSharedActions'
-import AuthService from '@backend/services/AuthService'
 import TrainingManager from '@backend/libs/TrainingManager'
+import { v4 as uuidv4 } from 'uuid'
 
 export default async (conv: ConversationV3) => {
-  const service = new AuthService()
 
-  //Login or create new user, generate authtoken for api methods 
-  const userId = conv.user.params?.id
-  let user = null
-  if (userId) {
-    user = await service.getUser(userId)
-  }
-
-  if (!user) {
-    user = await service.createNewUser()
+  //Generate user id for new users
+  if (!conv.user.params?.id) {
     setIsFirstLogin(conv)
+    conv.user.params.id = uuidv4()
   }
-
-  const authToken = await service.generateToken(user)
-  conv.user.params.id = user.id
 
   //Generate training
   const trainingManager = new TrainingManager(getTraining(conv), conv?.device?.timeZone?.id)
@@ -61,8 +50,6 @@ export default async (conv: ConversationV3) => {
       {
         command: appSharedActions.SET_STORE,
         payload: {
-          baseUrl: getPublicUrlFromConv(conv),
-          authToken,
           training,
           user: convToUser(conv),
           tutorialSeen,

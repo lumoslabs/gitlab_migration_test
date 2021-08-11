@@ -276,9 +276,9 @@ Example -
 ```
 
 
-#### isLinked
+#### lumosToken
 
-boolean, is user already linked to rails account
+encrypted access token to lumos api
 
 
 #### tokenPayload

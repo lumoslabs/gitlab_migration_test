@@ -58,6 +58,7 @@ module.exports = (phase) => {
         url: process.env.RAILS_URL,
         clientId: process.env.RAILS_CLIENT_ID,
         clientSecret: process.env.RAILS_CLIENT_SECRET,
+        encryptionToken: process.env.RAILS_ENCRYPTION_SECRET || 'Secret Passphrase',
       },
       rollbar: {
         serverToken: process.env.ROLLBAR_SERVER_TOKEN,
