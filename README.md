@@ -24,36 +24,6 @@ All enviroment variables should be stored in *.env.example*, just copy paste it 
 cp  .env.example .env.local
 ```
 
-#### Setup Dynamodb (only for development)
-
-You can either setup a local dynamodb instance with dynalite:
-
-##### Dynalite
-
-Just a local implementation of Amazon's DynamoDB built on LevelDB
-
-Authenticate with AWS:
-```
-eval $(aws-okta -d -t 10h env prod-g-analysts)`
-```
-
-```bash
-yarn run dynalite
-```
-
-_OR_
-
-##### Docker
-
-Official version of local dynamodb
-
-```bash
-docker run -p 8001:8001 -p 8002:8002 -it --rm instructure/dynamo-local-admin
-```
-
-Dynamodb will be available on http://localhost:8002 and dynamo-admin on http://localhost:8001
-
-
 #### Migrate and seed tables
 
 ```bash
@@ -323,8 +293,3 @@ You can clear user storage on the [App page](https://assistant.google.com/u/3/se
 #### isGuest always true
 
 You can change it on [app page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) with the *Allow Lumosity to remember me (?)* link
-
-
-### TODO:
-
-* remove jest-dynalite and dynalite info
