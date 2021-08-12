@@ -3,7 +3,7 @@ import { ExpectedPhrase, VerificationStatus } from 'actions-on-google/dist/api/s
 import appSharedActions from '@store/slices/appSharedActions'
 import getConfig from 'next/config'
 import { ITraining } from '@backend/libs/TrainingManager'
-import CryptoJS from "crypto-js"
+import CryptoJS from 'crypto-js'
 
 const { serverRuntimeConfig } = getConfig()
 

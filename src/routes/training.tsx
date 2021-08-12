@@ -15,21 +15,28 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
   const history = useHistory()
   const training = useAppSelector(getTraining)
   const [currentGame, setCurrentGame] = useState<GameConfig>(null)
+  const [nextGame, setNextGame] = useState<GameConfig>(null)
+
   const onFinish = () => {
-    dispatch(actions.setTrainingGameCompleted(currentGame.id))
+    if (nextGame) {
+      setCurrentGame(nextGame)
+    } else {
+      sendTextQuery('Home')
+    }
   }
 
   const onGameComplete = () => {
     if (training?.games?.length === 1) {
       track('training_session_finish')
     }
+    dispatch(actions.setTrainingGameCompleted(currentGame.id))
   }
 
   useEffect(() => {
     if (!training?.games?.length) {
-      sendTextQuery('Home')
+      setNextGame(null)
     } else {
-      setCurrentGame(games.find((game) => game.id === training.games[0]))
+      setNextGame(games.find((game) => game.id === training.games[0]))
     }
   }, [training])
 
@@ -40,6 +47,8 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
       // If there's no workout ready, select a random game
       const randomGameConfig = sample(games)
       history.push(`/game/${randomGameConfig.id}`)
+    } else {
+      setCurrentGame(games.find((game) => game.id === training.games[0]))
     }
   }, [])
 
@@ -50,7 +59,7 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
           game={currentGame}
           isTraining={true}
           onGameComplete={onGameComplete}
-          scoreActionButtonText={training.games.length > 1 ? 'Next Game' : 'Main Menu'}
+          scoreActionButtonText={training.games.length > 0 ? 'Next Game' : 'Main Menu'}
           onFinishHandler={onFinish}
           remainingGamesCount={training?.games?.length}
           totalGameCount={training?.size}
