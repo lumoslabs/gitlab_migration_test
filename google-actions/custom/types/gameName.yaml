@@ -12,9 +12,11 @@ synonym:
       - Urban Flow
       - ebenflow
       - Evan Flow
+      - Bill Evans
     Raindrops:
       synonyms:
       - Raindrops
+      - rain drops
     Train of Thought:
       synonyms:
       - Train of Thought
@@ -24,4 +26,6 @@ synonym:
     Word Snatchers:
       synonyms:
       - Word Snatchers
+      - Weird Snatchers
+
   matchType: EXACT_MATCH
