@@ -1,4 +1,5 @@
 import fs from 'fs'
+import path from 'path'
 
 export interface Config {
   name: string;
@@ -50,7 +51,7 @@ export default class CatalogService {
 
   async getFile<T>(fileName: string): Promise<T> {
     return new Promise((resolve, reject) => {
-      fs.readFile(`./config-data/${fileName}.json`, (error, fileBuffer) => {
+      fs.readFile(path.resolve(process.cwd(), `config-data/${fileName}.json`), (error, fileBuffer) => {
         if (error) {
           return reject(error)
         }
