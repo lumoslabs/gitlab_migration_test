@@ -276,9 +276,9 @@ Example -
 ```
 
 
-#### isLinked
+#### lumosToken
 
-boolean, is user already linked to rails account
+encrypted access token to lumos api
 
 
 #### tokenPayload
@@ -323,3 +323,10 @@ You can clear user storage on the [App page](https://assistant.google.com/u/3/se
 #### isGuest always true
 
 You can change it on [app page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) with the *Allow Lumosity to remember me (?)* link
+
+#### "Lumosity is not responding" after game finishing
+This can occur if you have linked user account and don't have http access for Lumos Rails. You should check if environment variables are correct and vpn is on if using staging Lumos Rails server
+
+### TODO:
+
+* remove jest-dynalite and dynalite info

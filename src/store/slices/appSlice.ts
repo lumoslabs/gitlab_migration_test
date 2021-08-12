@@ -5,8 +5,6 @@ import { TtsMarkName } from '@sharedTypes/interactiveCanvas'
 interface appState {
   tts?: TtsMarkName,
   started: boolean,
-  baseUrl: string,
-  authToken?: string,
   continuousMatchMode: boolean,
   scores: Record<string, { score: number, date: string }[]>,
   training: {
@@ -30,8 +28,6 @@ interface appState {
 const initialState: appState = {
   tts: null,
   started: false,
-  baseUrl: '',
-  authToken: null,
   continuousMatchMode: false,
   scores: {},
   training: null,
@@ -55,8 +51,6 @@ export const appSlice = createSlice({
       action: PayloadAction<Partial<typeof initialState>>
     ) => {
       state.started = true
-      state.baseUrl = action?.payload?.baseUrl ?? state.baseUrl
-      state.authToken = action?.payload?.authToken ?? state.authToken
       state.training = action.payload?.training ?? state.training
       state.user = action.payload?.user ?? state.user
       state.tutorialSeen = action.payload?.tutorialSeen ?? state.tutorialSeen
@@ -98,8 +92,6 @@ export const appSlice = createSlice({
 export const getAppState = (state: RootState) => state.app
 export const getTts = (state: RootState) => state.app.tts
 export const getIsStarted = (state: RootState) => state.app.started
-export const getBaseUrl = (state: RootState) => state.app.baseUrl
-export const getAuthToken = (state: RootState) => state.app.authToken
 export const getContinuousMatchMode = (state: RootState) => state.app.continuousMatchMode
 export const getTopScores = (state: RootState) => state.app.scores
 export const getTraining = (state: RootState) => state.app.training

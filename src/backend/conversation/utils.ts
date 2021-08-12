@@ -3,6 +3,7 @@ import { ExpectedPhrase, VerificationStatus } from 'actions-on-google/dist/api/s
 import appSharedActions from '@store/slices/appSharedActions'
 import getConfig from 'next/config'
 import { ITraining } from '@backend/libs/TrainingManager'
+import CryptoJS from 'crypto-js'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -78,22 +79,36 @@ export const getTraining = (conv: ConversationV3): ITraining | undefined => {
   return conv.user.params.training
 }
 
-export const convToUser = (conv: ConversationV3): any => {
-  return {
-    id: conv.user.params.id,
-    name: conv.user.params?.isLinked ? conv.user.params?.tokenPayload?.name : '',
-    email: conv.user.params?.isLinked ? conv.user.params?.tokenPayload?.email : '',
-    avatar: conv.user.params?.isLinked ? conv.user.params?.tokenPayload?.picture : '',
-    timezone: conv?.device?.timeZone?.id,
-    isGuest: conv.user.verificationStatus === VerificationStatus.Guest,
-    isLinked: Boolean(conv.user.params?.isLinked)
-  }
-}
-
 export const setBirthday = (conv: ConversationV3, birthday: string): any => {
   conv.user.params.birthday = birthday
 }
 
 export const getBirthday = (conv: ConversationV3): any => {
   return conv.user.params.birthday
+}
+
+
+export const setLumosToken = async (conv: ConversationV3, token: string) => {
+  conv.user.params.lumosToken = CryptoJS.Rabbit.encrypt(token, serverRuntimeConfig.rails.encryptionToken).toString()
+}
+
+export const getLumosToken = async (conv: ConversationV3) => {
+  return CryptoJS.Rabbit.decrypt(conv.user.params?.lumosToken, serverRuntimeConfig.rails.encryptionToken).toString(CryptoJS.enc.Utf8) as string
+}
+
+export const isLumosLinked = (conv: ConversationV3) => {
+  return Boolean(conv.user.params.lumosToken)
+}
+
+export const convToUser = (conv: ConversationV3): any => {
+  const isLinked = isLumosLinked(conv)
+  return {
+    id: conv.user.params.id,
+    name: isLinked ? conv.user.params?.tokenPayload?.name : '',
+    email: isLinked ? conv.user.params?.tokenPayload?.email : '',
+    avatar: isLinked ? conv.user.params?.tokenPayload?.picture : '',
+    timezone: conv?.device?.timeZone?.id,
+    isGuest: conv.user.verificationStatus === VerificationStatus.Guest,
+    isLinked: isLinked
+  }
 }

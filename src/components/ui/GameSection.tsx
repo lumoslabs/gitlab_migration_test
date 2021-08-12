@@ -2,7 +2,7 @@ import GameCard from '@components/ui/GameCard'
 import { Container } from 'react-bootstrap'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import commonStyles from '@styles/commonStyles'
-import { GameConfig } from '@backend/models/config'
+import { GameConfig } from '@backend/services/ConfigService'
 
 const GameSection = ({ games, onClick }: { games: GameConfig[], onClick: (slug: string) => void }): JSX.Element => {
 

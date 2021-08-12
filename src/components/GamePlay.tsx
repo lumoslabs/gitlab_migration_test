@@ -1,10 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
-import { GameConfig } from '@backend/models/config'
+import { useState, useEffect } from 'react'
+import { GameConfig } from '@backend/services/ConfigService'
 import GameContainer from '@components/ui/GameContainer'
 import GameScoreCard from '@components/ui/GameScoreCard'
 import LoadingComponent from '@components/ui/LoadingComponent'
-import gameRunCreate from '@api/gameRunCreate'
-import gameRunUpdate from '@api/gameRunUpdate'
 
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getTopScores, actions, getTutorialSeen } from '@store/slices/appSlice'
@@ -37,7 +35,6 @@ export default function GamePlay({
   const dispatch = useAppDispatch()
   const [result, setResult] = useState(null)
   const topScores = useAppSelector(getTopScores)[game.id]
-  const gameRunIdRef = useRef('')
   const { outputTts } = useInteractiveCanvas()
   const showTutorial = !useAppSelector(getTutorialSeen)[game.id]
 
@@ -47,15 +44,8 @@ export default function GamePlay({
     dispatch(actions.setTutorialSeen({ slug: game.id }))
   }
 
-  const onEvent = (eventName: string, eventData: any) => {
-    if (gameRunIdRef.current) {
-      gameRunUpdate(gameRunIdRef.current, eventName, eventData)
-    }
-  }
-
   // Create game run/results
   useEffect(() => {
-    gameRunIdRef.current = ''
     dispatch(actions.resetTopScores())
     setResult(null)
 
@@ -81,10 +71,6 @@ export default function GamePlay({
         ]))
       }
     }
-
-    gameRunCreate(game.id).then((gameRunId) => {
-      gameRunIdRef.current = gameRunId
-    })
   }, [game])
 
   useAppBusListener('onIntentYes', () => {
@@ -118,7 +104,6 @@ export default function GamePlay({
           showTutorial={showTutorial}
           game={game}
           onComplete={onComplete}
-          onEvent={onEvent}
           isTraining={isTraining}
         />
       )}

@@ -4,7 +4,7 @@ import Script from 'react-load-script'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import { Alert } from 'react-bootstrap'
 import getConfig from 'next/config'
-import { GameConfig } from '@backend/models/config'
+import { GameConfig } from '@backend/services/ConfigService'
 import commonStyles from '@styles/commonStyles'
 import GameProgressBar from '@components/ui/GameProgressBar'
 import Button from '@components/ui/Button'
@@ -17,12 +17,12 @@ const { publicRuntimeConfig } = getConfig()
 export interface IGameContainerProps {
   game: GameConfig;
   onComplete: (data: GameCompletedData) => void;
-  onEvent: (eventName: string, data: any) => void;
   isTraining: boolean;
   showTutorial: boolean;
+  onEvent?: (eventName: string, data: any) => void;
 }
 
-const GameContainer = ({ game, onComplete, onEvent, isTraining, showTutorial }: IGameContainerProps): JSX.Element => {
+const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining, showTutorial }: IGameContainerProps): JSX.Element => {
   const track = useAmplitude()
   const { sendTextQuery, outputTts, exitContinuousMatchMode } = useInteractiveCanvas()
 
@@ -90,7 +90,7 @@ const GameContainer = ({ game, onComplete, onEvent, isTraining, showTutorial }: 
         onComplete(eventData as GameCompletedData)
         exitContinuousMatchMode().then(() => {
           eventData = eventData as GameCompletedData
-          sendTextQuery('Invoke Score Screen Score TTS', { score: eventData?.score, slug: game.id, isTraining: isTraining })
+          sendTextQuery('Invoke Score Screen Score TTS', { eventData, slug: game.id, isTraining: isTraining })
         })
         track('game_finish', eventTracking)
         break

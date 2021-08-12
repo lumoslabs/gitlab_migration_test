@@ -13,7 +13,8 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "dynalite": "ts-node ./tools/dynalite.mjs",
-    "migrate": "yarn run ts-node tools/migration.mjs"
+    "migrate": "yarn run ts-node tools/migration.mjs",
+    "cmm-config-refresh": "yarn run ts-node tools/download-continuous-match-configs.mjs"
   },
   "dependencies": {
     "@amplitude/node": "^1.8.0",
@@ -24,6 +25,7 @@
     "aws-sdk": "^2.935.0",
     "axios": "^0.21.1",
     "bootstrap": "4.6.0",
+    "crypto-js": "^4.1.1",
     "dayjs": "^1.10.5",
     "dynamodb-toolbox": "^0.3.4",
     "jsonwebtoken": "^8.5.1",
