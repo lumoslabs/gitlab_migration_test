@@ -1,6 +1,3 @@
-import fs from 'fs'
-import path from 'path'
-
 export interface Config {
   name: string;
   id: string;
@@ -50,14 +47,8 @@ export interface CMMPhrase {
 export default class CatalogService {
 
   async getFile<T>(fileName: string): Promise<T> {
-    return new Promise((resolve, reject) => {
-      fs.readFile(path.resolve(process.cwd(), `config-data/${fileName}.json`), (error, fileBuffer) => {
-        if (error) {
-          return reject(error)
-        }
-        return resolve(JSON.parse(fileBuffer.toString()))
-      })
-    })
+    const module = await import(`../../../config-data/${fileName}.json`)
+    return module.default
   }
 
   async getCatalogGames() {
