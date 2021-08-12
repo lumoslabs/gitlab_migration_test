@@ -5,6 +5,7 @@ const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
  **/
 module.exports = (phase) => {
   return {
+    target: process.env.SERVERLESS ? 'serverless' : 'server',
     webpack: (config) => {
       config.module.rules.push({
         resourceQuery: /raw/,
