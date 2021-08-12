@@ -1,12 +1,15 @@
 import { useLocation } from 'react-router-dom'
+import useDebugBar from './useDebugBar'
 
 export default function useInteractiveCanvas() {
   const location = useLocation()
+  const logger = useDebugBar()
 
   const outputTts = (text: string, prompt: boolean = false) => {
     try {
       window.interactiveCanvas?.outputTts(text, prompt)
     } catch (e) {
+      logger('interactiveCanvas - outputTts - exception', e)
       console.error('interactiveCanvas - outputTts - exception', e)
     }
   }
@@ -31,6 +34,7 @@ export default function useInteractiveCanvas() {
     })
     const result = await window.interactiveCanvas?.sendTextQuery(query)
     if (result !== 'SUCCESS') {
+      logger('interactiveCanvas - sendTextQuery - incorrect result', { query, state }, result)
       console.error('interactiveCanvas - sendTextQuery - incorrect result', { query, state }, result)
     }
     return result as string

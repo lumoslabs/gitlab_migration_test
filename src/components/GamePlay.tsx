@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { GameConfig } from '@backend/services/ConfigService'
 import GameContainer from '@components/ui/GameContainer'
 import GameScoreCard from '@components/ui/GameScoreCard'
@@ -73,24 +73,6 @@ export default function GamePlay({
     }
   }, [game])
 
-  useAppBusListener('onIntentYes', () => {
-    if (result) {
-      onFinishHandler()
-    }
-  })
-
-  useAppBusListener('onIntentHelp', () => {
-    if (result) {
-      if (isTraining) {
-        outputTts(`Here is what you can do, you can say "Next" to go to your next game. "Home" to end your workout and return to the main menu, or "Exit" to leave Lumosity.`)
-      } else {
-        outputTts(`Here is what you can do, you can say "Next" or "Home" to return to the main menu, or "Exit" to leave Lumosity.`)
-      }
-    }
-  })
-
-  const showTrainingIcon = isTraining
-
   // shall we simplify this data structure in the database?
   const statLabel = game.values.frontend_data.scores[0].score_screen_score_key.replace('scoreScreen', '')
 
@@ -112,7 +94,7 @@ export default function GamePlay({
         <GameScoreCard
           title={game.values.title}
           gameIcon={game.values.score_thumbnail_url}
-          showTrainingIcon={showTrainingIcon}
+          showTrainingIcon={isTraining}
           currentScore={result?.score}
           topScoresData={topScores}
           actionButtonText={scoreActionButtonText}

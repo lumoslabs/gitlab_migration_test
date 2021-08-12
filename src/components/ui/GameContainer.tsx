@@ -12,6 +12,8 @@ import useAmplitude from '@hooks/useAmplitude'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import useAppBusListener from '@hooks/useAppBusListener'
 import useGameCallbacks, { GameEventData, GameSpeechData, GameCompletedData } from '@hooks/useGameCallbacks'
+import { useAppSelector } from '@store/hooks'
+import { getContinuousMatchMode } from '@store/slices/appSlice'
 const { publicRuntimeConfig } = getConfig()
 
 export interface IGameContainerProps {
@@ -25,7 +27,7 @@ export interface IGameContainerProps {
 const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining, showTutorial }: IGameContainerProps): JSX.Element => {
   const track = useAmplitude()
   const { sendTextQuery, outputTts, exitContinuousMatchMode } = useInteractiveCanvas()
-
+  const isCMM = useAppSelector(getContinuousMatchMode)
   // Set the dimensions of the screen for game layout
   const [clientHeight, setHeight] = useState(0)
   const [clientWidth, setWidth] = useState(0)
@@ -177,7 +179,7 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
           />
         </Card.Body>
       </Card>
-      {publicRuntimeConfig.gameSkip && (
+      {publicRuntimeConfig.gameSkip && isCMM && (
         <div className={css([commonStyles.flexRowAllCenter, styles.skipGameDiv])}>
           <Button buttonStyles={styles.skipGameButton}
             onClick={sendFakeCompleteEvent}

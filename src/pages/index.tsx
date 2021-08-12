@@ -14,8 +14,11 @@ import AgeGate from '@routes/ageGate'
 import NestHandler from '@components/NestHandler'
 import ConfigService from '@backend/services/ConfigService'
 import AppBusProvider from '@contexts/AppBusContext'
+import DebugBar from '@components/DebugBar'
+import getConfig from 'next/config'
 
 export function Index({ games }: { games: GameConfig[] }): JSX.Element {
+  const { publicRuntimeConfig } = getConfig()
   const gameRoutes = games.map((game) => {
     return <Route exact path={`/game/${game.id}`} key={game.id}>
       <GamePage game={game} />
@@ -25,6 +28,7 @@ export function Index({ games }: { games: GameConfig[] }): JSX.Element {
   return (
     <Router>
       <AppBusProvider>
+        {publicRuntimeConfig.debugBar && <DebugBar />}
         <NestHandler />
         <Switch>
           <Route exact path='/'>
