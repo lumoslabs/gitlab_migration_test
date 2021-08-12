@@ -65,7 +65,7 @@ export default class CatalogService {
       ...game,
       values: {
         ...game.values,
-        last_version: game?.values?.versions?.pop()
+        last_version: game?.values?.versions[game?.values?.versions?.length - 1]
       }
     } as GameConfig : null
   }
