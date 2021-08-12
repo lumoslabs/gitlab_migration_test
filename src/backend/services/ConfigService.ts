@@ -1,5 +1,3 @@
-import fs from 'fs'
-
 export interface Config {
   name: string;
   id: string;
@@ -49,14 +47,8 @@ export interface CMMPhrase {
 export default class CatalogService {
 
   async getFile<T>(fileName: string): Promise<T> {
-    return new Promise((resolve, reject) => {
-      fs.readFile(`./config-data/${fileName}.json`, (error, fileBuffer) => {
-        if (error) {
-          return reject(error)
-        }
-        return resolve(JSON.parse(fileBuffer.toString()))
-      })
-    })
+    const module = await import(`../../../config-data/${fileName}.json`)
+    return module.default
   }
 
   async getCatalogGames() {
@@ -73,7 +65,7 @@ export default class CatalogService {
       ...game,
       values: {
         ...game.values,
-        last_version: game?.values?.versions?.pop()
+        last_version: game?.values?.versions[game?.values?.versions?.length - 1]
       }
     } as GameConfig : null
   }
