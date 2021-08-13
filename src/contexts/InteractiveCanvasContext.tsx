@@ -45,7 +45,7 @@ class InteractiveCanvas {
     return result as string
   }
 
-  onListeningModeChanged = (data, reason) => {
+  onListeningModeChanged = (data, _reason) => {
     if (data === 'CONTINUOUS_MATCH') {
       this.ccmMode = true
     } else if (data === 'TURN_BASED') {
