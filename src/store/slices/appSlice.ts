@@ -1,11 +1,7 @@
 import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '@store/index'
-import { TtsMarkName } from '@sharedTypes/interactiveCanvas'
 
 interface appState {
-  tts?: TtsMarkName,
-  started: boolean,
-  continuousMatchMode: boolean,
   scores: Record<string, { score: number, date: string }[]>,
   training: {
     games: string[],
@@ -26,9 +22,6 @@ interface appState {
 }
 
 const initialState: appState = {
-  tts: null,
-  started: false,
-  continuousMatchMode: false,
   scores: {},
   training: null,
   user: null,
@@ -40,26 +33,13 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    setTts: (
-      state: Draft<typeof initialState>,
-      action: PayloadAction<{ tts: TtsMarkName }>
-    ) => {
-      state.tts = action.payload.tts
-    },
     setStore: (
       state: Draft<typeof initialState>,
       action: PayloadAction<Partial<typeof initialState>>
     ) => {
-      state.started = true
       state.training = action.payload?.training ?? state.training
       state.user = action.payload?.user ?? state.user
       state.tutorialSeen = action.payload?.tutorialSeen ?? state.tutorialSeen
-    },
-    setContinuousMatchMode: (
-      state: Draft<typeof initialState>,
-      action: PayloadAction<{ cmm: boolean }>
-    ) => {
-      state.continuousMatchMode = Boolean(action?.payload?.cmm)
     },
     setTopScores: (
       state: Draft<typeof initialState>,
@@ -90,9 +70,6 @@ export const appSlice = createSlice({
 
 // Selectors
 export const getAppState = (state: RootState) => state.app
-export const getTts = (state: RootState) => state.app.tts
-export const getIsStarted = (state: RootState) => state.app.started
-export const getContinuousMatchMode = (state: RootState) => state.app.continuousMatchMode
 export const getTopScores = (state: RootState) => state.app.scores
 export const getTraining = (state: RootState) => state.app.training
 export const getTutorialSeen = (state: RootState) => state.app.tutorialSeen
