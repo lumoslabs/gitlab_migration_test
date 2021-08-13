@@ -72,6 +72,7 @@ export default class LumosRailsApi {
     const response = await this.axios.post(uri, {
       game_result: {
         game_url_slug: gameSlug,
+        created_at_ts: gameResult.created_at_ts ?? Date.now(),
         ...gameResult,
       }
     }, {
