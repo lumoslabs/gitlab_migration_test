@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { TtsMarkName } from '@sharedTypes/interactiveCanvas';
-import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions';
-import useAppBus from '@hooks/useAppBus';
-import { useAppDispatch } from '@store/hooks';
+import { TtsMarkName } from '@sharedTypes/interactiveCanvas'
+import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions'
+import useAppBus from '@hooks/useAppBus'
+import { useAppDispatch } from '@store/hooks'
 import { actions } from '@store/slices/appSlice'
 import { useHistory } from 'react-router-dom'
 
@@ -11,7 +11,7 @@ class InteractiveCanvas {
   ccmMode = false
   exitCmmModeResolvers = []
 
-  outputTts = async (text: string, prompt: boolean = false) => {
+  outputTts = async (text: string, prompt = false) => {
     try {
       window.interactiveCanvas?.outputTts(text, prompt)
     } catch (e) {
