@@ -12,7 +12,7 @@ const debugBarStyle = {
   'right': '0px',
   'bottom': '0px',
   'top': '0px',
-  'maxWidth': '30%'
+  'maxWidth': '50%'
 }
 
 export default function DebugBar() {
@@ -25,7 +25,10 @@ export default function DebugBar() {
     ])
   })
 
-  return <div style={debugBarStyle}>
+  if (log.length === 0) {
+    return <></>
+  }
+  return <div style={debugBarStyle} >
     {log.join("\n")}
   </div>
 }

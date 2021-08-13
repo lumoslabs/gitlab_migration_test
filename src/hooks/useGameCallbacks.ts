@@ -20,7 +20,7 @@ export default function useGameCallbacks(gameEventHandler: (eventName: string, e
   sendFakeCompleteEvent: () => void,
 } {
 
-  const logger = useDebugBar()
+  const log = useDebugBar()
 
   useEffect(() => {
     window.sendToJavaScript = (data: string | [string, GameEventData], argData: GameEventData | null) => {
@@ -42,7 +42,7 @@ export default function useGameCallbacks(gameEventHandler: (eventName: string, e
   }
 
   const sendEventToCocos = (data: any) => {
-    logger('sendEventToCocos', data)
+    log('sendEventToCocos', data)
     if (window.sendEventToCocos) {
       window.sendEventToCocos(data)
     }

@@ -63,10 +63,8 @@ const P = InteractiveCanvasContext.Provider
 
 export default function InteractiveCanvasProvider({ children }) {
   const [interactiveCanvas] = useState(() => new InteractiveCanvas())
-
   const router = useHistory()
   const dispatch = useAppDispatch()
-
   const appBus = useAppBus()
 
   const onLoad = () => {
