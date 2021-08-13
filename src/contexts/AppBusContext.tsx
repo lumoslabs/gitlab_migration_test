@@ -13,7 +13,6 @@ export type appBusEvents = {
   onIntentRestartCMM: void;
   onIntentRestartGame: void;
   onIntentResumeGame: void;
-
   onDebugLog: string;
 }
 
