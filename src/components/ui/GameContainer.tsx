@@ -25,7 +25,6 @@ export interface IGameContainerProps {
 const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining, showTutorial }: IGameContainerProps): JSX.Element => {
   const track = useAmplitude()
   const { sendTextQuery, outputTts, exitContinuousMatchMode } = useInteractiveCanvas()
-
   // Set the dimensions of the screen for game layout
   const [clientHeight, setHeight] = useState(0)
   const [clientWidth, setWidth] = useState(0)
