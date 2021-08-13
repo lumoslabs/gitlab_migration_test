@@ -110,6 +110,7 @@ body {
   margin: 0;
   font-family: "MuseoSans100", "MuseoSans300", "MuseoSans500", "MuseoSans700", "MuseoSans900";
   overflow-y: hidden;
+  background: rgb(115, 229, 255);
 }
 
 code {
