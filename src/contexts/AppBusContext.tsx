@@ -13,6 +13,7 @@ export type appBusEvents = {
   onIntentRestartCMM: void;
   onIntentRestartGame: void;
   onIntentResumeGame: void;
+  onDebugLog: string;
 }
 
 export const BusContext = React.createContext<Emitter<appBusEvents>>(null)

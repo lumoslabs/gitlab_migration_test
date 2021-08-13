@@ -81,7 +81,7 @@ conversationApp.handle('FEInvokeTTS', onNoMatch)
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    logger.debug(`Fulfullment Request ${req.body?.handler?.name}`)
+    logger.debug(`Fulfillment Request ${req.body?.handler?.name}`)
 
     amplitudeBackendEvent({
       eventName: `intent_${req.body?.handler?.name}`,
@@ -90,7 +90,7 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     })
 
     const result: StandardResponse = await conversationApp(req.body, req.headers)
-    logger.debug(`Fulfullment Result ${req.body?.handler?.name}`)
+    logger.debug(`Fulfillment Result ${req.body?.handler?.name}`)
     return res.status(result.status).json(result.body)
   } catch (e) {
     rollbar?.error(e, req)

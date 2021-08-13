@@ -17,17 +17,6 @@ const styles = StyleSheet.create({
   }
 })
 
-jest.mock('react-router-dom', () => ({
-  __esModule: true,
-  useLocation: jest.fn().mockReturnValue({
-    pathname: '/another-route',
-    search: '',
-    hash: '',
-    state: null,
-    key: '5nvxpbdafa',
-  }),
-}))
-
 it('matches snapshot', () => {
   const { asFragment } = render(
     <WideActionButton

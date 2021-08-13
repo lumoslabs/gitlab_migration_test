@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import useDebugBar from './useDebugBar'
 
 export interface GameSpeechData {
   text: string,
@@ -18,6 +19,8 @@ export default function useGameCallbacks(gameEventHandler: (eventName: string, e
   sendEventToCocos: (data) => void,
   sendFakeCompleteEvent: () => void,
 } {
+
+  const log = useDebugBar()
 
   useEffect(() => {
     window.sendToJavaScript = (data: string | [string, GameEventData], argData: GameEventData | null) => {
@@ -39,6 +42,7 @@ export default function useGameCallbacks(gameEventHandler: (eventName: string, e
   }
 
   const sendEventToCocos = (data: any) => {
+    log('sendEventToCocos', data)
     if (window.sendEventToCocos) {
       window.sendEventToCocos(data)
     }
