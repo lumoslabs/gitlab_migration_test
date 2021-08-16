@@ -7,11 +7,16 @@ import {
   convToUser,
   getBirthday,
   Scenes,
-  Pages
+  Pages,
+  getUnderageTimestamp
 } from '@backend/conversation/utils'
 import appSharedActions from '@store/slices/appSharedActions'
 import TrainingManager from '@backend/libs/TrainingManager'
 import { v4 as uuidv4 } from 'uuid'
+import { dayjs } from '@backend/libs/dayjs'
+import getConfig from 'next/config'
+
+const { serverRuntimeConfig } = getConfig()
 
 export default async (conv: ConversationV3) => {
 
@@ -37,11 +42,18 @@ export default async (conv: ConversationV3) => {
   let nextScene = Scenes.Main
   let nextPage = Pages.Home
 
-  // Check if age already confirmed
-  if (!getBirthday(conv)) {
-    nextPage = Pages.AgeGate
+
+
+  console.log('(dayjs().unix() - getUnderageTimestamp(conv)) < serverRuntimeConfig.underageBanSeconds)', (dayjs().unix() - getUnderageTimestamp(conv)), serverRuntimeConfig.underageBanSeconds)
+  // check is use banned by undergame
+  if (getUnderageTimestamp(conv) && ((dayjs().unix() - getUnderageTimestamp(conv)) < serverRuntimeConfig.underageBanSeconds)) {
+    nextScene = Scenes.EndConversation
+    nextPage = null
+  } else if (!getBirthday(conv)) { // Check if age already confirmed
     nextScene = Scenes.AgeGate
+    nextPage = Pages.AgeGate
   }
+
 
   sendCommand({
     conv,
@@ -55,10 +67,10 @@ export default async (conv: ConversationV3) => {
           tutorialSeen,
         }
       },
-      {
+      nextPage ? {
         command: appSharedActions.GO_TO,
         payload: nextPage
-      }
+      } : undefined
     ],
     scene: nextScene
   })

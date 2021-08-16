@@ -1,5 +1,5 @@
 import { ConversationV3 } from 'actions-on-google'
-import { Pages, Scenes, sendCommand, setBirthday } from '@backend/conversation/utils'
+import { Pages, Scenes, sendCommand, setBirthday, setUnderageTimestamp } from '@backend/conversation/utils'
 import appSharedActions from '@store/slices/appSharedActions'
 import { dayjs } from '@backend/libs/dayjs'
 
@@ -9,6 +9,7 @@ export default async (conv: ConversationV3) => {
   if (isUnderage) {
     // TODO: Add age gate exit message
     conv.add('Exit message')
+    setUnderageTimestamp(conv, dayjs().unix())
     sendCommand({
       suppressMic: true,
       conv,
