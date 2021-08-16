@@ -83,7 +83,7 @@ const AgeGate = (({
       </Row>
       {/* TODO: Update with legal approved copy */}
       <p className={css(styles.disclaimer)}>
-          {'Your birthdate will be stored to verify you meet the age requirements for Lumosity.'}
+          {'Please select your birth date. Your birthday will be stored and added to your Lumosity account if you choose to create one.'}
         </p>
       <Row className={css(commonStyles.flexRowAllCenter, styles.buttonDiv)}>
         <Button

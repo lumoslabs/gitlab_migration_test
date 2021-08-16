@@ -7,7 +7,7 @@ export default function ageGate(): JSX.Element {
   const [disabled, setDisabled] = useState(false)
   useEffect(() => {
     // TODO: Revise with legal approved copy
-    outputTts(`Please select your birthdate on the screen. Your birthdate will be stored to verify you meet the age requirements for Lumosity.`)
+    outputTts(`Please select your birth date on the screen. Your birthday will be stored and added to your Lumosity account if you choose to create one.`)
   }, [])
 
   const onSubmit = (birthday) => {
