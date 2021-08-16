@@ -35,3 +35,5 @@ yarn-error.log*
 
 #dynalite data
 /dynalite_db
+
+/junit.xml
