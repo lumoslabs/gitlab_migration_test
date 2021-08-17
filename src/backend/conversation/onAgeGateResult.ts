@@ -7,8 +7,7 @@ export default async (conv: ConversationV3) => {
   const birthday = String(conv.context?.canvas?.state?.birthday)
   const isUnderage = (birthday && dayjs(birthday).isValid()) ? dayjs(birthday).add(13, 'year').isAfter(dayjs()) : true
   if (isUnderage) {
-    // TODO: Add age gate exit message
-    conv.add('Exit message')
+    conv.add('​​We’re sorry, but you’re not eligible to create an account. Please contact us at help.lumosity.com for more information.')
     sendCommand({
       suppressMic: true,
       conv,
