@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import AgeGate from '@components/ui/AgeGate'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
+import { Intents } from '@contexts/InteractiveCanvasContext'
 
 export default function ageGate(): JSX.Element {
   const { outputTts, sendTextQuery } = useInteractiveCanvas()
@@ -12,7 +13,7 @@ export default function ageGate(): JSX.Element {
 
   const onSubmit = (birthday) => {
     setDisabled(true)
-    sendTextQuery('Invoke Age Gate Result', { birthday: birthday })
+    sendTextQuery(Intents.AGE_GATE_RESULT, { birthday: birthday })
   }
 
   return <AgeGate onSubmit={onSubmit} disabled={disabled} />
