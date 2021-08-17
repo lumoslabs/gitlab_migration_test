@@ -29,9 +29,6 @@ intentEvents:
     webhookHandler: Help
   intent: HELP
 - handler:
-    webhookHandler: StartApp
-  intent: LOGIN
-- handler:
     webhookHandler: ResumeGame
   intent: RESUME_GAME
 - handler:

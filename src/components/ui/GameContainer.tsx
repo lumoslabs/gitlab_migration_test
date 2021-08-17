@@ -12,6 +12,7 @@ import useAmplitude from '@hooks/useAmplitude'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import useAppBusListener from '@hooks/useAppBusListener'
 import useGameCallbacks, { GameEventData, GameSpeechData, GameCompletedData } from '@hooks/useGameCallbacks'
+import { Intents } from '@contexts/InteractiveCanvasContext'
 const { publicRuntimeConfig } = getConfig()
 
 export interface IGameContainerProps {
@@ -82,19 +83,19 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
         track('game_start', eventTracking)
         break
       case 'game:nest_cmm_start':
-        sendTextQuery('Invoke Start Game', { slug: game.id })
+        sendTextQuery(Intents.START_GAME, { slug: game.id })
         break
       case 'game:complete':
         onEvent(eventName, eventData)
         onComplete(eventData as GameCompletedData)
         exitContinuousMatchMode().then(() => {
           eventData = eventData as GameCompletedData
-          sendTextQuery('Invoke Score Screen Score TTS', { eventData, slug: game.id, isTraining: isTraining })
+          sendTextQuery(Intents.PLAY_SCORE, { eventData, slug: game.id, isTraining: isTraining })
         })
         track('game_finish', eventTracking)
         break
       case 'game:nest_cmm_restart':
-        sendTextQuery('Restart Continuous Match Mode', { slug: game.id })
+        sendTextQuery(Intents.RESTART_CMM, { slug: game.id })
         break
       case 'game:speech':
         eventData = eventData as GameSpeechData
