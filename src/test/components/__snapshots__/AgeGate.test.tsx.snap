@@ -106,6 +106,11 @@ exports[`matches snapshot 1`] = `
                   <li
                     class=""
                   >
+                    27
+                  </li>
+                  <li
+                    class=""
+                  >
                     28
                   </li>
                   <li
@@ -147,11 +152,6 @@ exports[`matches snapshot 1`] = `
                     class=""
                   >
                     05
-                  </li>
-                  <li
-                    class=""
-                  >
-                    06
                   </li>
                 </ul>
               </div>
@@ -230,7 +230,7 @@ exports[`matches snapshot 1`] = `
     <p
       class="disclaimer_kdqsn7"
     >
-      Please select your birth date. Your birthday will be stored and added to your Lumosity account if you choose to create one.
+      Your birthday will be stored and added to your Lumosity account if you choose to create one.
     </p>
     <div
       class="flexRowAllCenter_1cn94ih-o_O-buttonDiv_120lt8p row"
