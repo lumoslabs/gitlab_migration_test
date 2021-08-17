@@ -2,9 +2,7 @@ import React from 'react'
 import AgeGate from '@components/ui/AgeGate'
 import { render } from '@test/render-with-redux'
 
-const onSubmit = (date: Date) => {
-  console.log('date: ' + date)
-}
+const onSubmit = () => { window.location.href = '/' }
 
 
 it('matches snapshot', () => {
