@@ -93,4 +93,12 @@ export default class LumosRailsApi {
     return response.data
   }
 
+  getGameResults = async (accessToken: string, gameSlug: string) => {
+    const uri = `/api/v2/games/${gameSlug}/high_scores?mv=0`
+    const response = await this.axios.get(uri, {
+      headers: { Authorization: `OAuth ${accessToken}` }
+    })
+    return response.data
+  }
+
 }
