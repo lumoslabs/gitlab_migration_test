@@ -58,6 +58,7 @@ export default async (conv: ConversationV3) => {
 
   sendCommand({
     conv,
+    suppressMic: false,
     commands: [
       {
         command: appSharedActions.GO_TO,
