@@ -8,18 +8,14 @@ handlers:
 - name: RestartCMM
 - name: GoogleAccountLink
 - name: GoogleAccountLinkRejected
-- name: FEInvokeTTS
 - name: "Yes"
 - name: "No"
 - name: PlayScore
-- name: StartAccountLinkingMonologue
 - name: Help
-- name: UserLogout
-- name: GameWelcomeMessage
 - name: ResumeGame
 - name: RestartGame
 - name: AgeGateResult
 - name: MainScene
 httpsEndpoint:
-  baseUrl: https://nest-backend.prod.eks.lumoslabs.net/google/fulfillment
+  baseUrl: https://lumos-google-assistant.netlify.app/api/google/fulfillment
   endpointApiVersion: 2

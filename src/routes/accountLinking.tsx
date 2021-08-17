@@ -6,6 +6,7 @@ import ConnectAccount from '@components/ui/ConnectAccount'
 import ConnectGuestAccount from '@components/ui/ConnectGuestAccount'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import useAppBusListener from '@hooks/useAppBusListener'
+import { Intents } from '@contexts/InteractiveCanvasContext'
 
 export default function accountLinking(): JSX.Element {
   const user = useAppSelector(getUser)
@@ -32,7 +33,7 @@ export default function accountLinking(): JSX.Element {
   }
 
   const handleConnect = () => {
-    sendTextQuery('Invoke link google account')
+    sendTextQuery(Intents.LINK_ACCOUNT)
   }
 
   return user?.isGuest ?

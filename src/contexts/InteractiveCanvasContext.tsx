@@ -6,6 +6,14 @@ import { useAppDispatch } from '@store/hooks'
 import { actions } from '@store/slices/appSlice'
 import { useHistory } from 'react-router-dom'
 
+export enum Intents {
+  AGE_GATE_RESULT = 'a9e9ate-ca767bf1-0239-4adb-89dc',
+  LINK_ACCOUNT = 'l1nk-11c0unt-3cff-4eba-5ac9abbfab8c',
+  PLAY_SCORE = 'p1ay-sc0re-ff74-11eb-9a03-0242ac130003',
+  RESTART_CMM = 'r3sta5t-cmm-ff74-11eb-9a03-da66ffd11cd4',
+  START_GAME = 's5ar5g0me-ff74-11eb-9a03-0242ac130003'
+}
+
 class InteractiveCanvas {
 
   ccmMode = false
