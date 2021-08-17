@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { GameConfig } from '@backend/services/ConfigService'
 import {
   MemoryRouter as Router,
@@ -55,7 +55,7 @@ export function Index({ games }: { games: GameConfig[] }): JSX.Element {
 }
 
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const games = await (new ConfigService()).getCatalogGames()
   return {
     props: {

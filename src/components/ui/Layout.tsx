@@ -1,6 +1,5 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
 import React, { useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
 
 const styles = StyleSheet.create({
   app: {
@@ -62,6 +61,4 @@ function Layout({ children }: { children: React.ReactNode }): JSX.Element {
   </>
 }
 
-export default dynamic(() => Promise.resolve(Layout), {
-  ssr: false
-})
+export default Layout
