@@ -1,5 +1,5 @@
 import { ConversationV3 } from 'actions-on-google'
-import { sendCommand, getRandomElement, getTraining, setTraining, getLumosToken, isLumosLinked } from '@backend/conversation/utils'
+import { sendCommand, getRandomElement, getTraining, setTraining, getLumosToken, isLumosLinked, getScoresList, setScoresList } from '@backend/conversation/utils'
 import { getCurrentUTCString } from '@backend/libs/dayjs'
 import appSharedActions from '@store/slices/appSharedActions'
 import TrainingManager from '@backend/libs/TrainingManager'
@@ -7,6 +7,7 @@ import onNoMatch from './onNoMatch'
 import LumosRailsApi from '@backend/libs/LumosRailsApi'
 import rollbar from '@backend/libs/rollbar'
 import logger from '@backend/libs/logger'
+import ScoresManager from '@backend/libs/ScoresManager'
 
 export default async (conv: ConversationV3) => {
   const eventData = conv.context?.canvas?.state?.eventData
@@ -29,14 +30,10 @@ export default async (conv: ConversationV3) => {
   }
 
 
-  if (!conv.user.params.scores) {
-    //first play
-    conv.user.params.scores = {}
-  }
-  if (!conv.user.params.scores[slug]) {
+  const scoresList = getScoresList(conv, slug)
+  if (!scoresList) {
     //first play in current game
     tts = `You scored ${score} points. Great first play! Would you like to return to the Lumosity main menu?`
-    conv.user.params.scores[slug] = []
   } else {
     tts = getRandomElement([
       `You scored ${score} points. Well done! Would you like to return to the Lumosity main menu?`,
@@ -45,19 +42,13 @@ export default async (conv: ConversationV3) => {
     ])
   }
 
-  //Push to gameruns array new element, sorting by scores and index and cut array to 5 top elements
-  conv.user.params.scores[slug].push({
+  const scoresManager = new ScoresManager(scoresList)
+  scoresManager.push({
     score,
     date: getCurrentUTCString(),
-    i: Number(conv.user.params.scores[slug].reduce((accum, current) => accum > current.i ? accum : current.i, 0)) + 1
   })
-  conv.user.params.scores[slug] = conv.user.params.scores[slug].sort((a, b) => {
-    if (a.score === b.score) {
-      return b.i - a.i
-    }
-    return b.score - a.score
-  }).slice(0, 5)
 
+  setScoresList(conv, slug, scoresManager.get())
 
   if (isTraining) {
     const trainingManager = new TrainingManager(getTraining(conv))
@@ -99,7 +90,7 @@ export default async (conv: ConversationV3) => {
         command: appSharedActions.SET_TOP_SCORES,
         payload: {
           slug,
-          scores: conv.user.params.scores[slug]
+          scores: getScoresList(conv, slug)
         }
       }
     ]

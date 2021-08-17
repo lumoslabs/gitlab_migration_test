@@ -4,6 +4,7 @@ import appSharedActions from '@store/slices/appSharedActions'
 import getConfig from 'next/config'
 import { ITraining } from '@backend/libs/TrainingManager'
 import CryptoJS from 'crypto-js'
+import { ScoreRow } from '@backend/libs/ScoresManager'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -94,6 +95,20 @@ export const setLumosToken = async (conv: ConversationV3, token: string) => {
 
 export const getLumosToken = async (conv: ConversationV3) => {
   return CryptoJS.Rabbit.decrypt(conv.user.params?.lumosToken, serverRuntimeConfig.rails.encryptionToken).toString(CryptoJS.enc.Utf8) as string
+}
+
+export const getScoresList = (conv: ConversationV3, slug: string) => {
+  if (!conv.user.params.scores) {
+    return []
+  }
+  return conv.user.params.scores[slug]
+}
+
+export const setScoresList = (conv: ConversationV3, slug: string, scores: ScoreRow[]) => {
+  if (!conv.user.params.scores) {
+    conv.user.params.scores = {}
+  }
+  conv.user.params.scores[slug] = scores
 }
 
 export const isLumosLinked = (conv: ConversationV3) => {
