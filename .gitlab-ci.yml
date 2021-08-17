@@ -1,0 +1,26 @@
+image: node:14.17.0
+
+variables:
+  CI: "true"
+
+stages:
+  - test
+
+include:
+  - project: lumoslabs/gitlab-ci-templates
+    file: /templates/docker/build.yml
+
+test:
+  stage: test
+  tags: ["env:ci", "executor:kubernetes", "name:default"]
+  before_script: 
+    - yarn install 
+  script:
+    - yarn check-types
+    - yarn lint
+    - yarn test --ci --reporters=default --reporters=jest-junit
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - junit.xml

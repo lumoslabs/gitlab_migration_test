@@ -12,9 +12,7 @@ import logger from '@backend/libs/logger'
 import onHome from '@backend/conversation/onHome'
 import onStartGame from '@backend/conversation/onStartGame'
 import onNoMatch from '@backend/conversation/onNoMatch'
-import onGameWelcomeMessage from '@backend/conversation/onGameWelcomeMessage'
 import onTraining from '@backend/conversation/onTraining'
-import onStartAccountLinkingMonologue from '@backend/conversation/onStartAccountLinkingMonologue'
 import onGoogleAccountLink from '@backend/conversation/onGoogleAccountLink'
 import onGoogleAccountLinkRejected from '@backend/conversation/onGoogleAccountLinkRejected'
 import rollbar from '@backend/libs/rollbar'
@@ -73,11 +71,6 @@ conversationApp.handle('AgeGateResult', onAgeGateResult)
 conversationApp.handle('Yes', onYes)
 conversationApp.handle('No', onNo)
 conversationApp.handle('Help', onHelp)
-
-//TODO: remove from code and from intence
-conversationApp.handle('GameWelcomeMessage', onGameWelcomeMessage)
-conversationApp.handle('StartAccountLinkingMonologue', onStartAccountLinkingMonologue)
-conversationApp.handle('FEInvokeTTS', onNoMatch)
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {

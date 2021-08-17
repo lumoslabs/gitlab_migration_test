@@ -14,9 +14,6 @@ intentEvents:
 - handler:
     webhookHandler: RestartCMM
   intent: RESTART_CMM
-- handler:
-    webhookHandler: FEInvokeTTS
-  intent: FE_INVOKE_TTS
 - intent: LINK_ACCOUNT
   transitionToScene: AccountLinkingOrigin
 - handler:
@@ -29,17 +26,11 @@ intentEvents:
     webhookHandler: PlayScore
   intent: PLAY_SCORE
 - handler:
-    webhookHandler: StartAccountLinkingMonologue
-  intent: ACCOUNT_LINK_MONOLOGUE
-- handler:
     webhookHandler: Help
   intent: HELP
 - handler:
     webhookHandler: StartApp
   intent: LOGIN
-- handler:
-    webhookHandler: GameWelcomeMessage
-  intent: GAME_WELCOME_MESSAGE
 - handler:
     webhookHandler: ResumeGame
   intent: RESUME_GAME
