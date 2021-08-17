@@ -30,14 +30,15 @@ class MyDocument extends Document<DocumentPropsWithAphrodite> {
           <Rollbar />
           <Amplitude />
           <link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;," />
-          <style
-            data-aphrodite
-            dangerouslySetInnerHTML={{ __html: css.content }}
-          />
+
         </Head>
         <body>
           <Main />
           <NextScript />
+          <style
+            data-aphrodite
+            dangerouslySetInnerHTML={{ __html: css.content }}
+          />
           {css?.renderedClassNames && (
             <script
               dangerouslySetInnerHTML={{
