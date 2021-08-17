@@ -88,6 +88,13 @@ export const getBirthday = (conv: ConversationV3): any => {
   return conv.user.params.birthday
 }
 
+export const setUnderageTimestamp = (conv: ConversationV3, underage: number): any => {
+  conv.user.params.underage = underage
+}
+
+export const getUnderageTimestamp = (conv: ConversationV3): number => {
+  return conv.user.params.underage
+}
 
 export const setLumosToken = async (conv: ConversationV3, token: string) => {
   conv.user.params.lumosToken = CryptoJS.Rabbit.encrypt(token, serverRuntimeConfig.rails.encryptionToken).toString()

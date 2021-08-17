@@ -64,7 +64,8 @@ module.exports = (phase) => {
       rollbar: {
         serverToken: process.env.ROLLBAR_SERVER_TOKEN,
         enviroment: process.env.ROLLBAR_ENV
-      }
+      },
+      underageBanSeconds: 172800, //48h
     },
     publicRuntimeConfig: {
       // Will be available on both server and client

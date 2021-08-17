@@ -7,11 +7,16 @@ import {
   convToUser,
   getBirthday,
   Scenes,
-  Pages
+  Pages,
+  getUnderageTimestamp
 } from '@backend/conversation/utils'
 import appSharedActions from '@store/slices/appSharedActions'
 import TrainingManager from '@backend/libs/TrainingManager'
 import { v4 as uuidv4 } from 'uuid'
+import { dayjs } from '@backend/libs/dayjs'
+import getConfig from 'next/config'
+
+const { serverRuntimeConfig } = getConfig()
 
 export default async (conv: ConversationV3) => {
 
@@ -37,10 +42,14 @@ export default async (conv: ConversationV3) => {
   let nextScene = Scenes.Main
   let nextPage = Pages.Home
 
-  // Check if age already confirmed
-  if (!getBirthday(conv)) {
-    nextPage = Pages.AgeGate
+  // check if is underage and locked out
+  if (getUnderageTimestamp(conv) && ((dayjs().unix() - getUnderageTimestamp(conv)) < serverRuntimeConfig.underageBanSeconds)) {
+    nextScene = Scenes.EndConversation
+    nextPage = null
+    conv.add('We’re sorry, but you’re not eligible to create an account. Please contact us at help.lumosity.com for more information.')
+  } else if (!getBirthday(conv)) { // Check if age already confirmed
     nextScene = Scenes.AgeGate
+    nextPage = Pages.AgeGate
   }
 
   sendCommand({
@@ -55,10 +64,10 @@ export default async (conv: ConversationV3) => {
           tutorialSeen,
         }
       },
-      {
+      nextPage ? {
         command: appSharedActions.GO_TO,
         payload: nextPage
-      }
+      } : undefined
     ],
     scene: nextScene
   })
