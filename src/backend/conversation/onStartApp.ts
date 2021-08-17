@@ -42,18 +42,15 @@ export default async (conv: ConversationV3) => {
   let nextScene = Scenes.Main
   let nextPage = Pages.Home
 
-
-
-  console.log('(dayjs().unix() - getUnderageTimestamp(conv)) < serverRuntimeConfig.underageBanSeconds)', (dayjs().unix() - getUnderageTimestamp(conv)), serverRuntimeConfig.underageBanSeconds)
-  // check is use banned by undergame
+  // check if is underage and locked out
   if (getUnderageTimestamp(conv) && ((dayjs().unix() - getUnderageTimestamp(conv)) < serverRuntimeConfig.underageBanSeconds)) {
     nextScene = Scenes.EndConversation
     nextPage = null
+    conv.add('We’re sorry, but you’re not eligible to create an account. Please contact us at help.lumosity.com for more information.')
   } else if (!getBirthday(conv)) { // Check if age already confirmed
     nextScene = Scenes.AgeGate
     nextPage = Pages.AgeGate
   }
-
 
   sendCommand({
     conv,
