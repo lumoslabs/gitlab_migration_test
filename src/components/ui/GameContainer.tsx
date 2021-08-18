@@ -50,7 +50,9 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
     gamevars: {
       ...game.values?.last_version?.overrides?.extras,
       game_resources_url: gameUrl,
-      show_tutorial: showTutorial
+      show_tutorial: showTutorial,
+      game_param: game?.values.slug,
+      languageVariant: navigator?.language
     },
   }
 
