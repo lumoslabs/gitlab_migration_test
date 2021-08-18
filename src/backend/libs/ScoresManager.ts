@@ -1,9 +1,8 @@
 import { dayjs } from '@backend/libs/dayjs'
-import { stringMap } from 'aws-sdk/clients/finspacedata'
 
 export interface ScoreRow {
-  score: number,
-  date: string
+  score: number;
+  date: string;
 }
 
 export default class ScoresManager {

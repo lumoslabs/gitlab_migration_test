@@ -22,9 +22,9 @@ export default async (conv: ConversationV3) => {
 
     //sync game results to user storage top scores
     const externalScores = await Promise.all(catalog.map(game => {
-      return linkingService.api.getGameResults(accessToken, game.id).then((scores) => {
+      return linkingService.api.getGameResults(accessToken, game.values.slug).then((scores) => {
         return {
-          game: game.id,
+          game: game.values.slug,
           scores: scores?.high_scores?.map(({ score, created_at }) => {
             return (score && created_at) ? {
               score,
@@ -55,6 +55,8 @@ export default async (conv: ConversationV3) => {
       conv.add('There was an error linking your account. Please try again later.')
     }
   }
+
+  conv.session.params.isWelcomeMessage = false
 
   sendCommand({
     conv,
