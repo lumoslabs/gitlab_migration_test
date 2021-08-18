@@ -1,14 +1,12 @@
 import React from 'react'
-import GameProgressBar from '@components/ui/GameProgressBar'
+import LoadingComponent from '@components/ui/LoadingComponent'
 import { render } from '@testing-library/react'
 
 describe('components', () => {
-  describe('GameProgressBar', () => {
+  describe('LoadingComponent', () => {
     it('matches snapshot', () => {
       const { asFragment } = render(
-        <GameProgressBar
-          progressLevel={50}
-        />, {}
+        <LoadingComponent />, {}
       )
       expect(asFragment()).toMatchSnapshot()
     })
