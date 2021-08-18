@@ -74,10 +74,10 @@ export default function GamePlay({
 
   // shall we simplify this data structure in the database?
   const statLabel = game.values.frontend_data.scores[0].score_screen_score_key.replace('scoreScreen', '')
-  const statKey =  game.values.frontend_data.scores[0].run_data_references[0]
+  const statKey =  game.values.frontend_data.scores[0].run_data_references[0] || 'num_correct'
 
   // Data from current game result
-  const stat = result?.game_result_data[statKey] || result?.game_result_data['num_correct']
+  const stat = result?.game_result_data[statKey]
 
   return (
     <main>

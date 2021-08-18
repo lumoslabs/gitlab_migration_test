@@ -21,7 +21,12 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
     if (nextGame) {
       setCurrentGame(nextGame)
     } else {
-      sendTextQuery('Home')
+      sendTextQuery('Home').then((result) => {
+        //TODO: fix it with the new interactiveCanvas
+        if (result === 'BLOCKED') {
+          history.push('/home')
+        }
+      })
     }
   }
 
