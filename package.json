@@ -25,6 +25,7 @@
     "bootstrap": "4.6.0",
     "crypto-js": "^4.1.1",
     "dayjs": "^1.10.5",
+    "jest-junit": "^12.2.0",
     "jsonwebtoken": "^8.5.1",
     "lodash.clonedeep": "^4.5.0",
     "lodash.sample": "^4.2.1",
