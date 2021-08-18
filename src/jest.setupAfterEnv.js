@@ -12,13 +12,6 @@ jest.mock('next/config', () => () => ({
     google: {
       clientId: 'google_client_id'
     },
-    public_url: 'http://nest.dev',
-    dynamodb: {
-      prefix: 'test_',
-      endpoint: process.env.MOCK_DYNAMODB_ENDPOINT,
-      sslEnabled: false,
-      region: 'local',
-    }
   },
   publicRuntimeConfig: {
     amplitude: {
