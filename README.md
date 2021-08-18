@@ -150,7 +150,11 @@ GameEventName -
 
 //TODO: describe flow of scenes managment
 
-[gactions cli tool](https://developers.google.com/assistant/actionssdk/gactions?hl=en&authuser=3)
+### gactions
+
+* You can update actions in the [Develop tab of the google actions console](https://console.actions.google.com/project/lumos-nest-prod/invocations/edit/actions.intent.MAIN)
+* Intents can be managed with the [gactions command line interface (CLI) tool](https://developers.google.com/assistant/actionssdk/gactions)
+* To pull or push gaction changes, cd into the google-actions folder and run `gactions pull` or `gactions push`. The project ID should be automatically detected, but you can also specify it with `gactions pull --project-id lumos-nest-prod`. We no longer use lumos-nest-staging.
 
 ### User Storage
 
