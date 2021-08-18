@@ -12,6 +12,7 @@ synonym:
       - Urban Flow
       - ebenflow
       - Evan Flow
+      - Bill Evans
     Raindrops:
       synonyms:
       - Raindrops
@@ -24,4 +25,5 @@ synonym:
     Word Snatchers:
       synonyms:
       - Word Snatchers
+      - Weird Snatchers
   matchType: EXACT_MATCH
