@@ -6,6 +6,8 @@ import base from '@styles/colors/base'
 import commonStyles from '@styles/commonStyles'
 import Button from '@components/ui/Button'
 
+// package: https://www.npmjs.com/package/react-mobile-datepicker
+
 export interface IAgeGateProps {
   onSubmit(birthday: Date): any;
   max?: Date,
@@ -20,7 +22,7 @@ const AgeGate = (({
   disabled = false
 }: IAgeGateProps): JSX.Element => {
 
-  const [date, setDate] = useState(new Date('1985-01-02'))
+  const [date, setDate] = useState(new Date(1985, 1, 1, 1, 1, 0, 0))
 
   const handleClick = () => {
     //    const isUnderage = !(new Date(Date.now()).getTime() - new Date(date).getTime() > 410310589331)
@@ -83,8 +85,8 @@ const AgeGate = (({
       </Row>
       {/* TODO: Update with legal approved copy */}
       <p className={css(styles.disclaimer)}>
-          {'Please select your birth date. Your birthday will be stored and added to your Lumosity account if you choose to create one.'}
-        </p>
+          {'Your birthday will be stored and added to your Lumosity account if you choose to create one.'}
+      </p>
       <Row className={css(commonStyles.flexRowAllCenter, styles.buttonDiv)}>
         <Button
           disabled={disabled}

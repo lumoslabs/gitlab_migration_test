@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import { getUser } from '@store/slices/appSlice'
 import { useAppSelector } from '@store/hooks'
 import ConnectAccount from '@components/ui/ConnectAccount'

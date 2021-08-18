@@ -17,7 +17,7 @@ export default async (conv: ConversationV3) => {
   } else {
     setBirthday(conv, birthday)
     sendCommand({
-      suppressMic: true,
+      suppressMic: false,
       conv,
       commands: [
         {

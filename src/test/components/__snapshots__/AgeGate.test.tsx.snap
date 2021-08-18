@@ -39,11 +39,6 @@ exports[`matches snapshot 1`] = `
                   <li
                     class=""
                   >
-                    Aug
-                  </li>
-                  <li
-                    class=""
-                  >
                     Sep
                   </li>
                   <li
@@ -86,6 +81,11 @@ exports[`matches snapshot 1`] = `
                   >
                     May
                   </li>
+                  <li
+                    class=""
+                  >
+                    Jun
+                  </li>
                 </ul>
               </div>
             </div>
@@ -103,6 +103,11 @@ exports[`matches snapshot 1`] = `
                   class="datepicker-scroll"
                   style="transform: translateY(-200px); margin-top: 0px;"
                 >
+                  <li
+                    class=""
+                  >
+                    27
+                  </li>
                   <li
                     class=""
                   >
@@ -147,11 +152,6 @@ exports[`matches snapshot 1`] = `
                     class=""
                   >
                     05
-                  </li>
-                  <li
-                    class=""
-                  >
-                    06
                   </li>
                 </ul>
               </div>
@@ -230,7 +230,7 @@ exports[`matches snapshot 1`] = `
     <p
       class="disclaimer_kdqsn7"
     >
-      Please select your birth date. Your birthday will be stored and added to your Lumosity account if you choose to create one.
+      Your birthday will be stored and added to your Lumosity account if you choose to create one.
     </p>
     <div
       class="flexRowAllCenter_1cn94ih-o_O-buttonDiv_120lt8p row"
