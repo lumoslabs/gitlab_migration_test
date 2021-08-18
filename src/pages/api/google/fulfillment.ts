@@ -88,6 +88,6 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
   } catch (e) {
     rollbar?.error(e, req)
     logger.error(e, 'fulfillment.ts')
-    return res.send(e)
+    return res.status(500).send({ error: e.message || e })
   }
 }

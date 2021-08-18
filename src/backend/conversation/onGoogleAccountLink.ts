@@ -56,9 +56,10 @@ export default async (conv: ConversationV3) => {
     }
   }
 
+  conv.session.params.isWelcomeMessage = false
+
   sendCommand({
     conv,
-    suppressMic: false,
     commands: [
       {
         command: appSharedActions.GO_TO,
