@@ -296,3 +296,5 @@ In order to connect your account to Google and turn off Guest mode, on the [app 
 
 #### "Lumosity is not responding" after game finishing
 This can occur if you have linked user account and don't have http access for Lumos Rails. You should check if environment variables are correct and vpn is on if using staging Lumos Rails server
+
+
