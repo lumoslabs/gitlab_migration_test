@@ -15,7 +15,8 @@ module.exports = {
       {
         suiteName: "jest tests",
         classNameTemplate: "{classname}",
-        titleTemplate: "{title}"
+        titleTemplate: "{title}",
+        ancestorSeparator: "/",
       }
     ]
   ]
