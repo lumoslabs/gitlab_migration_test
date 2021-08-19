@@ -39,22 +39,11 @@ module.exports = (phase) => {
         clientId: process.env.GOOGLE_CLIENT_ID
       },
       publicUrl: process.env.PUBLIC_URL,
-      dynamodb: {
-        prefix: process.env.DYNAMODB_PREFIX,
-        region: process.env.DYNAMODB_REGION,
-        endpoint: process.env.DYNAMODB_LOCAL ? 'http://localhost:' + process.env.DYNAMODB_PORT : undefined,
-        sslEnabled: process.env.DYNAMODB_SSL ? true : false,
-      },
       jwt: {
         secret: 'devjwtsecret' || process.env.JWT_SECRET,
         expiresIn: '24h'
       },
-      misc: {
-        configCatalogId: 1
-      },
       guestUser: true,
-      // Should be disabled for production
-      apidoc: (phase === PHASE_DEVELOPMENT_SERVER),
       rails: {
         url: process.env.RAILS_URL,
         clientId: process.env.RAILS_CLIENT_ID,

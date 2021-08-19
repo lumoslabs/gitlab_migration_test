@@ -24,36 +24,6 @@ All enviroment variables should be stored in *.env.example*, just copy paste it 
 cp  .env.example .env.local
 ```
 
-#### Setup Dynamodb (only for development)
-
-You can either setup a local dynamodb instance with dynalite:
-
-##### Dynalite
-
-Just a local implementation of Amazon's DynamoDB built on LevelDB
-
-Authenticate with AWS:
-```
-eval $(aws-okta -d -t 10h env prod-g-analysts)`
-```
-
-```bash
-yarn run dynalite
-```
-
-_OR_
-
-##### Docker
-
-Official version of local dynamodb
-
-```bash
-docker run -p 8001:8001 -p 8002:8002 -it --rm instructure/dynamo-local-admin
-```
-
-Dynamodb will be available on http://localhost:8002 and dynamo-admin on http://localhost:8001
-
-
 #### Migrate and seed tables
 
 ```bash
@@ -307,7 +277,7 @@ Example -
 ```
 
 
-### Known issues
+### Troubleshooting
 
 #### Linking account does not work with localhost on staging
 You cannot link with staging while on a device because staging requires VPN.
@@ -316,17 +286,13 @@ To link your account to a staging account, you must use the simulator while on t
 #### User Storage is always empty
 Just allow "Web & App Activity" on Google's [Activity controls](https://myactivity.google.com/u/3/activitycontrols?pli=1) page
 
-#### Clear User Storage
+#### Clear User Storage/Unlink Account
 
-You can clear user storage on the [App page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o), with the *Stop Lumosity from remembering me (?)* link
+You can clear user storage on the [App page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o), with the *Reset* link, or disconnect your account using the *Unlink* link. You can also click *Stop Lumosity from remembering me* to get into Guest mode.
 
 #### isGuest always true
 
-You can change it on [app page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) with the *Allow Lumosity to remember me (?)* link
+In order to connect your account to Google and turn off Guest mode, on the [app page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) click the *Allow Lumosity to remember me (?)* link.
 
 #### "Lumosity is not responding" after game finishing
 This can occur if you have linked user account and don't have http access for Lumos Rails. You should check if environment variables are correct and vpn is on if using staging Lumos Rails server
-
-### TODO:
-
-* remove jest-dynalite and dynalite info
