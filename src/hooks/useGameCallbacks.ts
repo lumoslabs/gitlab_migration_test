@@ -37,7 +37,7 @@ export default function useGameCallbacks(gameEventHandler: (eventName: string, e
 
   const sendFakeCompleteEvent = () => {
     if (window.sendToJavaScript) {
-      window.sendToJavaScript('game:complete', { score: Math.floor(Math.random() * 1000) })
+      window.sendToJavaScript('game:complete', { score: Math.floor(Math.random() * 1000), game_result_data: { num_correct: 10 } })
     }
   }
 

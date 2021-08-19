@@ -74,9 +74,10 @@ export default function GamePlay({
 
   // shall we simplify this data structure in the database?
   const statLabel = game.values.frontend_data.scores[0].score_screen_score_key.replace('scoreScreen', '')
+  const statKey =  game.values.frontend_data.scores[0].run_data_references[0] || 'num_correct'
 
   // Data from current game result
-  const stat = result?.stat
+  const stat = result?.game_result_data[statKey]
 
   return (
     <main>
@@ -88,8 +89,8 @@ export default function GamePlay({
           isTraining={isTraining}
         />
       )}
-      {result && (topScores === null) && <LoadingComponent />}
-      {result && (topScores !== null) && (
+      {result && (topScores === undefined) && <LoadingComponent />}
+      {result && (topScores !== undefined) && (
         <GameScoreCard
           title={game.values.title}
           gameIcon={game.values.score_thumbnail_url}
