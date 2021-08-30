@@ -49,7 +49,7 @@ conversationApp.handle('OpenGame', onOpenGame)
 conversationApp.handle('Home', onHome)
 conversationApp.handle('Games', onHome)
 
-// Link account or show Account Info Modal
+// Link account or stay on home if already linked
 conversationApp.handle('Guest', onGuest)
 
 // Gameplay
