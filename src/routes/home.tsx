@@ -7,14 +7,14 @@ import UserBar from '@components/ui/UserBar'
 import UserInfo from '@components/ui/UserInfo'
 import commonStyles from '@styles/commonStyles'
 import { GameConfig } from '@backend/services/ConfigService'
-import { getTraining, getUser, getShowAccountModal } from '@store/slices/appSlice'
-import { useAppSelector } from '@store/hooks'
+import { actions, getTraining, getUser, getShowAccountModal } from '@store/slices/appSlice'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 import useAmplitude from '@hooks/useAmplitude'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import useAppBusListener from '@hooks/useAppBusListener'
 
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
-
+  const dispatch = useAppDispatch()
   const track = useAmplitude()
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
   const showAccountModalState = useAppSelector(getShowAccountModal)
   const { outputTts } = useInteractiveCanvas()
   const [showAccountModal, setShowAccountModal] = useState(showAccountModalState)
-  const handleAccountModalClose = () => setShowAccountModal(false)
+  const handleAccountModalClose = () => dispatch(actions.setShowAccountModal(false))
 
   const onUserBarClick = () => {
     if (!user?.isLinked) {

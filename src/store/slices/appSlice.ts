@@ -68,8 +68,9 @@ export const appSlice = createSlice({
     },
     setShowAccountModal: (
       state: Draft<typeof initialState>,
+      action: PayloadAction<boolean>
     ) => {
-      state.showAccountModal = true
+      state.showAccountModal = action.payload
     },
   }
 })

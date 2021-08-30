@@ -18,10 +18,10 @@ export default function accountLinking(): JSX.Element {
   const outputInfo = () => {
     if (user?.isLinked) {
       outputTts(`Your account is already linked.`)
-      dispatch(actions.setShowAccountModal())
+      dispatch(actions.setShowAccountModal(true))
       sendTextQuery('Home').then((result) => {
         //TODO: fix it with the new interactiveCanvas
-        if (result === 'BLOCKED') {
+        if (result !== 'SUCCESS') {
           history.push('/home')
         }
       })
