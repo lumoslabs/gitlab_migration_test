@@ -18,14 +18,16 @@ interface appState {
     isLinked?: boolean,
     isGuest?: boolean,
     isAgeVerified?: boolean,
-  }
+  },
+  showAccountModal: boolean
 }
 
 const initialState: appState = {
   scores: {},
   training: null,
   user: null,
-  tutorialSeen: {}
+  tutorialSeen: {},
+  showAccountModal: false
 } as const
 
 
@@ -64,6 +66,11 @@ export const appSlice = createSlice({
     ) => {
       state.tutorialSeen[action.payload.slug] = true
     },
+    setShowAccountModal: (
+      state: Draft<typeof initialState>,
+    ) => {
+      state.showAccountModal = true
+    },
   }
 })
 
@@ -74,6 +81,7 @@ export const getTopScores = (state: RootState) => state.app.scores
 export const getTraining = (state: RootState) => state.app.training
 export const getTutorialSeen = (state: RootState) => state.app.tutorialSeen
 export const getUser = (state: RootState) => state.app.user
+export const getShowAccountModal = (state: RootState) => state.app.showAccountModal
 
 // Reducers and actions
 export const actions = appSlice.actions

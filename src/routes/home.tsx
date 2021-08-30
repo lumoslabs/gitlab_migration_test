@@ -7,7 +7,7 @@ import UserBar from '@components/ui/UserBar'
 import UserInfo from '@components/ui/UserInfo'
 import commonStyles from '@styles/commonStyles'
 import { GameConfig } from '@backend/services/ConfigService'
-import { getTraining, getUser } from '@store/slices/appSlice'
+import { getTraining, getUser, getShowAccountModal } from '@store/slices/appSlice'
 import { useAppSelector } from '@store/hooks'
 import useAmplitude from '@hooks/useAmplitude'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
@@ -24,8 +24,9 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
   const history = useHistory()
   const training = useAppSelector(getTraining)
   const user = useAppSelector(getUser)
+  const showAccountModalState = useAppSelector(getShowAccountModal)
   const { outputTts } = useInteractiveCanvas()
-  const [showAccountModal, setShowAccountModal] = useState(false)
+  const [showAccountModal, setShowAccountModal] = useState(showAccountModalState)
   const handleAccountModalClose = () => setShowAccountModal(false)
 
   const onUserBarClick = () => {
