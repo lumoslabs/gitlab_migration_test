@@ -17,7 +17,7 @@ export default async (conv: ConversationV3) => {
         }
       ]
     })
-  }  else {
+  } else {
     sendCommand({
       conv,
       commands: [
