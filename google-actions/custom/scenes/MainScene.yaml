@@ -34,5 +34,8 @@ intentEvents:
 - handler:
     webhookHandler: RestartGame
   intent: RESTART_GAME
+- handler:
+    webhookHandler: Guest
+  intent: GUEST
 onEnter:
   webhookHandler: MainScene
