@@ -6,24 +6,12 @@ import ConnectGuestAccount from '@components/ui/ConnectGuestAccount'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import useAppBusListener from '@hooks/useAppBusListener'
 import { Intents } from '@contexts/InteractiveCanvasContext'
-import { useHistory } from 'react-router-dom'
 
 export default function accountLinking(): JSX.Element {
-  const history = useHistory()
   const user = useAppSelector(getUser)
   const { outputTts, sendTextQuery } = useInteractiveCanvas()
 
   const outputInfo = () => {
-    if (user?.isLinked) {
-      outputTts(`Your account is already linked.`)
-      sendTextQuery('Home').then((result) => {
-        //TODO: fix it with the new interactiveCanvas
-        if (result !== 'SUCCESS') {
-          history.push('/home')
-        }
-      })
-    }
-
     if (user?.isGuest) {
       outputTts(`You're currently in guest mode. If you would like to save your scores and progress, check your Google Voice match settings and restart Lumosity. You can say "Home" to go to the main menu.`)
     } else {
