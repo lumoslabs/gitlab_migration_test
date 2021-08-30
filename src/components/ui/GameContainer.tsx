@@ -150,6 +150,8 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
   useEffect(() => {
     return () => {
       // Clear cocos3 scope
+      window?.cc?.director?.purgeCachedData()
+      window?.cc?.director?.purgeDirector()
       window?.cc?.director?.end()
       // try to exit from cmm
       exitContinuousMatchMode()
