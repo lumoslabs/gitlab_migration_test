@@ -1,12 +1,10 @@
 import { ConversationV3 } from 'actions-on-google'
 import appSharedActions from '@store/slices/appSharedActions'
 import { Pages, sendCommand } from './utils'
-import { getUser } from '@store/slices/appSlice'
-import { useAppSelector } from '@store/hooks'
+import { AccountLinkingStatus } from 'actions-on-google/dist/api/schema'
 
 export default async (conv: ConversationV3) => {
-  const user = useAppSelector(getUser)
-  if (user?.isLinked) {
+  if (conv.user.accountLinkingStatus === AccountLinkingStatus.Linked) {
     conv.add('Your account is already linked')
     sendCommand({
       conv,
