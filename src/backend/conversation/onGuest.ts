@@ -5,7 +5,7 @@ import { AccountLinkingStatus } from 'actions-on-google/dist/api/schema'
 
 export default async (conv: ConversationV3) => {
   if (conv.user.accountLinkingStatus === AccountLinkingStatus.Linked) {
-    conv.add('Your account is already linked')
+    conv.add('Your account is already linked. What would you like to do today?')
     sendCommand({
       conv,
       commands: [
