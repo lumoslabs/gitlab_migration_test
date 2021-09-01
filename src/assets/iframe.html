@@ -1,0 +1,135 @@
+<html>
+
+<head>
+  <style>
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class='cocos3' id='game-manager'>
+    <canvas id='gameCanvas' />
+  </div>
+  <script>
+    window.Lumos = {
+      gamevars: {
+        game_resources_url: 'https://assets.nest.lumosity.com/game-assets/ColorMatch_CC/nest_lowres/a213a4c63155fa5fde7fbe266d42654a33b71a56/289067450/release/',
+        show_tutorial: false,
+        game_param: 'color-match-none',
+      },
+    }
+    window.sendToJavaScript = (data, argData) => {
+      console.log('window.sendToJavaScript', data, argData)
+      console.log('window.top', window.top)
+    }
+    window.addEventListener('message', function (event) {
+      console.log('iframe onmessage', event)
+      try {
+        const data = JSON.parse(event.data)
+        if (!data || !data.lumos) {
+          return
+        }
+        switch (data.command) {
+          case 'init':
+            document.getElementById('gameCanvas').setAttribute('height', data.height)
+            document.getElementById('gameCanvas').setAttribute('width', data.width)
+            const script = document.createElement("script");
+            script.src = data.src;
+            document.body.appendChild(script);
+            break;
+        }
+      } catch (error) {
+
+      }
+    })
+  </script>
+</body>
+
+</html>

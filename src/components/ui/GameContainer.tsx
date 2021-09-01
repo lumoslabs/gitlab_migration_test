@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Card from 'react-bootstrap/Card'
 import Script from 'react-load-script'
 import { css, StyleSheet } from 'aphrodite/no-important'
@@ -29,6 +29,10 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
   // Set the dimensions of the screen for game layout
   const [clientHeight, setHeight] = useState(0)
   const [clientWidth, setWidth] = useState(0)
+
+  //canvas ref
+
+  const canvasRef = useRef()
 
   useEffect(() => {
     setHeight(window.innerHeight)
@@ -170,6 +174,7 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
               style={{ visibility: showProgress ? 'hidden' : 'visible' }}
               width={clientWidth}
               height={clientHeight}
+              ref={canvasRef}
             />
           </div>
           {showProgress && <GameProgressBar progressLevel={progressLevel} />}

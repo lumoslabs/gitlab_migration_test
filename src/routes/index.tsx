@@ -2,13 +2,22 @@ import { css, StyleSheet } from 'aphrodite/no-important'
 import LoadingComponent from '@components/ui/LoadingComponent'
 import { useEffect } from 'react'
 import useAmplitude from '@hooks/useAmplitude'
+import { useHistory } from 'react-router-dom'
 
 export function Index(): JSX.Element {
 
   const track = useAmplitude()
+  const router = useHistory()
   useEffect(() => {
     track('page_view')
+    router.push('/test')
+    //    router.push('/home')
   }, [])
+  /*
+    const iframe = useRef()
+    iframe.current?.contentWindow?.postMessage('test', '*')
+    <iframe ref={iframe} width="500" height="500" src="https://lumos-yura.ngrok.io/game.html" />
+  */
 
   return (
     <main>

@@ -13,6 +13,34 @@ module.exports = (phase) => {
       })
       return config
     },
+    async headers() {
+      return [
+        {
+          source: '/game.html',
+          headers: [
+            {
+              key: 'Access-Control-Allow-Origin',
+              value: '*',
+            },
+            {
+              key: 'Content-Security-Policy',
+              value: 'frame-src http://localhost:7300/',
+            },
+
+          ],
+        },
+        {
+          source: '/api/v2/games/:slug*',
+          headers: [
+            {
+              key: 'Access-Control-Allow-Origin',
+              value: '*',
+            }
+          ]
+        }
+      ]
+
+    },
     async rewrites() {
       return [
         {

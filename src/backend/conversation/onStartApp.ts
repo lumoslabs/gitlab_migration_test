@@ -66,9 +66,9 @@ export default async (conv: ConversationV3) => {
       },
       nextPage ? {
         command: appSharedActions.GO_TO,
-        payload: nextPage
+        payload: '/test' //nextPage
       } : undefined
     ],
-    scene: nextScene
+    //    scene: nextScene
   })
 }
