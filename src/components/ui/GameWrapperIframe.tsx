@@ -24,7 +24,7 @@ const GameWrapperIframe = forwardRef<GameWrapperRef, GameWrapperProps>(({ width,
     if (!message?.data?.lumos) {
       return
     }
-    let { eventName, eventData } = message.data
+    const { eventName, eventData } = message.data
     onEvent(eventName, eventData)
   }, [])
 
@@ -42,7 +42,7 @@ const GameWrapperIframe = forwardRef<GameWrapperRef, GameWrapperProps>(({ width,
         data
       })
     }
-  }));
+  }))
 
   return <>
     <iframe

@@ -36,7 +36,7 @@ const GameWrapperWindow = forwardRef<GameWrapperRef, GameWrapperProps>(({ width,
   useEffect(() => {
     window.Lumos = vars
     window.sendToJavaScript = (data: string | [string, GameEventData], argData: GameEventData | null) => {
-      let [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
+      const [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
       if (onEvent) {
         onEvent(eventName, eventData)
       }
@@ -60,7 +60,7 @@ const GameWrapperWindow = forwardRef<GameWrapperRef, GameWrapperProps>(({ width,
         window.sendEventToCocos(data)
       }
     }
-  }));
+  }))
 
   return <>
     <div className='cocos3' id='game-manager'>

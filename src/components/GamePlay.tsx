@@ -89,7 +89,8 @@ export default function GamePlay({
           isTraining={isTraining}
         />
       )}
-      {result && (
+      {result && (topScores === undefined) && <LoadingComponent />}
+      {result && (topScores !== undefined) && (
         <GameScoreCard
           title={game.values.title}
           gameIcon={game.values.score_thumbnail_url}
