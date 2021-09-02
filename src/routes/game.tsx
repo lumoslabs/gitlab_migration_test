@@ -20,13 +20,11 @@ export default function Game({ game }: { game: GameConfig }): JSX.Element {
       game={game}
       isTraining={false}
       onFinishHandler={() => {
-        router.push('/home')
-        //        sendTextQuery('Home').then((result) => {
-        //TODO: fix it with the new interactiveCanvas
-        //          if (result === 'BLOCKED') {
-        //            router.push('/home')
-        //          }
-        //        })
+        sendTextQuery('Home').then((result) => {
+          if (result === 'BLOCKED') {
+            router.push('/home')
+          }
+        })
       }}
     />
   )

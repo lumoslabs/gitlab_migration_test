@@ -9,7 +9,6 @@ import IndexPage from '@routes/index'
 import HomePage from '@routes/home'
 import GamePage from '@routes/game'
 import TrainingPage from '@routes/training'
-import TestPage from '@routes/test'
 import AccountLinkingPage from '@routes/accountLinking'
 import AgeGate from '@routes/ageGate'
 import ConfigService from '@backend/services/ConfigService'
@@ -46,9 +45,6 @@ export function Index({ games }: { games: GameConfig[] }): JSX.Element {
             </Route>
             <Route exact path='/age-gate'>
               <AgeGate />
-            </Route>
-            <Route exact path='/test'>
-              <TestPage />
             </Route>
             {gameRoutes}
           </Switch>

@@ -14,21 +14,8 @@ module.exports = (phase) => {
       return config
     },
     async headers() {
+      //TODO: remove useless call to /api/v2/games/settings from game.js
       return [
-        {
-          source: '/game.html',
-          headers: [
-            {
-              key: 'Access-Control-Allow-Origin',
-              value: '*',
-            },
-            {
-              key: 'Content-Security-Policy',
-              value: 'frame-src http://localhost:7300/',
-            },
-
-          ],
-        },
         {
           source: '/api/v2/games/:slug*',
           headers: [
@@ -39,7 +26,6 @@ module.exports = (phase) => {
           ]
         }
       ]
-
     },
     async rewrites() {
       return [

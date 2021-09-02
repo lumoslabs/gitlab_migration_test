@@ -11,13 +11,7 @@ export function Index(): JSX.Element {
   useEffect(() => {
     track('page_view')
     router.push('/test')
-    //    router.push('/home')
   }, [])
-  /*
-    const iframe = useRef()
-    iframe.current?.contentWindow?.postMessage('test', '*')
-    <iframe ref={iframe} width="500" height="500" src="https://lumos-yura.ngrok.io/game.html" />
-  */
 
   return (
     <main>

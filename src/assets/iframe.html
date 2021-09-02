@@ -5,84 +5,7 @@
     html,
     body,
     div,
-    span,
-    applet,
-    object,
-    iframe,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    blockquote,
-    pre,
-    a,
-    abbr,
-    acronym,
-    address,
-    big,
-    cite,
-    code,
-    del,
-    dfn,
-    em,
-    img,
-    ins,
-    kbd,
-    q,
-    s,
-    samp,
-    small,
-    strike,
-    strong,
-    sub,
-    sup,
-    tt,
-    var,
-    b,
-    u,
-    i,
-    center,
-    dl,
-    dt,
-    dd,
-    ol,
-    ul,
-    li,
-    fieldset,
-    form,
-    label,
-    legend,
-    table,
-    caption,
-    tbody,
-    tfoot,
-    thead,
-    tr,
-    th,
-    td,
-    article,
-    aside,
-    canvas,
-    details,
-    embed,
-    figure,
-    figcaption,
-    footer,
-    header,
-    hgroup,
-    menu,
-    nav,
-    output,
-    ruby,
-    section,
-    summary,
-    time,
-    mark,
-    audio,
-    video {
+    canvas {
       margin: 0;
       padding: 0;
       border: 0;
@@ -98,31 +21,37 @@
     <canvas id='gameCanvas' />
   </div>
   <script>
-    window.Lumos = {
-      gamevars: {
-        game_resources_url: 'https://assets.nest.lumosity.com/game-assets/ColorMatch_CC/nest_lowres/a213a4c63155fa5fde7fbe266d42654a33b71a56/289067450/release/',
-        show_tutorial: false,
-        game_param: 'color-match-none',
-      },
-    }
+    var topOrigin = '*'
+    var topSource = null
     window.sendToJavaScript = (data, argData) => {
-      console.log('window.sendToJavaScript', data, argData)
-      console.log('window.top', window.top)
+      if (topSource) {
+        if (Array.isArray(data)) {
+          topSource.postMessage(({ lumos: true, eventName: data[0], eventData: data[1] }), topOrigin)
+        } else {
+          topSource.postMessage(({ lumos: true, eventName: data, eventData: argData }), topOrigin)
+        }
+      }
     }
     window.addEventListener('message', function (event) {
-      console.log('iframe onmessage', event)
       try {
-        const data = JSON.parse(event.data)
-        if (!data || !data.lumos) {
+        if (!event.data || !event.data.lumos || !event.data.command) {
           return
         }
-        switch (data.command) {
+        topOrigin = event.origin
+        topSource = event.source
+        switch (event.data.command) {
           case 'init':
-            document.getElementById('gameCanvas').setAttribute('height', data.height)
-            document.getElementById('gameCanvas').setAttribute('width', data.width)
+            console.log('event.data', event.data)
+            window.Lumos = event.data.vars
+            document.getElementById('gameCanvas').setAttribute('height', event.data.height)
+            document.getElementById('gameCanvas').setAttribute('width', event.data.width)
             const script = document.createElement("script");
-            script.src = data.src;
+            script.src = event.data.url;
             document.body.appendChild(script);
+            console.log('document.getElementById(\'gameCanvas\')', document.getElementById('gameCanvas'))
+            break;
+          case 'send':
+            window.sendEventToCocos(event.data.data)
             break;
         }
       } catch (error) {
