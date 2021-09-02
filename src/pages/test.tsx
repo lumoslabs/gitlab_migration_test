@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import GameProgressBar from '@components/ui/GameProgressBar'
-import GameWrapperIframe from '@components/ui/GameWrapperIframe'
+/*import GameWrapperIframe from '@components/ui/GameWrapperIframe'*/
 import GameWrapperWindow, { GameWrapperRef } from "@components/ui/GameWrapperWindow"
 
 export default function test(): JSX.Element {

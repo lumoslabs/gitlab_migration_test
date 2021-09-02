@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect, useRef, useImperativeHandle } from "react"
+import React, { forwardRef, useEffect, useImperativeHandle } from "react"
 import Script from 'react-load-script'
 
 export interface GameWrapperProps {
@@ -31,7 +31,7 @@ export interface GameCompletedData {
 export type GameEventData = number | GameCompletedData | GameSpeechData | null
 
 
-const GameWrapperWindow = forwardRef<GameWrapperRef, GameWrapperProps>(({ width, height, url, vars, visibility = true, onEvent, onError = () => { } }, ref): JSX.Element => {
+const GameWrapperWindow = forwardRef<GameWrapperRef, GameWrapperProps>(({ width, height, url, vars, visibility = true, onEvent, onError = () => null }, ref): JSX.Element => {
 
   useEffect(() => {
     window.Lumos = vars

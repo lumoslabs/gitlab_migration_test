@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Property } from 'csstype'
 import useAppBusListener from '@hooks/useAppBusListener'
-import { useEffect } from 'react'
 
 const debugBarStyle = {
   'background': 'white',
@@ -13,15 +12,15 @@ const debugBarStyle = {
   'right': '0px',
   'bottom': '0px',
   'top': '0px',
-  'maxWidth': '50%',
-  'fontSize': '24px'
+  'maxWidth': '30%'
 }
 
 export default function DebugBar() {
   const [log, setLog] = useState([])
-  const [jsHeapSizeLimit, setJsHeapSizeLimit] = useState(0)
-  const [totalJSHeapSize, setTotalJSHeapSize] = useState(0)
-  const [usedJSHeapSize, setUsedJSHeapSize] = useState(0)
+
+  if (log.length === 0) {
+    return <></>
+  }
 
   useAppBusListener('onDebugLog', (data) => {
     setLog([
@@ -30,23 +29,7 @@ export default function DebugBar() {
     ])
   })
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      //@ts-ignore
-      setJsHeapSizeLimit((window.performance?.memory?.jsHeapSizeLimit / 1048576).toFixed(2))
-      //@ts-ignore
-      setTotalJSHeapSize((window.performance?.memory?.totalJSHeapSize / 1048576).toFixed(2))
-      //@ts-ignore
-      setUsedJSHeapSize((window.performance?.memory?.usedJSHeapSize / 1048576).toFixed(2))
-    }, 1000)
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
-
   return <div style={debugBarStyle} >
-    <p>jsHeapSizeLimit: {jsHeapSizeLimit}</p>
-    <p>totalJSHeapSize: {totalJSHeapSize}</p>
-    <p>usedJSHeapSize: {usedJSHeapSize}</p>
+    {log.join("\n")}
   </div>
 }

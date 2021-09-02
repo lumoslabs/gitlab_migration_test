@@ -2,7 +2,7 @@ import { forwardRef, useCallback, useEffect, useRef, useImperativeHandle } from 
 import iframeContent from '@assets/iframe.html?raw'
 import { GameWrapperProps, GameWrapperRef } from './GameWrapperWindow'
 
-const GameWrapperIframe = forwardRef<GameWrapperRef, GameWrapperProps>(({ width, height, onEvent, onError = () => { }, url, vars, visibility = true }, ref): JSX.Element => {
+const GameWrapperIframe = forwardRef<GameWrapperRef, GameWrapperProps>(({ width, height, onEvent, onError = () => null, url, vars, visibility = true }, ref): JSX.Element => {
   const iframe = useRef<any>()
 
   const sendToIframe = useCallback((data: Record<string, any>) => {
