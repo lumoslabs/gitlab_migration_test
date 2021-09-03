@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import GameProgressBar from '@components/ui/GameProgressBar'
-/*import GameWrapperIframe from '@components/ui/GameWrapperIframe'*/
-import GameWrapperWindow, { GameWrapperRef } from "@components/ui/GameWrapperWindow"
+import GameWrapper, { GameWrapperRef } from "@components/ui/GameWrapperWindow"
 
 export default function test(): JSX.Element {
   const [clientHeight, setHeight] = useState(0)
@@ -43,7 +42,7 @@ export default function test(): JSX.Element {
       {
         clientWidth &&
         clientHeight &&
-        <GameWrapperWindow
+        <GameWrapper
           width={clientWidth}
           height={clientHeight}
           url={'https://assets.nest.lumosity.com/game-assets/ColorMatch_CC/nest_lowres/a213a4c63155fa5fde7fbe266d42654a33b71a56/289067450/release/game.js'}

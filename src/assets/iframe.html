@@ -41,7 +41,6 @@
         topSource = event.source
         switch (event.data.command) {
           case 'init':
-            console.log('event.data', event.data)
             window.Lumos = event.data.vars
             document.getElementById('gameCanvas').setAttribute('height', event.data.height)
             document.getElementById('gameCanvas').setAttribute('width', event.data.width)

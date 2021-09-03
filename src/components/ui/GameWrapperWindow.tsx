@@ -1,5 +1,4 @@
 import React, { forwardRef, useEffect, useImperativeHandle } from "react"
-import Script from 'react-load-script'
 
 export interface GameWrapperProps {
   width: number,
@@ -34,6 +33,14 @@ export type GameEventData = number | GameCompletedData | GameSpeechData | null
 const GameWrapperWindow = forwardRef<GameWrapperRef, GameWrapperProps>(({ width, height, url, vars, visibility = true, onEvent, onError = () => null }, ref): JSX.Element => {
 
   useEffect(() => {
+    const script = document.createElement('script');
+    script.setAttribute('id', 'gameScript')
+    script.setAttribute('ref', 'gameScript')
+    script.setAttribute('src', url)
+    script.onerror = onError
+
+    document.body.appendChild(script);
+
     window.Lumos = vars
     window.sendToJavaScript = (data: string | [string, GameEventData], argData: GameEventData | null) => {
       const [eventName, eventData] = (Array.isArray(data)) ? data : [data, argData]
@@ -42,10 +49,11 @@ const GameWrapperWindow = forwardRef<GameWrapperRef, GameWrapperProps>(({ width,
       }
     }
     return () => {
+      document.body.removeChild(script)
+
       window.Lumos = {}
 
-      //eslint-disable-next-line @typescript-eslint/no-empty-function
-      window.sendToJavaScript = () => { }
+      window.sendToJavaScript = () => { return }
 
       // Clear cocos3 scope
       window?.cc?.director?.purgeCachedData()
@@ -71,11 +79,6 @@ const GameWrapperWindow = forwardRef<GameWrapperRef, GameWrapperProps>(({ width,
         height={height}
       />
     </div>
-    <Script
-      onError={(e) => { onError(e) }}
-      attributes={{ id: 'gameScript', ref: 'gameScript' }}
-      url={url}
-    />
   </>
 })
 
