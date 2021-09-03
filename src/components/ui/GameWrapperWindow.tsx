@@ -33,13 +33,13 @@ export type GameEventData = number | GameCompletedData | GameSpeechData | null
 const GameWrapperWindow = forwardRef<GameWrapperRef, GameWrapperProps>(({ width, height, url, vars, visibility = true, onEvent, onError = () => null }, ref): JSX.Element => {
 
   useEffect(() => {
-    const script = document.createElement('script');
+    const script = document.createElement('script')
     script.setAttribute('id', 'gameScript')
     script.setAttribute('ref', 'gameScript')
     script.setAttribute('src', url)
     script.onerror = onError
 
-    document.body.appendChild(script);
+    document.body.appendChild(script)
 
     window.Lumos = vars
     window.sendToJavaScript = (data: string | [string, GameEventData], argData: GameEventData | null) => {
