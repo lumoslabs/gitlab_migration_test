@@ -46,7 +46,7 @@ const GameWrapperIframe = forwardRef<GameWrapperRef, GameWrapperProps>(({ width,
 
   return <>
     <iframe
-      style={{ visibility: visibility ? 'visible' : 'hidden' }}
+      style={{ visibility: visibility ? 'visible' : 'hidden', overflow: 'hidden' }}
       allow="autoplay"
       sandbox="allow-same-origin allow-scripts"
       frameBorder="0"

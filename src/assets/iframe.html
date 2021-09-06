@@ -12,6 +12,7 @@
       font-size: 100%;
       font: inherit;
       vertical-align: baseline;
+      overflow: hidden;
     }
   </style>
 </head>
@@ -47,7 +48,6 @@
             const script = document.createElement("script");
             script.src = event.data.url;
             document.body.appendChild(script);
-            console.log('document.getElementById(\'gameCanvas\')', document.getElementById('gameCanvas'))
             break;
           case 'send':
             window.sendEventToCocos(event.data.data)
