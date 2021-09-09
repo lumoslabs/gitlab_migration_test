@@ -57,6 +57,13 @@
 
       }
     })
+    window.addEventListener("unload", function () {
+      if (window.cc && window.cc.director) {
+        window.cc.director.purgeCachedData();
+        window.cc.director.purgeDirector();
+        window.cc.director.end();
+      }
+    });
   </script>
 </body>
 

@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useEffect, useRef, useImperativeHandle } from "react"
+import { forwardRef, useCallback, useLayoutEffect, useRef, useImperativeHandle } from "react"
 import iframeContent from '@assets/iframe.html?raw'
 import { GameWrapperProps, GameWrapperRef } from './GameWrapperWindow'
 
@@ -28,10 +28,11 @@ const GameWrapperIframe = forwardRef<GameWrapperRef, GameWrapperProps>(({ width,
     onEvent(eventName, eventData)
   }, [])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.addEventListener('message', onMessageEvent)
     return () => {
       window.removeEventListener('message', onMessageEvent)
+      iframe.current?.setAttribute('srcdoc', null)
     }
   }, [])
 
