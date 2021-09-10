@@ -18,7 +18,7 @@ test:
   script:
     - yarn check-types
     - yarn lint
-    - yarn test --ci --reporters=default --reporters=jest-junit
+    - yarn test --ci
   artifacts:
     when: always
     reports:
