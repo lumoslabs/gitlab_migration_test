@@ -12,11 +12,15 @@ const debugBarStyle = {
   'right': '0px',
   'bottom': '0px',
   'top': '0px',
-  'maxWidth': '50%'
+  'maxWidth': '30%'
 }
 
 export default function DebugBar() {
   const [log, setLog] = useState([])
+
+  if (log.length === 0) {
+    return <></>
+  }
 
   useAppBusListener('onDebugLog', (data) => {
     setLog([
@@ -25,9 +29,6 @@ export default function DebugBar() {
     ])
   })
 
-  if (log.length === 0) {
-    return <></>
-  }
   return <div style={debugBarStyle} >
     {log.join("\n")}
   </div>

@@ -13,6 +13,20 @@ module.exports = (phase) => {
       })
       return config
     },
+    async headers() {
+      //TODO: remove useless call to /api/v2/games/settings from game.js
+      return [
+        {
+          source: '/api/v2/games/:slug*',
+          headers: [
+            {
+              key: 'Access-Control-Allow-Origin',
+              value: '*',
+            }
+          ]
+        }
+      ]
+    },
     async rewrites() {
       return [
         {
