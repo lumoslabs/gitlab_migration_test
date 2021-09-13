@@ -31,6 +31,7 @@ const GameWrapperIframe = forwardRef<GameWrapperRef, GameWrapperProps>(({ width,
   useLayoutEffect(() => {
     window.addEventListener('message', onMessageEvent)
     return () => {
+      sendToIframe({ command: 'end' })
       window.removeEventListener('message', onMessageEvent)
       iframe.current?.setAttribute('srcdoc', null)
     }
