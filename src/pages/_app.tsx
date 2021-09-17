@@ -6,12 +6,14 @@ import Head from 'next/head'
 import Layout from '@components/ui/Layout'
 import { Provider } from 'react-redux'
 import createAppStore from '@store/index'
+import VersionBar from '@components/VersionBar'
 
 const store = createAppStore()
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <Provider store={store}>
+      <VersionBar />
       <Layout>
         <Head>
           <title>Lumosity Google Assistant</title>
