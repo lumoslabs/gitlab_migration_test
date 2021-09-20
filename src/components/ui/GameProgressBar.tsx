@@ -6,11 +6,17 @@ import base from '@styles/colors/base'
 
 export interface IGameProgressBarProps {
   progressLevel: number;
+  title?: string;
 }
 
 const GameProgressBar = (props: IGameProgressBarProps): JSX.Element => {
   return (
     <div className={css([commonStyles.flexColumnAllCenter, commonStyles.flexJustifyCenter, styles.progressBarDiv])}>
+      {props.title &&
+        <p className={css(styles.title)}>
+          {props.title}
+        </p>
+      }
       <ProgressBar variant='lumos' className={css(styles.progressOverride)} animated={false} now={props.progressLevel} />
       <p className={css(styles.loadingText)}>
         Loading
@@ -36,6 +42,12 @@ const styles = StyleSheet.create({
     fontSize: '3vmin',
     fontFamily: 'MuseoSans500',
     marginTop: '2.5vmin'
+  },
+  title: {
+    color: base.lumosBlack,
+    fontSize: '10vmin',
+    fontFamily: 'MuseoSans500',
+    marginBottom: '6vmin'
   }
 })
 

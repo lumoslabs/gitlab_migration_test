@@ -176,7 +176,7 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
               ref={gameRef}
             />
           }
-          {showProgress && <GameProgressBar progressLevel={progressLevel} />}
+          {showProgress && <GameProgressBar title={game.values?.title} progressLevel={progressLevel} />}
         </Card.Body>
       </Card>
       {publicRuntimeConfig.gameSkip && (

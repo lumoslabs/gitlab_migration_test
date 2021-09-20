@@ -15,7 +15,7 @@ const versionBarStyle = {
 
 export default function VersionBar() {
   const { publicRuntimeConfig } = getConfig()
-  console.log('publicRuntimeConfig.versionBar', publicRuntimeConfig)
+
   if (!publicRuntimeConfig.versionBar) {
     return <></>
   }
