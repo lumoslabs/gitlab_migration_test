@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { StyleSheet, css } from 'aphrodite'
 import { Container, Row, Col } from 'react-bootstrap'
 import base from '@styles/colors/base'
