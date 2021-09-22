@@ -80,7 +80,6 @@ const UserInfo = ({ show, handleClose, profilePicUrl, email, name, timezone }: I
           <Row>
             <Col>
               <p className={css(styles.valueText, styles.unlinkText)}>
-                {/* TODO: Revise with legal approved copy */}
                 {'To unlink your Lumosity account from Google, visit myaccount.google.com/permissions.'}
                 <br/><br/>
                 {'To delete your Lumosity account, visit Lumosity.com.'}
