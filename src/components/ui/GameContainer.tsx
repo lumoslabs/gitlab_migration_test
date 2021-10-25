@@ -78,7 +78,6 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
         track('game_start', eventTracking)
         break
       case 'game:nest_cmm_start':
-        console.log(eventName, eventData)
         sendTextQuery(Intents.START_GAME, { continuous_match_phrases: eventData })
         break
       case 'game:complete':
