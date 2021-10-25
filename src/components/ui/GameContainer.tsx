@@ -49,7 +49,6 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
   const gameFile = game.values?.invoke_file
   const versionedGameUrl = `${gameUrl}${gameFile}?ts=${Date.now()}`
 
-
   // Handle game events
   const onGameEvent = useCallback((eventName: string, eventData: GameEventData) => {
     const eventTracking = {
@@ -79,7 +78,7 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
         track('game_start', eventTracking)
         break
       case 'game:nest_cmm_start':
-        sendTextQuery(Intents.START_GAME, { slug: game.id })
+        sendTextQuery(Intents.START_GAME, { continuous_match_phrases: eventData })
         break
       case 'game:complete':
         onEvent(eventName, eventData)
@@ -91,7 +90,7 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
         track('game_finish', eventTracking)
         break
       case 'game:nest_cmm_restart':
-        sendTextQuery(Intents.RESTART_CMM, { slug: game.id })
+        sendTextQuery(Intents.RESTART_CMM, { continuous_match_phrases: eventData })
         break
       case 'game:speech':
         eventData = eventData as GameSpeechData
@@ -125,8 +124,8 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
   useAppBusListener('onListeningModeChanged', (isCmm) => {
     gameRef.current?.send({ action: isCmm ? 'cmm_start' : 'cmm_end' })
   })
-  useAppBusListener('onTtsMark', (tts) => {
-    gameRef.current?.send({ action: 'tts_' + tts.toLowerCase() })
+  useAppBusListener('onTtsMark', (markName) => {
+    gameRef.current?.send({ action: 'tts_' + markName.toLowerCase() })
   })
 
   //Handle webhook intents

@@ -27,7 +27,6 @@ export interface GameConfig extends Config {
     id: number;
     slug: string;
     brain_area: string;
-    continuous_match_configs: string[];
     frontend_data: FrontEndData;
     invoke_file: string;
     title: string;
@@ -37,11 +36,6 @@ export interface GameConfig extends Config {
     banner_url: string;
     last_version: GameConfigVersion;
   }
-}
-
-export interface CMMPhrase {
-  "phrase": string,
-  "alternative_phrases": string[]
 }
 
 export default class CatalogService {
@@ -68,10 +62,6 @@ export default class CatalogService {
         last_version: game?.values?.versions[game?.values?.versions?.length - 1]
       }
     } as GameConfig : null
-  }
-
-  async getGameContinuousMatchPhrases(slug: string) {
-    return await this.getFile<CMMPhrase[]>(`continuous_match_configs/${slug}`)
   }
 
   async getVoiceGameMap() {

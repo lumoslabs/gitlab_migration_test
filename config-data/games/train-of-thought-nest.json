@@ -10,10 +10,6 @@
     "banner_url": "https://assets.nest.lumosity.com/frontend_assets/banner/train_of_thought_header.png",
     "score_thumbnail_url": "https://assets.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_train_of_thought.png",
     "invoke_file": "game.js",
-    "continuous_match_configs": [
-      "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
-      "https://assets.nest.lumosity.com/continuous_match_configs/train_of_thought_phrases.yml"
-    ],
     "frontend_data": {
       "score_description_key": "trainOfThoughtSummaryDescription",
       "scores": [
@@ -35,7 +31,7 @@
       {
         "id": "nest_1.0",
         "overrides": {
-          "game_url": "https://assets.nest.lumosity.com/game-assets/TrainOfThought_CC/nest_lowres/43a41021888c93d6b1fe1401ca0459f4655f2df3/289057183/release/",
+          "game_url": "https://assets.nest.lumosity.com/game-assets/TrainOfThought_CC/nest_lowres/f5a0f6b1094c472533d212a79e8caba0d80a4c00/394901613/release/",
           "extras": {
             "skip_title": true,
             "skip_stats": true

@@ -10,10 +10,6 @@
     "banner_url": "https://assets.nest.lumosity.com/frontend_assets/banner/raindrops_header.png",
     "score_thumbnail_url": "https://assets.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_raindrops.png",
     "invoke_file": "game.js",
-    "continuous_match_configs": [
-      "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
-      "https://assets.nest.lumosity.com/continuous_match_configs/raindrops_phrases.yml"
-    ],
     "frontend_data": {
       "score_description_key": "raindropsSummaryDescription",
       "scores": [
@@ -35,7 +31,7 @@
       {
         "id": "nest_1.0",
         "overrides": {
-          "game_url": "https://assets.nest.lumosity.com/game-assets/Raindrops_CC/nest_lowres/3bea7a3244b88385fa8aef44f9484770f1a6d924/289602258/release/",
+          "game_url": "https://assets.nest.lumosity.com/game-assets/Raindrops_CC/nest_lowres/a21fbd2f5de1233e49a48a9edbb7a94cf350b15e/394907750/release/",
           "extras": {
             "skip_title": true,
             "skip_stats": true
