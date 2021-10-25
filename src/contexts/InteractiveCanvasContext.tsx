@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { TtsMarkName } from '@sharedTypes/interactiveCanvas'
 import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions'
 import useAppBus from '@hooks/useAppBus'
 import { useAppDispatch } from '@store/hooks'
@@ -91,8 +90,8 @@ export default function InteractiveCanvasProvider({ children }) {
           }
         })
       },
-      onTtsMark(tts: TtsMarkName) {
-        appBus.emit('onTtsMark', tts)
+      onTtsMark(markName) {
+        appBus.emit('onTtsMark', markName)
       },
       onListeningModeChanged(data, reason) {
         interactiveCanvas.onListeningModeChanged(data, reason)

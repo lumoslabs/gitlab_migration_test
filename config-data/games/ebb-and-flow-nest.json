@@ -10,10 +10,6 @@
     "banner_url": "https://assets.nest.lumosity.com/frontend_assets/banner/ebb_and_flow_header.png",
     "score_thumbnail_url": "https://assets.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_ebb_and_flow.png",
     "invoke_file": "game.js",
-    "continuous_match_configs": [
-      "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
-      "https://assets.nest.lumosity.com/continuous_match_configs/up_down_left_right_phrases.yml"
-    ],
     "frontend_data": {
       "score_description_key": "ebbAndFlowSummaryDescription",
       "scores": [
@@ -35,7 +31,7 @@
       {
         "id": "nest_1.0",
         "overrides": {
-          "game_url": "https://assets.nest.lumosity.com/game-assets/EbbAndFlow_CC/nest_lowres/cd95f718b77a7320a74542238f9bf8895faac790/289522478/release/",
+          "game_url": "https://assets.nest.lumosity.com/game-assets/EbbAndFlow_CC/nest_lowres/d245fa71d9c0b8bdf2021834098879d53822582e/394891078/release/",
           "extras": {
             "skip_title": true,
             "skip_stats": true

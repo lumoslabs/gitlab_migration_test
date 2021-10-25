@@ -7,8 +7,8 @@ function interactiveCanvasProxy() {
     onUpdate(data) {
       bindings.onUpdate ? bindings.onUpdate(data) : storage.onUpdate.push(data)
     },
-    onTtsMark(tts) {
-      bindings.onTtsMark ? bindings.onTtsMark(tts) : null
+    onTtsMark(markName) {
+      bindings.onTtsMark ? bindings.onTtsMark(markName) : null
     },
     onListeningModeChanged(data, reason) {
       bindings.onListeningModeChanged ? bindings.onListeningModeChanged(data, reason) : null

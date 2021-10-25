@@ -1,11 +1,10 @@
 import React from 'react'
 import mitt, { Emitter } from 'mitt'
-import { TtsMarkName } from '@sharedTypes/interactiveCanvas'
 
 export type appBusEvents = {
   onPhraseMatched: any;
   onListeningModeChanged: boolean;
-  onTtsMark: TtsMarkName,
+  onTtsMark: string;
   onIntentYes: void;
   onIntentNo: void;
   onIntentHelp: void;
