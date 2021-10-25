@@ -83,7 +83,6 @@ const AgeGate = (({
           min={min}
         />
       </Row>
-      {/* TODO: Update with legal approved copy */}
       <p className={css(styles.disclaimer)}>
           {'Your birthday will be stored and added to your Lumosity account if you choose to create one.'}
       </p>

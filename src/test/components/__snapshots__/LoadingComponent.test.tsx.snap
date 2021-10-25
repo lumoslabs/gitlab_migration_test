@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components LoadingComponent matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flexColumnJustifyCenter_66qnx8-o_O-fullHeight_149btvt"
+  >
+    <div
+      class="loader"
+    />
+  </div>
+</DocumentFragment>
+`;

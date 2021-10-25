@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Card from 'react-bootstrap/Card'
-import Script from 'react-load-script'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import { Alert } from 'react-bootstrap'
 import getConfig from 'next/config'
@@ -11,8 +10,11 @@ import Button from '@components/ui/Button'
 import useAmplitude from '@hooks/useAmplitude'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import useAppBusListener from '@hooks/useAppBusListener'
-import useGameCallbacks, { GameEventData, GameSpeechData, GameCompletedData } from '@hooks/useGameCallbacks'
 import { Intents } from '@contexts/InteractiveCanvasContext'
+import { GameWrapperRef, GameEventData, GameSpeechData, GameCompletedData } from './GameWrapperWindow'
+import GameWrapper from './GameWrapperIframe'
+import { useCallback } from 'react'
+
 const { publicRuntimeConfig } = getConfig()
 
 export interface IGameContainerProps {
@@ -30,6 +32,8 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
   const [clientHeight, setHeight] = useState(0)
   const [clientWidth, setWidth] = useState(0)
 
+  const gameRef = useRef<GameWrapperRef>()
+
   useEffect(() => {
     setHeight(window.innerHeight)
     setWidth(window.innerWidth)
@@ -45,19 +49,8 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
   const gameFile = game.values?.invoke_file
   const versionedGameUrl = `${gameUrl}${gameFile}?ts=${Date.now()}`
 
-  // window vars for the game
-  window.Lumos = {
-    gamevars: {
-      ...game.values?.last_version?.overrides?.extras,
-      game_resources_url: gameUrl,
-      show_tutorial: showTutorial,
-      game_param: game?.values.slug,
-      languageVariant: navigator?.language
-    },
-  }
-
   // Handle game events
-  const { sendEventToCocos, sendFakeCompleteEvent } = useGameCallbacks((eventName: string, eventData: GameEventData) => {
+  const onGameEvent = useCallback((eventName: string, eventData: GameEventData) => {
     const eventTracking = {
       slug: game?.id,
       version: game?.values?.last_version?.id,
@@ -85,7 +78,7 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
         track('game_start', eventTracking)
         break
       case 'game:nest_cmm_start':
-        sendTextQuery(Intents.START_GAME, { slug: game.id })
+        sendTextQuery(Intents.START_GAME, { continuous_match_phrases: eventData })
         break
       case 'game:complete':
         onEvent(eventName, eventData)
@@ -97,7 +90,7 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
         track('game_finish', eventTracking)
         break
       case 'game:nest_cmm_restart':
-        sendTextQuery(Intents.RESTART_CMM, { slug: game.id })
+        sendTextQuery(Intents.RESTART_CMM, { continuous_match_phrases: eventData })
         break
       case 'game:speech':
         eventData = eventData as GameSpeechData
@@ -118,39 +111,41 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
       default:
         console.log('unhandled game event', eventName, eventData)
     }
-  })
+  }, [])
+
+  const sendFakeCompleteEvent = useCallback(() => {
+    onGameEvent('game:complete', { score: Math.floor(Math.random() * 1000), game_result_data: { num_correct: 10 }, session_level: 0, user_level: 0 })
+  }, [])
 
   //Handle interactive canvas events
   useAppBusListener('onPhraseMatched', (data) => {
-    sendEventToCocos(data)
+    gameRef.current?.send(data)
   })
   useAppBusListener('onListeningModeChanged', (isCmm) => {
-    sendEventToCocos({ action: isCmm ? 'cmm_start' : 'cmm_end' })
+    gameRef.current?.send({ action: isCmm ? 'cmm_start' : 'cmm_end' })
   })
-  useAppBusListener('onTtsMark', (tts) => {
-    sendEventToCocos({ action: 'tts_' + tts.toLowerCase() })
+  useAppBusListener('onTtsMark', (markName) => {
+    gameRef.current?.send({ action: 'tts_' + markName.toLowerCase() })
   })
 
   //Handle webhook intents
   useAppBusListener('onIntentHelp', () => {
-    sendEventToCocos({ action: 'tutorial' })
+    gameRef.current?.send({ action: 'tutorial' })
   })
 
   //TODO: remove it after migration to new version of interactiveCanvas
   useAppBusListener('onIntentRestartCMM', () => {
-    sendEventToCocos({ action: 'continue' })
+    gameRef.current?.send({ action: 'continue' })
   })
   useAppBusListener('onIntentRestartGame', () => {
-    sendEventToCocos({ action: 'restart' })
+    gameRef.current?.send({ action: 'restart' })
   })
   useAppBusListener('onIntentResumeGame', () => {
-    sendEventToCocos({ action: 'resume' })
+    gameRef.current?.send({ action: 'resume' })
   })
 
   useEffect(() => {
     return () => {
-      // Clear cocos3 scope
-      window?.cc?.director?.end()
       // try to exit from cmm
       exitContinuousMatchMode()
     }
@@ -161,22 +156,26 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
       {error && <Alert variant='danger'>Something went wrong</Alert>}
       <Card className={css([commonStyles.flexColumnAllCenter, styles.gameFrame])}>
         <Card.Body className={css(commonStyles.flexJustifyCenter)}>
-          <div className='cocos3' id='game-manager'>
-            <canvas
-              id='gameCanvas'
-              className={css(commonStyles.flexColumnAllCenter)}
-              style={{ visibility: showProgress ? 'hidden' : 'visible' }}
+          {clientWidth && clientHeight &&
+            <GameWrapper
               width={clientWidth}
               height={clientHeight}
+              url={versionedGameUrl}
+              vars={{
+                gamevars: {
+                  ...game.values?.last_version?.overrides?.extras,
+                  game_resources_url: gameUrl,
+                  show_tutorial: showTutorial,
+                  game_param: game?.values.slug,
+                  languageVariant: navigator?.language
+                },
+              }}
+              onEvent={onGameEvent}
+              onError={() => { setError(true) }}
+              ref={gameRef}
             />
-          </div>
-          {showProgress && <GameProgressBar progressLevel={progressLevel} />}
-          <Script
-            onError={() => { setError(true) }}
-            onLoad={() => { console.log('loaded') }}
-            attributes={{ id: 'gameScript', ref: 'gameScript' }}
-            url={versionedGameUrl}
-          />
+          }
+          {showProgress && <GameProgressBar title={game.values?.title} progressLevel={progressLevel} />}
         </Card.Body>
       </Card>
       {publicRuntimeConfig.gameSkip && (

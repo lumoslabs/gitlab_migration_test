@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches snapshot 1`] = `
+exports[`components GameProgressBar matches snapshot 1`] = `
 <DocumentFragment>
   <div
     class="flexColumnAllCenter_1vexgx1-o_O-flexJustifyCenter_jfsfb5-o_O-progressBarDiv_xge2iy"

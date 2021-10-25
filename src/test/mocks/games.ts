@@ -14,10 +14,6 @@ const games: GameConfig[] = [
       "banner_url": "https://assets.nest.lumosity.com/frontend_assets/banner/color_match_header.png",
       "score_thumbnail_url": "https://assets.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_color_match.png",
       "invoke_file": "game.js",
-      "continuous_match_configs": [
-        "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
-        "https://assets.nest.lumosity.com/continuous_match_configs/color_match_phrases.yml"
-      ],
       "frontend_data": {
         "score_description_key": "colorMatchSummaryDescription",
         "scores": [
@@ -61,10 +57,6 @@ const games: GameConfig[] = [
       "banner_url": "https://assets.nest.lumosity.com/frontend_assets/banner/ebb_and_flow_header.png",
       "score_thumbnail_url": "https://assets.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_ebb_and_flow.png",
       "invoke_file": "game.js",
-      "continuous_match_configs": [
-        "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
-        "https://assets.nest.lumosity.com/continuous_match_configs/up_down_left_right_phrases.yml"
-      ],
       "frontend_data": {
         "score_description_key": "ebbAndFlowSummaryDescription",
         "scores": [
@@ -108,10 +100,6 @@ const games: GameConfig[] = [
       "banner_url": "https://assets.nest.lumosity.com/frontend_assets/banner/raindrops_header.png",
       "score_thumbnail_url": "https://assets.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_raindrops.png",
       "invoke_file": "game.js",
-      "continuous_match_configs": [
-        "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
-        "https://assets.nest.lumosity.com/continuous_match_configs/raindrops_phrases.yml"
-      ],
       "frontend_data": {
         "score_description_key": "raindropsSummaryDescription",
         "scores": [
@@ -155,10 +143,6 @@ const games: GameConfig[] = [
       "banner_url": "https://assets.nest.lumosity.com/frontend_assets/banner/train_of_thought_header.png",
       "score_thumbnail_url": "https://assets.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_train_of_thought.png",
       "invoke_file": "game.js",
-      "continuous_match_configs": [
-        "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
-        "https://assets.nest.lumosity.com/continuous_match_configs/train_of_thought_phrases.yml"
-      ],
       "frontend_data": {
         "score_description_key": "trainOfThoughtSummaryDescription",
         "scores": [
@@ -202,10 +186,6 @@ const games: GameConfig[] = [
       "banner_url": "https://assets.nest.lumosity.com/frontend_assets/banner/word_snatchers_header.png",
       "score_thumbnail_url": "https://assets.nest.lumosity.com/frontend_assets/thumbnails/medium_thumbnail_word_snatchers.png",
       "invoke_file": "game.js",
-      "continuous_match_configs": [
-        "https://assets.nest.lumosity.com/continuous_match_configs/common_phrases.yml",
-        "https://assets.nest.lumosity.com/continuous_match_configs/word_snatchers_phrases.yml"
-      ],
       "frontend_data": {
         "score_description_key": "wordSnatchersSummaryDescription",
         "scores": [

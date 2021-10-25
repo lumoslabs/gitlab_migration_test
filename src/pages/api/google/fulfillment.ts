@@ -10,6 +10,7 @@ import onOpenGame from '@backend/conversation/onOpenGame'
 import onPlayScore from '@backend/conversation/onPlayScore'
 import logger from '@backend/libs/logger'
 import onHome from '@backend/conversation/onHome'
+import onGuest from '@backend/conversation/onGuest'
 import onStartGame from '@backend/conversation/onStartGame'
 import onNoMatch from '@backend/conversation/onNoMatch'
 import onTraining from '@backend/conversation/onTraining'
@@ -47,6 +48,9 @@ conversationApp.handle('OpenGame', onOpenGame)
 // Back to Main Menu
 conversationApp.handle('Home', onHome)
 conversationApp.handle('Games', onHome)
+
+// Link account or stay on home if already linked
+conversationApp.handle('Guest', onGuest)
 
 // Gameplay
 //TODO: move it to frontend

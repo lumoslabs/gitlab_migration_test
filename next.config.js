@@ -1,5 +1,8 @@
 // @ts-check
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
+
+const versionBar = (process.env.BRANCH && (!process.env.BRANCH.startsWith('v')) && (process.env.BRANCH.length > 3)) ? process.env.BRANCH + ' - ' + process.env.COMMIT_REF : ''
+
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
@@ -12,6 +15,20 @@ module.exports = (phase) => {
         type: 'asset/source',
       })
       return config
+    },
+    async headers() {
+      //TODO: remove useless call to /api/v2/games/settings from game.js
+      return [
+        {
+          source: '/api/v2/games/:slug*',
+          headers: [
+            {
+              key: 'Access-Control-Allow-Origin',
+              value: '*',
+            }
+          ]
+        }
+      ]
     },
     async rewrites() {
       return [
@@ -67,7 +84,8 @@ module.exports = (phase) => {
       rollbar: {
         clientToken: process.env.ROLLBAR_CLIENT_TOKEN,
         enviroment: process.env.ROLLBAR_ENV
-      }
+      },
+      versionBar: versionBar
     }
   }
 }

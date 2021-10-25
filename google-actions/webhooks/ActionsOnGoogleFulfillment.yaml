@@ -16,6 +16,7 @@ handlers:
 - name: RestartGame
 - name: AgeGateResult
 - name: MainScene
+- name: Guest
 httpsEndpoint:
   baseUrl: https://v1--lumos-google-assistant.netlify.app/api/google/fulfillment
   endpointApiVersion: 2

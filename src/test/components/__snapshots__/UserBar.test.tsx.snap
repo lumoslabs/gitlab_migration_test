@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches snapshot 1`] = `
+exports[`components UserBar matches snapshot 1`] = `
 <DocumentFragment>
   <div
     class="flexRow_1r5z645-o_O-footer_smmve6"

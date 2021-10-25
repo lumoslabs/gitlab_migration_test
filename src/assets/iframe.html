@@ -1,0 +1,70 @@
+<html>
+
+<head>
+  <style>
+    html,
+    body,
+    div,
+    canvas {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div class='cocos3' id='game-manager'>
+    <canvas id='gameCanvas' />
+  </div>
+  <script>
+    var topOrigin = '*'
+    var topSource = null
+    window.sendToJavaScript = (data, argData) => {
+      if (topSource) {
+        if (Array.isArray(data)) {
+          topSource.postMessage(({ lumos: true, eventName: data[0], eventData: data[1] }), topOrigin)
+        } else {
+          topSource.postMessage(({ lumos: true, eventName: data, eventData: argData }), topOrigin)
+        }
+      }
+    }
+    window.addEventListener('message', function (event) {
+      try {
+        if (!event.data || !event.data.lumos || !event.data.command) {
+          return
+        }
+        topOrigin = event.origin
+        topSource = event.source
+        switch (event.data.command) {
+          case 'init':
+            window.Lumos = event.data.vars
+            document.getElementById('gameCanvas').setAttribute('height', event.data.height)
+            document.getElementById('gameCanvas').setAttribute('width', event.data.width)
+            const script = document.createElement("script");
+            script.src = event.data.url;
+            document.body.appendChild(script);
+            break;
+          case 'send':
+            window.sendEventToCocos(event.data.data)
+            break;
+        }
+      } catch (error) {
+
+      }
+    })
+    window.addEventListener("unload", function () {
+      if (window.cc && window.cc.director) {
+        window.cc.director.purgeCachedData();
+        window.cc.director.purgeDirector();
+        window.cc.director.end();
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -8,4 +8,17 @@ module.exports = {
   testMatch: ["**/src/test/**/*test*.[jt]s?(x)"],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
   testEnvironment: 'jsdom',
+  reporters: [
+    "default",
+    [
+      "jest-junit",
+      {
+        suiteName: "jest tests",
+        classNameTemplate: "{classname}",
+        titleTemplate: "{title}",
+        ancestorSeparator: "/",
+      }
+    ]
+  ]
 }
+
