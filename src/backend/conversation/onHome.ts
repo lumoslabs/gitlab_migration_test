@@ -3,7 +3,7 @@ import appSharedActions from '@store/slices/appSharedActions'
 import { Pages, sendCommand } from './utils'
 
 export default async (conv: ConversationV3) => {
-  conv.add('Back to Main Menu')
+  conv.add('Back to Main Menu. What would you like to do next?')
   sendCommand({
     conv,
     commands: [
