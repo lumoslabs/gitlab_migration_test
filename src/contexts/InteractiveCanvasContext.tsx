@@ -42,12 +42,15 @@ class InteractiveCanvas {
   }
 
   sendTextQuery = async (query: string, state: Record<any, any> = {}) => {
+    console.log('sending text query: ' + query)
     window.interactiveCanvas?.setCanvasState({
       ...state
     })
     const result = await window.interactiveCanvas?.sendTextQuery(query)
     if (result !== 'SUCCESS') {
       console.error('interactiveCanvas - sendTextQuery - incorrect result', { query, state }, result)
+    } else {
+      console.log('textQuery successful: ' + query)
     }
     return result as string
   }
