@@ -2,13 +2,36 @@ import { css, StyleSheet } from 'aphrodite/no-important'
 import LoadingComponent from '@components/ui/LoadingComponent'
 import { useEffect } from 'react'
 import useAmplitude from '@hooks/useAmplitude'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { loadScores } from '@store/slices/scores'
+import { loadAgeGate } from '@store/slices/ageGate'
+import { loadUser } from '@store/slices/user'
+import { loadTraining } from '@store/slices/training'
+import { isUserStorageLoaded } from '@store/selectors'
+import useNavigation from '@hooks/useNavigation'
 
 export function Index(): JSX.Element {
 
   const track = useAmplitude()
+
+  const dispatch = useAppDispatch()
+  const navigation = useNavigation()
+
+  const isAgeGateLoaded = useAppSelector(isUserStorageLoaded)
+
   useEffect(() => {
     track('page_view')
+    dispatch(loadAgeGate())
+    dispatch(loadScores())
+    dispatch(loadUser())
+    dispatch(loadTraining())
   }, [])
+
+  useEffect(() => {
+    if (isAgeGateLoaded) {
+      navigation.toAgeGate()
+    }
+  }, [isAgeGateLoaded])
 
   return (
     <main>

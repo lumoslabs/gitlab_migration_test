@@ -1,10 +1,8 @@
 import { Canvas, ConversationV3 } from 'actions-on-google'
 import { ExpectedPhrase, VerificationStatus } from 'actions-on-google/dist/api/schema'
-import appSharedActions from '@store/slices/appSharedActions'
+//import appSharedActions from '@store/slices/appSharedActions'
 import getConfig from 'next/config'
-import { ITraining } from '@backend/libs/TrainingManager'
 import CryptoJS from 'crypto-js'
-import { ScoreRow } from '@backend/libs/ScoresManager'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -43,7 +41,7 @@ export const sendCommand = async ({ conv, commands = [], suppressMic = false, co
   continuousMatchPhrases?: ExpectedPhrase[],
   suppressMic?: boolean,
   commands?: {
-    command: appSharedActions,
+    command: string,
     payload: any
   }[],
   scene?: string
@@ -63,59 +61,12 @@ export const sendCommand = async ({ conv, commands = [], suppressMic = false, co
   }
 }
 
-export const setIsFirstLogin = (conv: ConversationV3): void => {
-  conv.session.params.isFirstPlay = true
-}
-
-
-export const getIsFirstLogin = (conv: ConversationV3): boolean => {
-  return Boolean(conv.session.params.isFirstPlay)
-}
-
-export const setTraining = (conv: ConversationV3, training: ITraining) => {
-  conv.user.params.training = training
-}
-
-export const getTraining = (conv: ConversationV3): ITraining | undefined => {
-  return conv.user.params.training
-}
-
-export const setBirthday = (conv: ConversationV3, birthday: string): any => {
-  conv.user.params.birthday = birthday
-}
-
-export const getBirthday = (conv: ConversationV3): any => {
-  return conv.user.params.birthday
-}
-
-export const setUnderageTimestamp = (conv: ConversationV3, underage: number): any => {
-  conv.user.params.underage = underage
-}
-
-export const getUnderageTimestamp = (conv: ConversationV3): number => {
-  return conv.user.params.underage
-}
-
 export const setLumosToken = async (conv: ConversationV3, token: string) => {
   conv.user.params.lumosToken = CryptoJS.Rabbit.encrypt(token, serverRuntimeConfig.rails.encryptionToken).toString()
 }
 
 export const getLumosToken = async (conv: ConversationV3) => {
   return CryptoJS.Rabbit.decrypt(conv.user.params?.lumosToken, serverRuntimeConfig.rails.encryptionToken).toString(CryptoJS.enc.Utf8) as string
-}
-
-export const getScoresList = (conv: ConversationV3, slug: string) => {
-  if (!conv.user.params.scores) {
-    return []
-  }
-  return conv.user.params.scores[slug]
-}
-
-export const setScoresList = (conv: ConversationV3, slug: string, scores: ScoreRow[]) => {
-  if (!conv.user.params.scores) {
-    conv.user.params.scores = {}
-  }
-  conv.user.params.scores[slug] = scores
 }
 
 export const isLumosLinked = (conv: ConversationV3) => {
@@ -133,4 +84,13 @@ export const convToUser = (conv: ConversationV3): any => {
     isGuest: conv.user.verificationStatus === VerificationStatus.Guest,
     isLinked: isLinked
   }
+}
+
+
+
+export const encrypt = async (token: string) => {
+  return CryptoJS.Rabbit.encrypt(token, serverRuntimeConfig.rails.encryptionToken).toString()
+}
+export const decrypt = async (token: string) => {
+  return CryptoJS.Rabbit.decrypt(token, serverRuntimeConfig.rails.encryptionToken).toString(CryptoJS.enc.Utf8) as string
 }

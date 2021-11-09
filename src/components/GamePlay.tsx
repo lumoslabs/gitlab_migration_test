@@ -5,9 +5,10 @@ import GameScoreCard from '@components/ui/GameScoreCard'
 import LoadingComponent from '@components/ui/LoadingComponent'
 
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { getTopScores, actions, getTutorialSeen } from '@store/slices/appSlice'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
+
 import sample from 'lodash.sample'
+import { saveUserScore, selectGameScores, selectScoresIsLoading, selectTutorialSeen } from '@store/slices/scores'
 
 /*
 Example:
@@ -33,21 +34,39 @@ export default function GamePlay({
 }): JSX.Element {
   const dispatch = useAppDispatch()
   const [result, setResult] = useState(null)
-  const topScores = useAppSelector(getTopScores)[game.id]
+
+  const topScores = useAppSelector((state) => selectGameScores(state, game.id))
+  const isLoading = useAppSelector(selectScoresIsLoading)
+
   const { outputTts } = useInteractiveCanvas()
-  const showTutorial = !useAppSelector(getTutorialSeen)[game.id]
+  const showTutorial = !useAppSelector((state) => selectTutorialSeen(state, game.id))
 
   const onComplete = (data: any) => {
     setResult(data)
+    const score = Number(data?.score)
+
+    /*
+    output tts
+    const scoresList = getScoresList(conv, slug)
+    if (!scoresList) {
+      //first play in current game
+      tts = `You scored ${score} points. Great first play! Would you like to return to the Lumosity main menu?`
+    } else {
+      tts = sample([
+        `You scored ${score} points. Well done! Would you like to return to the Lumosity main menu?`,
+        `You scored ${score} points. Great job! Would you like to return to the Lumosity main menu?`,
+        `You scored ${score} points. Congrats on a job well done. Would you like to return to the main menu?`,
+      ])
+    }
+    */
+    dispatch(saveUserScore({ score, slug: game.id }))
+
     onGameComplete && onGameComplete()
-    dispatch(actions.setTutorialSeen({ slug: game.id }))
   }
 
   // Create game run/results
   useEffect(() => {
-    dispatch(actions.resetTopScores())
     setResult(null)
-
     //GameWelcomeMessage
     if (!isTraining) {
       outputTts(`Okay. Let's play ${game.values?.title}`)
@@ -86,11 +105,10 @@ export default function GamePlay({
           showTutorial={showTutorial}
           game={game}
           onComplete={onComplete}
-          isTraining={isTraining}
         />
       )}
-      {result && (topScores === undefined) && <LoadingComponent />}
-      {result && (topScores !== undefined) && (
+      {result && isLoading && <LoadingComponent />}
+      {result && (!isLoading) && (
         <GameScoreCard
           title={game.values.title}
           gameIcon={game.values.score_thumbnail_url}

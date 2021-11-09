@@ -23,6 +23,7 @@ export interface FrontEndData {
 }
 
 export interface GameConfig extends Config {
+  intent_name: string;
   values: {
     id: number;
     slug: string;
@@ -64,8 +65,5 @@ export default class CatalogService {
     } as GameConfig : null
   }
 
-  async getVoiceGameMap() {
-    return await this.getFile<Record<string, string>>(`catalog_voice_map`)
-  }
 }
 

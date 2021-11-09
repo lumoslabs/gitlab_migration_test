@@ -1,13 +1,14 @@
 import { useLocation } from 'react-router-dom'
 import { useContext } from 'react'
-import { InteractiveCanvasContext } from '@contexts/InteractiveCanvasContext'
+import { InteractiveCanvasContext, Intents, Scenes } from '@contexts/InteractiveCanvasContext'
+
+export { Intents, Scenes }
 
 export default function useInteractiveCanvas() {
   const location = useLocation()
   const {
-    outputTts,
-    exitContinuousMatchMode,
-    sendTextQuery: realSendTextQuery
+    sendTextQuery: realSendTextQuery,
+    ...context
   } = useContext(InteractiveCanvasContext)
 
   const sendTextQuery = (query: string, state: Record<any, any> = {}) => {
@@ -16,8 +17,7 @@ export default function useInteractiveCanvas() {
   }
 
   return {
-    outputTts,
-    exitContinuousMatchMode,
-    sendTextQuery
+    sendTextQuery,
+    ...context
   }
 }

@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Property } from 'csstype'
 import useAppBusListener from '@hooks/useAppBusListener'
+import { useAppSelector } from '@store/hooks'
+import { useLocation } from 'react-router-dom'
 
 const debugBarStyle = {
   'background': 'white',
-  'opacity': .4,
+  'opacity': .8,
   'position': 'absolute' as Property.Position,
   'whiteSpace': 'pre-wrap' as Property.WhiteSpace,
   'overflow': 'auto',
@@ -17,11 +19,9 @@ const debugBarStyle = {
 
 export default function DebugBar() {
   const [log, setLog] = useState([])
-
-  if (log.length === 0) {
-    return <></>
-  }
-
+  const [storageString, setStorageString] = useState('')
+  const location = useLocation()
+  const storage = useAppSelector((state) => state)
   useAppBusListener('onDebugLog', (data) => {
     setLog([
       data,
@@ -29,7 +29,13 @@ export default function DebugBar() {
     ])
   })
 
-  return <div style={debugBarStyle} >
+  useEffect(() => {
+    setStorageString(JSON.stringify(storage, undefined, 4))
+  }, [storage])
+
+  return <div style={debugBarStyle}>
+    {location.pathname} <br />
+    {storageString}
     {log.join("\n")}
   </div>
 }

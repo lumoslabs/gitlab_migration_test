@@ -1,11 +1,10 @@
 import { ConversationV3 } from 'actions-on-google'
-import appSharedActions from '@store/slices/appSharedActions'
-import { convToUser, getBirthday, getScoresList, setScoresList, Pages, sendCommand, setLumosToken } from './utils'
+//import appSharedActions from '@store/slices/appSharedActions'
+import { sendCommand, encrypt } from './utils'
 import LinkingService from '@backend/services/LinkingService'
 import logger from '@backend/libs/logger'
 import rollbar from '@backend/libs/rollbar'
 import CatalogService from '@backend/services/ConfigService'
-import { dayjs } from '@backend/libs/dayjs'
 import ScoresManager from '@backend/libs/ScoresManager'
 
 export default async (conv: ConversationV3) => {
@@ -16,7 +15,6 @@ export default async (conv: ConversationV3) => {
   try {
     // Attempt to login with google token
     const accessToken = await linkingService.getUserAccessTokenById(userId, token)
-    await setLumosToken(conv, accessToken)
 
     const catalog = await (new CatalogService()).getCatalogGames()
 
@@ -28,26 +26,30 @@ export default async (conv: ConversationV3) => {
           scores: scores?.high_scores?.map(({ score, created_at }) => {
             return (score && created_at) ? {
               score,
-              date: dayjs(created_at).utc().format()
+              date: created_at
             } : null
           })
         }
       })
     }))
-    externalScores.forEach(({ game, scores }) => {
-      const scoresList = (new ScoresManager(getScoresList(conv, game))).pushList(scores).get()
-      if (scoresList.length) {
-        setScoresList(conv, game, scoresList)
-      }
-    })
+
+    const scores = externalScores.reduce((accum, { game, scores }) => {
+      const scoresList = (new ScoresManager(conv.user.params.scores?.[game])).pushList(scores).get()
+      accum[game] = scoresList
+      return accum
+    }, {})
+
+    conv.user.params.scores = scores
+    conv.user.params.lumosToken = await encrypt(accessToken)
 
   } catch (signinError) {
     try {
       // This user cannot be found in the lumosity database
       const user = await linkingService.createNewUser(token)
       const accessToken = await linkingService.getUserAccessTokenById(userId, token)
-      await linkingService.setUserBirthday(user.id, accessToken, getBirthday(conv))
-      await setLumosToken(conv, accessToken)
+      await linkingService.setUserBirthday(user.id, accessToken, conv.user.params.ageGate.birthday)
+      conv.user.params.lumosToken = await encrypt(accessToken)
+
     } catch (signupError) {
       //something went wrong with api or current user storage
       rollbar?.error(signupError)
@@ -56,11 +58,10 @@ export default async (conv: ConversationV3) => {
     }
   }
 
-  conv.session.params.isWelcomeMessage = false
-
   sendCommand({
     conv,
     commands: [
+      /*
       {
         command: appSharedActions.GO_TO,
         payload: Pages.Home
@@ -71,6 +72,7 @@ export default async (conv: ConversationV3) => {
           user: convToUser(conv)
         }
       }
+      */
     ]
   })
 }

@@ -1,9 +1,17 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import appReducer from './slices/appSlice';
+import scores from './slices/scores';
+import ageGate from './slices/ageGate';
+import user from './slices/user';
+import training from './slices/training';
+import session from './slices/session';
 
 const rootReducer = combineReducers({
-  app: appReducer,
+  scores,
+  ageGate,
+  user,
+  training,
+  session
 })
 
 export default rootReducer

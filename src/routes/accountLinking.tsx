@@ -1,15 +1,17 @@
 import { useEffect } from 'react'
-import { getUser } from '@store/slices/appSlice'
 import { useAppSelector } from '@store/hooks'
 import ConnectAccount from '@components/ui/ConnectAccount'
 import ConnectGuestAccount from '@components/ui/ConnectGuestAccount'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
-import useAppBusListener from '@hooks/useAppBusListener'
-import { Intents } from '@contexts/InteractiveCanvasContext'
+import { Intents, Scenes } from '@contexts/InteractiveCanvasContext'
+import useNavigation from '@hooks/useNavigation'
+import useExpect from '@hooks/useExpect'
+import { selectUser } from '@store/slices/user'
 
 export default function accountLinking(): JSX.Element {
-  const user = useAppSelector(getUser)
-  const { outputTts, sendTextQuery } = useInteractiveCanvas()
+  const user = useAppSelector(selectUser)
+  const navigation = useNavigation()
+  const { outputTts, triggerScene } = useInteractiveCanvas()
 
   const outputInfo = () => {
     if (user?.isGuest) {
@@ -19,20 +21,20 @@ export default function accountLinking(): JSX.Element {
     }
   }
 
+  useExpect(Intents.HELP, () => {
+    outputInfo()
+  })
+
   useEffect(() => {
     outputInfo()
   }, [])
 
-  useAppBusListener('onIntentHelp', () => {
-    outputInfo()
-  })
-
   const handleCancel = () => {
-    sendTextQuery('Home')
+    navigation.toHome()
   }
 
   const handleConnect = () => {
-    sendTextQuery(Intents.LINK_ACCOUNT)
+    triggerScene(Scenes.AccountLinkingOriginAccountLinking)
   }
 
   return user?.isGuest ?

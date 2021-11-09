@@ -5,6 +5,7 @@ const games: GameConfig[] = [
     "type": "game",
     "id": "color-match-nest",
     "name": "color-match-nest",
+    "intent_name": "color match",
     "values": {
       "slug": "color-match-nest",
       "id": 1,
@@ -48,6 +49,7 @@ const games: GameConfig[] = [
     "type": "game",
     "id": "ebb-and-flow-nest",
     "name": "ebb-and-flow-nest",
+    "intent_name": "ebb and flow",
     "values": {
       "slug": "ebb-and-flow-nest",
       "id": 2,
@@ -91,6 +93,7 @@ const games: GameConfig[] = [
     "type": "game",
     "id": "raindrops-nest",
     "name": "raindrops-nest",
+    "intent_name": "raindrops",
     "values": {
       "slug": "raindrops-nest",
       "id": 3,
@@ -134,6 +137,7 @@ const games: GameConfig[] = [
     "type": "game",
     "id": "train-of-thought-nest",
     "name": "train-of-thought-nest",
+    "intent_name": "train of thought",
     "values": {
       "slug": "train-of-thought-nest",
       "id": 4,
@@ -177,6 +181,7 @@ const games: GameConfig[] = [
     "type": "game",
     "id": "word-snatchers-nest",
     "name": "word-snatchers-nest",
+    "intent_name": "word snatchers",
     "values": {
       "slug": "word-snatchers-nest",
       "id": 5,

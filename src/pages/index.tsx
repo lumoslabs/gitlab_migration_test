@@ -19,12 +19,6 @@ import getConfig from 'next/config'
 
 export function Index({ games }: { games: GameConfig[] }): JSX.Element {
   const { publicRuntimeConfig } = getConfig()
-  const gameRoutes = games.map((game) => {
-    return <Route exact path={`/game/${game.id}`} key={game.id}>
-      <GamePage game={game} />
-    </Route>
-  })
-
   return (
     <Router>
       <AppBusProvider>
@@ -46,7 +40,9 @@ export function Index({ games }: { games: GameConfig[] }): JSX.Element {
             <Route exact path='/age-gate'>
               <AgeGate />
             </Route>
-            {gameRoutes}
+            <Route exact path='/game/:slug'>
+              <GamePage games={games} />
+            </Route>
           </Switch>
         </InteractiveCanvasProvider>
       </AppBusProvider>

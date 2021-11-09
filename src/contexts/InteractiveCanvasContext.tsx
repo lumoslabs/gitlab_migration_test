@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions'
+//import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions'
 import useAppBus from '@hooks/useAppBus'
 import { useAppDispatch } from '@store/hooks'
-import { actions } from '@store/slices/appSlice'
+//import { actions } from '@store/slices/appSlice'
 import { useHistory } from 'react-router-dom'
 
 export enum Intents {
-  AGE_GATE_RESULT = 'a9e9ate-ca767bf1-0239-4adb-89dc',
-  LINK_ACCOUNT = 'l1nk-11c0unt-3cff-4eba-5ac9abbfab8c',
-  PLAY_SCORE = 'p1ay-sc0re-ff74-11eb-9a03-0242ac130003',
-  RESTART_CMM = 'r3sta5t-cmm-ff74-11eb-9a03-da66ffd11cd4',
-  START_GAME = 's5ar5g0me-ff74-11eb-9a03-0242ac130003'
+  GUEST = 'GUEST',
+  HELP = 'HELP',
+  HOME = 'HOME',
+  OPEN_GAME = 'OPEN_GAME',
+  RESTART_GAME = 'RESTART_GAME',
+  RESUME_GAME = 'RESUME_GAME',
+  NO = 'NO',
+  YES = 'YES',
+  TRAINING = 'TRAINING',
+}
+
+export enum Scenes {
+  InitialScene = 'InitialScene',
+  Main = 'MainScene',
+  AgeGate = 'AgeGate',
+  AccountLinkingOrigin = 'AccountLinkingOrigin',
+  AccountLinkingOriginAccountLinking = 'AccountLinkingOrigin_AccountLinking', //TODO: rename to normal name
+  EndConversation = 'EndConversation',
 }
 
 class InteractiveCanvas {
@@ -25,6 +38,14 @@ class InteractiveCanvas {
       console.error('interactiveCanvas - outputTts - exception', e)
     }
   }
+
+  enterContinuousMatchMode = async (phrases: any[], timeout?: number): Promise<void> => {
+    return new Promise((resolve) => {
+      window.interactiveCanvas?.enterContinuousMatchMode(phrases, timeout || 180);
+      resolve()
+    })
+  }
+
 
   exitContinuousMatchMode = async (): Promise<void> => {
     return new Promise((resolve) => {
@@ -63,6 +84,20 @@ class InteractiveCanvas {
       this.exitCmmModeResolvers = []
     }
   }
+
+  triggerScene = (scene: string) => {
+    return window.interactiveCanvas?.triggerScene(scene)
+  }
+
+  expect = (intentId: string, callback: any) => {
+    const handler = window.interactiveCanvas?.createIntentHandler(intentId, callback)
+    return window.interactiveCanvas?.expect(handler)
+  }
+
+  clearExpectations = () => {
+    return window.interactiveCanvas?.clearExpectations()
+  }
+
 }
 
 export const InteractiveCanvasContext = React.createContext<InteractiveCanvas>(null)
@@ -77,18 +112,22 @@ export default function InteractiveCanvasProvider({ children }) {
   const onLoad = () => {
     const callbacks = {
       onUpdate(data: unknown[]) {
-        data.forEach((row) => {
-          const action = asSharedAction(row)
-          if (action && actions[action.command]) {
-            dispatch(actions[action.command](action.payload))
-          }
-          if (action.command == appSharedActions.GO_TO) {
-            router.push(action.payload)
-          }
-          if ((action.command == appSharedActions.EMIT_EVENT) && (action.payload)) {
-            appBus.emit(action.payload)
-          }
-        })
+        console.log('onUpdate', data)
+        /*
+      data.forEach((row) => {
+//          const action = asSharedAction(row)
+                  if (action && actions[action.command]) {
+                    //            dispatch(actions[action.command](action.payload))
+                  }
+                  if (action.command == appSharedActions.GO_TO) {
+                    console.log('goto', action)
+                    //            router.push(action.payload)
+                  }
+                  if ((action.command == appSharedActions.EMIT_EVENT) && (action.payload)) {
+                    //            appBus.emit(action.payload)
+                  }
+      })
+        */
       },
       onTtsMark(markName) {
         appBus.emit('onTtsMark', markName)

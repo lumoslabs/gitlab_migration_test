@@ -52,6 +52,9 @@
       "@contexts/*": [
         "src/contexts/*"
       ],
+      "@libs/*": [
+        "src/libs/*"
+      ],
       "@sharedTypes/*": [
         "src/sharedTypes/*"
       ]

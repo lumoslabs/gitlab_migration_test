@@ -6,8 +6,8 @@ import commonStyles from '@styles/commonStyles'
 import WideActionButton from '@components/ui/WideActionButton'
 import base from '@styles/colors/base'
 import dayjs from 'dayjs'
-import useAppBusListener from '@hooks/useAppBusListener'
-import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
+import useInteractiveCanvas, { Intents } from '@hooks/useInteractiveCanvas'
+import useExpect from '@hooks/useExpect'
 
 const { black, gray7, lumosOrange } = base
 
@@ -46,17 +46,22 @@ const GameScoreCard = ({
 
   const { outputTts } = useInteractiveCanvas()
 
-  useAppBusListener('onIntentYes', () => {
+  useExpect(Intents.YES, () => {
     actionButtonHandler()
   })
 
-  useAppBusListener('onIntentHelp', () => {
+  useExpect(Intents.HELP, () => {
     if (showTrainingIcon) {
       outputTts(`Here is what you can do, you can say "Next" to go to your next game. "Home" to end your workout and return to the main menu, or "Exit" to leave Lumosity.`)
     } else {
       outputTts(`Here is what you can do, you can say "Next" or "Home" to return to the main menu, or "Exit" to leave Lumosity.`)
     }
   })
+
+  useExpect(Intents.HOME, () => {
+    actionButtonHandler()
+  })
+
 
   const trophyIndex = topScoresData?.findIndex((score) => {
     if (score.score === currentScore)

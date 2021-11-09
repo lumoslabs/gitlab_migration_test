@@ -27,7 +27,7 @@ export interface GameCompletedData {
   game_result_data: unknown;
 }
 
-export type GameEventData = number | GameCompletedData | GameSpeechData | null
+export type GameEventData = number | GameCompletedData | GameSpeechData | null | any[]
 
 
 const GameWrapperWindow = forwardRef<GameWrapperRef, GameWrapperProps>(({ width, height, url, vars, visibility = true, onEvent, onError = () => null }, ref): JSX.Element => {

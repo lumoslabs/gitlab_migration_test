@@ -2,18 +2,17 @@ import { useHistory } from 'react-router-dom'
 import GamePlay from '@components/GamePlay'
 import { GameConfig } from '@backend/services/ConfigService'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { getTraining, actions } from '@store/slices/appSlice'
+import { selectTraining, setTrainingGameCompleted } from '@store/slices/training'
 import { useEffect, useState } from 'react'
 import useAmplitude from '@hooks/useAmplitude'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import sample from 'lodash.sample'
 
 export default function Training({ games }: { games: GameConfig[] }): JSX.Element {
-  const { sendTextQuery } = useInteractiveCanvas()
   const track = useAmplitude()
   const dispatch = useAppDispatch()
   const history = useHistory()
-  const training = useAppSelector(getTraining)
+  const training = useAppSelector(selectTraining)
   const [currentGame, setCurrentGame] = useState<GameConfig>(null)
   const [nextGame, setNextGame] = useState<GameConfig>(null)
 
@@ -21,12 +20,7 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
     if (nextGame) {
       setCurrentGame(nextGame)
     } else {
-      sendTextQuery('Home').then((result) => {
-        //TODO: fix it with the new interactiveCanvas
-        if (result === 'BLOCKED') {
-          history.push('/home')
-        }
-      })
+      history.push('/home')
     }
   }
 
@@ -34,10 +28,12 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
     if (training?.games?.length === 1) {
       track('training_session_finish')
     }
-    dispatch(actions.setTrainingGameCompleted(currentGame.id))
+    console.log('onGameComplete', currentGame.id)
+    dispatch(setTrainingGameCompleted(currentGame.id))
   }
 
   useEffect(() => {
+    console.log('training training training training !', training)
     if (!training?.games?.length) {
       setNextGame(null)
     } else {

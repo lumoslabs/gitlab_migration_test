@@ -1,6 +1,7 @@
 {
   "id": "ebb-and-flow-nest",
   "name": "ebb-and-flow-nest",
+  "intent_name": "ebb and flow",
   "values": {
     "slug": "ebb-and-flow-nest",
     "id": 2,

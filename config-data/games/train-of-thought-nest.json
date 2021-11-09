@@ -1,6 +1,7 @@
 {
   "id": "train-of-thought-nest",
   "name": "train-of-thought-nest",
+  "intent_name": "train of thought",
   "values": {
     "slug": "train-of-thought-nest",
     "id": 4,

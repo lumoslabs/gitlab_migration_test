@@ -1,6 +1,7 @@
 {
   "id": "color-match-nest",
   "name": "color-match-nest",
+  "intent_name": "color match",
   "values": {
     "slug": "color-match-nest",
     "id": 1,

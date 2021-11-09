@@ -8,35 +8,51 @@ import commonStyles from '@styles/commonStyles'
 import GameProgressBar from '@components/ui/GameProgressBar'
 import Button from '@components/ui/Button'
 import useAmplitude from '@hooks/useAmplitude'
-import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
+import useInteractiveCanvas, { Intents } from '@hooks/useInteractiveCanvas'
 import useAppBusListener from '@hooks/useAppBusListener'
-import { Intents } from '@contexts/InteractiveCanvasContext'
 import { GameWrapperRef, GameEventData, GameSpeechData, GameCompletedData } from './GameWrapperWindow'
 import GameWrapper from './GameWrapperIframe'
 import { useCallback } from 'react'
+import useExpect from '@hooks/useExpect'
 
 const { publicRuntimeConfig } = getConfig()
 
 export interface IGameContainerProps {
   game: GameConfig;
   onComplete: (data: GameCompletedData) => void;
-  isTraining: boolean;
   showTutorial: boolean;
   onEvent?: (eventName: string, data: any) => void;
 }
 
-const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining, showTutorial }: IGameContainerProps): JSX.Element => {
+const GameContainer = ({ game, onComplete, onEvent = () => undefined, showTutorial }: IGameContainerProps): JSX.Element => {
   const track = useAmplitude()
-  const { sendTextQuery, outputTts, exitContinuousMatchMode } = useInteractiveCanvas()
+  const { sendTextQuery, outputTts, enterContinuousMatchMode, exitContinuousMatchMode } = useInteractiveCanvas()
   // Set the dimensions of the screen for game layout
   const [clientHeight, setHeight] = useState(0)
   const [clientWidth, setWidth] = useState(0)
 
   const gameRef = useRef<GameWrapperRef>()
 
+  useExpect(Intents.HELP, () => {
+    gameRef.current?.send({ action: 'tutorial' })
+  })
+
+  useExpect(Intents.RESTART_GAME, () => {
+    gameRef.current?.send({ action: 'restart' })
+  })
+
+  useExpect(Intents.RESUME_GAME, () => {
+    gameRef.current?.send({ action: 'resume' })
+  })
+
   useEffect(() => {
     setHeight(window.innerHeight)
     setWidth(window.innerWidth)
+
+    return () => {
+      // try to exit from cmm
+      exitContinuousMatchMode()
+    }
   }, [])
 
   // Game loading progress for loading bar and errors
@@ -78,19 +94,18 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
         track('game_start', eventTracking)
         break
       case 'game:nest_cmm_start':
-        sendTextQuery(Intents.START_GAME, { continuous_match_phrases: eventData })
+        eventData = eventData as any[]
+        enterContinuousMatchMode(eventData)
         break
       case 'game:complete':
         onEvent(eventName, eventData)
         onComplete(eventData as GameCompletedData)
-        exitContinuousMatchMode().then(() => {
-          eventData = eventData as GameCompletedData
-          sendTextQuery(Intents.PLAY_SCORE, { eventData, slug: game.id, isTraining: isTraining })
-        })
+        exitContinuousMatchMode()
         track('game_finish', eventTracking)
         break
       case 'game:nest_cmm_restart':
-        sendTextQuery(Intents.RESTART_CMM, { continuous_match_phrases: eventData })
+        eventData = eventData as any[]
+        enterContinuousMatchMode(eventData)
         break
       case 'game:speech':
         eventData = eventData as GameSpeechData
@@ -127,29 +142,6 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
   useAppBusListener('onTtsMark', (markName) => {
     gameRef.current?.send({ action: 'tts_' + markName.toLowerCase() })
   })
-
-  //Handle webhook intents
-  useAppBusListener('onIntentHelp', () => {
-    gameRef.current?.send({ action: 'tutorial' })
-  })
-
-  //TODO: remove it after migration to new version of interactiveCanvas
-  useAppBusListener('onIntentRestartCMM', () => {
-    gameRef.current?.send({ action: 'continue' })
-  })
-  useAppBusListener('onIntentRestartGame', () => {
-    gameRef.current?.send({ action: 'restart' })
-  })
-  useAppBusListener('onIntentResumeGame', () => {
-    gameRef.current?.send({ action: 'resume' })
-  })
-
-  useEffect(() => {
-    return () => {
-      // try to exit from cmm
-      exitContinuousMatchMode()
-    }
-  }, [])
 
   return (
     <div className={css([commonStyles.fullWidth, commonStyles.flexColumnAllCenter])}>

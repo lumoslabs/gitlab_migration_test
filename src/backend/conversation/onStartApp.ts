@@ -1,74 +1,25 @@
 import { ConversationV3 } from 'actions-on-google'
 import {
   sendCommand,
-  setIsFirstLogin,
-  setTraining,
-  getTraining,
   convToUser,
-  getBirthday,
   Scenes,
-  Pages,
-  getUnderageTimestamp
 } from '@backend/conversation/utils'
-import appSharedActions from '@store/slices/appSharedActions'
-import TrainingManager from '@backend/libs/TrainingManager'
-import { v4 as uuidv4 } from 'uuid'
-import { dayjs } from '@backend/libs/dayjs'
-import getConfig from 'next/config'
-
-const { serverRuntimeConfig } = getConfig()
+//import appSharedActions from '@store/slices/appSharedActions'
 
 export default async (conv: ConversationV3) => {
-
-  //Generate user id for new users
-  if (!conv.user.params?.id) {
-    setIsFirstLogin(conv)
-    conv.user.params.id = uuidv4()
-  }
-
-  //Generate training
-  const trainingManager = new TrainingManager(getTraining(conv), conv?.device?.timeZone?.id)
-  const training = await trainingManager.get()
-
-  setTraining(conv, training)
-
-  //Generate tutorial object
-  const tutorialSeen = Object.keys(conv.user.params?.scores ?? {}).reduce((accum, gameName) => {
-    accum[gameName] = true
-    return accum
-  }, {})
-
-
-  let nextScene = Scenes.Main
-  let nextPage = Pages.Home
-
-  // check if is underage and locked out
-  if (getUnderageTimestamp(conv) && ((dayjs().unix() - getUnderageTimestamp(conv)) < serverRuntimeConfig.underageBanSeconds)) {
-    nextScene = Scenes.EndConversation
-    nextPage = null
-    conv.add('We’re sorry, but you’re not eligible to create an account. Please contact us at help.lumosity.com for more information.')
-  } else if (!getBirthday(conv)) { // Check if age already confirmed
-    nextScene = Scenes.AgeGate
-    nextPage = Pages.AgeGate
-  }
+  console.log('onStartApp', conv.user.params)
 
   sendCommand({
     conv,
     suppressMic: false,
     commands: [
-      {
-        command: appSharedActions.SET_STORE,
-        payload: {
-          training,
-          user: convToUser(conv),
-          tutorialSeen,
-        }
-      },
-      nextPage ? {
-        command: appSharedActions.GO_TO,
-        payload: nextPage
-      } : undefined
+      //      {
+      //        command: appSharedActions.SET_STORE,
+      //        payload: {
+      //          user: convToUser(conv),
+      //        }
+      //      },
     ],
-    scene: nextScene
+    scene: Scenes.Main
   })
 }

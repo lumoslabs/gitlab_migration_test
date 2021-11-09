@@ -1,6 +1,7 @@
 {
   "id": "word-snatchers-nest",
   "name": "word-snatchers-nest",
+  "intent_name": "word snatchers",
   "values": {
     "slug": "word-snatchers-nest",
     "id": 5,

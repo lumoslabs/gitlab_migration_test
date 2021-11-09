@@ -74,6 +74,9 @@ module.exports = (phase) => {
       underageBanSeconds: 172800, //48h
     },
     publicRuntimeConfig: {
+
+      underageBanSeconds: 172800, //48h
+
       // Will be available on both server and client
       amplitude: {
         apiKey: process.env.AMPLITUDE_API_KEY

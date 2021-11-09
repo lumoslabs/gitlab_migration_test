@@ -1,6 +1,7 @@
 {
   "id": "raindrops-nest",
   "name": "raindrops-nest",
+  "intent_name": "raindrops",
   "values": {
     "slug": "raindrops-nest",
     "id": 3,
