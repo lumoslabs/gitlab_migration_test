@@ -1,5 +1,6 @@
 class InteractiveUserStorage {
   async set<T>(key: string, props: T): Promise<T> {
+    console.log('set!', key, props)
     await window.interactiveCanvas?.setUserParam(key, props)
     return props
   }

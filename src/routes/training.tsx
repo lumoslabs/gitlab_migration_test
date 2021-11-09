@@ -28,12 +28,10 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
     if (training?.games?.length === 1) {
       track('training_session_finish')
     }
-    console.log('onGameComplete', currentGame.id)
     dispatch(setTrainingGameCompleted(currentGame.id))
   }
 
   useEffect(() => {
-    console.log('training training training training !', training)
     if (!training?.games?.length) {
       setNextGame(null)
     } else {

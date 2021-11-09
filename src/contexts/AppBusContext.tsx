@@ -5,14 +5,6 @@ export type appBusEvents = {
   onPhraseMatched: any;
   onListeningModeChanged: boolean;
   onTtsMark: string;
-  onIntentYes: void;
-  onIntentNo: void;
-  onIntentHelp: void;
-  //TODO: remove it with private game intents
-  onIntentRestartCMM: void;
-  onIntentRestartGame: void;
-  onIntentResumeGame: void;
-  onDebugLog: string;
 }
 
 export const BusContext = React.createContext<Emitter<appBusEvents>>(null)

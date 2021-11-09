@@ -9,6 +9,7 @@ import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 
 import sample from 'lodash.sample'
 import { saveUserScore, selectGameScores, selectScoresIsLoading, selectTutorialSeen } from '@store/slices/scores'
+import { selectTrainingIsLoading } from '@store/slices/training'
 
 /*
 Example:
@@ -37,6 +38,7 @@ export default function GamePlay({
 
   const topScores = useAppSelector((state) => selectGameScores(state, game.id))
   const isLoading = useAppSelector(selectScoresIsLoading)
+  const isTrainingLoading = useAppSelector(selectTrainingIsLoading)
 
   const { outputTts } = useInteractiveCanvas()
   const showTutorial = !useAppSelector((state) => selectTutorialSeen(state, game.id))
@@ -44,24 +46,20 @@ export default function GamePlay({
   const onComplete = (data: any) => {
     setResult(data)
     const score = Number(data?.score)
-
-    /*
-    output tts
-    const scoresList = getScoresList(conv, slug)
-    if (!scoresList) {
+    if (!topScores) {
       //first play in current game
-      tts = `You scored ${score} points. Great first play! Would you like to return to the Lumosity main menu?`
+      outputTts(`You scored ${score} points. Great first play! Would you like to return to the Lumosity main menu?`)
     } else {
-      tts = sample([
+      outputTts(sample([
         `You scored ${score} points. Well done! Would you like to return to the Lumosity main menu?`,
         `You scored ${score} points. Great job! Would you like to return to the Lumosity main menu?`,
         `You scored ${score} points. Congrats on a job well done. Would you like to return to the main menu?`,
-      ])
+      ]))
     }
-    */
-    dispatch(saveUserScore({ score, slug: game.id }))
-
-    onGameComplete && onGameComplete()
+    //HACK: setUserParam doesn't work in parallel
+    dispatch(saveUserScore({ score, slug: game.id })).then(() => {
+      onGameComplete && onGameComplete()
+    })
   }
 
   // Create game run/results
@@ -107,8 +105,8 @@ export default function GamePlay({
           onComplete={onComplete}
         />
       )}
-      {result && isLoading && <LoadingComponent />}
-      {result && (!isLoading) && (
+      {result && (isLoading || isTrainingLoading) && <LoadingComponent />}
+      {result && (!isLoading) && (!isTrainingLoading) && (
         <GameScoreCard
           title={game.values.title}
           gameIcon={game.values.score_thumbnail_url}

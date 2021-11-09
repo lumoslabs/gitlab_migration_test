@@ -104,6 +104,7 @@ export const trainingSlice = createSlice({
 })
 
 export const selectTraining = (state: RootState) => state.training.storage
+export const selectTrainingIsLoading = (state: RootState) => state.training.loading
 
 // Reducers and actions
 export const actions = trainingSlice.actions

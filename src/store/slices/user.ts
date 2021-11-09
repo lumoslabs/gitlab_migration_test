@@ -19,7 +19,7 @@ interface UserStorage {
 
 const userStorageKey = 'tokenPayload'
 const lumosTokenStorageKey = 'lumosToken'
-const idStorageKey = 'id'
+const idStorageKey = 'uniqUuid'
 const loginCountStorageKey = 'loginCount'
 
 const initialState: UserStorage = {
@@ -44,6 +44,7 @@ export const loadUser = createAsyncThunk<UserStorage["storage"], undefined, thun
 
     if (!id) {
       id = uuidv4()
+      console.log('new uuid!', id)
       await thunkApi.extra.interactiveUserStorage.set(idStorageKey, id) as string
     }
 
@@ -57,7 +58,11 @@ export const loadUser = createAsyncThunk<UserStorage["storage"], undefined, thun
     } catch {
     }
 
-    await thunkApi.extra.interactiveUserStorage.set(loginCountStorageKey, loginCount + 1)
+    if (!loginCount) {
+      loginCount = 0
+    }
+
+    await thunkApi.extra.interactiveUserStorage.set(loginCountStorageKey, (loginCount + 1))
 
     try {
       const response = await thunkApi.extra.interactiveUserStorage.get(userStorageKey) as Partial<UserStorage["storage"]>
@@ -83,6 +88,7 @@ export const userSlice = createSlice({
       state.loading = true
     })
     builder.addCase(loadUser.rejected, (state, action) => {
+      console.log('loadUser.rejected', action)
       state.loading = false
       state.error = true
     })
