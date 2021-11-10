@@ -1,25 +1,18 @@
 import { ConversationV3 } from 'actions-on-google'
 import {
-  sendCommand,
-  convToUser,
+  sendConv,
   Scenes,
+  getPublicUrlFromConv,
 } from '@backend/conversation/utils'
-//import appSharedActions from '@store/slices/appSharedActions'
+import { VerificationStatus } from 'actions-on-google/dist/api/schema'
 
 export default async (conv: ConversationV3) => {
-  console.log('onStartApp', conv.user.params)
-
-  sendCommand({
+  sendConv({
     conv,
-    suppressMic: false,
-    commands: [
-      //      {
-      //        command: appSharedActions.SET_STORE,
-      //        payload: {
-      //          user: convToUser(conv),
-      //        }
-      //      },
-    ],
+    data: {
+      isGuest: conv.user.verificationStatus === VerificationStatus.Guest,
+      baseUrl: getPublicUrlFromConv(conv)
+    },
     scene: Scenes.Main
   })
 }

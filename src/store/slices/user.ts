@@ -10,7 +10,6 @@ interface UserStorage {
     picture?: string;
     lumosToken?: string;
     loginCount?: number;
-    isGuest?: boolean;
   },
   loaded: boolean,
   loading: boolean,
@@ -107,6 +106,8 @@ export const selectUser = (state: RootState) => state.user.storage
 export const selectUserIsLoaded = (state: RootState) => state.user.loaded
 
 export const selectUserIsLinked = (state: RootState) => Boolean(state.user.storage.lumosToken)
+
+export const selectUserLumosToken = (state: RootState) => state.user.storage.lumosToken
 
 export const selectUserIsFirstLogin = (state: RootState) => (state.user.storage.loginCount === 0)
 

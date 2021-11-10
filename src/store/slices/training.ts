@@ -52,7 +52,7 @@ export const loadTraining = createAsyncThunk<TrainingStorage["storage"], undefin
   'training/load',
   async (_args, thunkApi) => {
     const training = await thunkApi.extra.interactiveUserStorage.get<TrainingStorage["storage"]>(trainingStorageKey, generateRandomTraining())
-    if (training && (training.version === VERSION) && dayjs(training?.deadline).isValid() && (dayjs(training?.deadline).diff(dayjs(), 'day') < 1)) {
+    if (training && (training.version === VERSION) && dayjs(training?.deadline).isValid() && dayjs().isSame(training?.deadline, 'day')) {
       return training
     }
     await thunkApi.extra.interactiveUserStorage.set<TrainingStorage["storage"]>(trainingStorageKey, training)

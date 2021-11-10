@@ -1,4 +1,5 @@
 import { AsyncThunk, configureStore } from '@reduxjs/toolkit'
+import axios, { AxiosInstance } from 'axios'
 import InteractiveUserStorage from './InteractiveUserStorage'
 import rootReducer from './rootReducer'
 
@@ -9,7 +10,8 @@ export default function createAppStore() {
       getDefaultMiddleware({
         thunk: {
           extraArgument: {
-            interactiveUserStorage: new InteractiveUserStorage()
+            interactiveUserStorage: new InteractiveUserStorage(),
+            axios: axios.create()
           }
         }
       }),
@@ -19,7 +21,8 @@ export default function createAppStore() {
 export type thunkApiExtended = {
   state: RootState,
   extra: {
-    interactiveUserStorage: InteractiveUserStorage
+    interactiveUserStorage: InteractiveUserStorage,
+    axios: AxiosInstance
   }
 }
 

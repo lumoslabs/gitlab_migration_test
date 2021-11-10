@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-//import appSharedActions, { asSharedAction } from '@store/slices/appSharedActions'
 import useAppBus from '@hooks/useAppBus'
 import { useAppDispatch } from '@store/hooks'
-//import { actions } from '@store/slices/appSlice'
 import { useHistory } from 'react-router-dom'
+import { onInteractiveUpdate } from '@store/slices/session'
 
 export enum Intents {
   GUEST = 'GUEST',
@@ -112,22 +111,9 @@ export default function InteractiveCanvasProvider({ children }) {
   const onLoad = () => {
     const callbacks = {
       onUpdate(data: unknown[]) {
-        console.log('onUpdate', data)
-        /*
-      data.forEach((row) => {
-//          const action = asSharedAction(row)
-                  if (action && actions[action.command]) {
-                    //            dispatch(actions[action.command](action.payload))
-                  }
-                  if (action.command == appSharedActions.GO_TO) {
-                    console.log('goto', action)
-                    //            router.push(action.payload)
-                  }
-                  if ((action.command == appSharedActions.EMIT_EVENT) && (action.payload)) {
-                    //            appBus.emit(action.payload)
-                  }
-      })
-        */
+        data.forEach((row) => {
+          dispatch(onInteractiveUpdate(row))
+        })
       },
       onTtsMark(markName) {
         appBus.emit('onTtsMark', markName)

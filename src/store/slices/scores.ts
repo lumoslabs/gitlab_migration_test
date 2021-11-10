@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit'
-import { RootState } from '@store/index'
+import { RootState, thunkApiExtended } from '@store/index'
 import dayjs from 'dayjs'
 import clonedeep from 'lodash.clonedeep'
+import { selectBaseUrl } from './session'
+import { selectUserLumosToken } from './user'
 
 const SCORES_MAX_SIZE = 5
 const userStorageKey = 'scores'
@@ -33,10 +35,10 @@ export const loadScores = createAsyncThunk(
   }
 )
 
-export const saveUserScore = createAsyncThunk(
+export const saveUserScore = createAsyncThunk<ScoresStorage["storage"], { slug: string, score: number }, thunkApiExtended>(
   'scores/setScores',
-  async ({ slug, score }: { slug: string, score: number }, thunkApi) => {
-    let scores = clonedeep(selectScoresStorage(thunkApi.getState() as RootState))
+  async ({ slug, score }, thunkApi) => {
+    let scores = clonedeep(selectScoresStorage(thunkApi.getState()))
     if (!scores[slug]) {
       scores[slug] = []
     }
@@ -51,11 +53,25 @@ export const saveUserScore = createAsyncThunk(
       return b.score - a.score
     }).slice(0, SCORES_MAX_SIZE)
 
-    //TODO: sync with backend
-
-    console.log('calculated scores', scores)
     await window.interactiveCanvas?.setUserParam('scores', scores)
     return scores
+  }
+)
+
+export const syncScores = createAsyncThunk<void, { slug: string, eventData: any }, thunkApiExtended>('scores/syncScores',
+  async ({ slug, eventData }, thunkApi) => {
+    console.log('syncScores', slug, eventData)
+    const token = selectUserLumosToken(thunkApi.getState())
+    const baseUrl = selectBaseUrl(thunkApi.getState())
+    if (token) {
+      thunkApi.extra.axios.post(baseUrl + '/api/scores', {
+        token,
+        slug,
+        eventData
+      }).catch(() => {
+        console.error('Score sync error', slug, eventData)
+      })
+    }
   }
 )
 

@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '@store/hooks'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 
 import sample from 'lodash.sample'
-import { saveUserScore, selectGameScores, selectScoresIsLoading, selectTutorialSeen } from '@store/slices/scores'
+import { saveUserScore, selectGameScores, selectScoresIsLoading, selectTutorialSeen, syncScores } from '@store/slices/scores'
 import { selectTrainingIsLoading } from '@store/slices/training'
 
 /*
@@ -56,6 +56,9 @@ export default function GamePlay({
         `You scored ${score} points. Congrats on a job well done. Would you like to return to the main menu?`,
       ]))
     }
+
+    dispatch(syncScores({ slug: game.id, eventData: data }))
+
     //HACK: setUserParam doesn't work in parallel
     dispatch(saveUserScore({ score, slug: game.id })).then(() => {
       onGameComplete && onGameComplete()

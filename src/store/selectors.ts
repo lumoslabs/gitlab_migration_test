@@ -1,5 +1,5 @@
 import { RootState } from "."
 
 export const isUserStorageLoaded = (state: RootState) => {
-  return state.ageGate.loaded && state.scores.loaded && state.user.loaded && state.training.loaded
+  return state.ageGate.loaded && state.scores.loaded && state.user.loaded && state.training.loaded && state.session.isLoaded
 }

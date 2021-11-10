@@ -1,6 +1,5 @@
 import { ConversationV3 } from 'actions-on-google'
-//import appSharedActions from '@store/slices/appSharedActions'
-import { sendCommand, encrypt } from './utils'
+import { sendConv, encrypt } from './utils'
 import LinkingService from '@backend/services/LinkingService'
 import logger from '@backend/libs/logger'
 import rollbar from '@backend/libs/rollbar'
@@ -58,21 +57,7 @@ export default async (conv: ConversationV3) => {
     }
   }
 
-  sendCommand({
-    conv,
-    commands: [
-      /*
-      {
-        command: appSharedActions.GO_TO,
-        payload: Pages.Home
-      },
-      {
-        command: appSharedActions.SET_STORE,
-        payload: {
-          user: convToUser(conv)
-        }
-      }
-      */
-    ]
+  sendConv({
+    conv
   })
 }

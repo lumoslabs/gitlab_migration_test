@@ -6,15 +6,15 @@ import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 import { Intents, Scenes } from '@contexts/InteractiveCanvasContext'
 import useNavigation from '@hooks/useNavigation'
 import useExpect from '@hooks/useExpect'
-import { selectUser } from '@store/slices/user'
+import { selectIsGuest } from '@store/slices/session'
 
 export default function accountLinking(): JSX.Element {
-  const user = useAppSelector(selectUser)
   const navigation = useNavigation()
   const { outputTts, triggerScene } = useInteractiveCanvas()
+  const isGuest = useAppSelector(selectIsGuest)
 
   const outputInfo = () => {
-    if (user?.isGuest) {
+    if (isGuest) {
       outputTts(`You're currently in guest mode. If you would like to save your scores and progress, check your Google Voice match settings and restart Lumosity. You can say "Home" to go to the main menu.`)
     } else {
       outputTts(`You are currently playing as a guest user. To save scores and progress, you need to link your Lumosity account. Press connect to link your account.`)
@@ -37,7 +37,7 @@ export default function accountLinking(): JSX.Element {
     triggerScene(Scenes.AccountLinkingOriginAccountLinking)
   }
 
-  return user?.isGuest ?
+  return isGuest ?
     <ConnectGuestAccount handleCancel={handleCancel} /> :
     <ConnectAccount handleConnect={handleConnect} handleCancel={handleCancel} />
 }

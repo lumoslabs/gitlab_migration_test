@@ -1,9 +1,9 @@
 import { ConversationV3 } from 'actions-on-google'
-import { sendCommand } from './utils'
+import { sendConv } from './utils'
 
 export default async (conv: ConversationV3) => {
   conv.add('Sorry, what was that?')
-  sendCommand({
+  sendConv({
     conv,
   })
 }

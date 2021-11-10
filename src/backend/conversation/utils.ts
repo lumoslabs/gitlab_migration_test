@@ -36,57 +36,24 @@ export const getPublicUrlFromConv = (conv: ConversationV3) => {
   return serverRuntimeConfig.publicUrl || ('https://' + conv.headers?.host?.toString())
 }
 
-export const sendCommand = async ({ conv, commands = [], suppressMic = false, continuousMatchPhrases = undefined, scene }: {
+export const sendConv = async ({ conv, data = undefined, suppressMic = false, scene }: {
   conv: ConversationV3,
-  continuousMatchPhrases?: ExpectedPhrase[],
   suppressMic?: boolean,
-  commands?: {
-    command: string,
-    payload: any
-  }[],
+  data?: any,
   scene?: string
 }) => {
+
   conv.add(new Canvas({
     enableFullScreen: true,
-    continuousMatchConfig: continuousMatchPhrases ? {
-      expectedPhrases: continuousMatchPhrases,
-      durationSeconds: 180,
-    } : undefined,
     url: getPublicUrlFromConv(conv),
     suppressMic,
-    data: commands ? commands : [],
+    data: data,
   }))
+
   if (scene) {
     conv.scene.next.name = scene
   }
 }
-
-export const setLumosToken = async (conv: ConversationV3, token: string) => {
-  conv.user.params.lumosToken = CryptoJS.Rabbit.encrypt(token, serverRuntimeConfig.rails.encryptionToken).toString()
-}
-
-export const getLumosToken = async (conv: ConversationV3) => {
-  return CryptoJS.Rabbit.decrypt(conv.user.params?.lumosToken, serverRuntimeConfig.rails.encryptionToken).toString(CryptoJS.enc.Utf8) as string
-}
-
-export const isLumosLinked = (conv: ConversationV3) => {
-  return Boolean(conv.user.params.lumosToken)
-}
-
-export const convToUser = (conv: ConversationV3): any => {
-  const isLinked = isLumosLinked(conv)
-  return {
-    id: conv.user.params.id,
-    name: isLinked ? conv.user.params?.tokenPayload?.name : '',
-    email: isLinked ? conv.user.params?.tokenPayload?.email : '',
-    avatar: isLinked ? conv.user.params?.tokenPayload?.picture : '',
-    timezone: conv?.device?.timeZone?.id,
-    isGuest: conv.user.verificationStatus === VerificationStatus.Guest,
-    isLinked: isLinked
-  }
-}
-
-
 
 export const encrypt = async (token: string) => {
   return CryptoJS.Rabbit.encrypt(token, serverRuntimeConfig.rails.encryptionToken).toString()
