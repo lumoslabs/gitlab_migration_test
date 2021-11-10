@@ -60,7 +60,6 @@ export const saveUserScore = createAsyncThunk<ScoresStorage["storage"], { slug: 
 
 export const syncScores = createAsyncThunk<void, { slug: string, eventData: any }, thunkApiExtended>('scores/syncScores',
   async ({ slug, eventData }, thunkApi) => {
-    console.log('syncScores', slug, eventData)
     const token = selectUserLumosToken(thunkApi.getState())
     const baseUrl = selectBaseUrl(thunkApi.getState())
     if (token) {

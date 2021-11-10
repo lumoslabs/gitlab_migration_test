@@ -31,38 +31,71 @@ export default function GamePlay({
   scoreActionButtonText: string,
   remainingGamesCount?: number,
   totalGameCount?: number,
-  onGameComplete?: () => any,
+  onGameComplete?: () => Promise<any>,
 }): JSX.Element {
   const dispatch = useAppDispatch()
   const [result, setResult] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const topScores = useAppSelector((state) => selectGameScores(state, game.id))
-  const isLoading = useAppSelector(selectScoresIsLoading)
-  const isTrainingLoading = useAppSelector(selectTrainingIsLoading)
 
   const { outputTts } = useInteractiveCanvas()
   const showTutorial = !useAppSelector((state) => selectTutorialSeen(state, game.id))
 
   const onComplete = (data: any) => {
+    setLoading(true)
     setResult(data)
     const score = Number(data?.score)
-    if (!topScores) {
-      //first play in current game
-      outputTts(`You scored ${score} points. Great first play! Would you like to return to the Lumosity main menu?`)
-    } else {
-      outputTts(sample([
-        `You scored ${score} points. Well done! Would you like to return to the Lumosity main menu?`,
-        `You scored ${score} points. Great job! Would you like to return to the Lumosity main menu?`,
-        `You scored ${score} points. Congrats on a job well done. Would you like to return to the main menu?`,
-      ]))
-    }
-
-    dispatch(syncScores({ slug: game.id, eventData: data }))
 
     //HACK: setUserParam doesn't work in parallel
+    dispatch(syncScores({ slug: game.id, eventData: data }))
+
     dispatch(saveUserScore({ score, slug: game.id })).then(() => {
-      onGameComplete && onGameComplete()
+      if (onGameComplete) {
+        onGameComplete().then(() => {
+          onScoreOutput(score)
+          setLoading(false)
+        })
+      } else {
+        onScoreOutput(score)
+        setLoading(false)
+      }
     })
+  }
+
+  const onScoreOutput = (score) => {
+    console.log('onScoreOutput', totalGameCount, remainingGamesCount)
+    if (!isTraining) {
+      if (!topScores) {
+        //first play in current game
+        outputTts(`You scored ${score} points. Great first play! Would you like to return to the Lumosity main menu?`, true)
+      } else {
+        outputTts(sample([
+          `You scored ${score} points. Well done! Would you like to return to the Lumosity main menu?`,
+          `You scored ${score} points. Great job! Would you like to return to the Lumosity main menu?`,
+          `You scored ${score} points. Congrats on a job well done. Would you like to return to the main menu?`,
+        ]), true)
+      }
+    } else {
+      if (totalGameCount - remainingGamesCount === 0) {
+        outputTts(`You scored ${score} points. Great first play! Are you ready for the next game?`, true)
+      } else if (remainingGamesCount === 1) {
+        outputTts(sample([
+          `You scored ${score} points and completed your workout for today. Well done! 
+            Would you like to return to the Lumosity main menu?`,
+          `You scored ${score} points and completed today's workout. Great job! 
+            Are you ready to return to the main menu?`,
+          `You scored ${score} points and completed your workout. Congrats on a job well done. 
+            Would you like to end your workout and return to the main menu?`,
+        ]), true)
+      } else {
+        outputTts(sample([
+          `You scored ${score} points. Well done! Are you ready for the next game?`,
+          `You just scored ${score} points. Great job! Are you ready to play your next game?`,
+          `You scored ${score} points that time. Nice play! Ready for the next one?`
+        ]), true)
+      }
+    }
   }
 
   // Create game run/results
@@ -108,8 +141,8 @@ export default function GamePlay({
           onComplete={onComplete}
         />
       )}
-      {result && (isLoading || isTrainingLoading) && <LoadingComponent />}
-      {result && (!isLoading) && (!isTrainingLoading) && (
+      {result && (loading) && <LoadingComponent />}
+      {result && (!loading) && (
         <GameScoreCard
           title={game.values.title}
           gameIcon={game.values.score_thumbnail_url}

@@ -47,6 +47,7 @@ const GameScoreCard = ({
   const { outputTts } = useInteractiveCanvas()
 
   useExpect(Intents.YES, () => {
+    console.log('actionButtonHandler', actionButtonHandler)
     actionButtonHandler()
   })
 
@@ -61,7 +62,6 @@ const GameScoreCard = ({
   useExpect(Intents.HOME, () => {
     actionButtonHandler()
   })
-
 
   const trophyIndex = topScoresData?.findIndex((score) => {
     if (score.score === currentScore)

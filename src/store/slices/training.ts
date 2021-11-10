@@ -5,7 +5,7 @@ import sampleSize from 'lodash.samplesize'
 import clonedeep from 'lodash.clonedeep'
 
 const SIZE = 3 // Workouts are 3 games
-const VERSION = 2  // Version of current training manager, if you want to invalidate all trainings increase this int
+const VERSION = 3  // Version of current training manager, if you want to invalidate all trainings increase this int
 
 interface TrainingStorage {
   storage: {
@@ -51,9 +51,9 @@ const generateRandomTraining = () => {
 export const loadTraining = createAsyncThunk<TrainingStorage["storage"], undefined, thunkApiExtended>(
   'training/load',
   async (_args, thunkApi) => {
-    const training = await thunkApi.extra.interactiveUserStorage.get<TrainingStorage["storage"]>(trainingStorageKey, generateRandomTraining())
-    if (training && (training.version === VERSION) && dayjs(training?.deadline).isValid() && dayjs().isSame(training?.deadline, 'day')) {
-      return training
+    let training = await thunkApi.extra.interactiveUserStorage.get<TrainingStorage["storage"]>(trainingStorageKey, null)
+    if (!(training && (training.version === VERSION) && dayjs(training?.deadline).isValid() && dayjs().isSame(training?.deadline, 'day'))) {
+      training = generateRandomTraining()
     }
     await thunkApi.extra.interactiveUserStorage.set<TrainingStorage["storage"]>(trainingStorageKey, training)
     return training

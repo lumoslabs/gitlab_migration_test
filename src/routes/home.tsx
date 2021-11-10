@@ -33,6 +33,10 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
     outputTts('Here is what you can do: you can say "Play a game" to start a random game or "Start a workout" to play a series of three games. What would you like to do?', true)
   })
 
+  useExpect(Intents.NO_MATCH, () => {
+    outputTts('Sorry, what was that?', true)
+  })
+
   useExpect(Intents.TRAINING, () => {
     onTrainingClick()
   })
@@ -64,6 +68,8 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
            What would you like to do today?`)
         }
       }
+    } else {
+      outputTts(`Back to Main Menu. What would you like to do next?`, true)
     }
   }, [])
 

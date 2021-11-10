@@ -81,6 +81,7 @@ export const ageGateSlice = createSlice({
       state.loading = true
     })
     builder.addCase(setBirthday.rejected, (state, action) => {
+      state.error = true
     })
     builder.addCase(setBirthday.fulfilled, (state, action) => {
       state.loading = false

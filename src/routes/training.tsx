@@ -28,7 +28,7 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
     if (training?.games?.length === 1) {
       track('training_session_finish')
     }
-    dispatch(setTrainingGameCompleted(currentGame.id))
+    return dispatch(setTrainingGameCompleted(currentGame.id))
   }
 
   useEffect(() => {

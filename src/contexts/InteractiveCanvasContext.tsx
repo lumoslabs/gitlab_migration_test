@@ -14,6 +14,7 @@ export enum Intents {
   NO = 'NO',
   YES = 'YES',
   TRAINING = 'TRAINING',
+  NO_MATCH = 'NoMatch'
 }
 
 export enum Scenes {

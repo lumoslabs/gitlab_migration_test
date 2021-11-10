@@ -1,5 +1,5 @@
 import { css, StyleSheet } from 'aphrodite/no-important'
-import LoadingComponent from '@components/ui/LoadingComponent'
+import Logo from '@components/ui/Logo'
 import { useCallback, useEffect } from 'react'
 import useAmplitude from '@hooks/useAmplitude'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
@@ -40,7 +40,7 @@ export function Index(): JSX.Element {
     <main>
       <div className={css(styles.app)}>
         <div className={css(styles.mainContent)}>
-          <LoadingComponent />
+          <Logo />
         </div>
       </div>
     </main>
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     height: '100%',
     maxWidth: '100%',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

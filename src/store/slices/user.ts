@@ -43,7 +43,6 @@ export const loadUser = createAsyncThunk<UserStorage["storage"], undefined, thun
 
     if (!id) {
       id = uuidv4()
-      console.log('new uuid!', id)
       await thunkApi.extra.interactiveUserStorage.set(idStorageKey, id) as string
     }
 
@@ -87,7 +86,6 @@ export const userSlice = createSlice({
       state.loading = true
     })
     builder.addCase(loadUser.rejected, (state, action) => {
-      console.log('loadUser.rejected', action)
       state.loading = false
       state.error = true
     })

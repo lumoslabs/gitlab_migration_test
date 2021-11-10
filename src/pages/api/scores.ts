@@ -8,6 +8,14 @@ async function scoresHandler(req, res) {
     })
     return
   }
+
+  if ((!req.body.token) || (!req.body.slug) || (!req.body.eventData)) {
+    res.status(400).json({
+      status: 400
+    })
+    return
+  }
+
   const { slug, eventData } = req.body
   const token = await decrypt(req.body.token)
   const result = await (new LumosRailsApi()).saveGameResult(token, slug, eventData)
