@@ -8,8 +8,7 @@ import { useAppDispatch, useAppSelector } from '@store/hooks'
 import useInteractiveCanvas from '@hooks/useInteractiveCanvas'
 
 import sample from 'lodash.sample'
-import { saveUserScore, selectGameScores, selectScoresIsLoading, selectTutorialSeen, syncScores } from '@store/slices/scores'
-import { selectTrainingIsLoading } from '@store/slices/training'
+import { saveUserScore, selectGameScores, selectTutorialSeen, syncScores } from '@store/slices/scores'
 
 /*
 Example:
