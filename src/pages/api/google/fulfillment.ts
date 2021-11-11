@@ -34,6 +34,12 @@ conversationApp.handle('GoogleAccountLink', onGoogleAccountLink)
 conversationApp.handle('GoogleAccountLinkRejected', onGoogleAccountLinkRejected)
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  await (new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, 10001)
+  }))
+
   try {
     logger.debug(`Fulfillment Request ${req.body?.handler?.name}`)
 
