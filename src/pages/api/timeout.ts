@@ -1,9 +1,6 @@
-import { decrypt } from "@backend/conversation/utils"
-import LumosRailsApi from "@backend/libs/LumosRailsApi"
+async function scoresHandler(_req, res) {
 
-async function scoresHandler(req, res) {
-
-  const start = new Date().getTime() / 1000;
+  const start = new Date().getTime() / 1000
 
   await (new Promise<void>((resolve) => {
     setTimeout(() => {
@@ -11,7 +8,7 @@ async function scoresHandler(req, res) {
     }, 10001)
   }))
 
-  const end = new Date().getTime() / 1000;
+  const end = new Date().getTime() / 1000
 
   res.status(200).json({ timeout: (end - start) })
 }
