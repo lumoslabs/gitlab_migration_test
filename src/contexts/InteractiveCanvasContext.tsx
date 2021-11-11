@@ -41,14 +41,23 @@ class InteractiveCanvas {
     })
   }
 
-  sendTextQuery = async (query: string, state: Record<any, any> = {}) => {
+  sendTextQuery = async (query: string, state: Record<any, any> = {}, isRetry: boolean = false) => {
     console.log('sending text query: ' + query)
     window.interactiveCanvas?.setCanvasState({
       ...state
     })
-    const result = await window.interactiveCanvas?.sendTextQuery(query)
+    let result = await window.interactiveCanvas?.sendTextQuery(query)
     if (result !== 'SUCCESS') {
       console.error('interactiveCanvas - sendTextQuery - incorrect result', { query, state }, result)
+      if (!isRetry) {
+        console.log('retry sendTextQuery ', { query, state })
+        await (new Promise<void>((resolve, reject) => {
+          setTimeout(() => {
+            resolve();
+          }, 1000)
+        }))
+        return this.sendTextQuery(query, state, true)
+      }
     } else {
       console.log('textQuery successful: ' + query)
     }
