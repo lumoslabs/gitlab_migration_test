@@ -24,7 +24,7 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
       sendTextQuery('Home').then((result) => {
         //TODO: fix it with the new interactiveCanvas
         if (result === 'BLOCKED') {
-          history.push('/home')
+          history.push('/home', { tts: true })
         }
       })
     }

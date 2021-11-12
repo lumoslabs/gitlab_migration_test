@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom'
 export default function Game({ game }: { game: GameConfig }): JSX.Element {
   const track = useAmplitude()
   const { sendTextQuery } = useInteractiveCanvas()
-  const router = useHistory()
+  const history = useHistory()
 
   useEffect(() => {
     track('page_view')
@@ -23,7 +23,7 @@ export default function Game({ game }: { game: GameConfig }): JSX.Element {
         sendTextQuery('Home').then((result) => {
           //TODO: fix it with the new interactiveCanvas
           if (result === 'BLOCKED') {
-            router.push('/home')
+            history.push('/home', { tts: true })
           }
         })
       }}

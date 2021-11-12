@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import WorkoutCard from '@components/ui/WorkoutCard'
 import GameSection from '@components/ui/GameSection'
@@ -16,6 +16,7 @@ import useAppBusListener from '@hooks/useAppBusListener'
 export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
 
   const track = useAmplitude()
+  const location = useLocation<{ tts: boolean }>()
 
   useEffect(() => {
     track('page_view')
@@ -43,6 +44,12 @@ export default function Home({ games }: { games: GameConfig[] }): JSX.Element {
   const onGameClick = (slug: string) => {
     history.push(`/game/${slug}`)
   }
+
+  useEffect(() => {
+    if (location.state?.tts) {
+      outputTts('Back to Main Menu. What would you like to do next?', true)
+    }
+  }, [])
 
   useAppBusListener('onIntentHelp', () => {
     outputTts('Here is what you can do: you can say "Play a game" to start a random game or "Start a workout" to play a series of three games. What would you like to do?')
