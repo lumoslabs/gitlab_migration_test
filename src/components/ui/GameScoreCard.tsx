@@ -22,8 +22,9 @@ export interface IGameScoreCardProps {
   showTrainingIcon: boolean;
   currentScore: number;
   topScoresData: ITopScoreData[];
-  actionButtonText: string;
-  actionButtonHandler(): any;
+  buttonText: string;
+  onYesHandler: any;
+  onNextHandler: any;
   statLabel: string;
   stat: number;
   remainingGamesCount?: number;
@@ -36,8 +37,9 @@ const GameScoreCard = ({
   showTrainingIcon,
   currentScore,
   topScoresData,
-  actionButtonText,
-  actionButtonHandler,
+  buttonText,
+  onYesHandler,
+  onNextHandler,
   statLabel,
   stat,
   remainingGamesCount,
@@ -47,7 +49,11 @@ const GameScoreCard = ({
   const { outputTts } = useInteractiveCanvas()
 
   useAppBusListener('onIntentYes', () => {
-    actionButtonHandler()
+    onYesHandler()
+  })
+
+  useAppBusListener('onIntentNext', () => {
+    onNextHandler()
   })
 
   useAppBusListener('onIntentHelp', () => {
@@ -176,8 +182,8 @@ const GameScoreCard = ({
       <div className={css(commonStyles.flexColumnAllCenter)}>
         <WideActionButton
           extendStyles={styles.nextButton}
-          buttonText={actionButtonText}
-          onClick={actionButtonHandler}
+          buttonText={buttonText}
+          onClick={onYesHandler}
         />
       </div>
     </div>

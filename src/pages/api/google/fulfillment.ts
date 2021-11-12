@@ -26,6 +26,7 @@ import onRestartCMM from '@backend/conversation/onRestartCMM'
 import onHelp from '@backend/conversation/onHelp'
 import onResumeGame from '@backend/conversation/onResumeGame'
 import onRestartGame from '@backend/conversation/onRestartGame'
+import onNext from '@backend/conversation/onNext'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -75,6 +76,7 @@ conversationApp.handle('AgeGateResult', onAgeGateResult)
 conversationApp.handle('Yes', onYes)
 conversationApp.handle('No', onNo)
 conversationApp.handle('Help', onHelp)
+conversationApp.handle('Next', onNext)
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {

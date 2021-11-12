@@ -37,5 +37,8 @@ intentEvents:
 - handler:
     webhookHandler: Guest
   intent: GUEST
+- handler:
+    webhookHandler: Next
+  intent: NEXT
 onEnter:
   webhookHandler: MainScene

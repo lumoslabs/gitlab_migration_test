@@ -30,6 +30,15 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
     }
   }
 
+  const onNextHandler = () => {
+    if (nextGame) {
+      setCurrentGame(nextGame)
+    } else {
+      const randomGame = sample(games)
+      history.push('/game/' + randomGame.id)
+    }
+  }
+
   const onGameComplete = () => {
     if (training?.games?.length === 1) {
       track('training_session_finish')
@@ -66,6 +75,7 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
           onGameComplete={onGameComplete}
           scoreActionButtonText={training.games.length > 0 ? 'Next Game' : 'Main Menu'}
           onFinishHandler={onFinish}
+          onNextHandler={onNextHandler}
           remainingGamesCount={training?.games?.length}
           totalGameCount={training?.size}
         />
