@@ -28,7 +28,7 @@ export default function Game({ slug, games }: { games: GameConfig[], slug: strin
         sendTextQuery('Home').then((result) => {
           //TODO: fix it with the new interactiveCanvas
           if (result === 'BLOCKED') {
-            history.push('/home')
+            history.push('/home', { tts: true })
           }
         })
       }}
