@@ -17,6 +17,7 @@ window.sendToJavaScript('game:complete', {"score":4500,"session_level":0,"user_l
 export default function GamePlay({
   game,
   onFinishHandler,
+  onNextHandler,
   isTraining,
   scoreActionButtonText,
   remainingGamesCount,
@@ -25,6 +26,7 @@ export default function GamePlay({
 }: {
   game: GameConfig,
   onFinishHandler: () => void,
+  onNextHandler: () => void,
   isTraining: boolean,
   scoreActionButtonText: string,
   remainingGamesCount?: number,
@@ -97,8 +99,9 @@ export default function GamePlay({
           showTrainingIcon={isTraining}
           currentScore={result?.score}
           topScoresData={topScores}
-          actionButtonText={scoreActionButtonText}
-          actionButtonHandler={onFinishHandler}
+          buttonText={scoreActionButtonText}
+          onYesHandler={onFinishHandler}
+          onNextHandler={onNextHandler}
           stat={stat}
           statLabel={statLabel}
           remainingGamesCount={remainingGamesCount}

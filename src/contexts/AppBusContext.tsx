@@ -6,6 +6,7 @@ export type appBusEvents = {
   onListeningModeChanged: boolean;
   onTtsMark: string;
   onIntentYes: void;
+  onIntentNext: void;
   onIntentNo: void;
   onIntentHelp: void;
   //TODO: remove it with private game intents
