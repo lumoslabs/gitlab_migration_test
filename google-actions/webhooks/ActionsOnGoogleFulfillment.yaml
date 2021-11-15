@@ -17,6 +17,7 @@ handlers:
 - name: AgeGateResult
 - name: MainScene
 - name: Guest
+- name: Next
 httpsEndpoint:
   baseUrl: https://v1--lumos-google-assistant.netlify.app/api/google/fulfillment
   endpointApiVersion: 2
