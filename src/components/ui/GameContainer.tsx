@@ -14,6 +14,7 @@ import { GameWrapperRef, GameEventData, GameSpeechData, GameCompletedData } from
 import GameWrapper from './GameWrapperIframe'
 import { useCallback } from 'react'
 import useExpect from '@hooks/useExpect'
+import useNavigation from '@hooks/useNavigation'
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -26,7 +27,8 @@ export interface IGameContainerProps {
 
 const GameContainer = ({ game, onComplete, onEvent = () => undefined, showTutorial }: IGameContainerProps): JSX.Element => {
   const track = useAmplitude()
-  const { sendTextQuery, outputTts, enterContinuousMatchMode, exitContinuousMatchMode } = useInteractiveCanvas()
+  const navigation = useNavigation()
+  const { outputTts, enterContinuousMatchMode, exitContinuousMatchMode } = useInteractiveCanvas()
   // Set the dimensions of the screen for game layout
   const [clientHeight, setHeight] = useState(0)
   const [clientWidth, setWidth] = useState(0)
@@ -118,7 +120,7 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, showTutori
         break
       case 'game:quit':
         track('game_quit', eventTracking)
-        sendTextQuery('Home')
+        navigation.toHome()
         break
       //case 'game:resume':
       //case 'game:abort_update':
