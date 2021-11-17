@@ -10,6 +10,7 @@ async function scoresHandler(_req, res) {
 
   const end = new Date().getTime() / 1000
 
+
   res.status(200).json({ timeout: (end - start) })
 }
 
