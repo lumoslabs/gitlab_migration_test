@@ -31,7 +31,7 @@
       {
         "id": "nest_1.0",
         "overrides": {
-          "game_url": "https://assets.nest.lumosity.com/game-assets/EbbAndFlow_CC/nest_lowres/d245fa71d9c0b8bdf2021834098879d53822582e/394891078/release/",
+          "game_url": "https://assets.nest.lumosity.com/game-assets/EbbAndFlow_CC/nest_lowres/4ea5c5f29d4971dae355ba61dfdebe7a934ed519/413806359/release/",
           "extras": {
             "skip_title": true,
             "skip_stats": true
