@@ -1,15 +1,15 @@
 import { ConversationV3 } from 'actions-on-google'
+import { sendCommand } from '@backend/conversation/utils'
 import appSharedActions from '@store/slices/appSharedActions'
-import { Pages, sendCommand } from './utils'
 
 export default async (conv: ConversationV3) => {
-  conv.add('Back to Main Menu. What would you like to do next?')
   sendCommand({
     conv,
+    suppressMic: true,
     commands: [
       {
-        command: appSharedActions.GO_TO,
-        payload: Pages.Home
+        command: appSharedActions.EMIT_EVENT,
+        payload: `onIntentNext`,
       }
     ]
   })

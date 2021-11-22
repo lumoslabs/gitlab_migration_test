@@ -21,7 +21,7 @@ export function Index({ games }: { games: GameConfig[] }): JSX.Element {
   const { publicRuntimeConfig } = getConfig()
   const gameRoutes = games.map((game) => {
     return <Route exact path={`/game/${game.id}`} key={game.id}>
-      <GamePage game={game} />
+      <GamePage games={games} slug={game.id} />
     </Route>
   })
 

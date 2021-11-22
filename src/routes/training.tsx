@@ -24,9 +24,18 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
       sendTextQuery('Home').then((result) => {
         //TODO: fix it with the new interactiveCanvas
         if (result === 'BLOCKED') {
-          history.push('/home')
+          history.push('/home', { tts: true })
         }
       })
+    }
+  }
+
+  const onNextHandler = () => {
+    if (nextGame) {
+      setCurrentGame(nextGame)
+    } else {
+      const randomGame = sample(games)
+      history.push('/game/' + randomGame.id)
     }
   }
 
@@ -66,6 +75,7 @@ export default function Training({ games }: { games: GameConfig[] }): JSX.Elemen
           onGameComplete={onGameComplete}
           scoreActionButtonText={training.games.length > 0 ? 'Next Game' : 'Main Menu'}
           onFinishHandler={onFinish}
+          onNextHandler={onNextHandler}
           remainingGamesCount={training?.games?.length}
           totalGameCount={training?.size}
         />
