@@ -134,9 +134,6 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
   })
 
   //TODO: remove it after migration to new version of interactiveCanvas
-  useAppBusListener('onIntentRestartCMM', () => {
-    gameRef.current?.send({ action: 'continue' })
-  })
   useAppBusListener('onIntentRestartGame', () => {
     gameRef.current?.send({ action: 'restart' })
   })
