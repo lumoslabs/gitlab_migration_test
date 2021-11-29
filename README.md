@@ -63,7 +63,8 @@ ngrok start lumos-google-assistant
 
 ### Folder structure
 
-* Frontend routes - */src/pages*
+* Nextjs frontend routes - */src/pages*
+* Interactive canvas app routes - */src/routes*
 * React components - */src/components* can be imported by alias @components/*
 * UI components - */src/components/ui* can be imported by alias @components/ui/*
 * Styles - */src/styles/* can be imported by alias @styles/*
@@ -83,8 +84,88 @@ yarn lint
 
 ### Testing
 
-TODO
+```bash
+  yarn test
+```
 
+TODO: Intergration testing, test cases
+
+### Interactive canvas routing
+
+Interactive canvas app should stay on the same url, so we are using `react-router-dom` and memory routing to handle routes instead of `nextjs-router`, these routes list defined in the `src/pages/index.tsx`
+
+#### Routes - 
+
+* index - loads initial data
+* ageGate - age gate flow
+* home - games list
+* game - gameplay, scores
+* training - gameplay, scores
+
+### Event emmiter/miit.js
+
+miit.js is the tiny EventEmitter implementation for frontend
+
+Events - 
+  * onPhraseMatched: any;
+  * onListeningModeChanged: boolean;
+  * onTtsMark: string;
+Only for *server webhook fulfillment version* -
+  * onIntentYes: void;
+  * onIntentNo: void;
+  * onIntentHelp: void;
+  * onIntentRestartCMM: void;
+  * onIntentRestartGame: void;
+  * onIntentResumeGame: void;
+  * onDebugLog: string;
+
+Any component can subscribe on events with the `src/hooks/useAppBusListener.ts` hook
+
+### Interactive canvas integration
+Interactive canvas injected to the DOM by `src/components/InteractiveCanvasScript.tsx`
+Sometimes interactive canvas library initializes earlier then react app, so we have proxy script - `@assets/interactiveCanvasProxy.js?raw` which stores unhandled events and passes it to react when it is ready.
+
+Callbacks for interactive canvas are managed in `src/contexts/InteractiveCanvasContext.tsx`
+
+Helpful hooks - 
+* useInteractiveCanvas - returns interactive canvas library methods
+* useExpect(intentId, callback) - binds expectation function for `intentId` on component mound and gracefully removes it on unmount, only for *client fullfilment version*
+
+### State management
+App state is managed by [redux toolkit](https://redux-toolkit.js.org/)
+
+#### Server webhook fulfillment version(v1)
+
+All data stored in the one slice - `src/store/slices/appSlice.ts`
+
+Result of webhook intent handler are commands for React SPA, like: to emit miit.js event, to dispatch redux action, to change app route
+
+Example - 
+```mermaid
+stateDiagram-v2
+    User --> Device : Trigger intent by voice/sendTextQuery()
+    Device --> WebhookHandler : Trigger webhook
+    WebhookHandler --> ReactApp : trigger InteractiveCanvas@onUpdate with new state
+    state ReactApp {
+        direction LR
+        InteractiveCanvas@onUpdate --> EventEmmiter : Emit event
+        InteractiveCanvas@onUpdate --> Redux : Dispatch action
+        InteractiveCanvas@onUpdate --> Router : Push to routing 
+    }
+    ReactApp --> User : Render new state
+```
+
+
+#### Client fulfillment version(v2)
+
+This version loads user storage data from the interactive canvas frontend library, with thunk side effects and interactiveCanvas.getUserParam(). So this version doesn't contain webhook commands flow.
+
+Slices: 
+* src/store/slices/ageGate
+* src/store/slices/scores
+* src/store/slices/session
+* src/store/slices/training
+* src/store/slices/user
 
 ### Games integration
 
@@ -148,7 +229,7 @@ GameEventName -
 
 ### Scenes and intents managments
 
-//TODO: describe flow of scenes managment
+Scenes are managed by [google developer console](https://console.actions.google.com/u/3/project/lumos-nest-prod/scenes)
 
 ### gactions
 
@@ -301,4 +382,10 @@ In order to connect your account to Google and turn off Guest mode, on the [app 
 #### "Lumosity is not responding" after game finishing
 This can occur if you have linked user account and don't have http access for Lumos Rails. You should check if environment variables are correct and vpn is on if using staging Lumos Rails server
 
+
+### TODO:
+
+* Merge main to v2 branch after v1 release
+* minor: integration tests
+* minor: integrate git-based cms to change game vars (e.g. netlify cms)
 
