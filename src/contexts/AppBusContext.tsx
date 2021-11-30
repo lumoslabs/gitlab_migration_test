@@ -3,6 +3,7 @@ import mitt, { Emitter } from 'mitt'
 
 export type appBusEvents = {
   onPhraseMatched: any;
+  onPhraseUnmatched: void;
   onListeningModeChanged: boolean;
   onTtsMark: string;
   onIntentYes: void;
