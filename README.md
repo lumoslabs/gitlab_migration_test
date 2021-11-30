@@ -386,6 +386,7 @@ This can occur if you have linked user account and don't have http access for Lu
 ### TODO:
 
 * Merge main to v2 branch after v1 release
+* Remove useless ajax calls from game.js scripts, rewrite it to promise style
 * minor: integration tests
 * minor: integrate git-based cms to change game vars (e.g. netlify cms)
 
