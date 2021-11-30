@@ -46,14 +46,14 @@ class InteractiveCanvas {
     window.interactiveCanvas?.setCanvasState({
       ...state
     })
-    let result = await window.interactiveCanvas?.sendTextQuery(query)
+    const result = await window.interactiveCanvas?.sendTextQuery(query)
     if (result !== 'SUCCESS') {
       console.error('interactiveCanvas - sendTextQuery - incorrect result', { query, state }, result)
       if (!isRetry) {
         console.log('retry sendTextQuery ', { query, state })
         await (new Promise<void>((resolve, reject) => {
           setTimeout(() => {
-            resolve();
+            resolve()
           }, 1000)
         }))
         return this.sendTextQuery(query, state, true)
@@ -115,6 +115,9 @@ export default function InteractiveCanvasProvider({ children }) {
       },
       onPhraseMatched(data) {
         appBus.emit('onPhraseMatched', data)
+      },
+      onPhraseUnmatched() {
+        appBus.emit('onPhraseUnmatched')
       },
     }
     window?.interactiveCanvasProxy?.ready(callbacks)

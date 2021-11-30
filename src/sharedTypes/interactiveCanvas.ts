@@ -5,4 +5,5 @@ export interface interactiveCanvasCallbacks {
   onTtsMark: (markName: string) => any,
   onListeningModeChanged: (data: ListeningMode, reason: string) => any,
   onPhraseMatched: (data: any) => any,
+  onPhraseUnmatched: () => any,
 }

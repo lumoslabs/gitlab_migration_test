@@ -90,22 +90,26 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
         track('game_finish', eventTracking)
         break
       case 'game:nest_cmm_restart':
-        sendTextQuery(Intents.RESTART_CMM, { continuous_match_phrases: eventData })
+        exitContinuousMatchMode().then(() => {
+          sendTextQuery(Intents.RESTART_CMM, { continuous_match_phrases: eventData })
+        })
         break
       case 'game:speech':
         eventData = eventData as GameSpeechData
         outputTts(eventData.text, eventData.prompt)
         break
       case 'game:pause':
+      case 'game:resume':
         break
       case 'game:nest_cmm_pause':
         exitContinuousMatchMode()
         break
       case 'game:quit':
-        track('game_quit', eventTracking)
-        sendTextQuery('Home')
+        exitContinuousMatchMode().then(() => {
+          track('game_quit', eventTracking)
+          sendTextQuery('Home')
+        })
         break
-      //case 'game:resume':
       //case 'game:abort_update':
       //case 'game:nest_cmm_resume':
       default:
@@ -120,6 +124,9 @@ const GameContainer = ({ game, onComplete, onEvent = () => undefined, isTraining
   //Handle interactive canvas events
   useAppBusListener('onPhraseMatched', (data) => {
     gameRef.current?.send(data)
+  })
+  useAppBusListener('onPhraseUnmatched', () => {
+    gameRef.current?.send({ action: 'cmm_unmatched' })
   })
   useAppBusListener('onListeningModeChanged', (isCmm) => {
     gameRef.current?.send({ action: isCmm ? 'cmm_start' : 'cmm_end' })

@@ -16,6 +16,9 @@ function interactiveCanvasProxy() {
     onPhraseMatched(data) {
       bindings.onPhraseMatched ? bindings.onPhraseMatched(data) : null
     },
+    onPhraseUnmatched() {
+      bindings.onPhraseUnmatched ? bindings.onPhraseUnmatched() : null
+    },
   }
   window.interactiveCanvas.ready(callbacks)
   return {
