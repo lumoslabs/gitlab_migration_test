@@ -229,9 +229,9 @@ GameEventName -
 
 ### Scenes and intents managments
 
-Scenes are managed by [google developer console](https://console.actions.google.com/u/3/project/lumos-nest-prod/scenes)
+Scenes are managed by [google developer console](https://console.actions.google.com/project/lumos-nest-prod/scenes)
 
-### gactions
+#### gactions cli tool
 
 * You can update actions in the [Develop tab of the google actions console](https://console.actions.google.com/project/lumos-nest-prod/invocations/edit/actions.intent.MAIN)
 * Intents can be managed with the [gactions command line interface (CLI) tool](https://developers.google.com/assistant/actionssdk/gactions)
@@ -369,15 +369,15 @@ You cannot link with staging while on a device because staging requires VPN.
 To link your account to a staging account, you must use the simulator while on the VPN.
 
 #### User Storage is always empty
-Just allow "Web & App Activity" on Google's [Activity controls](https://myactivity.google.com/u/3/activitycontrols?pli=1) page
+Just allow "Web & App Activity" on Google's [Activity controls](https://myactivity.google.com/activitycontrols?pli=1) page
 
 #### Clear User Storage/Unlink Account
 
-You can clear user storage on the [App page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o), with the *Reset* link, or disconnect your account using the *Unlink* link. You can also click *Stop Lumosity from remembering me* to get into Guest mode.
+You can clear user storage on the [App page](https://assistant.google.com/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o), with the *Reset* link, or disconnect your account using the *Unlink* link. You can also click *Stop Lumosity from remembering me* to get into Guest mode.
 
 #### isGuest always true
 
-In order to connect your account to Google and turn off Guest mode, on the [app page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) click the *Allow Lumosity to remember me (?)* link.
+In order to connect your account to Google and turn off Guest mode, on the [app page](https://assistant.google.com/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) click the *Allow Lumosity to remember me (?)* link.
 
 #### "Lumosity is not responding" after game finishing
 This can occur if you have linked user account and don't have http access for Lumos Rails. You should check if environment variables are correct and vpn is on if using staging Lumos Rails server
