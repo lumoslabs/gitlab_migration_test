@@ -88,7 +88,7 @@ yarn lint
   yarn test
 ```
 
-TODO: Intergration testing, test cases
+TODO: Integration testing, test cases
 
 ### Interactive canvas routing
 
@@ -129,7 +129,7 @@ Callbacks for interactive canvas are managed in `src/contexts/InteractiveCanvasC
 
 Helpful hooks - 
 * useInteractiveCanvas - returns interactive canvas library methods
-* useExpect(intentId, callback) - binds expectation function for `intentId` on component mound and gracefully removes it on unmount, only for *client fullfilment version*
+* useExpect(intentId, callback) - binds expectation function for `intentId` on component mount and gracefully removes it on unmount, only for *client fullfilment version*
 
 ### State management
 App state is managed by [redux toolkit](https://redux-toolkit.js.org/)
