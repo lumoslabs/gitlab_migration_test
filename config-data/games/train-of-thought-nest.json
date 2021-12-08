@@ -31,7 +31,7 @@
       {
         "id": "nest_1.0",
         "overrides": {
-          "game_url": "https://assets.nest.lumosity.com/game-assets/TrainOfThought_CC/nest_lowres/a284dc862ce4dbd1e56a584cbf429b16b3273749/414017054/release/",
+          "game_url": "https://assets.nest.lumosity.com/game-assets/TrainOfThought_CC/nest_lowres/6bacc6539614ce289c74ad445e672aa0ef316800/424949588/release/",
           "extras": {
             "skip_title": true,
             "skip_stats": true
