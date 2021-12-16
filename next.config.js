@@ -69,7 +69,7 @@ module.exports = (phase) => {
       },
       rollbar: {
         serverToken: process.env.ROLLBAR_SERVER_TOKEN,
-        enviroment: process.env.ROLLBAR_ENV
+        environment: process.env.ROLLBAR_ENV
       },
       underageBanSeconds: 172800, //48h
     },
@@ -83,7 +83,7 @@ module.exports = (phase) => {
       interactiveCanvasLibUrl: 'https://www.gstatic.com/assistant/interactivecanvas/api/interactive_canvas_eap.min.js',
       rollbar: {
         clientToken: process.env.ROLLBAR_CLIENT_TOKEN,
-        enviroment: process.env.ROLLBAR_ENV
+        environment: process.env.ROLLBAR_ENV
       },
       versionBar: versionBar
     }
