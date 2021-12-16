@@ -110,7 +110,9 @@ Events -
   * onPhraseMatched: any;
   * onListeningModeChanged: boolean;
   * onTtsMark: string;
+
 Only for *server webhook fulfillment version* -
+
   * onIntentYes: void;
   * onIntentNo: void;
   * onIntentHelp: void;
