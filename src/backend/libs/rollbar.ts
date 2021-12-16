@@ -4,7 +4,7 @@ import getConfig from 'next/config'
 const { serverRuntimeConfig } = getConfig()
 
 const rollbar = new Rollbar({
-  environment: serverRuntimeConfig?.rollbar?.enviroment,
+  environment: serverRuntimeConfig?.rollbar?.environment,
   accessToken: serverRuntimeConfig?.rollbar?.serverToken
 })
 
