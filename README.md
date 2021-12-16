@@ -63,7 +63,8 @@ ngrok start lumos-google-assistant
 
 ### Folder structure
 
-* Frontend routes - */src/pages*
+* Nextjs frontend routes - */src/pages*
+* Interactive canvas app routes - */src/routes*
 * React components - */src/components* can be imported by alias @components/*
 * UI components - */src/components/ui* can be imported by alias @components/ui/*
 * Styles - */src/styles/* can be imported by alias @styles/*
@@ -83,8 +84,90 @@ yarn lint
 
 ### Testing
 
-TODO
+```bash
+  yarn test
+```
 
+TODO: Integration testing, test cases
+
+### Interactive canvas routing
+
+Interactive canvas app should stay on the same url, so we are using `react-router-dom` and memory routing to handle routes instead of `nextjs-router`, these routes list defined in the `src/pages/index.tsx`
+
+#### Routes - 
+
+* index - loads initial data
+* ageGate - age gate flow
+* home - games list
+* game - gameplay, scores
+* training - gameplay, scores
+
+### Event emmiter/miit.js
+
+miit.js is the tiny EventEmitter implementation for frontend
+
+Events - 
+  * onPhraseMatched: any;
+  * onListeningModeChanged: boolean;
+  * onTtsMark: string;
+
+Only for *server webhook fulfillment version* -
+
+  * onIntentYes: void;
+  * onIntentNo: void;
+  * onIntentHelp: void;
+  * onIntentRestartCMM: void;
+  * onIntentRestartGame: void;
+  * onIntentResumeGame: void;
+  * onDebugLog: string;
+
+Any component can subscribe on events with the `src/hooks/useAppBusListener.ts` hook
+
+### Interactive canvas integration
+Interactive canvas injected to the DOM by `src/components/InteractiveCanvasScript.tsx`
+Sometimes interactive canvas library initializes earlier then react app, so we have proxy script - `@assets/interactiveCanvasProxy.js?raw` which stores unhandled events and passes it to react when it is ready.
+
+Callbacks for interactive canvas are managed in `src/contexts/InteractiveCanvasContext.tsx`
+
+Helpful hooks - 
+* useInteractiveCanvas - returns interactive canvas library methods
+* useExpect(intentId, callback) - binds expectation function for `intentId` on component mount and gracefully removes it on unmount, only for *client fullfilment version*
+
+### State management
+App state is managed by [redux toolkit](https://redux-toolkit.js.org/)
+
+#### Server webhook fulfillment version(v1)
+
+All data stored in the one slice - `src/store/slices/appSlice.ts`
+
+Result of webhook intent handler are commands for React SPA, like: to emit miit.js event, to dispatch redux action, to change app route
+
+Example - 
+```mermaid
+stateDiagram-v2
+    User --> Device : Trigger intent by voice/sendTextQuery()
+    Device --> WebhookHandler : Trigger webhook
+    WebhookHandler --> ReactApp : trigger InteractiveCanvas@onUpdate with new state
+    state ReactApp {
+        direction LR
+        InteractiveCanvas@onUpdate --> EventEmmiter : Emit event
+        InteractiveCanvas@onUpdate --> Redux : Dispatch action
+        InteractiveCanvas@onUpdate --> Router : Push to routing 
+    }
+    ReactApp --> User : Render new state
+```
+
+
+#### Client fulfillment version(v2)
+
+This version loads user storage data from the interactive canvas frontend library, with thunk side effects and interactiveCanvas.getUserParam(). So this version doesn't contain webhook commands flow.
+
+Slices: 
+* src/store/slices/ageGate
+* src/store/slices/scores
+* src/store/slices/session
+* src/store/slices/training
+* src/store/slices/user
 
 ### Games integration
 
@@ -148,9 +231,9 @@ GameEventName -
 
 ### Scenes and intents managments
 
-//TODO: describe flow of scenes managment
+Scenes are managed by [google developer console](https://console.actions.google.com/project/lumos-nest-prod/scenes)
 
-### gactions
+#### gactions cli tool
 
 * You can update actions in the [Develop tab of the google actions console](https://console.actions.google.com/project/lumos-nest-prod/invocations/edit/actions.intent.MAIN)
 * Intents can be managed with the [gactions command line interface (CLI) tool](https://developers.google.com/assistant/actionssdk/gactions)
@@ -288,17 +371,24 @@ You cannot link with staging while on a device because staging requires VPN.
 To link your account to a staging account, you must use the simulator while on the VPN.
 
 #### User Storage is always empty
-Just allow "Web & App Activity" on Google's [Activity controls](https://myactivity.google.com/u/3/activitycontrols?pli=1) page
+Just allow "Web & App Activity" on Google's [Activity controls](https://myactivity.google.com/activitycontrols?pli=1) page
 
 #### Clear User Storage/Unlink Account
 
-You can clear user storage on the [App page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o), with the *Reset* link, or disconnect your account using the *Unlink* link. You can also click *Stop Lumosity from remembering me* to get into Guest mode.
+You can clear user storage on the [App page](https://assistant.google.com/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o), with the *Reset* link, or disconnect your account using the *Unlink* link. You can also click *Stop Lumosity from remembering me* to get into Guest mode.
 
 #### isGuest always true
 
-In order to connect your account to Google and turn off Guest mode, on the [app page](https://assistant.google.com/u/3/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) click the *Allow Lumosity to remember me (?)* link.
+In order to connect your account to Google and turn off Guest mode, on the [app page](https://assistant.google.com/services/a/uid/00000020ae1ec8fb?hl=en&e=-WebDirectoryEmbeddedWebviewExperiment&jsmode=o) click the *Allow Lumosity to remember me (?)* link.
 
 #### "Lumosity is not responding" after game finishing
 This can occur if you have linked user account and don't have http access for Lumos Rails. You should check if environment variables are correct and vpn is on if using staging Lumos Rails server
 
+
+### TODO:
+
+* Merge main to v2 branch after v1 release
+* Remove useless ajax calls from game.js scripts, rewrite it to promise style
+* minor: integration tests
+* minor: integrate git-based cms to change game vars (e.g. netlify cms)
 
