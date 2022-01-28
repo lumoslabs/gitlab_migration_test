@@ -11,7 +11,7 @@ export default function useAmplitude(): (eventName: string, eventProps?: any) =>
     const instance = window.amplitude?.getInstance()
     instance?.logEvent(eventName, {
       ...eventProps,
-      userId: userId,
+      user_id: userId,
       currentPage: location.pathname
     })
   }
