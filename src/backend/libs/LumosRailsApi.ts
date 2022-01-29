@@ -82,13 +82,21 @@ export default class LumosRailsApi {
   }
 
   updateUserInfo = async (id: string, accessToken: string, { birthday }: { birthday: string }) => {
-    const uri = `api/v2/users/${id}`
-    const response = await this.axios.put(uri, {
-      user: {
-        date_of_birth: birthday
-      }
-    }, {
-      headers: { Authorization: `OAuth ${accessToken}` }
+      const uri = `api/v2/users/${id}`
+      const response = await this.axios.put(uri, {
+        user: {
+          date_of_birth: birthday
+        }
+      }, {
+        headers: { Authorization: `OAuth ${accessToken}` }
+      })
+      return response.data
+    }
+
+  getUserInfo = async (token: string) => {
+    const uri = `api/v2/users/id`
+    const response = await this.axios.get(uri, {
+      headers: { Authorization: `OAuth ${token}` }
     })
     return response.data
   }

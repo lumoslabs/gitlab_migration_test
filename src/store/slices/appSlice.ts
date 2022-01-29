@@ -18,6 +18,7 @@ interface appState {
     isLinked?: boolean,
     isGuest?: boolean,
     isAgeVerified?: boolean,
+    lumosUserId?: number
   }
 }
 
@@ -64,6 +65,12 @@ export const appSlice = createSlice({
     ) => {
       state.tutorialSeen[action.payload.slug] = true
     },
+    setLumosUserId: (
+      state: Draft<typeof initialState>,
+      action: PayloadAction<{ id: number }>
+    ) => {
+      state.user.lumosUserId = action.payload.id
+    }
   }
 })
 

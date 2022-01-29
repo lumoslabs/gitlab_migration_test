@@ -9,6 +9,7 @@ export default class LinkingService {
 
   getUserAccessTokenById = async (userId: string, token: string): Promise<string> => {
     const result = await this.api.loginByGoogleToken(token)
+
     if (!result?.access_token) {
       throw new Error('access_token is incorrect')
     }
@@ -19,6 +20,11 @@ export default class LinkingService {
     const accessToken = await this.api.getApiAccessToken()
     const { user } = await this.api.createAccountWithGoogleIdToken(accessToken.access_token, token)
     return user
+  }
+
+  getUserId = async (token: string): Promise<any> => {
+    const data = await this.api.getUserInfo(token)
+    return data.user.id
   }
 
   setUserBirthday = async (userId: string, token: string, birthday: string): Promise<any> => {

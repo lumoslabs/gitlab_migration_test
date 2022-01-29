@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 
 export default function useAmplitude(): (eventName: string, eventProps?: any) => void {
   const user = useAppSelector(getUser)
-  const userId = user?.id
+  const userId = user?.lumosUserId
 
   const location = useLocation()
   const track = (eventName: string, eventProps = {}) => {

@@ -7,8 +7,11 @@ import rollbar from '@backend/libs/rollbar'
 import CatalogService from '@backend/services/ConfigService'
 import { dayjs } from '@backend/libs/dayjs'
 import ScoresManager from '@backend/libs/ScoresManager'
+import { useAppDispatch } from '@store/hooks'
+import { actions } from '@store/slices/appSlice'
 
 export default async (conv: ConversationV3) => {
+  const dispatch = useAppDispatch()
   const linkingService = new LinkingService()
   const token = conv.headers?.authorization as string
   const userId = conv.user.params.id
@@ -17,6 +20,9 @@ export default async (conv: ConversationV3) => {
     // Attempt to login with google token
     const accessToken = await linkingService.getUserAccessTokenById(userId, token)
     await setLumosToken(conv, accessToken)
+
+    const lumosUserId = await linkingService.getUserId(accessToken)
+    dispatch(actions.setLumosUserId({ id: lumosUserId }))
 
     const catalog = await (new CatalogService()).getCatalogGames()
 
