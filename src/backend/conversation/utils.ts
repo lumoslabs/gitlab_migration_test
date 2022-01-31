@@ -118,6 +118,11 @@ export const setScoresList = (conv: ConversationV3, slug: string, scores: ScoreR
   conv.user.params.scores[slug] = scores
 }
 
+export const setLumosUserId = (conv: ConversationV3, lumosUserId: number) => {
+  conv.user.params.lumosUserId = lumosUserId
+}
+
+
 export const isLumosLinked = (conv: ConversationV3) => {
   return Boolean(conv.user.params.lumosToken)
 }
@@ -126,6 +131,7 @@ export const convToUser = (conv: ConversationV3): any => {
   const isLinked = isLumosLinked(conv)
   return {
     id: conv.user.params.id,
+    lumosUserId: conv.user.params.lumosUserId,
     name: isLinked ? conv.user.params?.tokenPayload?.name : '',
     email: isLinked ? conv.user.params?.tokenPayload?.email : '',
     avatar: isLinked ? conv.user.params?.tokenPayload?.picture : '',
