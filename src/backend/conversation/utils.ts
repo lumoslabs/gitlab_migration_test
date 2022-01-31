@@ -131,7 +131,7 @@ export const convToUser = (conv: ConversationV3): any => {
   const isLinked = isLumosLinked(conv)
   return {
     id: conv.user.params.id,
-    lumosUserId: conv.user.params.lumosUserId,
+    lumosUserId: conv.user.params?.lumosUserId,
     name: isLinked ? conv.user.params?.tokenPayload?.name : '',
     email: isLinked ? conv.user.params?.tokenPayload?.email : '',
     avatar: isLinked ? conv.user.params?.tokenPayload?.picture : '',
