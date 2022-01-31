@@ -21,6 +21,11 @@ export default class LinkingService {
     return user
   }
 
+  getUserId = async (token: string): Promise<any> => {
+    const data = await this.api.getUserInfo(token)
+    return data.user.id
+  }
+
   setUserBirthday = async (userId: string, token: string, birthday: string): Promise<any> => {
     const { user } = await this.api.updateUserInfo(userId, token, { birthday })
     return user

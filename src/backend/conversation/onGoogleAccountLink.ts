@@ -1,6 +1,6 @@
 import { ConversationV3 } from 'actions-on-google'
 import appSharedActions from '@store/slices/appSharedActions'
-import { convToUser, getBirthday, getScoresList, setScoresList, Pages, sendCommand, setLumosToken } from './utils'
+import { convToUser, getBirthday, getScoresList, setScoresList, setLumosUserId, Pages, sendCommand, setLumosToken } from './utils'
 import LinkingService from '@backend/services/LinkingService'
 import logger from '@backend/libs/logger'
 import rollbar from '@backend/libs/rollbar'
@@ -17,6 +17,9 @@ export default async (conv: ConversationV3) => {
     // Attempt to login with google token
     const accessToken = await linkingService.getUserAccessTokenById(userId, token)
     await setLumosToken(conv, accessToken)
+
+    const lumosUserId = await linkingService.getUserId(accessToken)
+    await setLumosUserId(conv, lumosUserId)
 
     const catalog = await (new CatalogService()).getCatalogGames()
 

@@ -18,6 +18,7 @@ interface appState {
     isLinked?: boolean,
     isGuest?: boolean,
     isAgeVerified?: boolean,
+    lumosUserId?: number
   }
 }
 
@@ -63,7 +64,7 @@ export const appSlice = createSlice({
       action: PayloadAction<{ slug: string }>
     ) => {
       state.tutorialSeen[action.payload.slug] = true
-    },
+    }
   }
 })
 
