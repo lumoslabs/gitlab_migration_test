@@ -121,7 +121,7 @@ Only for *server webhook fulfillment version* -
   * onIntentResumeGame: void;
   * onDebugLog: string;
 
-Any component can subscribe on events with the `src/hooks/useAppBusListener.ts` hook
+Any component can subscribe to events with the `src/hooks/useAppBusListener.ts` hook
 
 ### Interactive canvas integration
 Interactive canvas injected to the DOM by `src/components/InteractiveCanvasScript.tsx`

@@ -9,6 +9,7 @@ export default function useAmplitude(): (eventName: string, eventProps?: any) =>
   const location = useLocation()
   const track = (eventName: string, eventProps = {}) => {
     const instance = window.amplitude?.getInstance()
+    instance?.setUserId(userId)
     instance?.logEvent(eventName, {
       ...eventProps,
       user_id: userId,
