@@ -81,7 +81,6 @@ conversationApp.handle('Next', onNext)
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
     logger.debug(`Fulfillment Request ${req.body?.handler?.name}`)
-    rollbar.debug(`Lumos User ID: ${req.body?.user?.params?.lumosUserId}`)
     amplitudeBackendEvent({
       eventName: `intent_${req.body?.handler?.name}`,
       userId: req.body?.user?.params?.lumosUserId,

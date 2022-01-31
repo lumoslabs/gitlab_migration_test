@@ -64,12 +64,6 @@ export const appSlice = createSlice({
       action: PayloadAction<{ slug: string }>
     ) => {
       state.tutorialSeen[action.payload.slug] = true
-    },
-    setLumosUserId: (
-      state: Draft<typeof initialState>,
-      action: PayloadAction<{ id: number }>
-    ) => {
-      state.user.lumosUserId = action.payload.id
     }
   }
 })

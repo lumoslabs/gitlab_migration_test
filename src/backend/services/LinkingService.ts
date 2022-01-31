@@ -9,7 +9,6 @@ export default class LinkingService {
 
   getUserAccessTokenById = async (userId: string, token: string): Promise<string> => {
     const result = await this.api.loginByGoogleToken(token)
-
     if (!result?.access_token) {
       throw new Error('access_token is incorrect')
     }

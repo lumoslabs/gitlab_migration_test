@@ -12,6 +12,7 @@ export interface IAmplitudeEventProps {
 }
 
 const amplitudeBackendEvent = async ({ eventName, data, userId }: IAmplitudeEventProps): Promise<void> => {
+
   client.logEvent({
     event_type: eventName,
     user_id: userId,
