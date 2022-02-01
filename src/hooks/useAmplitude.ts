@@ -13,7 +13,7 @@ export default function useAmplitude(): (eventName: string, eventProps?: any) =>
     instance?.logEvent(eventName, {
       ...eventProps,
       user_id: userId,
-      currentPage: location.pathname,
+      current_page: location.pathname,
       device_id: deviceId
     })
   }
