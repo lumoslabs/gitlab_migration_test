@@ -28,6 +28,7 @@ const amplitudeBackendEvent = async ({ eventName, data, userId, deviceId }: IAmp
     rollbar?.error('Amplitude event did not succeed', { response: response, data: {
       event_type: eventName,
       user_id: userId,
+      device_id: deviceId,
       event_properties: data
     }})
   }
