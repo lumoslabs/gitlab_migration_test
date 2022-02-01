@@ -1,5 +1,6 @@
 import * as Amplitude from '@amplitude/node'
 import getConfig from 'next/config'
+import rollbar from './rollbar'
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -12,7 +13,6 @@ export interface IAmplitudeEventProps {
 }
 
 const amplitudeBackendEvent = async ({ eventName, data, userId }: IAmplitudeEventProps): Promise<void> => {
-
   client.logEvent({
     event_type: eventName,
     user_id: userId,
@@ -20,7 +20,15 @@ const amplitudeBackendEvent = async ({ eventName, data, userId }: IAmplitudeEven
   })
   // Send any events that are currently queued for sending.
   // Will automatically happen on the next event loop.
-  client.flush()
+  const response = await client.flush()
+
+  if (response?.statusCode !== 200) {
+    rollbar?.error('Amplitude event did not succeed', { response: response, data: {
+      event_type: eventName,
+      user_id: userId,
+      event_properties: data
+    }})
+  }
 }
 
 export default amplitudeBackendEvent
