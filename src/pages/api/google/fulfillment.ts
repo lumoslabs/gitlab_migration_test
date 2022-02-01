@@ -81,10 +81,12 @@ conversationApp.handle('Next', onNext)
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
     logger.debug(`Fulfillment Request ${req.body?.handler?.name}`)
-    const userId = (req.body?.user?.params?.lumosUserId || req.body?.user?.params?.id)?.toString() || ''
+    const userId = req.body?.user?.params?.lumosUserId?.toString()
+    const deviceId = req.body?.user?.params?.id
     amplitudeBackendEvent({
       eventName: `intent_${req.body?.handler?.name}`,
       userId: userId,
+      deviceId: deviceId,
       data: req.body
     })
 
