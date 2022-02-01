@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom'
 
 export default function useAmplitude(): (eventName: string, eventProps?: any) => void {
   const user = useAppSelector(getUser)
-  const userId = user?.lumosUserId || user?.id
-
+  const userId = user?.lumosUserId
+  const deviceId = user?.id
   const location = useLocation()
   const track = (eventName: string, eventProps = {}) => {
     const instance = window.amplitude?.getInstance()
@@ -13,7 +13,8 @@ export default function useAmplitude(): (eventName: string, eventProps?: any) =>
     instance?.logEvent(eventName, {
       ...eventProps,
       user_id: userId,
-      currentPage: location.pathname
+      currentPage: location.pathname,
+      device_id: deviceId
     })
   }
 
