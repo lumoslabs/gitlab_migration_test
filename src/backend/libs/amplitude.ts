@@ -29,7 +29,7 @@ const amplitudeBackendEvent = async ({ eventName, data, userId, deviceId }: IAmp
       event_type: eventName,
       user_id: userId,
       device_id: deviceId,
-      event_properties: data
+      response: data.response 
     }})
   }
 }
