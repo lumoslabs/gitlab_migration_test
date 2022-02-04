@@ -81,9 +81,13 @@ conversationApp.handle('Next', onNext)
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
     logger.debug(`Fulfillment Request ${req.body?.handler?.name}`)
+    const userId = req.body?.user?.params?.lumosUserId?.toString()
+    // Only send a deviceId if there is no lumosUserId, otherwise send the automatically generated uuid stored in user.id as deviceId.
+    const deviceId = userId ? null : req.body?.user?.params?.id
     amplitudeBackendEvent({
       eventName: `intent_${req.body?.handler?.name}`,
-      userId: req.body?.user?.params?.lumosUserId,
+      userId: userId,
+      deviceId: deviceId,
       data: req.body
     })
 
