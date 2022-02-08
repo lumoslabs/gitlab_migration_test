@@ -24,7 +24,7 @@ const amplitudeBackendEvent = async ({ eventName, data, userId, deviceId }: IAmp
   // Will automatically happen on the next event loop.
   const response = await client.flush()
 
-  if (response?.statusCode !== 200 && response?.status !== 'skipped') {
+  if (response?.statusCode !== 200) {
     rollbar?.error('Amplitude event did not succeed', { response: response, data: {
       event_type: eventName,
       user_id: userId,
