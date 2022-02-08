@@ -80,6 +80,10 @@ conversationApp.handle('Next', onNext)
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
+    const userId = req.body?.user?.params?.lumosUserId?.toString()
+    // Only send a deviceId if there is no lumosUserId, otherwise send the automatically generated uuid stored in user.id as deviceId.
+    const deviceId = userId ? null : req.body?.user?.params?.id
+
     logger.debug(`Fulfillment Request ${req.body?.handler?.name}`)
 
     const scrubbedEventProperties = JSON.parse(JSON.stringify(req.body))
@@ -89,9 +93,6 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     delete scrubbedEventProperties?.user?.params?.lumosToken
     delete scrubbedEventProperties?.context?.canvas?.state?.birthday
 
-  const userId = req.body?.user?.params?.lumosUserId?.toString()
-    // Only send a deviceId if there is no lumosUserId, otherwise send the automatically generated uuid stored in user.id as deviceId.
-    const deviceId = userId ? null : req.body?.user?.params?.id
     amplitudeBackendEvent({
       eventName: `intent_${req.body?.handler?.name}`,
       userId: userId,
